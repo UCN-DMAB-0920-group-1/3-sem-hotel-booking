@@ -25,15 +25,13 @@ namespace PrimeStayApi.Controllers
             _dao = dao;
         }
         // GET: HotelController
-        //TODO: move DB to DAL and call factory to get connection
         [HttpGet]
         public IEnumerable<Hotel> Index() => _dao.ReadAll();
 
         // GET: HotelController/Details/5
-        public ActionResult Details(int id)
-        {
-            throw new NotImplementedException();
-        }
+        [Route("?id={id}")]
+        public Hotel Details(int id) => _dao.ReadById(id);
+
 
         // GET: HotelController/Create
         public ActionResult Create()
