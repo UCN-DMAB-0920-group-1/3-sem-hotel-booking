@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DataAccessLayerTest
+namespace PrimeStayApi.DataAccessLayer.Test
 {
     [TestClass]
     public class UnitTest1
