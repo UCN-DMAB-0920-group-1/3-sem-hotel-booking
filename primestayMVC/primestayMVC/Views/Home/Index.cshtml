@@ -3,8 +3,6 @@
 }
 
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
-
-
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
         <h1> Find your dream stay!</h1>
     </div>
@@ -82,7 +80,7 @@
                     <div class="form-group float-right">
                         <span class="form-label" style="padding-bottom:10px;">Price: 500 kr/night</span>
                         <br />
-                        <input class="btn btn-primary " type="button" name="order" value="order" style="width:150px;" />
+                        <a asp-area="" asp-controller="Order" asp-action="Index"> <input class="btn btn-primary " type="button" name="order" value="order" style="width:150px;"  /></a>
                     </div>
                 </div>
             </div>
