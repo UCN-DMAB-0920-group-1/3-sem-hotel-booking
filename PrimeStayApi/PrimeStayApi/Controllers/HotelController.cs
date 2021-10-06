@@ -1,20 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Dapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PrimeStayApi.Controllers
 {
 
-
+    [ApiController]
+    [Route("api/[controller]")]
     public class HotelController : ControllerBase
     {
+
+        private readonly IDbConnection conn = new SqlConnection(ENV.ConnectionString());
+        private const string GET_ALL_QUERY = "Select * FROM Hotel";
         // GET: HotelController
-        public IActionResult Index()
+        [HttpGet]
+        public IEnumerable<Hotel> Index()
         {
-            throw new NotImplementedException();
+            return conn.Query<Hotel>(GET_ALL_QUERY);
         }
 
         // GET: HotelController/Details/5
