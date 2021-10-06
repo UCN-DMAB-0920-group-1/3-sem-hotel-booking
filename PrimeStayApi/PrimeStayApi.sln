@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi", "PrimeStayApi.csproj", "{D6E755CC-7512-4665-A281-2DC90076E66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi", "PrimeStayApi.csproj", "{D6E755CC-7512-4665-A281-2DC90076E66A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "..\Database\Database.csproj", "{04637B29-5DE0-4041-9C91-2894C01CCE2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "..\DataAccessLayer\DataAccessLayer.csproj", "{1CCD0D3A-C940-442E-AACC-01D210D9677A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{534BDDAE-1EC8-4D0F-AE78-6099D4624EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayerTest", "..\DataAccessLayerTest\DataAccessLayerTest.csproj", "{88FF5202-118A-4BFD-AB9A-375F53B0B734}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApiTest", "..\PrimeStayApiTest\PrimeStayApiTest.csproj", "{ECF7E416-525B-481A-9E1F-19739EC9EFB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{D6E755CC-7512-4665-A281-2DC90076E66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6E755CC-7512-4665-A281-2DC90076E66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6E755CC-7512-4665-A281-2DC90076E66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04637B29-5DE0-4041-9C91-2894C01CCE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04637B29-5DE0-4041-9C91-2894C01CCE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04637B29-5DE0-4041-9C91-2894C01CCE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04637B29-5DE0-4041-9C91-2894C01CCE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CCD0D3A-C940-442E-AACC-01D210D9677A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCD0D3A-C940-442E-AACC-01D210D9677A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCD0D3A-C940-442E-AACC-01D210D9677A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCD0D3A-C940-442E-AACC-01D210D9677A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{534BDDAE-1EC8-4D0F-AE78-6099D4624EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{534BDDAE-1EC8-4D0F-AE78-6099D4624EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{534BDDAE-1EC8-4D0F-AE78-6099D4624EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{534BDDAE-1EC8-4D0F-AE78-6099D4624EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FF5202-118A-4BFD-AB9A-375F53B0B734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88FF5202-118A-4BFD-AB9A-375F53B0B734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88FF5202-118A-4BFD-AB9A-375F53B0B734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88FF5202-118A-4BFD-AB9A-375F53B0B734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF7E416-525B-481A-9E1F-19739EC9EFB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF7E416-525B-481A-9E1F-19739EC9EFB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF7E416-525B-481A-9E1F-19739EC9EFB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF7E416-525B-481A-9E1F-19739EC9EFB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
