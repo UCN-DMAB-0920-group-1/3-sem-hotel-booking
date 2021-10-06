@@ -1,47 +1,41 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PrimeStayApi.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
-    public class HotelController : ControllerBase
+    public class RoomController : Controller
     {
-        private readonly IDao<Hotel> _dao;
-        public HotelController(IDao<Hotel> dao)
+        private readonly IDao<Room> _dao;
+        public RoomController(IDao<Room> dao)
         {
             _dao = dao;
         }
-        // GET: HotelController
-        //TODO: move DB to DAL and call factory to get connection
-        [HttpGet]
-        public IEnumerable<Hotel> Index() => _dao.ReadAll();
 
-        // GET: HotelController/Details/5
+        // GET: RoomController
+        [HttpGet]
+        public IEnumerable<Room> Index() => _dao.ReadAll();
+
+        // GET: RoomController/Details/5
         public ActionResult Details(int id)
         {
-            throw new NotImplementedException();
+            return View();
         }
 
-        // GET: HotelController/Create
+        // GET: RoomController/Create
         public ActionResult Create()
         {
-            throw new NotImplementedException();
+            return View();
         }
 
-        // POST: HotelController/Create
+        // POST: RoomController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -52,17 +46,17 @@ namespace PrimeStayApi.Controllers
             }
             catch
             {
-                throw new NotImplementedException();
+                return View();
             }
         }
 
-        // GET: HotelController/Edit/5
+        // GET: RoomController/Edit/5
         public ActionResult Edit(int id)
         {
-            throw new NotImplementedException();
+            return View();
         }
 
-        // POST: HotelController/Edit/5
+        // POST: RoomController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -73,17 +67,17 @@ namespace PrimeStayApi.Controllers
             }
             catch
             {
-                throw new NotImplementedException();
+                return View();
             }
         }
 
-        // GET: HotelController/Delete/5
+        // GET: RoomController/Delete/5
         public ActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            return View();
         }
 
-        // POST: HotelController/Delete/5
+        // POST: RoomController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -94,7 +88,7 @@ namespace PrimeStayApi.Controllers
             }
             catch
             {
-                throw new NotImplementedException();
+                return View();
             }
         }
     }

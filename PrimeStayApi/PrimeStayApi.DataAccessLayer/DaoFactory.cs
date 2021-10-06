@@ -14,6 +14,7 @@ namespace PrimeStayApi.DataAccessLayer
             return typeof(T) switch
             {
                 var dao when dao == typeof(Hotel) => new HotelDao(dataContext) as IDao<T>,
+                var dao when dao == typeof(Room) => new RoomDao(dataContext) as IDao<T>,
                 _ => null,
 
             };
