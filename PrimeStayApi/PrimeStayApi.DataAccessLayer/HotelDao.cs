@@ -30,6 +30,7 @@ namespace PrimeStayApi.DataAccessLayer
 
         public override Hotel ReadById(int id)
         {
+            //TODO: make preparedstatement
             string GET_BY_ID_QUERY = $"Select * FROM Hotel WHERE ID = {id}";
             return DataContext.OpenConnection().QueryFirst<Hotel>(GET_BY_ID_QUERY);
         }
