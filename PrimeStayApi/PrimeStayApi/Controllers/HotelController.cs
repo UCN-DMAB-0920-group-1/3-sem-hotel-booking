@@ -29,7 +29,7 @@ namespace PrimeStayApi.Controllers
         public IEnumerable<Hotel> Index() => _dao.ReadAll();
 
         // GET: HotelController/Details/5
-        [Route("?id={id}")]
+        [Route("id={id}")]
         public Hotel Details(int id) => _dao.ReadById(id);
 
 
