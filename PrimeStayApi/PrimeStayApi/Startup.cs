@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PrimeStayApi.DataAccessLayer;
+using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +28,10 @@ namespace PrimeStayApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IDataContext dataContext = new DataContext();
+            services.AddScoped<IDao<Hotel>>(s => DaoFactory.Create<Hotel>(dataContext));
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PrimeStayApi", Version = "v1" });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +40,8 @@ namespace PrimeStayApi
             if(env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrimeStayApi v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrimeStayApi v1"));
             }
 
             app.UseHttpsRedirection();

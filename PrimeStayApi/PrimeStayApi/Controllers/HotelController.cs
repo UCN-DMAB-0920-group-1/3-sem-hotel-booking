@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using System;
@@ -18,15 +19,17 @@ namespace PrimeStayApi.Controllers
     [Route("api/[controller]")]
     public class HotelController : ControllerBase
     {
-
-        private readonly IDbConnection conn = new SqlConnection(ENV.ConnectionString);
-        private const string GET_ALL_QUERY = "Select * FROM Hotel";
+        private readonly IDao<Hotel> _dao;
+        public HotelController(IDao<Hotel> dao)
+        {
+            _dao = dao;
+        }
         // GET: HotelController
         //TODO: move DB to DAL and call factory to get connection
         [HttpGet]
         public IEnumerable<Hotel> Index()
         {
-            return conn.Query<Hotel>(GET_ALL_QUERY);
+            return _dao.ReadAll();
         }
 
         // GET: HotelController/Details/5
