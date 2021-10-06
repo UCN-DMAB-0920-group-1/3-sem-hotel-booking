@@ -1,19 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi", "PrimeStayApi.csproj", "{E253E4CA-D3B7-4786-8B1A-C3940C9F6DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi", "PrimeStayApi.csproj", "{E253E4CA-D3B7-4786-8B1A-C3940C9F6DC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi.Model", "..\PrimeStayApi.model\PrimeStayApi.Model.csproj", "{ECD479CA-0801-44B5-8A45-81FD76668370}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Model", "..\PrimeStayApi.model\PrimeStayApi.Model.csproj", "{ECD479CA-0801-44B5-8A45-81FD76668370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi.DataAccessLayer", "..\PrimeStayApi.DataAccessLayer\PrimeStayApi.DataAccessLayer.csproj", "{6CCAAE0A-8DAF-46BA-B205-487DEEB9B151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.DataAccessLayer", "..\PrimeStayApi.DataAccessLayer\PrimeStayApi.DataAccessLayer.csproj", "{6CCAAE0A-8DAF-46BA-B205-487DEEB9B151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi.Database", "..\PrimeStayApi.Database\PrimeStayApi.Database.csproj", "{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Database", "..\PrimeStayApi.Database\PrimeStayApi.Database.csproj", "{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi.DataAccessLayer.Test", "..\PrimeStayApi.DataAccessLayer.Test\PrimeStayApi.DataAccessLayer.Test.csproj", "{4709A79C-5234-4EC3-B809-9189A5E2992A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.DataAccessLayer.Test", "..\PrimeStayApi.DataAccessLayer.Test\PrimeStayApi.DataAccessLayer.Test.csproj", "{4709A79C-5234-4EC3-B809-9189A5E2992A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi.Test", "..\PrimeStayApi.Test\PrimeStayApi.Test.csproj", "{12DB843A-93C0-4C82-98BA-AC89502A3701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Test", "..\PrimeStayApi.Test\PrimeStayApi.Test.csproj", "{12DB843A-93C0-4C82-98BA-AC89502A3701}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStayApi.Enviroment", "..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj", "{FBD215F4-6D2A-4A19-AE90-B6347641D666}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{12DB843A-93C0-4C82-98BA-AC89502A3701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12DB843A-93C0-4C82-98BA-AC89502A3701}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12DB843A-93C0-4C82-98BA-AC89502A3701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBD215F4-6D2A-4A19-AE90-B6347641D666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBD215F4-6D2A-4A19-AE90-B6347641D666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBD215F4-6D2A-4A19-AE90-B6347641D666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBD215F4-6D2A-4A19-AE90-B6347641D666}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
