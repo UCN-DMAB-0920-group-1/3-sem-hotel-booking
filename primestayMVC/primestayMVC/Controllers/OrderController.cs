@@ -14,7 +14,11 @@ namespace primestayMVC.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public IActionResult Confirm()
+        {
+            return View();
+        }
+        public IActionResult Room()
         {
             return View();
         }
