@@ -24,13 +24,13 @@ namespace PrimeStayApi.Controllers
         // GET: HotelController
         [HttpGet]
         public IEnumerable<Hotel> Index(int? id, string name, string description, string staffed_hours, int? stars)
-            => _dao.ReadAll(new Dictionary<string, object>()
+            => _dao.ReadAll(new Hotel()
             {
-                {"id", id },
-                {"name", name},
-                {"description",description },
-                {"staffed_hours", staffed_hours },
-                {"stars", stars }
+                Id = id,
+                Name = name,
+                Description = description,
+                Staffed_hours = staffed_hours,
+                Stars = stars
 
             });
 
@@ -46,18 +46,18 @@ namespace PrimeStayApi.Controllers
         {
             int stars = new IntParser().parseInt(collection["star"]);
 
-                Hotel hotel = new()
-                {
-                    Name = collection["name"],
-                    Description = collection["description"],
-                    Staffed_hours = collection["staffedHours"],
-                    Stars = stars,
-                };
+            Hotel hotel = new()
+            {
+                Name = collection["name"],
+                Description = collection["description"],
+                Staffed_hours = collection["staffedHours"],
+                Stars = stars,
+            };
 
-                int id = _dao.Create(hotel);
+            int id = _dao.Create(hotel);
 
-                return Created(id.ToString(), hotel);
-            
+            return Created(id.ToString(), hotel);
+
         }
 
         [HttpPut]
