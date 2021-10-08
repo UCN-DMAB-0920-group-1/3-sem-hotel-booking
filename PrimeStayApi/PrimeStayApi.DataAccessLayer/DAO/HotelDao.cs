@@ -22,10 +22,16 @@ namespace PrimeStayApi.DataAccessLayer
             throw new System.NotImplementedException();
         }
 
-        public override IEnumerable<Hotel> ReadAll()
+        public override IEnumerable<Hotel> ReadAll(int? id, string name, string description, string staffed_hours, int? stars)
         {
-            const string GET_ALL_QUERY = "Select * FROM Hotel";
-            return DataContext.OpenConnection().Query<Hotel>(GET_ALL_QUERY);
+            name = "%" + name + "%" ?? name;
+            description = "%" + description + "%" ?? description;
+            staffed_hours = "%" + staffed_hours + "%" ?? staffed_hours;
+            return DataContext.OpenConnection().Query<Hotel>($"SELECT * FROM Hotel WHERE " +
+                                                             $"id=ISNULL(@id,id) AND" +
+                                                             $" name LIKE ISNULL(@name,name)",
+                                                             new { id, name, description, staffed_hours, stars });
+
         }
 
         public override Hotel ReadById(int id)

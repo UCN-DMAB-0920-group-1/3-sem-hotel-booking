@@ -21,7 +21,7 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<Room> Index() => _dao.ReadAll();
+        //public IEnumerable<Room> Index() => _dao.ReadAll();
 
         // GET: RoomController/Details/5
         public ActionResult Details(int id)

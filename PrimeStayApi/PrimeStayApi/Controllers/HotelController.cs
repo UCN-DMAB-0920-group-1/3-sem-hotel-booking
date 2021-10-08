@@ -26,7 +26,7 @@ namespace PrimeStayApi.Controllers
         }
         // GET: HotelController
         [HttpGet]
-        public IEnumerable<Hotel> Index() => _dao.ReadAll();
+        public IEnumerable<Hotel> Index(int? id, string name) => _dao.ReadAll(id, name);
 
         // GET: HotelController/Details/5
         [Route("id={id}")]
