@@ -22,7 +22,8 @@ namespace PrimeStayApi.DataAccessLayer
         {
             throw new NotImplementedException();
         }
-        public override IEnumerable<Hotel> ReadAll(int? id, string name, string description, string staffed_hours, int? stars)
+
+        public override IEnumerable<Hotel> ReadAll(Dictionary<string, object> dictionary)
         {
             throw new NotImplementedException();
         }

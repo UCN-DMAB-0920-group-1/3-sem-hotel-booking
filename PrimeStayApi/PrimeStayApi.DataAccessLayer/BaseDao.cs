@@ -15,7 +15,6 @@ namespace PrimeStayApi.DataAccessLayer
         public abstract int Create(T model);
         public abstract int Update(T model);
         public abstract int Delete(T model);
-        public abstract IEnumerable<Hotel> ReadAll(int? id, string name, string description, string staffed_hours, int? stars);
-
+        public abstract IEnumerable<Hotel> ReadAll(Dictionary<string, object> dictionary);
     }
 }

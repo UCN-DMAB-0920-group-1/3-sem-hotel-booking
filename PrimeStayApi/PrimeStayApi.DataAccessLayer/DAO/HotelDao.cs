@@ -22,18 +22,19 @@ namespace PrimeStayApi.DataAccessLayer
             throw new System.NotImplementedException();
         }
 
-        public override IEnumerable<Hotel> ReadAll(int? id, string name, string description, string staffed_hours, int? stars)
+        public override IEnumerable<Hotel> ReadAll(Dictionary<string, object> map)
         {
-            name = name != null ? "%" + name + "%" : null;
-            description = description != null ? "%" + description + "%" : null;
-            staffed_hours = staffed_hours != null ? "%" + staffed_hours + "%" : null;
+            var name = map["name"] != null ? "%" + map["name"] + "%" : null;
+            var description = map["description"] != null ? "%" + map["description"] + "%" : null;
+            var staffed_hours = map["staffed_hours"] != null ? "%" + map["staffed_hours"] + "%" : null;
+
             return DataContext.OpenConnection().Query<Hotel>($"SELECT * FROM Hotel WHERE " +
                                                              $"id=ISNULL(@id,id)" +
                                                              $"AND name LIKE ISNULL(@name,name)" +
                                                              $"AND description LIKE ISNULL(@description,description)" +
                                                              $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
                                                              $"AND stars = ISNULL(@stars,stars)",
-                                                             new { id, name, description, staffed_hours, stars });
+                                                             new { id = map["id"], name, description, staffed_hours, stars = map["stars"] });
 
         }
 
