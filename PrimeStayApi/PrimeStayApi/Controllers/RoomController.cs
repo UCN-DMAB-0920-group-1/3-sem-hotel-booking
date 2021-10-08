@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PrimeStayApi.Services;
 
 namespace PrimeStayApi.Controllers
 {
@@ -23,73 +24,69 @@ namespace PrimeStayApi.Controllers
         [HttpGet]
         public IEnumerable<Room> Index() => _dao.ReadAll();
 
-        // GET: RoomController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: RoomController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        [HttpGet]
+        public Room Details(int id) => _dao.ReadById(id);
 
-        // POST: RoomController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            try
+            IntParser parser = new();
+            int availableRooms = parser.parseInt(collection["numOfAvailableRooms"]);
+            int availableBeds = parser.parseInt(collection["numOfAvailableBeds"]);
+            int hotelId = parser.parseInt(collection["hotelId"]);
+            int rating = parser.parseInt(collection["rating"]);
+
+
+            Room room = new()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Type = collection["type"],
+                Description = collection["description"],
+                Num_of_avaliable = availableRooms,
+                Num_of_beds = availableBeds,
+                HotelId = hotelId,
+                Rating =rating
+            };
+
+            int id = _dao.Create(room);
+
+            return Created(id.ToString(), room);
         }
 
-        // GET: RoomController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: RoomController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPut]
         public ActionResult Edit(int id, IFormCollection collection)
         {
-            try
+            IntParser parser = new();
+            int availableRooms = parser.parseInt(collection["numOfAvailableRooms"]);
+            int availableBeds = parser.parseInt(collection["numOfAvailableBeds"]);
+            int hotelId = parser.parseInt(collection["hotelId"]);
+            int rating = parser.parseInt(collection["rating"]);
+
+
+            Room room = new()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Id = id,
+                Type = collection["type"],
+                Description = collection["description"],
+                Num_of_avaliable = availableRooms,
+                Num_of_beds = availableBeds,
+                HotelId = hotelId,
+                Rating = rating
+            };
+
+            return _dao.Update(room) == 1 ? Ok() : NotFound();
         }
 
-        // GET: RoomController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: RoomController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpDelete]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
+            Room room = new()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Id = id,
+            }; 
+
+            return _dao.Delete(room) == 1 ? Ok() : NotFound();
         }
     }
 }
