@@ -26,6 +26,7 @@ namespace PrimeStayApi.Controllers
 
 
         [HttpGet]
+        [Route("{id}")]
         public Room Details(int id) => _dao.ReadById(id);
 
         [HttpPost]
