@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PrimeStayApi.Model;
+using System.Collections.Generic;
 
 namespace PrimeStayApi.DataAccessLayer
 {
@@ -10,10 +11,10 @@ namespace PrimeStayApi.DataAccessLayer
             DataContext = dataContext;
         }
 
-        public abstract IEnumerable<T> ReadAll();
         public abstract T ReadById(int id);
         public abstract int Create(T model);
         public abstract int Update(T model);
         public abstract int Delete(T model);
+        public abstract IEnumerable<Hotel> ReadAll(Dictionary<string, object> dictionary);
     }
 }
