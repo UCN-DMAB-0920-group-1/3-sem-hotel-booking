@@ -24,12 +24,15 @@ namespace PrimeStayApi.DataAccessLayer
 
         public override IEnumerable<Hotel> ReadAll(int? id, string name, string description, string staffed_hours, int? stars)
         {
-            name = "%" + name + "%" ?? name;
-            description = "%" + description + "%" ?? description;
-            staffed_hours = "%" + staffed_hours + "%" ?? staffed_hours;
+            name = "%" + name + "%" ?? null;
+            description = "%" + description + "%" ?? null;
+            staffed_hours = "%" + staffed_hours + "%" ?? null;
             return DataContext.OpenConnection().Query<Hotel>($"SELECT * FROM Hotel WHERE " +
-                                                             $"id=ISNULL(@id,id) AND" +
-                                                             $" name LIKE ISNULL(@name,name)",
+                                                             $"id=ISNULL(@id,id)" +
+                                                             $"AND name LIKE ISNULL(@name,name)" +
+                                                             $"AND description LIKE ISNULL(@description,description)" +
+                                                             $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
+                                                             $"AND stars = ISNULL(@stars,stars)",
                                                              new { id, name, description, staffed_hours, stars });
 
         }
