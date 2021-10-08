@@ -46,7 +46,7 @@ namespace PrimeStayApi.Controllers
                 Num_of_avaliable = availableRooms,
                 Num_of_beds = availableBeds,
                 HotelId = hotelId,
-                Rating =rating
+                Rating = rating
             };
 
             int id = _dao.Create(room);
@@ -85,7 +85,7 @@ namespace PrimeStayApi.Controllers
             Room room = new()
             {
                 Id = id,
-            }; 
+            };
 
             return _dao.Delete(room) == 1 ? Ok() : NotFound();
         }
