@@ -22,8 +22,16 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        //public IEnumerable<Room> Index() => _dao.ReadAll();
-
+        public IEnumerable<Room> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id) => _dao.ReadAll(new Room()
+        {
+            Id = id,
+            Type = type,
+            Num_of_avaliable = num_of_available,
+            Num_of_beds = num_of_beds,
+            Description = description,
+            Rating = rating,
+            Hotel_Id = hotel_id
+        });
 
         [HttpGet]
         [Route("{id}")]
@@ -45,7 +53,7 @@ namespace PrimeStayApi.Controllers
                 Description = collection["description"],
                 Num_of_avaliable = availableRooms,
                 Num_of_beds = availableBeds,
-                HotelId = hotelId,
+                Hotel_Id = hotelId,
                 Rating = rating
             };
 
@@ -72,7 +80,7 @@ namespace PrimeStayApi.Controllers
                 Description = collection["description"],
                 Num_of_avaliable = availableRooms,
                 Num_of_beds = availableBeds,
-                HotelId = hotelId,
+                Hotel_Id = hotelId,
                 Rating = rating
             };
 
