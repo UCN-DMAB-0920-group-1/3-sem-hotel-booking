@@ -1,6 +1,9 @@
-﻿@{
+﻿@using primestayMVC.Model
+@{
     ViewData["Title"] = "Home Page";
+    
 }
+@model IEnumerable<Hotel>;
 
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
@@ -65,7 +68,39 @@
         </div>
     </div>
 </div>
-<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+
+@foreach (Hotel item in Model)
+{
+   <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row g-0">
+            <div class="col-md-4"style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
+                <img src="~/img/aboutslider2-1.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body ">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address: </small></p>
+                    <p class="card-text">This is a wider card with supporting text additional content. This content is a little bit longer.</p>
+                  
+                    <div class="form-group float-right">
+                        <span class="form-label" style="padding-bottom:10px;">Price from: 500 kr/night</span>
+                        <br />
+                        <a asp-area="" asp-controller="Order" asp-action="Room"> <input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;"  /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> 
+
+}
+{
+    
+}
+
+@*<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
     <div class="card mb-3" style="max-width: 100%;">
         <div class="row g-0">
             <div class="col-md-4"style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
@@ -87,4 +122,4 @@
         </div>
     </div>
 
-</div>
+</div>*@
