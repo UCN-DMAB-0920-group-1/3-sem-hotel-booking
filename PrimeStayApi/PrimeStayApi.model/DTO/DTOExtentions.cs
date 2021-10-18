@@ -18,7 +18,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = @$"api/Location/{hotel.LocationId}" // TODO should this be changed?
+                LocationHref = @$"api/Location/{hotel.LocationId}" // TODO use helper method GetHrefFromId()
             };
         }
 
@@ -36,31 +36,33 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static RoomDto Map(this HotelDTO hotel)
+        public static RoomDto Map(this Room room)
         {
-            if (hotel == null) return null;
-            return new Hotel()
+            if (room == null) return null;
+            return new RoomDto()
             {
-                Id = hotel.ExtractId(),
-                Name = hotel.Name,
-                Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_hours,
-                Stars = hotel.Stars,
-                LocationId = GetIdFromHref(hotel.LocationHref) ?? 0
-            };
+                Href = room.ExtractHref(),
+                Type = room.Type,
+                Num_of_avaliable = room.Num_of_avaliable,
+                Num_of_beds = room.Num_of_beds,
+                Description = room.Description,
+                Rating = room.Rating,
+                hotelHref = GetHrefFromId(typeof(Hotel), room.Hotel_Id)
+        };
         }
 
-        public static Hotel Map(this HotelDTO hotel)
+        public static Room Map(this RoomDto room)
         {
-            if (hotel == null) return null;
-            return new Hotel()
+            if (room == null) return null;
+            return new Room()
             {
-                Id = hotel.ExtractId(),
-                Name = hotel.Name,
-                Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_hours,
-                Stars = hotel.Stars,
-                LocationId = GetIdFromHref(hotel.LocationHref) ?? 0
+                Id = room.ExtractId(),
+                Type = room.Type,
+                Num_of_avaliable = room.Num_of_avaliable,
+                Num_of_beds = room.Num_of_beds,
+                Description = room.Description,
+                Rating = room.Rating,
+                Hotel_Id = GetIdFromHref(room.hotelHref) ?? 0
             };
         }
 
@@ -71,7 +73,14 @@ namespace PrimeStayApi.Model.DTO
 
         public static string ExtractHref(this BaseModel model)
         {
-            return $@"/api/{model.GetType().Name.ToLower()}/{model.Id}";
+            return GetHrefFromId(model.GetType(), model.Id);
+        }
+
+        public static string GetHrefFromId(Type type, int? id)
+        {
+            if (id == null) return null;
+
+            return $@"api/{type.Name.ToLower()}/{id}";
         }
 
         public static int? GetIdFromHref(string href)
