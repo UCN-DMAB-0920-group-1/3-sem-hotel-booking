@@ -28,8 +28,9 @@ namespace primestayMVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
       
-        public static IEnumerable<Room> getAllHotelRooms(int hotelId)
+        public static IEnumerable<Room> getAllHotelRooms(string hotelHref)
         {
+            int hotelId = 1;
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new($"api/room?hotelId={hotelId}",Method.GET, DataFormat.Json);
             return client.Execute<IEnumerable<Room>>(request).Data;
