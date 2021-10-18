@@ -6,7 +6,8 @@ using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
 using PrimeStayApi.Services;
-
+using PrimeStayApi.Model.DTO;
+using System.Linq;
 
 namespace PrimeStayApi.Controllers
 {
@@ -23,7 +24,7 @@ namespace PrimeStayApi.Controllers
 
         // GET: HotelController
         [HttpGet]
-        public IEnumerable<Hotel> Index(int? id, string name, string description, string staffed_hours, int? stars)
+        public IEnumerable<HotelDTO> Index(int? id, string name, string description, string staffed_hours, int? stars)
             => _dao.ReadAll(new Hotel()
             {
                 Id = id,
@@ -32,12 +33,12 @@ namespace PrimeStayApi.Controllers
                 Staffed_hours = staffed_hours,
                 Stars = stars
 
-            });
+            }).Select(x => x.MapToDTO());
 
         // GET: HotelController/Details/5
         [Route("{id}")]
         [HttpGet]
-        public Hotel Details(int id) => _dao.ReadById(id);
+        public HotelDTO Details(int id) => _dao.ReadById(id).MapToDTO();
 
 
 
