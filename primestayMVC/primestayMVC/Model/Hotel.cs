@@ -11,5 +11,7 @@ namespace primestayMVC.Model
         public string Description { get; set; }
         public string Staffed_hours { get; set; }
         public int Stars { get; set; }
+
+        public IEnumerable<Room> rooms {get; set; }
     }
 }

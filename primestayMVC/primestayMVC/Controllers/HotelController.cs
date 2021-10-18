@@ -29,6 +29,7 @@ namespace primestayMVC.Controllers
         public IActionResult Details(string href)
         {
             var hotel = GetHotel(href);
+            hotel.rooms = RoomController.getAllHotelRooms(href);
             return View(hotel);
         }
 
