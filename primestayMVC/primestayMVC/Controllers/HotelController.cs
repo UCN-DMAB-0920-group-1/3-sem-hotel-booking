@@ -23,8 +23,9 @@ namespace primestayMVC.Controllers
         public  IActionResult Index()
         {
            var hotels = GetAllHotels();
-
-            return View(hotels);
+           
+           hotels.ToList().ForEach(h => h.Location = LocationController.GetLocation(h.LocationHref));
+           return View(hotels);
         }
         //[Route("Details")]
         public IActionResult Details(string href)

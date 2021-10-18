@@ -4,7 +4,6 @@
     
 }
 @model IEnumerable<Hotel>;
-@model Location;
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
         <h1> Find your dream stay!</h1>
@@ -77,7 +76,7 @@
             <div class="col-md-8">
                 <div class="card-body ">
                     <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address:@ </small></p>
+                    <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address: @item.Location.Street_Address </small></p>
                     <p class="card-text">@item.Description</p>
                   
                     <div class="form-group float-right">

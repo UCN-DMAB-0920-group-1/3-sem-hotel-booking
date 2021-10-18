@@ -12,10 +12,5 @@ namespace PrimeStayApi.Model.DTO
         public string City { get; set; }
         public string Country { get; set; }
         public string Zip_code { get; set; }
-
-        public LocationDTO() : base()
-        {
-
-        }
     }
 }
