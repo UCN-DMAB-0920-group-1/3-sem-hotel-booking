@@ -13,4 +13,9 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PrimeStayApi.Database\PrimeStayApi.Database.csproj" />
+    <ProjectReference Include="..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj" />
+  </ItemGroup>
+
 </Project>
