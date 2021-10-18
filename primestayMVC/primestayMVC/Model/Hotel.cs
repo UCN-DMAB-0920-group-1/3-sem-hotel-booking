@@ -13,5 +13,7 @@ namespace primestayMVC.Model
         public int Stars { get; set; }
         public string LocationHref { get; set; }
         public Location Location { get; set; }
+
+        public IEnumerable<Room> rooms {get; set; }
     }
 }
