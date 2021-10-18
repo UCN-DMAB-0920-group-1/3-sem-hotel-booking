@@ -15,7 +15,7 @@ namespace primestayMVC.Controllers
             return View();
         }
 
-        private Location GetLocation(string href)
+        public static Location GetLocation(string href)
         {
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new(href, Method.GET, DataFormat.Json);

@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace primestayMVC.Model
 {
-    public class Location
+    public class Location : BaseModel
     {
+        public string Street_Address { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Zip_code { get; set; }
+
     }
 }
