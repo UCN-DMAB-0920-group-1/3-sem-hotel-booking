@@ -19,10 +19,9 @@ namespace primestayMVC.Controllers
         {
             _logger = logger;
         }
-        [Route("Hotel")]
-        public  IActionResult Index()
+        public IActionResult Index()
         {
-           var hotels = GetAllHotels();
+            var hotels = GetAllHotels();
 
             return View(hotels);
         }
@@ -46,15 +45,15 @@ namespace primestayMVC.Controllers
         }
         private Hotel GetHotel(string href)
         {
-            RestClient client = new ("https://localhost:44312/");
-            RestRequest request = new (href, Method.GET, DataFormat.Json);
-            return client.Execute<Hotel>(request).Data; 
-            
+            RestClient client = new("https://localhost:44312/");
+            RestRequest request = new(href, Method.GET, DataFormat.Json);
+            return client.Execute<Hotel>(request).Data;
+
         }
         public static IEnumerable<Hotel> GetAllHotels()
         {
             RestClient client = new("https://localhost:44312/");
-            RestRequest request = new("api/hotel/",Method.GET, DataFormat.Json);
+            RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
             return client.Execute<IEnumerable<Hotel>>(request).Data;
         }
     }
