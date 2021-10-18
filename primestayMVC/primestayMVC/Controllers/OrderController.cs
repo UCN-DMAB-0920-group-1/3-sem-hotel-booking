@@ -18,9 +18,6 @@ namespace primestayMVC.Controllers
         {
             return View();
         }
-        public IActionResult Room()
-        {
-            return View();
-        }
+        
     }
 }

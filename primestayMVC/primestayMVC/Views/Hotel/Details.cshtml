@@ -1,0 +1,61 @@
+﻿@using primestayMVC.Model
+@model Hotel;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    @{
+        ViewData["Title"] = "Choose room";
+    }
+    <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+        <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
+                    <img src="~/img/aboutslider2-1.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body ">
+                        <h5 class="card-title">@Model.Name</h5>
+
+                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text">Stars: @Model.Stars</p>
+                        <p class="card-text">Staffed hours: @Model.Staffed_hours</p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @foreach (Room room in Model.rooms) { 
+        <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+            <div class="card mb-3" style="max-width: 100%;">
+                <div class="row g-0">
+                    <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
+                        <img src="~/img/hotel-room.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body ">
+                            <h5 class="card-title">@room.Type</h5>
+
+                            <p class="card-text">@room.Description</p>
+
+                            <div class="form-group float-right">
+                                <span class="form-label" style="padding-bottom:10px;">Price: KOMMER SNART kr/night</span>
+                                <br />
+                                <a asp-area="" asp-controller="Order" asp-action="Confirm"> <input class="btn btn-primary " type="button" name="order" value="Choose" style="width:150px;" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>}
+ 
+</body>
+</html>

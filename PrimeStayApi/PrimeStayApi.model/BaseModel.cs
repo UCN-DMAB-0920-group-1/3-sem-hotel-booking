@@ -8,6 +8,6 @@ namespace PrimeStayApi.Model
 {
     public class BaseModel
     {
-        public int? Id {  get; set; }
+        public int? Id { get; set; }
     }
 }

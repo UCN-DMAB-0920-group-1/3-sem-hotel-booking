@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrimeStayApi.Model.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,8 @@ namespace PrimeStayApi.Model
         public string Description { get; set; }
         public string Staffed_hours { get; set; }
         public int? Stars { get; set; }
+        public int LocationId { get; set; }
+    
     }
+
 }
