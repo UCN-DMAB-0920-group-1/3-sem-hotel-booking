@@ -48,7 +48,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = room.Description,
                 Rating = room.Rating,
                 hotelHref = GetHrefFromId(typeof(Hotel), room.Hotel_Id)
-        };
+            };
         }
 
         public static Room Map(this RoomDto room)
