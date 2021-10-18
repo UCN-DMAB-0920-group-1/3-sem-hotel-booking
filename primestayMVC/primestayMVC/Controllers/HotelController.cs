@@ -11,20 +11,26 @@ using System.Threading.Tasks;
 
 namespace primestayMVC.Controllers
 {
-    public class HomeController : Controller
+    public class HotelController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HotelController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HotelController(ILogger<HotelController> logger)
         {
             _logger = logger;
         }
-
+        [Route("Hotel")]
         public  IActionResult Index()
         {
            var hotels = GetAllHotels();
 
             return View(hotels);
+        }
+        //[Route("Details")]
+        public IActionResult Details(string href)
+        {
+            var hotel = GetHotel(href);
+            return View(hotel);
         }
 
 
@@ -38,7 +44,14 @@ namespace primestayMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private  IEnumerable<Hotel> GetAllHotels()
+        private Hotel GetHotel(string href)
+        {
+            RestClient client = new ("https://localhost:44312/");
+            RestRequest request = new (href, Method.GET, DataFormat.Json);
+            return client.Execute<Hotel>(request).Data; 
+            
+        }
+        public static IEnumerable<Hotel> GetAllHotels()
         {
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new("api/hotel/",Method.GET, DataFormat.Json);

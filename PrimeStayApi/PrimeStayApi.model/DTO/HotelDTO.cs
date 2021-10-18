@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace PrimeStayApi.Model.DTO
 {
-    internal class HotelDTO : BaseModelDTO
+    public class HotelDTO : BaseModelDTO
     {
-        public HotelDTO(int? id, string name, string description, string staffed_hours, int? stars, string locationHref) : base($"/api/hotel?id={id}")
+        public HotelDTO(int id, string name, string description, string staffed_hours, int? stars, string locationHref) : base(id)
         {
             Name = name;
             Description = description;
             Staffed_hours = staffed_hours;
             Stars = stars;
             LocationHref = $"/api/Location?id={locationHref}";
+        }
+        public HotelDTO() : base()
+        {
+
         }
 
         public string Name  { get; set; }
