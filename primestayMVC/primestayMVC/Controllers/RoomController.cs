@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using primestayMVC.Model.DTO;
 
 namespace primestayMVC.Controllers
 {
@@ -30,9 +31,8 @@ namespace primestayMVC.Controllers
       
         public static IEnumerable<Room> getAllHotelRooms(string hotelHref)
         {
-            int hotelId = 1;
             RestClient client = new("https://localhost:44312/");
-            RestRequest request = new($"api/room?hotelId={hotelId}",Method.GET, DataFormat.Json);
+            RestRequest request = new($"api/room?hotel_id={hotelHref.GetIdFromHref()}",Method.GET, DataFormat.Json);
             return client.Execute<IEnumerable<Room>>(request).Data;
         }
     }

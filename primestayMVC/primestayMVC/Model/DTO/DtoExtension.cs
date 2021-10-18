@@ -7,7 +7,7 @@
             return GetIdFromHref(dto.Href);
         }
 
-        public static int? GetIdFromHref(string href)
+        public static int? GetIdFromHref(this string href)
         {
             if (string.IsNullOrEmpty(href)) return null;
 
