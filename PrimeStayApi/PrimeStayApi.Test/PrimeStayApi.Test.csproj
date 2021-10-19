@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PrimeStayApi.Database\PrimeStayApi.Database.csproj" />
     <ProjectReference Include="..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj" />
+    <ProjectReference Include="..\PrimeStayApi\PrimeStayApi.csproj" />
   </ItemGroup>
 
 </Project>
