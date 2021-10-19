@@ -88,7 +88,7 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
             Room room = new()
             {
