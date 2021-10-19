@@ -46,7 +46,7 @@ namespace PrimeStayApi.Test
         }
 
         [TestMethod]
-        public void GetHotelFromDBWithHotel()
+        public void GetHotelFromTestDBWithHotel()
         {
             //arrange
             _dao = DaoFactory.Create<Hotel>(_dataContext);
@@ -68,33 +68,64 @@ namespace PrimeStayApi.Test
             Assert.IsTrue(hotels.First().Stars == hotel.Stars);
         }
 
-    }
-
-    internal class FakeHotelDao : IDao<Hotel>
-    {
-        public int Create(Hotel model)
+        internal class FakeHotelDao : IDao<Hotel>
         {
-            return -1;
+            public int Create(Hotel model)
+            {
+                return -1;
+            }
+
+            public int Delete(Hotel model)
+            {
+                return -1;
+            }
+
+            public IEnumerable<Hotel> ReadAll(Hotel model)
+            {
+                return new List<Hotel>();
+            }
+
+            public Hotel ReadById(int id)
+            {
+                return new Hotel();
+            }
+
+            public int Update(Hotel model)
+            {
+                return -1;
+            }
+        }
+        [TestMethod]
+        public void GetHotelFakeDaoWithId()
+        {
+            //Arange
+            _controllerNoDB = new HotelController(new FakeHotelDao());
+            int id = 1;
+
+            //Act
+            var res = _controllerNoDB.Details(id);
+
+            //Assert
+            Assert.IsTrue(string.IsNullOrEmpty(res.Name));
         }
 
-        public int Delete(Hotel model)
+        [TestMethod]
+        public void GetHotelsFakeDaoWithHotel()
         {
-            return -1;
-        }
+            //Arrange
+            _controllerNoDB = new HotelController(new FakeHotelDao());
+            var hotel = new Hotel()
+            {
+                Name = "Test",
+                Description = "Test",
+                Staffed_hours = "Test",
+                Stars = 1,
+            };
 
-        public IEnumerable<Hotel> ReadAll(Hotel model)
-        {
-            return new List<Hotel>();
-        }
-
-        public Hotel ReadById(int id)
-        {
-            return new Hotel();
-        }
-
-        public int Update(Hotel model)
-        {
-            return -1;
+            //Act
+            var res = _controllerNoDB.Index(hotel.Name, hotel.Description, hotel.Staffed_hours, hotel.Stars);
+            //Assert
+            Assert.AreEqual(res.Count(), 0);
         }
     }
 }
