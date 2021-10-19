@@ -24,7 +24,7 @@ namespace PrimeStayApi.Controllers
         // GET: LocationController/Details/5
         [Route("{id}")]
         [HttpGet]
-        public LocationDTO Details(int id) => _dao.ReadById(id).MapToDTO();
+        public LocationDTO Details(int id) => _dao.ReadById(id).Map();
        
 
         // GET: LocationController/Create

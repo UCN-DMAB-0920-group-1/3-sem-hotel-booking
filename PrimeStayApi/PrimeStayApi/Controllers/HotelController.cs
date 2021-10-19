@@ -24,21 +24,20 @@ namespace PrimeStayApi.Controllers
 
         // GET: HotelController
         [HttpGet]
-        public IEnumerable<HotelDTO> Index(int? id, string name, string description, string staffed_hours, int? stars)
+        public IEnumerable<HotelDTO> Index(string name, string description, string staffed_hours, int? stars)
             => _dao.ReadAll(new Hotel()
             {
-                Id = id,
                 Name = name,
                 Description = description,
                 Staffed_hours = staffed_hours,
                 Stars = stars
 
-            }).Select(x => x.MapToDTO());
+            }).Select(x => x.Map());
 
         // GET: HotelController/Details/5
         [Route("{id}")]
         [HttpGet]
-        public HotelDTO Details(int id) => _dao.ReadById(id).MapToDTO();
+        public HotelDTO Details(int id) => _dao.ReadById(id).Map();
 
 
 

@@ -8,11 +8,6 @@ namespace PrimeStayApi.Model.DTO
 {
     public class HotelDTO : BaseModelDTO
     {
-      
-        public HotelDTO() : base()
-        {
-
-        }
         public string Name  { get; set; }
         public string Description { get; set; }
         public string Staffed_hours { get; set; }
