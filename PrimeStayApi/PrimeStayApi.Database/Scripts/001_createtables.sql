@@ -20,16 +20,11 @@ CREATE TABLE [Room] (
     [num_of_beds] int  NOT NULL ,
     [description] VARCHAR(250)  NULL ,
     [rating] int  NOT NULL ,
-    [hotel_id] int  NOT NULL ,
+    [hotel_id] int  NOT NULL ,  
     CONSTRAINT [PK_Room] PRIMARY KEY CLUSTERED (
         [id] ASC
     ),
-    CONSTRAINT [UK_Room_type] UNIQUE (
-        [type]
-    ),
-    CONSTRAINT [UK_Room_hotel_id] UNIQUE (
-        [hotel_id]
-    )
+    FOREIGN KEY (hotel_id) REFERENCES Hotel(id)
 )
 
 CREATE TABLE [Booking] (

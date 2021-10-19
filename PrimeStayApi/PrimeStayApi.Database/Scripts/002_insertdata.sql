@@ -22,17 +22,8 @@ INSERT INTO [dbo].[Hotel]
            ,[staffed_hours]
            ,[location_id])
      VALUES
-           ('Hotel Petrús'
-           ,'Classic old fashioned hotel with a river of red wine.'
-           ,3
-           ,'24/7'
-           ,1),
-           ('Hotel Grøtten'
-           ,'An nice hotel inside a cave, there is no lights at all'
-           ,1
-           ,'24/7'
-           ,2)
-
+           ('Hotel Petrús','Classic old fashioned hotel with a river of red wine.',3,'24/7',1),
+           ('Hotel Grøtten','An nice hotel inside a cave, there is no lights at all',1,'24/7',2)
 GO
 
 INSERT INTO [dbo].[Room]
@@ -43,12 +34,14 @@ INSERT INTO [dbo].[Room]
            ,[rating]
            ,[hotel_id])
      VALUES
-           ('Premium'
-           ,55
-           ,2
-           ,'Premium suite with champagne'
-           ,3
-           ,1)
+           ('Junior Suite',12,4,'Junior suite smaller room but space for 4',2,1),
+           ('Economy Suite',50,2,'Economy suite with 2 bunk beds',3,1),
+           ('Standard Suite',60,2,'Standard suite with twin beds',4,1),
+           ('Premium Suite',25,2,'Premium suite with champagne',5,1),
+           ('Economy Suite',60,2,'Economy suite with 2 bunk beds',2,2),
+           ('Standard Suite',55,2,'Standard suite with twin beds',4,2),
+           ('Premium Suite',15,2,'Premium suite with champagne',5,2),
+           ('Penthouse Suite',5,1,'Penthouse suite with queen-size bed',5,2)
 GO
 
 
