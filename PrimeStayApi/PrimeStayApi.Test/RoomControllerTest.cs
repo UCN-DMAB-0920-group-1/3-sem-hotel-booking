@@ -5,6 +5,8 @@ using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PrimeStayApi.Test
 {
@@ -15,16 +17,33 @@ namespace PrimeStayApi.Test
         private static RoomController _controller;
 
         [ClassInitialize]
-        public static void setUp(TestContext context)
+        public static void Setup(TestContext context)
         {
-            IDataContext dataContext = new DataContext();
-            _controller = new RoomController(DaoFactory.Create<Room>(dataContext));
+            _controller = new RoomController(DaoFactory.Create<Room>(new DataContext()));
         }
-         
-        [TestMethod]
-        public  void TestIndex()
+
+        [TestInitialize]
+        public void SetupDatabase()
         {
-            Room[] rooms = _controller.Index(null, null, null, null, null, null, null).ToArray();
+            Database.Version.Upgrade(Enviroment.ENV.ConnectionStringTest);
+        }
+
+        [TestCleanup]
+        public void TearDown()
+        {
+            Database.Version.Drop(Enviroment.ENV.ConnectionStringTest);
+        }
+
+        [TestMethod]
+        public void TestIndex()
+        {
+            //Arrange
+            Room[] rooms;
+
+            //Act
+           rooms = _controller.Index(null, null, null, null, null, null, null).ToArray();
+
+            //Assert
             Assert.IsNotNull(rooms);
             Assert.IsTrue(rooms.Length > 0);
         }
@@ -32,15 +51,31 @@ namespace PrimeStayApi.Test
         [TestMethod]
         public void TestGetRoomsByHotelId()
         {
-            Room[] rooms = _controller.Index(null, null, null, null, null, null, 1).ToArray();
+
+            //Arrange
+            Room[] rooms;
+
+            //Act
+            rooms = _controller.Index(null, null, null, null, null, null, 1).ToArray();
+
+            //Assert
             Assert.IsNotNull(rooms);
             Assert.IsTrue(rooms.Length > 0);
-        }
 
+           
+
+        }
+        /*
         [TestMethod]
         public void TestGetRoomById()
         {
-            Room room = _controller.Details(1);
+            //Arrange
+            Room room = null;
+
+            //Act
+            room = _controller.Details(1);
+
+            //Assert
             Assert.IsNotNull(room);
         }
 
@@ -48,20 +83,67 @@ namespace PrimeStayApi.Test
         public void TestCreateRoom()
         {
             //Arrange
+            var collection = new FormCollection(new Dictionary<string, StringValues>
+            {
+                { "numOfAvailableRooms", "321" },
+                { "numOfAvailableBeds", "123" },
+                { "hotelId", "1" },
+                { "rating", "5" },
+                { "type", "Mælkerummet" },
+                { "description", "Ikke for folk der er lactose introlerent. Beklager guys" }
+            });
 
-
-            var form = new FormCollection {
-    {"WeekList", weekfilter},
-    {"PracticeList", practicefitler}
-}
+            ActionResult room = null;
 
 
             //Act
-            Room room = _controller.Create(collection);
+            room = _controller.Create(collection);
+
+            //Assert
+            Assert.IsNotNull(room);
+        }
+
+
+        [TestMethod]
+        public void TestUpdateRoom()
+        {
+            //Arrange
+            var collection = new FormCollection(new Dictionary<string, StringValues>
+            {
+                { "numOfAvailableRooms", "35" },
+                { "numOfAvailableBeds", "3" },
+                { "hotelId", "1" },
+                { "rating", "3" },
+                { "type", "Test Suite" },
+                { "description", "Kun de helt modige tør være her!" }
+            });
+
+            ActionResult room = null;
+
+
+            //Act
+            room = _controller.Edit(1, collection);
 
             //Assert
 
             Assert.IsNotNull(room);
         }
+
+
+
+        [TestMethod]
+        public void TestDeleteRoom()
+        {
+            //Arrange
+            
+
+            //Act
+            var result = _controller.Delete(1);
+            Room room = _controller.Details(1);
+
+
+            //Assert
+            Assert.IsNull(room);
+        } */
     }
 }
