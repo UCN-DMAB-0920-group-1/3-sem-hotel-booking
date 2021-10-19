@@ -17,7 +17,19 @@ namespace PrimeStayApi.Model.DTO
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = @$"api/Location/{hotel.LocationId}"
+                LocationHref = @$"api/Location/{hotel.Location_Id}"
+            };
+        }
+
+        public static LocationDTO MapToDTO(this Location location)
+        {
+            return new LocationDTO()
+            {
+                Href = @$"api/location/{location.Id}",
+                Street_Address = location.Street_Address,
+                City = location.City,
+                Country = location.Country,
+                Zip_code = location.Zip_code,
             };
         }
     }
