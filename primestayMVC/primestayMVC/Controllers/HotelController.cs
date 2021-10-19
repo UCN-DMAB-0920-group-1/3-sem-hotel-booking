@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using primestayMVC.Model;
 using primestayMVC.Models;
@@ -19,16 +19,21 @@ namespace primestayMVC.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public IActionResult Index(IEnumerable<Hotel> hotels)
         {
-            var hotels = GetAllHotels();
-
-            return View(hotels);
+           if (hotels == null || hotels.Count() == 0)
+            {
+            hotels = GetAllHotels();
+            }
+           hotels.ToList().ForEach(h => h.Location = LocationController.GetLocation(h.LocationHref));
+           
+           return View(hotels);
         }
         //[Route("Details")]
         public IActionResult Details(string href)
         {
             var hotel = GetHotel(href);
+            hotel.rooms = RoomController.getAllHotelRooms(href);
             return View(hotel);
         }
 
@@ -50,8 +55,8 @@ namespace primestayMVC.Controllers
             return client.Execute<Hotel>(request).Data;
 
         }
-        public static IEnumerable<Hotel> GetAllHotels()
-        {
+        public static IEnumerable<Hotel> GetAllHotels() { 
+        
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
             return client.Execute<IEnumerable<Hotel>>(request).Data;
