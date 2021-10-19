@@ -18,7 +18,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = @$"api/Location/{hotel.LocationId}" // TODO use helper method GetHrefFromId()
+                LocationHref = @$"api/Location/{hotel.Location_Id}" // TODO use helper method GetHrefFromId()
             };
         }
 
@@ -32,7 +32,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationId = GetIdFromHref(hotel.LocationHref) ?? 0
+                Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
             };
         }
 
@@ -63,6 +63,18 @@ namespace PrimeStayApi.Model.DTO
                 Description = room.Description,
                 Rating = room.Rating,
                 Hotel_Id = GetIdFromHref(room.hotelHref) ?? 0
+            };
+        }
+
+        public static LocationDTO Map(this Location location)
+        {
+            return new LocationDTO()
+            {
+                Href = location.ExtractHref(),
+                Street_Address = location.Street_Address,
+                City = location.City,
+                Country = location.Country,
+                Zip_code = location.Zip_code,
             };
         }
 
