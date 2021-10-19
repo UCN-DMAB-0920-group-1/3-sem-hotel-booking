@@ -19,11 +19,14 @@ namespace primestayMVC.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public IActionResult Index(IEnumerable<Hotel> hotels)
         {
-           var hotels = GetAllHotels();
-           
+           if (hotels == null || hotels.Count() == 0)
+            {
+            hotels = GetAllHotels();
+            }
            hotels.ToList().ForEach(h => h.Location = LocationController.GetLocation(h.LocationHref));
+           
            return View(hotels);
         }
         //[Route("Details")]
