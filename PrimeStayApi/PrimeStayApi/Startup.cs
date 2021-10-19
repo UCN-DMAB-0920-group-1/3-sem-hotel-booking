@@ -31,6 +31,7 @@ namespace PrimeStayApi
             IDataContext dataContext = new DataContext();
             services.AddScoped<IDao<Hotel>>(s => DaoFactory.Create<Hotel>(dataContext));
             services.AddScoped<IDao<Room>>(s => DaoFactory.Create<Room>(dataContext));
+            services.AddScoped<IDao<Location>>(s => DaoFactory.Create<Location>(dataContext));
 
             services.AddControllers();
         }

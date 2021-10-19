@@ -31,7 +31,7 @@ namespace PrimeStayApi.DataAccessLayer
 
             using (IDbConnection connection = DataContext.OpenConnection())
             {
-                return DataContext.OpenConnection().Query<Hotel>($"SELECT * FROM Hotel WHERE " +
+                return connection.Query<Hotel>($"SELECT * FROM Hotel WHERE " +
                                                                  $"id=ISNULL(@id,id)" +
                                                                  $"AND name LIKE ISNULL(@name,name)" +
                                                                  $"AND description LIKE ISNULL(@description,description)" +
@@ -44,11 +44,10 @@ namespace PrimeStayApi.DataAccessLayer
 
         public override Hotel ReadById(int id)
         {
-            string GET_BY_ID_QUERY = $"Select * FROM Hotel WHERE ID = {id}";
 
             using (IDbConnection connection = DataContext.OpenConnection())
             {
-                return DataContext.OpenConnection().QueryFirst<Hotel>(GET_BY_ID_QUERY);
+                return connection.QueryFirst<Hotel>($"Select * FROM Hotel WHERE ID = @id", new {id});
 
             };
         }
