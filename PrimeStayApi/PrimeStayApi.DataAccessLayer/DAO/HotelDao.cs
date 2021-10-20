@@ -2,7 +2,6 @@
 using PrimeStayApi.Model;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace PrimeStayApi.DataAccessLayer
 {
@@ -47,7 +46,7 @@ namespace PrimeStayApi.DataAccessLayer
 
             using (IDbConnection connection = DataContext.OpenConnection())
             {
-                return connection.QueryFirst<Hotel>($"Select * FROM Hotel WHERE ID = @id", new {id});
+                return connection.QueryFirst<Hotel>($@"Select * FROM Hotel WHERE ID = @id", new { id });
 
             };
         }
