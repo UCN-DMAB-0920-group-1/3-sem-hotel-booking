@@ -10,7 +10,7 @@ using System.Linq;
 namespace PrimeStayApi.Test
 {
     [TestClass]
-    public class HotelTest
+    public class HotelControllerTest
     {
         private HotelController _controllerWithDB;
         private IDao<Hotel> _dao;
