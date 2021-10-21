@@ -5,8 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PrimeStay.DataAccessLayer;
 using PrimeStay.DataAccessLayer.DAO;
+using PrimeStay.Model;
 using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
+using System.Data;
 
 namespace PrimeStayApi
 {
@@ -22,7 +23,7 @@ namespace PrimeStayApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext dataContext = new SQLDataContext(ENV.ConnectionString);
+            IDataContext<IDbConnection> dataContext = new SQLDataContext(ENV.ConnectionString);
             services.AddScoped<IDao<Hotel>>(s => DaoFactory.Create<Hotel>(dataContext));
             services.AddScoped<IDao<Room>>(s => DaoFactory.Create<Room>(dataContext));
             services.AddScoped<IDao<Location>>(s => DaoFactory.Create<Location>(dataContext));
