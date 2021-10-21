@@ -17,9 +17,10 @@ namespace primestayMVC.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index(IEnumerable<Hotel> hotels)
+        public IActionResult Index()
         {
-            if (hotels == null) hotels = GetAllHotels();
+            //if (hotels == null) 
+            IEnumerable<HotelDto> hotels = GetAllHotels();
             hotels.ToList().ForEach(h => h.Location = getHotelLocation(h));
 
             return View(hotels);
@@ -45,21 +46,22 @@ namespace primestayMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private Hotel GetHotel(string href)
+        private HotelDto GetHotel(string href)
         {
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new(href, Method.GET, DataFormat.Json);
-            return client.Execute<Hotel>(request).Data;
+            return client.Execute<HotelDto>(request).Data;
 
         }
-        public static IEnumerable<Hotel> GetAllHotels()
+        public static IEnumerable<HotelDto> GetAllHotels()
         {
 
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
-            return client.Execute<IEnumerable<Hotel>>(request).Data;
+            IRestResponse<IEnumerable<HotelDto>> restResponse = client.Get<IEnumerable<HotelDto>>(request);
+            return restResponse.Data;
         }
-        private Location getHotelLocation(Hotel h) => LocationController.GetLocation(h.LocationHref);
+        private Location getHotelLocation(HotelDto h) => LocationController.GetLocation(h.LocationHref);
 
     }
 }
