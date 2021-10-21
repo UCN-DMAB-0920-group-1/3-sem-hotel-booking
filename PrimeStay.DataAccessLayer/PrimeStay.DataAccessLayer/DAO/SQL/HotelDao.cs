@@ -1,13 +1,15 @@
-﻿using PrimeStay.Model;
-using RestSharp;
+﻿using Dapper;
+using PrimeStay.DataAccessLayer.DAO;
+using PrimeStay.Model;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer.DAO.SQL
+namespace PrimeStay.DataAccessLayer
 {
-    internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<Hotel>
+    internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<Hotel>
     {
-        public HotelDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+
+        public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 
@@ -23,15 +25,31 @@ namespace PrimeStay.DataAccessLayer.DAO.SQL
 
         public IEnumerable<Hotel> ReadAll(Hotel model)
         {
-            IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest("/api/hotel", Method.GET, DataFormat.Json);
-            IRestResponse<IEnumerable<Hotel>> restResponse = restClient.Get<IEnumerable<Hotel>>(restRequest);
-            return restResponse.Data;
+            model.Name = model.Name != null ? "%" + model.Name + "%" : null;
+            model.Description = model.Description != null ? "%" + model.Description + "%" : null;
+            model.Staffed_hours = model.Staffed_hours != null ? "%" + model.Staffed_hours + "%" : null;
+
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.Query<Hotel>($"SELECT * FROM Hotel WHERE " +
+                                                                 $"id=ISNULL(@id,id)" +
+                                                                 $"AND name LIKE ISNULL(@name,name)" +
+                                                                 $"AND description LIKE ISNULL(@description,description)" +
+                                                                 $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
+                                                                 $"AND stars = ISNULL(@stars,stars)",
+                                                                 new { model.Id, model.Name, model.Description, model.Staffed_hours, model.Stars });
+
+            };
         }
 
         public Hotel ReadById(int id)
         {
-            throw new System.NotImplementedException();
+
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.QueryFirst<Hotel>($@"Select * FROM Hotel WHERE ID = @id", new { id });
+
+            };
         }
 
         public int Update(Hotel model)

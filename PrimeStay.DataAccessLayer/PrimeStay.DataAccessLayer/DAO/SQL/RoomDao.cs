@@ -1,38 +1,36 @@
 ﻿using Dapper;
-using PrimeStayApi.Model;
+using PrimeStay.DataAccessLayer.DAO;
+using PrimeStay.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PrimeStayApi.DataAccessLayer
+namespace PrimeStay.DataAccessLayer
 {
-    internal class RoomDao : BaseDao<Room>
+    internal class RoomDao : BaseDao<IDataContext<IDbConnection>>, IDao<Room>
     {
-        public RoomDao(IDataContext dataContext) : base(dataContext)
+        public RoomDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 
-        public override int Create(Room model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int Delete(Room model)
+        public int Create(Room model)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<Room> ReadAll(Room model)
+        public int Delete(Room model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Room> ReadAll(Room model)
         {
             model.Type = model.Type != null ? "%" + model.Type + "%" : null;
             model.Description = model.Description != null ? "%" + model.Description + "%" : null;
 
-            using (IDbConnection connection = DataContext.OpenConnection())
+            using (IDbConnection connection = DataContext.Open())
             {
-                return DataContext.OpenConnection().Query<Room>($"SELECT * FROM Room WHERE " +
+                return connection.Query<Room>($"SELECT * FROM Room WHERE " +
                                                      $"id=ISNULL(@id,id)" +
                                                      $"AND type LIKE ISNULL(@type,type)" +
                                                      $"AND description LIKE ISNULL(@description,description)" +
@@ -46,12 +44,12 @@ namespace PrimeStayApi.DataAccessLayer
 
         }
 
-        public override Room ReadById(int id)
+        public Room ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override int Update(Room model)
+        public int Update(Room model)
         {
             throw new NotImplementedException();
         }
