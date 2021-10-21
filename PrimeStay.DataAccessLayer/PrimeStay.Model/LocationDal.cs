@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeStay.Model
 {
-    public class Location : BaseModel
+    public class LocationDal : BaseModelDal
     {
         public string Street_Address { get; set; }
         public string Zip_code { get; set; }

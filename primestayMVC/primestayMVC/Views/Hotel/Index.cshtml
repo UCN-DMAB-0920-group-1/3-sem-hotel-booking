@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
     
 }
-@model IEnumerable<HotelDto>;
+@model IEnumerable<Hotel>;
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
         <h1> Find your dream stay!</h1>
@@ -65,7 +65,7 @@
     </div>
 </div>
 
-@foreach (HotelDto item in Model)
+@foreach (Hotel item in Model)
 {
    <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
     <div class="card mb-3" style="max-width: 100%;">

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStay.DataAccessLayer", "PrimeStay.DataAccessLayer\PrimeStay.DataAccessLayer.csproj", "{C01F9996-2E04-4612-8440-862B45E3A4F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStay.DataAccessLayer", "PrimeStay.DataAccessLayer\PrimeStay.DataAccessLayer.csproj", "{C01F9996-2E04-4612-8440-862B45E3A4F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeStay.Model", "PrimeStay.Model\PrimeStay.Model.csproj", "{A5BB211F-66D6-408E-879C-487AE242C104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStay.Model", "PrimeStay.Model\PrimeStay.Model.csproj", "{A5BB211F-66D6-408E-879C-487AE242C104}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

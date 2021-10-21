@@ -1,29 +1,25 @@
 ﻿using PrimeStay.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PrimeStay.DataAccessLayer.DAO.DTO
+namespace primestayMVC.Model
 {
-    internal static class DtoMapper
+    public static class ModelMapper
     {
-        public static HotelDto Map(this HotelDal hotel)
+        public static Hotel Map(this HotelDal hotel)
         {
             if (hotel == null) return null;
-            return new HotelDto()
+            return new Hotel()
             {
                 Href = hotel.ExtractHref(),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                StaffedHours = hotel.Staffed_hours,
+                Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = GetHrefFromId(typeof(LocationDal), hotel.Location_Id)
+                LocationHref = @$"api/Location/{hotel.Location_Id}" // TODO use helper method GetHrefFromId()
             };
         }
 
-        public static HotelDal Map(this HotelDto hotel)
+        public static HotelDal Map(this Hotel hotel)
         {
             if (hotel == null) return null;
             return new HotelDal()
@@ -31,13 +27,13 @@ namespace PrimeStay.DataAccessLayer.DAO.DTO
                 Id = hotel.ExtractId(),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.StaffedHours,
+                Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                Location_Id = GetIdFromHref(hotel.LocationHref)
+                Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
             };
         }
 
-        public static int? ExtractId(this BaseDto dto)
+        public static int? ExtractId(this BaseModel dto)
         {
             return GetIdFromHref(dto.Href);
         }

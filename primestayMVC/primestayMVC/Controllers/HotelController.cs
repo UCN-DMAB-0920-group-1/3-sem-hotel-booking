@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PrimeStay.DataAccessLayer;
+using PrimeStay.Model;
 using primestayMVC.Model;
 using primestayMVC.Models;
 using RestSharp;
@@ -12,16 +14,18 @@ namespace primestayMVC.Controllers
     public class HotelController : Controller
     {
         private readonly ILogger<HotelController> _logger;
+        private readonly IDao<Hotel> _dao;
 
-        public HotelController(ILogger<HotelController> logger)
+        public HotelController(ILogger<HotelController> logger, IDao<Hotel> dao)
         {
             _logger = logger;
+            _dao = dao;
         }
-        public IActionResult Index()
+        public IActionResult Index([FromQuery] Hotel hotel)
         {
             //if (hotels == null) 
-            IEnumerable<HotelDto> hotels = GetAllHotels();
-            hotels.ToList().ForEach(h => h.Location = getHotelLocation(h));
+            IEnumerable<Hotel> hotels = _dao.ReadAll(hotel);
+            hotels.Select(h => h.Map()).ToList().ForEach(h => h.Location = getHotelLocation(h));
 
             return View(hotels);
         }
@@ -46,22 +50,22 @@ namespace primestayMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private HotelDto GetHotel(string href)
+        private Hotel GetHotel(string href)
         {
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new(href, Method.GET, DataFormat.Json);
-            return client.Execute<HotelDto>(request).Data;
+            return client.Execute<Hotel>(request).Data;
 
         }
-        public static IEnumerable<HotelDto> GetAllHotels()
+        public static IEnumerable<Hotel> GetAllHotels()
         {
 
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
-            IRestResponse<IEnumerable<HotelDto>> restResponse = client.Get<IEnumerable<HotelDto>>(request);
+            IRestResponse<IEnumerable<Hotel>> restResponse = client.Get<IEnumerable<Hotel>>(request);
             return restResponse.Data;
         }
-        private Location getHotelLocation(HotelDto h) => LocationController.GetLocation(h.LocationHref);
+        private Location getHotelLocation(Hotel h) => LocationController.GetLocation(h.LocationHref);
 
     }
 }

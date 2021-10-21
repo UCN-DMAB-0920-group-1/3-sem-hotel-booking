@@ -1,6 +1,6 @@
 ﻿namespace PrimeStay.Model
 {
-    public class Hotel : BaseModel
+    public class HotelDal : BaseModelDal
     {
         public string Name { get; set; }
         public string Description { get; set; }

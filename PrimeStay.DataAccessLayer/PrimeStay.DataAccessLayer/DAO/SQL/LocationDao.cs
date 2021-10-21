@@ -7,23 +7,23 @@ using System.Data;
 
 namespace PrimeStay.DataAccessLayer.SQL
 {
-    internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<Location>
+    internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<LocationDal>
     {
         public LocationDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(Location model)
+        public int Create(LocationDal model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(Location model)
+        public int Delete(LocationDal model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Location> ReadAll(Location model)
+        public IEnumerable<LocationDal> ReadAll(LocationDal model)
         {
             model.Street_Address = model.Street_Address != null ? "%" + model.Street_Address + "%" : null;
             model.Zip_code = model.Zip_code != null ? "%" + model.Zip_code + "%" : null;
@@ -31,7 +31,7 @@ namespace PrimeStay.DataAccessLayer.SQL
             model.Country = model.Country != null ? "%" + model.Country + "%" : null;
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<Location>($@"SELECT * FROM Location WHERE " +
+                return connection.Query<LocationDal>($@"SELECT * FROM Location WHERE " +
                                                                $"id=ISNULL(@id,id) " +
                                                                $"AND Street_Address=ISNULL(@Street_Address,Street_Address)" +
                                                                $"AND Zip_code=ISNULL(@Zip_code,Zip_code)" +
@@ -42,17 +42,17 @@ namespace PrimeStay.DataAccessLayer.SQL
             }
         }
 
-        public Location ReadById(int id)
+        public LocationDal ReadById(int id)
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<Location>(@$"SELECT * FROM Location WHERE id = @id", new { id });
+                return connection.QueryFirst<LocationDal>(@$"SELECT * FROM Location WHERE id = @id", new { id });
 
             };
 
         }
 
-        public int Update(Location model)
+        public int Update(LocationDal model)
         {
             throw new NotImplementedException();
         }

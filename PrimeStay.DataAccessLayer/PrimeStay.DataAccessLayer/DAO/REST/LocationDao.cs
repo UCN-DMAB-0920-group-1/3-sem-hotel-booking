@@ -6,33 +6,33 @@ using System.Data;
 
 namespace PrimeStay.DataAccessLayer.DAO.REST
 {
-    internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<Location>
+    internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<LocationDal>
     {
         public LocationDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(Location model)
+        public int Create(LocationDal model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(Location model)
+        public int Delete(LocationDal model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Location> ReadAll(Location model)
+        public IEnumerable<LocationDal> ReadAll(LocationDal model)
         {
             throw new NotImplementedException();
         }
 
-        public Location ReadById(int id)
+        public LocationDal ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Location model)
+        public int Update(LocationDal model)
         {
             throw new NotImplementedException();
         }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace primestayMVC.Model
 {
-    public class HotelDto : BaseModel
+    public class Hotel : BaseModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

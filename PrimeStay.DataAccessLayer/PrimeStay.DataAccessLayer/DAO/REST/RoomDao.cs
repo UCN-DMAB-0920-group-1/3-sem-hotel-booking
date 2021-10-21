@@ -6,33 +6,33 @@ using System.Data;
 
 namespace PrimeStay.DataAccessLayer.DAO.REST
 {
-    internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<Room>
+    internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomDal>
     {
         public RoomDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(Room model)
+        public int Create(RoomDal model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(Room model)
+        public int Delete(RoomDal model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Room> ReadAll(Room model)
+        public IEnumerable<RoomDal> ReadAll(RoomDal model)
         {
             throw new NotImplementedException();
         }
 
-        public Room ReadById(int id)
+        public RoomDal ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Room model)
+        public int Update(RoomDal model)
         {
             throw new NotImplementedException();
         }
