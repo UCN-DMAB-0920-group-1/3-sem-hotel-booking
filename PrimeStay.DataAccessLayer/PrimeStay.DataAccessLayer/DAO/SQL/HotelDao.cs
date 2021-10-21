@@ -4,7 +4,7 @@ using PrimeStay.Model;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer
+namespace PrimeStay.DataAccessLayer.SQL
 {
     internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<Hotel>
     {

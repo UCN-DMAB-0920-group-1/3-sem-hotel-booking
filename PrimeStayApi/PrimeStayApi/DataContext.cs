@@ -1,19 +1,19 @@
-﻿using PrimeStayApi.DataAccessLayer;
+﻿using PrimeStay.DataAccessLayer;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace PrimeStayApi
 {
-    public class DataContext : IDataContext
+    public class SQLDataContext : IDataContext<IDbConnection>
     {
         private string _connectionString;
 
-        public DataContext(string connectionString)
+        public SQLDataContext(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public IDbConnection OpenConnection()
+        public IDbConnection Open()
         {
             // ADO.NET creates a pool for the specific connectionstring supplied ot the contructor og the sqlconnection object.
             // There is no need to worry about it opening lots of connection, everytime the method is called.

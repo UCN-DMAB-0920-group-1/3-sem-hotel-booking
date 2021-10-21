@@ -1,12 +1,9 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PrimeStay.DataAccessLayer.DAO;
 using PrimeStayApi.Controllers;
-using PrimeStayApi.DataAccessLayer;
+using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Extensions.Primitives;
-using Microsoft.AspNetCore.Mvc;
 
 namespace PrimeStayApi.Test
 {
@@ -19,7 +16,7 @@ namespace PrimeStayApi.Test
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _controller = new RoomController(DaoFactory.Create<Room>(new DataContext()));
+            _controller = new RoomController(DaoFactory.Create<Room>(new SQLDataContext(ENV.ConnectionStringTest)));
         }
 
         [TestInitialize]
@@ -41,7 +38,7 @@ namespace PrimeStayApi.Test
             Room[] rooms;
 
             //Act
-           rooms = _controller.Index(null, null, null, null, null, null, null).ToArray();
+            rooms = _controller.Index(null, null, null, null, null, null, null).ToArray();
 
             //Assert
             Assert.IsNotNull(rooms);
@@ -62,7 +59,7 @@ namespace PrimeStayApi.Test
             Assert.IsNotNull(rooms);
             Assert.IsTrue(rooms.Length > 0);
 
-           
+
 
         }
         /*

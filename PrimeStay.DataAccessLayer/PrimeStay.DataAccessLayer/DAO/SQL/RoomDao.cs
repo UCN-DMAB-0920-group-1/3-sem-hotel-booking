@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer
+namespace PrimeStay.DataAccessLayer.SQL
 {
     internal class RoomDao : BaseDao<IDataContext<IDbConnection>>, IDao<Room>
     {

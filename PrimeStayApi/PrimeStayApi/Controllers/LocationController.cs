@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStayApi.DataAccessLayer;
+using PrimeStay.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
 using System;
@@ -25,7 +25,7 @@ namespace PrimeStayApi.Controllers
         [Route("{id}")]
         [HttpGet]
         public LocationDTO Details(int id) => _dao.ReadById(id).Map();
-       
+
 
         // GET: LocationController/Create
         public ActionResult Create()
