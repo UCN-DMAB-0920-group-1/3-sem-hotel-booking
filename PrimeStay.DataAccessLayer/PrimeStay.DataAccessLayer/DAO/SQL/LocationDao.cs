@@ -25,7 +25,21 @@ namespace PrimeStay.DataAccessLayer.SQL
 
         public IEnumerable<Location> ReadAll(Location model)
         {
-            throw new NotImplementedException();
+            model.Street_Address = model.Street_Address != null ? "%" + model.Street_Address + "%" : null;
+            model.Zip_code = model.Zip_code != null ? "%" + model.Zip_code + "%" : null;
+            model.City = model.City != null ? "%" + model.City + "%" : null;
+            model.Country = model.Country != null ? "%" + model.Country + "%" : null;
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.Query<Location>($@"SELECT * FROM Location WHERE " +
+                                                               $"id=ISNULL(@id,id) " +
+                                                               $"AND Street_Address=ISNULL(@Street_Address,Street_Address)" +
+                                                               $"AND Zip_code=ISNULL(@Zip_code,Zip_code)" +
+                                                               $"AND City=ISNULL(@City,City)" +
+                                                               $"AND Country=ISNULL(@Country,Country)",
+                                                               new { model.Id, model.Street_Address, model.Zip_code, model.City, model.Country }
+                    );
+            }
         }
 
         public Location ReadById(int id)
