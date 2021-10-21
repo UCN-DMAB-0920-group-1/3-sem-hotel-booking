@@ -3,11 +3,9 @@ using Microsoft.Extensions.Logging;
 using primestayMVC.Model;
 using primestayMVC.Models;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace primestayMVC.Controllers
 {
@@ -21,14 +19,13 @@ namespace primestayMVC.Controllers
         }
         public IActionResult Index(IEnumerable<Hotel> hotels)
         {
-           if (hotels == null || hotels.Count() == 0)
-            {
-            hotels = GetAllHotels();
-            }
-           hotels.ToList().ForEach(h => h.Location = LocationController.GetLocation(h.LocationHref));
-           
-           return View(hotels);
+            if (hotels == null) hotels = GetAllHotels();
+            hotels.ToList().ForEach(h => h.Location = getHotelLocation(h));
+
+            return View(hotels);
         }
+
+
         //[Route("Details")]
         public IActionResult Details(string href)
         {
@@ -55,11 +52,14 @@ namespace primestayMVC.Controllers
             return client.Execute<Hotel>(request).Data;
 
         }
-        public static IEnumerable<Hotel> GetAllHotels() { 
-        
+        public static IEnumerable<Hotel> GetAllHotels()
+        {
+
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
             return client.Execute<IEnumerable<Hotel>>(request).Data;
         }
+        private Location getHotelLocation(Hotel h) => LocationController.GetLocation(h.LocationHref);
+
     }
 }
