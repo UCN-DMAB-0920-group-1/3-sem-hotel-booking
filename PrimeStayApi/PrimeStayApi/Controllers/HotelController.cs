@@ -89,5 +89,7 @@ namespace PrimeStayApi.Controllers
 
             return _dao.Delete(hotel) == 1 ? Ok() : NotFound();
         }
+
+
     }
 }
