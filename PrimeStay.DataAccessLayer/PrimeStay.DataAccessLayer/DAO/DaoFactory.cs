@@ -15,18 +15,9 @@ namespace PrimeStay.DataAccessLayer.DAO
             {
                 return typeof(T) switch
                 {
-                    var dao when dao == typeof(HotelDal) => new REST.HotelDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
-                    var dao when dao == typeof(RoomDal) => new REST.RoomDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
-                    var dao when dao == typeof(LocationDal) => new REST.LocationDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
-                    _ => null,
-                };
-            }
-
-            else if (typeof(IDataContext<IDbConnection>).IsAssignableFrom(DataContextType))
-            {
-                return typeof(T) switch
-                {
-                    var dao when dao == typeof(HotelDal) => new SQL.HotelDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                    var dao when dao == typeof(HotelDto) => new HotelDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
+                    var dao when dao == typeof(RoomDto) => new RoomDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
+                    var dao when dao == typeof(LocationDto) => new LocationDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
                     _ => null,
                 };
             }

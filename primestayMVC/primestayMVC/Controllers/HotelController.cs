@@ -3,20 +3,20 @@ using Microsoft.Extensions.Logging;
 using PrimeStay.DataAccessLayer;
 using PrimeStay.Model;
 using primestayMVC.Model;
-using primestayMVC.Models;
-using RestSharp;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace primestayMVC.Controllers
 {
     public class HotelController : Controller
     {
         private readonly ILogger<HotelController> _logger;
-        private readonly IDao<Hotel> _dao;
+        private readonly IDao<HotelDal> _dao;
 
-        public HotelController(ILogger<HotelController> logger, IDao<Hotel> dao)
+        public HotelController(ILogger<HotelController> logger, IDao<HotelDal> dao)
         {
             _logger = logger;
             _dao = dao;
@@ -24,20 +24,20 @@ namespace primestayMVC.Controllers
         public IActionResult Index([FromQuery] Hotel hotel)
         {
             //if (hotels == null) 
-            IEnumerable<Hotel> hotels = _dao.ReadAll(hotel);
+            IEnumerable<HotelDal> hotels = _dao.ReadAll(hotel.Map());
             hotels.Select(h => h.Map()).ToList().ForEach(h => h.Location = getHotelLocation(h));
-
 
             return View(hotels);
         }
 
 
         //[Route("Details")]
-        public IActionResult Details(string href)
+        public IActionResult Details(int id)
         {
-            var hotel = GetHotel(href);
+            var controller = DependencyResolver.Current.GetService<RoomController>();
+            var hotel = GetHotel(id);
             hotel.Location = getHotelLocation(hotel);
-            hotel.rooms = RoomController.getAllHotelRooms(href);
+            hotel.rooms = controller.getAllHotelRoomsForHotel(id);
             return View(hotel);
         }
 
@@ -52,22 +52,21 @@ namespace primestayMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private Hotel GetHotel(string href)
+        private Hotel GetHotel(int id)
         {
-            RestClient client = new("https://localhost:44312/");
-            RestRequest request = new(href, Method.GET, DataFormat.Json);
-            return client.Execute<Hotel>(request).Data;
+            return _dao.ReadById(id).Map();
 
         }
-        public static IEnumerable<Hotel> GetAllHotels()
+        public IEnumerable<Hotel> GetAllHotels()
         {
-
-            RestClient client = new("https://localhost:44312/");
-            RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
-            IRestResponse<IEnumerable<Hotel>> restResponse = client.Get<IEnumerable<Hotel>>(request);
-            return restResponse.Data;
+            HotelDal emptyHotel = new HotelDal();
+            return _dao.ReadAll(emptyHotel).Select(h => h.Map());
         }
-        private Location getHotelLocation(Hotel h) => LocationController.GetLocation(h.LocationHref);
+        private Location getHotelLocation(Hotel h)
+        {
+            LocationController controller = DependencyResolver.Current.GetService<LocationController>();
+            return controller.GetLocationById(h.Id ?? 0);
+        }
 
     }
 }

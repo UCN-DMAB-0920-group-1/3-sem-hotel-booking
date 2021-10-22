@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PrimeStay.Model
 {
-    public class BaseModelDal
+    public class BaseDto
     {
-        public int? Id { get; set; }
+        public string Href { get; set; }
     }
 }

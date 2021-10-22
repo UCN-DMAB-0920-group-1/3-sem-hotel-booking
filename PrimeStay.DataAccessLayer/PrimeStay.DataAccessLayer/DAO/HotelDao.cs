@@ -3,38 +3,38 @@ using RestSharp;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer.DAO.REST
+namespace PrimeStay.DataAccessLayer.DAO
 {
-    internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<HotelDal>
+    internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<HotelDto>
     {
         public HotelDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(HotelDal model)
+        public int Create(HotelDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Delete(HotelDal model)
+        public int Delete(HotelDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<HotelDal> ReadAll(HotelDal model)
+        public IEnumerable<HotelDto> ReadAll(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/hotel", Method.GET, DataFormat.Json);
-            IRestResponse<IEnumerable<HotelDal>> restResponse = restClient.Get<IEnumerable<HotelDal>>(restRequest);
+            IRestResponse<IEnumerable<HotelDto>> restResponse = restClient.Get<IEnumerable<HotelDto>>(restRequest);
             return restResponse.Data;
         }
 
-        public HotelDal ReadById(int id)
+        public HotelDto ReadById(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Update(HotelDal model)
+        public int Update(HotelDto model)
         {
             throw new System.NotImplementedException();
         }

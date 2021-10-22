@@ -4,35 +4,35 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer.DAO.REST
+namespace PrimeStay.DataAccessLayer.DAO
 {
-    internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<LocationDal>
+    internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<LocationDto>
     {
         public LocationDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(LocationDal model)
+        public int Create(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(LocationDal model)
+        public int Delete(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<LocationDal> ReadAll(LocationDal model)
+        public IEnumerable<LocationDto> ReadAll(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public LocationDal ReadById(int id)
+        public LocationDto ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(LocationDal model)
+        public int Update(LocationDto model)
         {
             throw new NotImplementedException();
         }

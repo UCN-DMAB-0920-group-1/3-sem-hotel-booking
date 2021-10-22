@@ -5,22 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using primestayMVC.Model;
+using PrimeStay.Model;
+using PrimeStay.DataAccessLayer;
 
 namespace primestayMVC.Controllers
 {
     public class LocationController : Controller
     {
+        private readonly IDao<LocationDal> _dao;
+
+        public LocationController(IDao<LocationDal> dao)
+        {
+            _dao = dao;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public static Location GetLocation(string href)
+        public Location GetLocationById(int id)
         {
-            RestClient client = new("https://localhost:44312/");
-            RestRequest request = new(href, Method.GET, DataFormat.Json);
-            return client.Execute<Location>(request).Data;
-
+            return _dao.ReadById(id).Map();
         }
     }
 }

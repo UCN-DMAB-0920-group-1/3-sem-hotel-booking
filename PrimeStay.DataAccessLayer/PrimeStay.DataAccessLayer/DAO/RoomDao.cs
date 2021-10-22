@@ -4,35 +4,35 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer.DAO.REST
+namespace PrimeStay.DataAccessLayer.DAO
 {
-    internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomDal>
+    internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomDto>
     {
         public RoomDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(RoomDal model)
+        public int Create(RoomDto model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(RoomDal model)
+        public int Delete(RoomDto model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RoomDal> ReadAll(RoomDal model)
+        public IEnumerable<RoomDto> ReadAll(RoomDto model)
         {
             throw new NotImplementedException();
         }
 
-        public RoomDal ReadById(int id)
+        public RoomDto ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(RoomDal model)
+        public int Update(RoomDto model)
         {
             throw new NotImplementedException();
         }
