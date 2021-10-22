@@ -94,12 +94,12 @@ namespace primestayMVC.Model
 
         #region info_extraction
 
-        public static int? ExtractId(this BaseModel dto)
+        public static int? ExtractId(this BaseDto dto)
         {
             return GetIdFromHref(dto.Href);
         }
 
-        public static string ExtractHref(this BaseModelDal model)
+        public static string ExtractHref(this BaseModel model)
         {
             return GetHrefFromId(model.GetType(), model.Id);
         }
@@ -107,8 +107,9 @@ namespace primestayMVC.Model
         public static string GetHrefFromId(Type type, int? id)
         {
             if (id == null) return null;
+            string typeName = type.Name.Substring(0, (type.Name.Length - 3));
 
-            return $@"api/{type.Name.ToLower()}/{id}";
+            return $@"api/{typeName}/{id}";
         }
 
         public static int? GetIdFromHref(string href)
