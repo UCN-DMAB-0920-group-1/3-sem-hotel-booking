@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeStay.Model
 {
-    public class RoomDal : BaseModelDal
+    public class RoomDto : BaseDto
     {
         public string Type { get; set; }
         public int? Num_of_avaliable { get; set; }

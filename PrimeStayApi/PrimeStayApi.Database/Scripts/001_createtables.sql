@@ -33,7 +33,7 @@ CREATE TABLE [Booking] (
     [end_date] DATE  NOT NULL ,
     [num_of_guests] int  NOT NULL ,
     [room_id] int  NOT NULL ,
-    [costumer_id] int  NOT NULL ,
+    [customer_id] int  NOT NULL ,
     CONSTRAINT [PK_Booking] PRIMARY KEY CLUSTERED (
         [booking_id] ASC
     )
@@ -154,10 +154,10 @@ REFERENCES [Room] ([id])
 
 ALTER TABLE [Booking] CHECK CONSTRAINT [FK_Booking_room_id]
 
-ALTER TABLE [Booking] WITH CHECK ADD CONSTRAINT [FK_Booking_costumer_id] FOREIGN KEY([costumer_id])
+ALTER TABLE [Booking] WITH CHECK ADD CONSTRAINT [FK_Booking_customer_id] FOREIGN KEY([customer_id])
 REFERENCES [Customer] ([id])
 
-ALTER TABLE [Booking] CHECK CONSTRAINT [FK_Booking_costumer_id]
+ALTER TABLE [Booking] CHECK CONSTRAINT [FK_Booking_customer_id]
 
 ALTER TABLE [Price] WITH CHECK ADD CONSTRAINT [FK_Price_room_id] FOREIGN KEY([room_id])
 REFERENCES [Room] ([id])
