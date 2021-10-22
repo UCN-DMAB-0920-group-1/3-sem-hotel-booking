@@ -27,6 +27,7 @@ namespace primestayMVC.Controllers
             IEnumerable<Hotel> hotels = _dao.ReadAll(hotel);
             hotels.Select(h => h.Map()).ToList().ForEach(h => h.Location = getHotelLocation(h));
 
+
             return View(hotels);
         }
 
@@ -35,6 +36,7 @@ namespace primestayMVC.Controllers
         public IActionResult Details(string href)
         {
             var hotel = GetHotel(href);
+            hotel.Location = getHotelLocation(hotel);
             hotel.rooms = RoomController.getAllHotelRooms(href);
             return View(hotel);
         }
