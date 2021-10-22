@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PrimeStay.DataAccessLayer;
+using PrimeStay.DataAccessLayer.DAO;
 using PrimeStayApi.Controllers;
-using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
@@ -14,7 +15,7 @@ namespace PrimeStayApi.Test
     {
         private HotelController _controllerWithDB;
         private IDao<Hotel> _dao;
-        private DataContext _dataContext;
+        private SQLDataContext _dataContext;
         private HotelController _controllerNoDB;
 
 
@@ -22,7 +23,7 @@ namespace PrimeStayApi.Test
         public void SetUp()
         {
             Version.Upgrade(ENV.ConnectionStringTest);
-            _dataContext = new DataContext(ENV.ConnectionStringTest);
+            _dataContext = new SQLDataContext(ENV.ConnectionStringTest);
 
         }
         [TestCleanup]

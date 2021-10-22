@@ -2,6 +2,6 @@
 {
     public class BaseModel
     {
-        public string href { get; set; }
+        public string Href { get; set; }
     }
 }

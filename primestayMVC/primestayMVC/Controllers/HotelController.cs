@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PrimeStay.DataAccessLayer;
+using PrimeStay.Model;
 using primestayMVC.Model;
 using primestayMVC.Models;
 using RestSharp;
@@ -12,15 +14,19 @@ namespace primestayMVC.Controllers
     public class HotelController : Controller
     {
         private readonly ILogger<HotelController> _logger;
+        private readonly IDao<Hotel> _dao;
 
-        public HotelController(ILogger<HotelController> logger)
+        public HotelController(ILogger<HotelController> logger, IDao<Hotel> dao)
         {
             _logger = logger;
+            _dao = dao;
         }
-        public IActionResult Index(IEnumerable<Hotel> hotels)
+        public IActionResult Index([FromQuery] Hotel hotel)
         {
-            hotels = GetAllHotels();
-            hotels.ToList().ForEach(h => h.Location = getHotelLocation(h));
+            //if (hotels == null) 
+            IEnumerable<Hotel> hotels = _dao.ReadAll(hotel);
+            hotels.Select(h => h.Map()).ToList().ForEach(h => h.Location = getHotelLocation(h));
+
 
             return View(hotels);
         }
@@ -58,7 +64,8 @@ namespace primestayMVC.Controllers
 
             RestClient client = new("https://localhost:44312/");
             RestRequest request = new("api/hotel/", Method.GET, DataFormat.Json);
-            return client.Execute<IEnumerable<Hotel>>(request).Data;
+            IRestResponse<IEnumerable<Hotel>> restResponse = client.Get<IEnumerable<Hotel>>(request);
+            return restResponse.Data;
         }
         private Location getHotelLocation(Hotel h) => LocationController.GetLocation(h.LocationHref);
 

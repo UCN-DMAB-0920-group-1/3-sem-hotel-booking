@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStayApi.DataAccessLayer;
+using PrimeStay.DataAccessLayer;
 using PrimeStayApi.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using PrimeStayApi.Services;
+using System.Collections.Generic;
 
 namespace PrimeStayApi.Controllers
 {
