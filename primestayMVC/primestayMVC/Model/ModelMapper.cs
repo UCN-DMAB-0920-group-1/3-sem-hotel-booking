@@ -24,12 +24,12 @@ namespace primestayMVC.Model
             if (hotel == null) return null;
             return new HotelDto()
             {
-                Href = hotel.ExtractId(),
+                Href = GetHrefFromId(typeof(Hotel), hotel.Id),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_hours,
+                Staffed_Hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
+                LocationHref = GetHrefFromId(typeof(Hotel), hotel.Id),
             };
         }
 
@@ -38,8 +38,8 @@ namespace primestayMVC.Model
             if (room == null) return null;
             return new Room()
             {
-                Id = room.Id,
-                Href = GetHrefFromId(typeof(Room), room.Id),
+                Id = GetIdFromHref(room.Href),
+                Href = room.Href,
                 Type = room.Type,
                 Num_of_avaliable = room.Num_of_avaliable,
                 Num_of_beds = room.Num_of_beds,
@@ -53,7 +53,7 @@ namespace primestayMVC.Model
             if (room == null) return null;
             return new RoomDto()
             {
-                Id = room.Id,
+                Href = GetHrefFromId(typeof(Room), room.Id),
                 Type = room.Type,
                 Num_of_avaliable = room.Num_of_avaliable,
                 Num_of_beds = room.Num_of_beds,
@@ -80,7 +80,7 @@ namespace primestayMVC.Model
             if (location == null) return null;
             return new LocationDto()
             {
-                Id = location.Id,
+                Href = GetHrefFromId(typeof(Location), location.Id),
                 Street_Address = location.Street_Address,
                 City = location.City,
                 Country = location.Country,

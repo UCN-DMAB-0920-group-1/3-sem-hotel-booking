@@ -1,4 +1,4 @@
-﻿namespace PrimeStay.DataAccessLayer.DAO
+﻿namespace MVC.DataAccessLayer.DAO
 {
     internal abstract class BaseDao<T>
     {

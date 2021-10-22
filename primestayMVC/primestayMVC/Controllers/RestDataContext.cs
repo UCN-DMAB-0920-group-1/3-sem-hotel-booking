@@ -1,4 +1,4 @@
-﻿using PrimeStay.DataAccessLayer;
+﻿using MVC.DataAccessLayer;
 using RestSharp;
 
 namespace primestayMVC.Controllers

@@ -1,20 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MVC.DataAccessLayer;
+using MVC.DataAccessLayer.DTO;
 using primestayMVC.Model;
-using PrimeStay.Model;
-using PrimeStay.DataAccessLayer;
 
 namespace primestayMVC.Controllers
 {
     public class LocationController : Controller
     {
-        private readonly IDao<LocationDal> _dao;
+        private readonly IDao<LocationDto> _dao;
 
-        public LocationController(IDao<LocationDal> dao)
+        public LocationController(IDao<LocationDto> dao)
         {
             _dao = dao;
         }

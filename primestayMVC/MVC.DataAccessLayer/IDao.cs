@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PrimeStay.DataAccessLayer
+namespace MVC.DataAccessLayer
 {
     public interface IDao<T>
     {

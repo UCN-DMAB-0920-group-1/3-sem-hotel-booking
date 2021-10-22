@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PrimeStay.DataAccessLayer;
-using PrimeStay.DataAccessLayer.DAO;
-using PrimeStay.Model;
+using MVC.DataAccessLayer;
+using MVC.DataAccessLayer.DAO;
 using primestayMVC.Controllers;
+using primestayMVC.Model;
 using RestSharp;
 
 namespace primestayMVC
@@ -24,8 +24,8 @@ namespace primestayMVC
         public void ConfigureServices(IServiceCollection services)
         {
             IDataContext<IRestClient> dataContext = new RestDataContext();
-            services.AddScoped<IDao<RoomDal>>(s => DaoFactory.Create<RoomDal>(dataContext));
-            services.AddScoped<IDao<HotelDal>>(s => DaoFactory.Create<HotelDal>(dataContext));
+            services.AddScoped<IDao<Room>>(s => DaoFactory.Create<Room>(dataContext));
+            services.AddScoped<IDao<Hotel>>(s => DaoFactory.Create<Hotel>(dataContext));
 
             services.AddControllersWithViews();
         }

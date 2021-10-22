@@ -1,7 +1,6 @@
-﻿using PrimeStay.Model;
+﻿using MVC.DataAccessLayer.DTO;
 using RestSharp;
 using System;
-using System.Data;
 
 namespace MVC.DataAccessLayer.DAO
 {
