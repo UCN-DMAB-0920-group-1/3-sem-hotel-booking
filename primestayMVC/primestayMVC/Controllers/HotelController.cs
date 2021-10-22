@@ -1,43 +1,44 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MVC.DataAccessLayer;
 using MVC.DataAccessLayer.DTO;
 using primestayMVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Web.Mvc;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace primestayMVC.Controllers
 {
     public class HotelController : Controller
     {
-        private readonly ILogger<HotelController> _logger;
         private readonly IDao<HotelDto> _dao;
+        private readonly RoomController _RoomCTRL;
+        private readonly LocationController _locationCTRL;
 
-        public HotelController(ILogger<HotelController> logger, IDao<HotelDto> dao)
+        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomDto> roomDao)
         {
-            _logger = logger;
             _dao = dao;
+            _locationCTRL = new LocationController(locationDao);
+            _RoomCTRL = new RoomController(roomDao);
         }
         public IActionResult Index([FromQuery] Hotel hotel)
         {
             //if (hotels == null) 
             IEnumerable<HotelDto> hotels = _dao.ReadAll(hotel.Map());
-            hotels.Select(h => h.Map()).ToList().ForEach(h => h.Location = getHotelLocation(h));
+            List<Hotel> hotelList = hotels.Select(h => h.Map()).ToList();
+            hotelList.ForEach(h => h.Location = getHotelLocation(h));
 
-            return View(hotels);
+            return View(hotelList);
         }
 
 
         //[Route("Details")]
-        public IActionResult Details(int id)
+        public IActionResult Details([FromQuery] string href)
         {
-            var controller = DependencyResolver.Current.GetService<RoomController>();
+            int id = int.Parse(href[(href.LastIndexOf("/") + 1)..]);
             var hotel = GetHotel(id);
             hotel.Location = getHotelLocation(hotel);
-            hotel.rooms = controller.getAllHotelRoomsForHotel(id);
+            hotel.rooms = _RoomCTRL.getAllHotelRoomsForHotel(id);
             return View(hotel);
         }
 
@@ -64,8 +65,8 @@ namespace primestayMVC.Controllers
         }
         private Location getHotelLocation(Hotel h)
         {
-            LocationController controller = DependencyResolver.Current.GetService<LocationController>();
-            return controller.GetLocationById(h.Id ?? 0);
+            //TODO get controller from 
+            return _locationCTRL.GetLocationById(h.Id ?? 0);
         }
 
     }

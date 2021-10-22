@@ -81,14 +81,15 @@ namespace PrimeStayApi.Model.DTO
 
         public static string ExtractHref(this BaseEntity model)
         {
+
             return GetHrefFromId(model.GetType(), model.Id);
         }
 
         public static string GetHrefFromId(Type type, int? id)
         {
             if (id == null) return null;
-
-            return $@"api/{type.Name.ToLower()}/{id}";
+            string typeName = type.Name.Substring(0, type.Name.IndexOf("Entity"));
+            return $@"api/{typeName}/{id}";
         }
 
         public static int? GetIdFromHref(string href)

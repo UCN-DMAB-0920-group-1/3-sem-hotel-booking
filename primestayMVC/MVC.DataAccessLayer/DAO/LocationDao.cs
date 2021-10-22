@@ -28,7 +28,9 @@ namespace MVC.DataAccessLayer.DAO
 
         public LocationDto ReadById(int id)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest($"/api/Location/{id}", Method.GET, DataFormat.Json);
+            return restClient.Execute<LocationDto>(restRequest).Data;
         }
 
         public int Update(LocationDto model)

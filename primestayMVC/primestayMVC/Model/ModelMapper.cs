@@ -11,6 +11,7 @@ namespace primestayMVC.Model
             return new Hotel()
             {
                 Id = GetIdFromHref(hotel.Href),
+                Href = hotel.Href,
                 Name = hotel.Name,
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_Hours,
@@ -48,7 +49,7 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
-        public static RoomDal Map(this Room room)
+        public static RoomDto Map(this Room room)
         {
             if (room == null) return null;
             return new RoomDto()
@@ -75,10 +76,10 @@ namespace primestayMVC.Model
             };
         }
 
-        public static LocationDal Map(this Location location)
+        public static LocationDto Map(this Location location)
         {
             if (location == null) return null;
-            return new LocationDal()
+            return new LocationDto()
             {
                 Href = GetHrefFromId(typeof(Location), location.Id),
                 Street_Address = location.Street_Address,
@@ -106,7 +107,7 @@ namespace primestayMVC.Model
         public static string GetHrefFromId(Type type, int? id)
         {
             if (id == null) return null;
-            string typeName = type.Name.Substring(0, (type.Name.Length - 3));
+            string typeName = type.Name;
 
             return $@"api/{typeName}/{id}";
         }

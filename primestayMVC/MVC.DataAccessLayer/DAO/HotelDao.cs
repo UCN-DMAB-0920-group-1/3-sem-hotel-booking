@@ -30,7 +30,9 @@ namespace MVC.DataAccessLayer.DAO
 
         public HotelDto ReadById(int id)
         {
-            throw new System.NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest($"/api/hotel/{id}", Method.GET, DataFormat.Json);
+            return restClient.Get<HotelDto>(restRequest).Data;
         }
 
         public int Update(HotelDto model)

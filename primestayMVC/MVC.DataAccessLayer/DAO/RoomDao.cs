@@ -2,6 +2,7 @@
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MVC.DataAccessLayer.DAO
 {
@@ -23,7 +24,10 @@ namespace MVC.DataAccessLayer.DAO
 
         public IEnumerable<RoomDto> ReadAll(RoomDto model)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest($"/api/room/", Method.GET, DataFormat.Json);
+            var res = restClient.Get<IEnumerable<RoomDto>>(restRequest).Data;
+            return res.Where(r => r.Hotel_Id == model.Hotel_Id);
         }
 
         public RoomDto ReadById(int id)
