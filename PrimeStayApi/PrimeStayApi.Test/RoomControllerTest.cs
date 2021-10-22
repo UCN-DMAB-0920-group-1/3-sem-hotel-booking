@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStay.DataAccessLayer.DAO;
 using PrimeStayApi.Controllers;
+using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace PrimeStayApi.Test
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _controller = new RoomController(DaoFactory.Create<Room>(new SQLDataContext(ENV.ConnectionStringTest)));
+            _controller = new RoomController(DaoFactory.Create<RoomEntity>(new DataContext(ENV.ConnectionStringTest)));
         }
 
         [TestInitialize]
@@ -35,7 +35,7 @@ namespace PrimeStayApi.Test
         public void TestIndex()
         {
             //Arrange
-            Room[] rooms;
+            RoomEntity[] rooms;
 
             //Act
             rooms = _controller.Index(null, null, null, null, null, null, null).ToArray();
@@ -50,7 +50,7 @@ namespace PrimeStayApi.Test
         {
 
             //Arrange
-            Room[] rooms;
+            RoomEntity[] rooms;
 
             //Act
             rooms = _controller.Index(null, null, null, null, null, null, 1).ToArray();

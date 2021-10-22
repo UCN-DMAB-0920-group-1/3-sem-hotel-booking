@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PrimeStay.DataAccessLayer;
-using PrimeStay.DataAccessLayer.DAO;
-using PrimeStay.Model;
+using PrimeStayApi.DataAccessLayer;
+using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Enviroment;
-using System.Data;
+using PrimeStayApi.Model;
 
 namespace PrimeStayApi
 {
@@ -23,10 +22,10 @@ namespace PrimeStayApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext<IDbConnection> dataContext = new SQLDataContext(ENV.ConnectionString);
-            services.AddScoped<IDao<HotelDal>>(s => DaoFactory.Create<HotelDal>(dataContext));
-            services.AddScoped<IDao<RoomDal>>(s => DaoFactory.Create<RoomDal>(dataContext));
-            services.AddScoped<IDao<LocationDal>>(s => DaoFactory.Create<LocationDal>(dataContext));
+            IDataContext dataContext = new DataContext(ENV.ConnectionString);
+            services.AddScoped<IDao<HotelEntity>>(s => DaoFactory.Create<HotelEntity>(dataContext));
+            services.AddScoped<IDao<RoomEntity>>(s => DaoFactory.Create<RoomEntity>(dataContext));
+            services.AddScoped<IDao<LocationEntity>>(s => DaoFactory.Create<LocationEntity>(dataContext));
 
             services.AddControllers();
         }

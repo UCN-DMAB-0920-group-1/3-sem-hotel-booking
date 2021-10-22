@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimeStay.Model
+namespace PrimeStayApi.Model
 {
-    public class BaseDto
+    public class BaseEntity
     {
-        public string Href { get; set; }
+        public int? Id { get; set; }
     }
 }

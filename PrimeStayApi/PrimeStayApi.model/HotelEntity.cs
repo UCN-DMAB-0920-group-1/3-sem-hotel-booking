@@ -1,20 +1,13 @@
-﻿using PrimeStayApi.Model.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrimeStayApi.Model
+﻿namespace PrimeStayApi.Model
 {
-    public class Hotel : BaseModel
+    public class HotelEntity : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public string Staffed_hours { get; set; }
         public int? Stars { get; set; }
         public int Location_Id { get; set; }
-    
+
     }
 
 }
