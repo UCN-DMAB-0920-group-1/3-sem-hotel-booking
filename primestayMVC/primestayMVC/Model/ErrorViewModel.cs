@@ -1,6 +1,4 @@
-using System;
-
-namespace primestayMVC.Models
+namespace primestayMVC.Model
 {
     public class ErrorViewModel
     {

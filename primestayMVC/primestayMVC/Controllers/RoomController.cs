@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using PrimeStay.DataAccessLayer;
 using PrimeStay.Model;
 using primestayMVC.Model;
-using primestayMVC.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

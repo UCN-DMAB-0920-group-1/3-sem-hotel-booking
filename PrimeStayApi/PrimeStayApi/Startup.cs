@@ -24,9 +24,9 @@ namespace PrimeStayApi
         public void ConfigureServices(IServiceCollection services)
         {
             IDataContext<IDbConnection> dataContext = new SQLDataContext(ENV.ConnectionString);
-            services.AddScoped<IDao<Hotel>>(s => DaoFactory.Create<Hotel>(dataContext));
-            services.AddScoped<IDao<Room>>(s => DaoFactory.Create<Room>(dataContext));
-            services.AddScoped<IDao<Location>>(s => DaoFactory.Create<Location>(dataContext));
+            services.AddScoped<IDao<HotelDal>>(s => DaoFactory.Create<HotelDal>(dataContext));
+            services.AddScoped<IDao<RoomDal>>(s => DaoFactory.Create<RoomDal>(dataContext));
+            services.AddScoped<IDao<LocationDal>>(s => DaoFactory.Create<LocationDal>(dataContext));
 
             services.AddControllers();
         }

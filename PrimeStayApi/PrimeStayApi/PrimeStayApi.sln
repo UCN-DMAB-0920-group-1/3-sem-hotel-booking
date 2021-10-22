@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Model", "..\Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Database", "..\PrimeStayApi.Database\PrimeStayApi.Database.csproj", "{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.DataAccessLayer.Test", "..\PrimeStayApi.DataAccessLayer.Test\PrimeStayApi.DataAccessLayer.Test.csproj", "{4709A79C-5234-4EC3-B809-9189A5E2992A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Test", "..\PrimeStayApi.Test\PrimeStayApi.Test.csproj", "{12DB843A-93C0-4C82-98BA-AC89502A3701}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Enviroment", "..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj", "{FBD215F4-6D2A-4A19-AE90-B6347641D666}"
@@ -33,10 +31,6 @@ Global
 		{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4709A79C-5234-4EC3-B809-9189A5E2992A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4709A79C-5234-4EC3-B809-9189A5E2992A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4709A79C-5234-4EC3-B809-9189A5E2992A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4709A79C-5234-4EC3-B809-9189A5E2992A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12DB843A-93C0-4C82-98BA-AC89502A3701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12DB843A-93C0-4C82-98BA-AC89502A3701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12DB843A-93C0-4C82-98BA-AC89502A3701}.Release|Any CPU.ActiveCfg = Release|Any CPU
