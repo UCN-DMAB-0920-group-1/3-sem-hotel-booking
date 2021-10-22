@@ -1,14 +1,14 @@
-﻿using PrimeStay.DataAccessLayer;
+﻿using PrimeStayApi.DataAccessLayer;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace PrimeStayApi
 {
-    public class SQLDataContext : IDataContext<IDbConnection>
+    public class DataContext : IDataContext
     {
         private string _connectionString;
 
-        public SQLDataContext(string connectionString)
+        public DataContext(string connectionString)
         {
             _connectionString = connectionString;
         }

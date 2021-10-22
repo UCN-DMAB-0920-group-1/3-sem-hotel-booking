@@ -1,7 +1,7 @@
 ﻿namespace PrimeStayApi.Model.DTO
 {
-    public class BaseModelDTO
+    public class BaseModelDto
     {
-        public string Href {  get; set; }
+        public string Href { get; set; }
     }
 }

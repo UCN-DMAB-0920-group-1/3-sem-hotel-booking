@@ -1,4 +1,4 @@
-﻿using MVC.DataAccessLayer.DTO;
+using MVC.DataAccessLayer.DTO;
 using System;
 
 namespace primestayMVC.Model
@@ -48,7 +48,7 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
-        public static RoomDto Map(this Room room)
+        public static RoomDal Map(this Room room)
         {
             if (room == null) return null;
             return new RoomDto()
@@ -75,10 +75,10 @@ namespace primestayMVC.Model
             };
         }
 
-        public static LocationDto Map(this Location location)
+        public static LocationDal Map(this Location location)
         {
             if (location == null) return null;
-            return new LocationDto()
+            return new LocationDal()
             {
                 Href = GetHrefFromId(typeof(Location), location.Id),
                 Street_Address = location.Street_Address,

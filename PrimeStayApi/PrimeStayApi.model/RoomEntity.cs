@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeStayApi.Model
 {
-    public class Room : BaseModel
+    public class RoomEntity : BaseEntity
     {
         public string Type { get; set; }
         public int? Num_of_avaliable { get; set; }
