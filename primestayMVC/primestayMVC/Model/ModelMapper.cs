@@ -49,6 +49,21 @@ namespace primestayMVC.Model
             };
         }
 
+        public static RoomDal Map(this Room room)
+        {
+            if (room == null) return null;
+            return new RoomDal()
+            {
+                Id = room.Id,
+                Type = room.Type,
+                Num_of_avaliable = room.Num_of_avaliable,
+                Num_of_beds = room.Num_of_beds,
+                Description = room.Description,
+                Rating = room.Rating,
+                Hotel_Id = room.Hotel_Id,
+            };
+        }
+
         public static int? ExtractId(this BaseModel dto)
         {
             return GetIdFromHref(dto.Href);
