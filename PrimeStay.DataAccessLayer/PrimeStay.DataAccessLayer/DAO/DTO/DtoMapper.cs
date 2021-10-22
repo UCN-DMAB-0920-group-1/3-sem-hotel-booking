@@ -1,9 +1,5 @@
 ﻿using PrimeStay.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrimeStay.DataAccessLayer.DAO.DTO
 {
@@ -50,8 +46,9 @@ namespace PrimeStay.DataAccessLayer.DAO.DTO
         public static string GetHrefFromId(Type type, int? id)
         {
             if (id == null) return null;
+            string typeName = type.Name.Substring(0, (type.Name.Length - 3));
 
-            return $@"api/{type.Name.ToLower()}/{id}";
+            return $@"api/{typeName}/{id}";
         }
 
         public static int? GetIdFromHref(string href)
