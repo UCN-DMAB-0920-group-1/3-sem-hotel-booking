@@ -6,6 +6,8 @@ using primestayMVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace primestayMVC.Controllers
 {
@@ -13,13 +15,11 @@ namespace primestayMVC.Controllers
     {
         private readonly ILogger<HotelController> _logger;
         private readonly IDao<HotelDal> _dao;
-        private readonly RoomController _roomController;
 
-        public HotelController(ILogger<HotelController> logger, IDao<HotelDal> dao, RoomController roomController)
+        public HotelController(ILogger<HotelController> logger, IDao<HotelDal> dao)
         {
             _logger = logger;
             _dao = dao;
-            _roomController = roomController;
         }
         public IActionResult Index([FromQuery] Hotel hotel)
         {
@@ -34,9 +34,10 @@ namespace primestayMVC.Controllers
         //[Route("Details")]
         public IActionResult Details(int id)
         {
+            var controller = DependencyResolver.Current.GetService<RoomController>();
             var hotel = GetHotel(id);
             hotel.Location = getHotelLocation(hotel);
-            hotel.rooms = _roomController.getAllHotelRoomsForHotel(id);
+            hotel.rooms = controller.getAllHotelRoomsForHotel(id);
             return View(hotel);
         }
 
@@ -61,7 +62,11 @@ namespace primestayMVC.Controllers
             HotelDal emptyHotel = new HotelDal();
             return _dao.ReadAll(emptyHotel).Select(h => h.Map());
         }
-        private Location getHotelLocation(Hotel h) => LocationController.GetLocation(h.LocationHref);
+        private Location getHotelLocation(Hotel h)
+        {
+            LocationController controller = DependencyResolver.Current.GetService<LocationController>();
+            return controller.GetLocationById(h.Id ?? 0);
+        }
 
     }
 }
