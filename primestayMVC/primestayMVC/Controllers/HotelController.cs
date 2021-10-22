@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PrimeStay.DataAccessLayer;
-using PrimeStay.Model;
+using MVC.DataAccessLayer;
+using MVC.DataAccessLayer.DTO;
 using primestayMVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,9 +14,9 @@ namespace primestayMVC.Controllers
     public class HotelController : Controller
     {
         private readonly ILogger<HotelController> _logger;
-        private readonly IDao<HotelDal> _dao;
+        private readonly IDao<HotelDto> _dao;
 
-        public HotelController(ILogger<HotelController> logger, IDao<HotelDal> dao)
+        public HotelController(ILogger<HotelController> logger, IDao<HotelDto> dao)
         {
             _logger = logger;
             _dao = dao;
@@ -24,7 +24,7 @@ namespace primestayMVC.Controllers
         public IActionResult Index([FromQuery] Hotel hotel)
         {
             //if (hotels == null) 
-            IEnumerable<HotelDal> hotels = _dao.ReadAll(hotel.Map());
+            IEnumerable<HotelDto> hotels = _dao.ReadAll(hotel.Map());
             hotels.Select(h => h.Map()).ToList().ForEach(h => h.Location = getHotelLocation(h));
 
             return View(hotels);
@@ -59,7 +59,7 @@ namespace primestayMVC.Controllers
         }
         public IEnumerable<Hotel> GetAllHotels()
         {
-            HotelDal emptyHotel = new HotelDal();
+            HotelDto emptyHotel = new HotelDto();
             return _dao.ReadAll(emptyHotel).Select(h => h.Map());
         }
         private Location getHotelLocation(Hotel h)

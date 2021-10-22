@@ -1,30 +1,30 @@
-﻿using PrimeStay.Model;
+﻿using MVC.DataAccessLayer.DTO;
 using System;
 
 namespace primestayMVC.Model
 {
     public static class ModelMapper
     {
-        public static Hotel Map(this HotelDal hotel)
+        public static Hotel Map(this HotelDto hotel)
         {
             if (hotel == null) return null;
             return new Hotel()
             {
-                Href = hotel.ExtractHref(),
+                Id = GetIdFromHref(hotel.Href),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_hours,
+                Staffed_hours = hotel.Staffed_Hours,
                 Stars = hotel.Stars,
-                LocationHref = GetHrefFromId(typeof(Location), hotel.Location_Id)
+                Location_Id = GetIdFromHref(hotel.LocationHref)
             };
         }
 
-        public static HotelDal Map(this Hotel hotel)
+        public static HotelDto Map(this Hotel hotel)
         {
             if (hotel == null) return null;
-            return new HotelDal()
+            return new HotelDto()
             {
-                Id = hotel.ExtractId(),
+                Href = hotel.ExtractId(),
                 Name = hotel.Name,
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
@@ -33,7 +33,7 @@ namespace primestayMVC.Model
             };
         }
 
-        public static Room Map(this RoomDal room)
+        public static Room Map(this RoomDto room)
         {
             if (room == null) return null;
             return new Room()
@@ -48,10 +48,10 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
-            public static RoomDal Map(this Room room)
+        public static RoomDto Map(this Room room)
         {
             if (room == null) return null;
-            return new RoomDal()
+            return new RoomDto()
             {
                 Id = room.Id,
                 Type = room.Type,
@@ -62,24 +62,23 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
-        public static Location Map(this LocationDal location)
+        public static Location Map(this LocationDto location)
         {
-            if ( location == null) return null;
+            if (location == null) return null;
             return new Location()
             {
-                Href = location.ExtractHref(),
-                Id = location.Id,
+                Id = GetIdFromHref(location.Href),
                 Street_Address = location.Street_Address,
                 City = location.City,
                 Country = location.Country,
                 Zip_code = location.Zip_code,
             };
         }
-        
-        public static LocationDal Map(this Location location)
+
+        public static LocationDto Map(this Location location)
         {
-            if ( location == null) return null;
-            return new LocationDal()
+            if (location == null) return null;
+            return new LocationDto()
             {
                 Id = location.Id,
                 Street_Address = location.Street_Address,

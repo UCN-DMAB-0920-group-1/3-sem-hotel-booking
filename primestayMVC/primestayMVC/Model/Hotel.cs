@@ -8,7 +8,7 @@ namespace primestayMVC.Model
         public string Description { get; set; }
         public string Staffed_hours { get; set; }
         public int? Stars { get; set; }
-        public string LocationHref { get; set; }
+        public int? Location_Id { get; set; }
         public Location Location { get; set; }
 
         public IEnumerable<Room> rooms { get; set; }
