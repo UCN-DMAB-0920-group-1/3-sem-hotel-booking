@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStay.DataAccessLayer;
+using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
 using System;
@@ -11,8 +11,8 @@ namespace PrimeStayApi.Controllers
     [Route("api/[controller]")]
     public class LocationController : ControllerBase
     {
-        private readonly IDao<Location> _dao;
-        public LocationController(IDao<Location> dao)
+        private readonly IDao<LocationEntity> _dao;
+        public LocationController(IDao<LocationEntity> dao)
         {
             _dao = dao;
         }
@@ -24,7 +24,7 @@ namespace PrimeStayApi.Controllers
         // GET: LocationController/Details/5
         [Route("{id}")]
         [HttpGet]
-        public LocationDTO Details(int id) => _dao.ReadById(id).Map();
+        public LocationDto Details(int id) => _dao.ReadById(id).Map();
 
 
         // GET: LocationController/Create

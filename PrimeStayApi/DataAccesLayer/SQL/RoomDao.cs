@@ -1,36 +1,36 @@
 ﻿using Dapper;
-using PrimeStay.DataAccessLayer.DAO;
-using PrimeStay.Model;
+using PrimeStayApi.DataAccessLayer.DAO;
+using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer.SQL
+namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class RoomDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomDal>
+    internal class RoomDao : BaseDao<IDataContext>, IDao<RoomEntity>
     {
-        public RoomDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
+        public RoomDao(IDataContext dataContext) : base(dataContext)
         {
         }
 
-        public int Create(RoomDal model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Delete(RoomDal model)
+        public int Create(RoomEntity model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RoomDal> ReadAll(RoomDal model)
+        public int Delete(RoomEntity model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<RoomEntity> ReadAll(RoomEntity model)
         {
             model.Type = model.Type != null ? "%" + model.Type + "%" : null;
             model.Description = model.Description != null ? "%" + model.Description + "%" : null;
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomDal>($"SELECT * FROM Room WHERE " +
+                return connection.Query<RoomEntity>($"SELECT * FROM Room WHERE " +
                                                      $"id=ISNULL(@id,id)" +
                                                      $"AND type LIKE ISNULL(@type,type)" +
                                                      $"AND description LIKE ISNULL(@description,description)" +
@@ -44,12 +44,12 @@ namespace PrimeStay.DataAccessLayer.SQL
 
         }
 
-        public RoomDal ReadById(int id)
+        public RoomEntity ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(RoomDal model)
+        public int Update(RoomEntity model)
         {
             throw new NotImplementedException();
         }

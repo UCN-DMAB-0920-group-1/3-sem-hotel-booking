@@ -1,29 +1,29 @@
 ﻿using Dapper;
-using PrimeStay.DataAccessLayer.DAO;
-using PrimeStay.Model;
+using PrimeStayApi.DataAccessLayer.DAO;
+using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStay.DataAccessLayer.SQL
+namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<LocationDal>
+    internal class LocationDao : BaseDao<IDataContext>, IDao<LocationEntity>
     {
-        public LocationDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
+        public LocationDao(IDataContext dataContext) : base(dataContext)
         {
         }
 
-        public int Create(LocationDal model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Delete(LocationDal model)
+        public int Create(LocationEntity model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<LocationDal> ReadAll(LocationDal model)
+        public int Delete(LocationEntity model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<LocationEntity> ReadAll(LocationEntity model)
         {
             model.Street_Address = model.Street_Address != null ? "%" + model.Street_Address + "%" : null;
             model.Zip_code = model.Zip_code != null ? "%" + model.Zip_code + "%" : null;
@@ -31,7 +31,7 @@ namespace PrimeStay.DataAccessLayer.SQL
             model.Country = model.Country != null ? "%" + model.Country + "%" : null;
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<LocationDal>($@"SELECT * FROM Location WHERE " +
+                return connection.Query<LocationEntity>($@"SELECT * FROM Location WHERE " +
                                                                $"id=ISNULL(@id,id) " +
                                                                $"AND Street_Address=ISNULL(@Street_Address,Street_Address)" +
                                                                $"AND Zip_code=ISNULL(@Zip_code,Zip_code)" +
@@ -42,17 +42,17 @@ namespace PrimeStay.DataAccessLayer.SQL
             }
         }
 
-        public LocationDal ReadById(int id)
+        public LocationEntity ReadById(int id)
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<LocationDal>(@$"SELECT * FROM Location WHERE id = @id", new { id });
+                return connection.QueryFirst<LocationEntity>(@$"SELECT * FROM Location WHERE id = @id", new { id });
 
             };
 
         }
 
-        public int Update(LocationDal model)
+        public int Update(LocationEntity model)
         {
             throw new NotImplementedException();
         }

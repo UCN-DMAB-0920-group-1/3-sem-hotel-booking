@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeStayApi.Model
 {
-    public class BaseModel
+    public class BaseEntity
     {
         public int? Id { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStay.DataAccessLayer;
+using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Services;
 using System.Collections.Generic;
@@ -11,15 +11,15 @@ namespace PrimeStayApi.Controllers
     [Route("api/[controller]")]
     public class RoomController : Controller
     {
-        private readonly IDao<Room> _dao;
-        public RoomController(IDao<Room> dao)
+        private readonly IDao<RoomEntity> _dao;
+        public RoomController(IDao<RoomEntity> dao)
         {
             _dao = dao;
         }
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<Room> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id) => _dao.ReadAll(new Room()
+        public IEnumerable<RoomEntity> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id) => _dao.ReadAll(new RoomEntity()
         {
             Id = id,
             Type = type,
@@ -32,7 +32,7 @@ namespace PrimeStayApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public Room Details(int id) => _dao.ReadById(id);
+        public RoomEntity Details(int id) => _dao.ReadById(id);
 
         [HttpPost]
         public ActionResult Create(IFormCollection collection)
@@ -44,7 +44,7 @@ namespace PrimeStayApi.Controllers
             int rating = parser.parseInt(collection["rating"]);
 
 
-            Room room = new()
+            RoomEntity room = new()
             {
                 Type = collection["type"],
                 Description = collection["description"],
@@ -70,7 +70,7 @@ namespace PrimeStayApi.Controllers
             int rating = parser.parseInt(collection["rating"]);
 
 
-            Room room = new()
+            RoomEntity room = new()
             {
                 Id = id,
                 Type = collection["type"],
@@ -87,7 +87,7 @@ namespace PrimeStayApi.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            Room room = new()
+            RoomEntity room = new()
             {
                 Id = id,
             };

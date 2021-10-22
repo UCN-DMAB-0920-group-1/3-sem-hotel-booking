@@ -48,7 +48,7 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
-            public static RoomDal Map(this Room room)
+        public static RoomDal Map(this Room room)
         {
             if (room == null) return null;
             return new RoomDal()
@@ -64,7 +64,7 @@ namespace primestayMVC.Model
         }
         public static Location Map(this LocationDal location)
         {
-            if ( location == null) return null;
+            if (location == null) return null;
             return new Location()
             {
                 Href = location.ExtractHref(),
@@ -75,10 +75,10 @@ namespace primestayMVC.Model
                 Zip_code = location.Zip_code,
             };
         }
-        
+
         public static LocationDal Map(this Location location)
         {
-            if ( location == null) return null;
+            if (location == null) return null;
             return new LocationDal()
             {
                 Id = location.Id,

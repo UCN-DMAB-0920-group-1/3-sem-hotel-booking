@@ -11,17 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataAccesLayer\PrimeStayApi.DataAccesLayer.csproj" />
     <ProjectReference Include="..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj" />
     <ProjectReference Include="..\PrimeStayApi.model\PrimeStayApi.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="PrimeStay.DataAccessLayer">
-      <HintPath>..\..\PrimeStay.DataAccessLayer\PrimeStay.DataAccessLayer\bin\Debug\net5.0\PrimeStay.DataAccessLayer.dll</HintPath>
-    </Reference>
-    <Reference Include="PrimeStay.Model">
-      <HintPath>..\..\PrimeStay.DataAccessLayer\PrimeStay.DataAccessLayer\bin\Debug\net5.0\PrimeStay.Model.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

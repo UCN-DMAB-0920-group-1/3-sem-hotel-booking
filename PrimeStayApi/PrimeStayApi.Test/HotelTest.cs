@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStay.DataAccessLayer;
-using PrimeStay.DataAccessLayer.DAO;
 using PrimeStayApi.Controllers;
+using PrimeStayApi.DataAccessLayer;
+using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
@@ -14,8 +14,8 @@ namespace PrimeStayApi.Test
     public class HotelControllerTest
     {
         private HotelController _controllerWithDB;
-        private IDao<Hotel> _dao;
-        private SQLDataContext _dataContext;
+        private IDao<HotelEntity> _dao;
+        private DataContext _dataContext;
         private HotelController _controllerNoDB;
 
 
@@ -23,7 +23,7 @@ namespace PrimeStayApi.Test
         public void SetUp()
         {
             Version.Upgrade(ENV.ConnectionStringTest);
-            _dataContext = new SQLDataContext(ENV.ConnectionStringTest);
+            _dataContext = new DataContext(ENV.ConnectionStringTest);
 
         }
         [TestCleanup]
@@ -37,7 +37,7 @@ namespace PrimeStayApi.Test
         public void GetHotelFromTestDBWithId()
         {
             //arrange
-            _dao = DaoFactory.Create<Hotel>(_dataContext);
+            _dao = DaoFactory.Create<HotelEntity>(_dataContext);
             _controllerWithDB = new HotelController(_dao);
             int hotelId = 1;
             //act 
@@ -50,9 +50,9 @@ namespace PrimeStayApi.Test
         public void GetHotelFromTestDBWithHotel()
         {
             //arrange
-            _dao = DaoFactory.Create<Hotel>(_dataContext);
+            _dao = DaoFactory.Create<HotelEntity>(_dataContext);
             _controllerWithDB = new HotelController(_dao);
-            var hotel = new Hotel()
+            var hotel = new HotelEntity()
             {
                 Name = "Hotel Petrús",
                 Description = "Classic old fashioned hotel with a river of red wine.",
@@ -69,29 +69,29 @@ namespace PrimeStayApi.Test
             Assert.IsTrue(hotels.First().Stars == hotel.Stars);
         }
 
-        internal class FakeHotelDao : IDao<Hotel>
+        internal class FakeHotelDao : IDao<HotelEntity>
         {
-            public int Create(Hotel model)
+            public int Create(HotelEntity model)
             {
                 return -1;
             }
 
-            public int Delete(Hotel model)
+            public int Delete(HotelEntity model)
             {
                 return -1;
             }
 
-            public IEnumerable<Hotel> ReadAll(Hotel model)
+            public IEnumerable<HotelEntity> ReadAll(HotelEntity model)
             {
-                return new List<Hotel>();
+                return new List<HotelEntity>();
             }
 
-            public Hotel ReadById(int id)
+            public HotelEntity ReadById(int id)
             {
-                return new Hotel();
+                return new HotelEntity();
             }
 
-            public int Update(Hotel model)
+            public int Update(HotelEntity model)
             {
                 return -1;
             }
@@ -115,7 +115,7 @@ namespace PrimeStayApi.Test
         {
             //Arrange
             _controllerNoDB = new HotelController(new FakeHotelDao());
-            var hotel = new Hotel()
+            var hotel = new HotelEntity()
             {
                 Name = "Test",
                 Description = "Test",

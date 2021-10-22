@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrimeStayApi.Model.DTO
+﻿namespace PrimeStayApi.Model.DTO
 {
-    public class LocationDTO : BaseModelDTO
+    public class LocationDto : BaseModelDto
     {
         public string Street_Address { get; set; }
         public string City { get; set; }

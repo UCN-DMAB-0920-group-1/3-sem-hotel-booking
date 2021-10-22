@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStay.DataAccessLayer;
+using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
 using PrimeStayApi.Services;
@@ -15,28 +15,28 @@ namespace PrimeStayApi.Controllers
     [Route("api/[controller]")]
     public class HotelController : ControllerBase
     {
-        private readonly IDao<Hotel> _dao;
-        public HotelController(IDao<Hotel> dao)
+        private readonly IDao<HotelEntity> _dao;
+        public HotelController(IDao<HotelEntity> dao)
         {
             _dao = dao;
         }
 
         // GET: HotelController
         [HttpGet]
-        public IEnumerable<HotelDTO> Index(string name, string description, string staffed_hours, int? stars)
-            => _dao.ReadAll(new Hotel()
+        public IEnumerable<HotelDto> Index(string name, string description, string staffed_hours, int? stars)
+            => _dao.ReadAll(new HotelEntity()
             {
                 Name = name,
                 Description = description,
                 Staffed_hours = staffed_hours,
                 Stars = stars
 
-            }).Select(x => x.Map());
+            }).Select(h => h.Map());
 
         // GET: HotelController/Details/5
         [Route("{id}")]
         [HttpGet]
-        public HotelDTO Details(int id) => _dao.ReadById(id).Map();
+        public HotelDto Details(int id) => _dao.ReadById(id).Map();
 
 
 
@@ -45,7 +45,7 @@ namespace PrimeStayApi.Controllers
         {
             int stars = new IntParser().parseInt(collection["star"]);
 
-            Hotel hotel = new()
+            HotelEntity hotel = new()
             {
                 Name = collection["name"],
                 Description = collection["description"],
@@ -64,7 +64,7 @@ namespace PrimeStayApi.Controllers
         {
             int stars = new IntParser().parseInt(collection["star"]);
 
-            Hotel hotel = new()
+            HotelEntity hotel = new()
             {
                 Name = collection["name"],
                 Description = collection["description"],
@@ -81,7 +81,7 @@ namespace PrimeStayApi.Controllers
         [HttpDelete]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            Hotel hotel = new()
+            HotelEntity hotel = new()
             {
                 Id = id,
             };

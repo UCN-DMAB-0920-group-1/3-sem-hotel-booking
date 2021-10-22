@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrimeStayApi.Model.DTO
 {
-    public static class DTOExtentions
+    public static class DtoExtentions
     {
-        public static HotelDTO Map(this Hotel hotel)
+        public static HotelDto Map(this HotelEntity hotel)
         {
             if (hotel == null) return null;
-            return new HotelDTO()
+            return new HotelDto()
             {
                 Href = hotel.ExtractHref(),
                 Name = hotel.Name,
@@ -22,10 +18,10 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static Hotel Map(this HotelDTO hotel)
+        public static HotelEntity Map(this HotelDto hotel)
         {
             if (hotel == null) return null;
-            return new Hotel()
+            return new HotelEntity()
             {
                 Id = hotel.ExtractId(),
                 Name = hotel.Name,
@@ -36,7 +32,7 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static RoomDto Map(this Room room)
+        public static RoomDto Map(this RoomEntity room)
         {
             if (room == null) return null;
             return new RoomDto()
@@ -47,14 +43,14 @@ namespace PrimeStayApi.Model.DTO
                 Num_of_beds = room.Num_of_beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                hotelHref = GetHrefFromId(typeof(Hotel), room.Hotel_Id)
+                hotelHref = GetHrefFromId(typeof(HotelEntity), room.Hotel_Id)
             };
         }
 
-        public static Room Map(this RoomDto room)
+        public static RoomEntity Map(this RoomDto room)
         {
             if (room == null) return null;
-            return new Room()
+            return new RoomEntity()
             {
                 Id = room.ExtractId(),
                 Type = room.Type,
@@ -66,9 +62,9 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static LocationDTO Map(this Location location)
+        public static LocationDto Map(this LocationEntity location)
         {
-            return new LocationDTO()
+            return new LocationDto()
             {
                 Href = location.ExtractHref(),
                 Street_Address = location.Street_Address,
@@ -78,12 +74,12 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static int? ExtractId(this BaseModelDTO dto)
+        public static int? ExtractId(this BaseModelDto dto)
         {
             return GetIdFromHref(dto.Href);
         }
 
-        public static string ExtractHref(this BaseModel model)
+        public static string ExtractHref(this BaseEntity model)
         {
             return GetHrefFromId(model.GetType(), model.Id);
         }

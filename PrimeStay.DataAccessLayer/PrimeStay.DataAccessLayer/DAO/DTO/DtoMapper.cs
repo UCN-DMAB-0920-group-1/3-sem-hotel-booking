@@ -3,7 +3,7 @@ using System;
 
 namespace PrimeStay.DataAccessLayer.DAO.DTO
 {
-    internal static class DtoMapper
+    public static class DtoMapper
     {
         public static HotelDto Map(this HotelDal hotel)
         {

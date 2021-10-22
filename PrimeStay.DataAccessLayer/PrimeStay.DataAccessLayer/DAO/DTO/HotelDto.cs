@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrimeStay.DataAccessLayer.DAO.DTO
+﻿namespace PrimeStay.DataAccessLayer.DAO.DTO
 {
-    internal class HotelDto : BaseDto
+    public class HotelDto : BaseDto
     {
         public string Name { get; set; }
         public string Description { get; set; }
