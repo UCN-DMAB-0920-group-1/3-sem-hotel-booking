@@ -24,7 +24,9 @@ namespace primestayMVC
         public void ConfigureServices(IServiceCollection services)
         {
             IDataContext<IRestClient> dataContext = new RestDataContext();
+            services.AddScoped<IDao<RoomDal>>(s => DaoFactory.Create<RoomDal>(dataContext));
             services.AddScoped<IDao<HotelDal>>(s => DaoFactory.Create<HotelDal>(dataContext));
+
             services.AddControllersWithViews();
         }
 

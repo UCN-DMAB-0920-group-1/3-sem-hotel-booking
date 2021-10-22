@@ -15,7 +15,7 @@ namespace primestayMVC.Model
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = @$"api/Location/{hotel.Location_Id}" // TODO use helper method GetHrefFromId()
+                LocationHref = GetHrefFromId(typeof(Hotel), hotel.Location_Id),
             };
         }
 
@@ -30,6 +30,22 @@ namespace primestayMVC.Model
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
                 Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
+            };
+        }
+
+        public static Room Map(this RoomDal room)
+        {
+            if (room == null) return null;
+            return new Room()
+            {
+                Id = room.Id,
+                Href = GetHrefFromId(typeof(Room), room.Id),
+                Type = room.Type,
+                Num_of_avaliable = room.Num_of_avaliable,
+                Num_of_beds = room.Num_of_beds,
+                Description = room.Description,
+                Rating = room.Rating,
+                Hotel_Id = room.Hotel_Id,
             };
         }
 
