@@ -15,7 +15,7 @@ namespace primestayMVC.Model
                 Description = hotel.Description,
                 Staffed_hours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = GetHrefFromId(typeof(Hotel), hotel.Location_Id),
+                LocationHref = GetHrefFromId(typeof(Location), hotel.Location_Id)
             };
         }
 
@@ -48,8 +48,7 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
-
-        public static RoomDal Map(this Room room)
+            public static RoomDal Map(this Room room)
         {
             if (room == null) return null;
             return new RoomDal()
@@ -63,6 +62,37 @@ namespace primestayMVC.Model
                 Hotel_Id = room.Hotel_Id,
             };
         }
+        public static Location Map(this LocationDal location)
+        {
+            if ( location == null) return null;
+            return new Location()
+            {
+                Href = location.ExtractHref(),
+                Id = location.Id,
+                Street_Address = location.Street_Address,
+                City = location.City,
+                Country = location.Country,
+                Zip_code = location.Zip_code,
+            };
+        }
+        
+        public static LocationDal Map(this Location location)
+        {
+            if ( location == null) return null;
+            return new LocationDal()
+            {
+                Id = location.Id,
+                Street_Address = location.Street_Address,
+                City = location.City,
+                Country = location.Country,
+                Zip_code = location.Zip_code,
+            };
+        }
+
+
+
+
+        #region info_extraction
 
         public static int? ExtractId(this BaseModel dto)
         {
@@ -87,5 +117,6 @@ namespace primestayMVC.Model
 
             return int.Parse(href[(href.LastIndexOf("/") + 1)..]);
         }
+        #endregion
     }
 }
