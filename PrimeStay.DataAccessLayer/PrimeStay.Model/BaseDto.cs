@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimeStay.DataAccessLayer.DAO.DTO
+namespace PrimeStay.Model
 {
-    internal class BaseDto
+    public class BaseDto
     {
         public string Href { get; set; }
     }
