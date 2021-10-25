@@ -27,5 +27,20 @@ namespace PrimeStay.MVC.Controllers
         {
             return _dao.ReadAll(new RoomDto() { Hotel_Id = hotel_id }).Select(r => r.Map());
         }
+
+        public Room GetRoom(string Href)
+        {
+            //TODO Make Pretty
+            int id;
+            if (ModelMapper.GetIdFromHref(Href) == null)
+            {
+                return null;
+            }
+            else
+            {
+                id = (int)ModelMapper.GetIdFromHref(Href);
+                return _dao.ReadById(id).Map();
+            }
+        }
     }
 }

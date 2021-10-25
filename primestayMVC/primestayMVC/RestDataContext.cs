@@ -1,7 +1,7 @@
 ﻿using PrimeStay.MVC.DataAccessLayer;
 using RestSharp;
 
-namespace PrimeStay.MVC.Controllers
+namespace PrimeStay.MVC
 {
     public class RestDataContext : IDataContext<IRestClient>
     {

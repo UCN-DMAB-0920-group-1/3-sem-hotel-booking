@@ -68,5 +68,10 @@ namespace PrimeStay.MVC.Controllers
             return _locationCTRL.GetLocationById(h.Id ?? 0);
         }
 
+        public void setViewDates()
+        {
+            var startdate = Request.Form["startDate"];
+        }
+
     }
 }

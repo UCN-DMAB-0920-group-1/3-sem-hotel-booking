@@ -1,120 +1,121 @@
 ﻿@using PrimeStay.MVC.Model
 @{
     ViewData["Title"] = "Home Page";
-    
+
 }
 @model IEnumerable<Hotel>;
+
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
         <h1> Find your dream stay!</h1>
     </div>
     <div class="container" style=" max-height:600px; background-color:aliceblue; border-radius: 15px; padding:10px; ">
         <div style="padding:10px;">
-            <div class="row">
+            <form>
+                <div class="row">
 
-                <div class="col-sm-6">
-                    <span class="form-label"> Location</span>
-                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <span class="form-label">Check In</span>
-                        <input class="form-control" type="date" required="">
+                    <div class="col-sm-6">
+                        <span class="form-label"> Location</span>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Check In</span>
+                            <input class="form-control" type="date" required="" id="startDate">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Check out</span>
+                            <input class="form-control" type="date" required="" id="endDate">
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <span class="form-label">Check out</span>
-                        <input class="form-control" type="date" required="">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="form-group">
+                <div class="row">
+                    <div class="form-group col-sm-3">
                         <span class="form-label">Rooms:</span>
                         <input class="form-control" type="number" required="">
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <span class="form-label">Guest:</span>
-                        <input class="form-control" type="number" required="">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Guest:</span>
+                            <input class="form-control" type="number" required="">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <span class="form-label">Price from:</span>
-                        <input class="form-control" type="number" required="">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Price from:</span>
+                            <input class="form-control" type="number" required="">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Price to:</span>
+                            <input class="form-control" type="number" required="">
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <span class="form-label">Price to:</span>
-                        <input class="form-control" type="number" required="">
-                    </div>
+                <div style="padding: 15px;">
+                    <center>
+                        <input class="btn btn-primary" type="button" name="Search" value="Search" style="width:100%;" />
+                    </center>
                 </div>
-            </div>
-            <div style="padding: 15px;">
-                <center>
-                    <input class="btn btn-primary" type="button" name="Search" value="Search" style="width:100%;" />
-                </center>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
 @foreach (Hotel item in Model)
 {
-   <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
-    <div class="card mb-3" style="max-width: 100%;">
-        <div class="row g-0">
-            <div class="col-md-4"style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                <img src="~/img/hotel-presidente.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body ">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address: @item.Location.Street_Address  City: @item.Location.City  Country: @item.Location.Country</small></p>
-                    <p class="card-text">@item.Description</p>
-                  
-                    <div class="form-group float-right">
-                        <br />
-                        <a asp-action="Details" asp-route-href="@item.Href" ><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;"  /></a>
+    <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+        <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
+                    <img src="~/img/hotel-presidente.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body ">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address: @item.Location.Street_Address  City: @item.Location.City  Country: @item.Location.Country</small></p>
+                        <p class="card-text">@item.Description</p>
+
+                        <div class="form-group float-right">
+                            <br />
+                            <a asp-action="Details" asp-route-href="@item.Href"><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div> 
+    </div>
 
 }
 {
-    
+
 }
 
 @*<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
-    <div class="card mb-3" style="max-width: 100%;">
-        <div class="row g-0">
-            <div class="col-md-4"style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                <img src="~/img/aboutslider2-1.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body ">
-                    <h5 class="card-title">Hotel name</h5>
-                    <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address: </small></p>
-                    <p class="card-text">This is a wider card with supporting text additional content. This content is a little bit longer.</p>
-                  
-                    <div class="form-group float-right">
-                        <span class="form-label" style="padding-bottom:10px;">Price from: 500 kr/night</span>
-                        <br />
-                        <a asp-area="" asp-controller="Order" asp-action="Room"> <input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;"  /></a>
+        <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4"style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
+                    <img src="~/img/aboutslider2-1.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body ">
+                        <h5 class="card-title">Hotel name</h5>
+                        <p class="card-text" style="margin: -5px 0px; "><small class="text-muted">address: </small></p>
+                        <p class="card-text">This is a wider card with supporting text additional content. This content is a little bit longer.</p>
+
+                        <div class="form-group float-right">
+                            <span class="form-label" style="padding-bottom:10px;">Price from: 500 kr/night</span>
+                            <br />
+                            <a asp-area="" asp-controller="Order" asp-action="Room"> <input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;"  /></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>*@
+    </div>*@
