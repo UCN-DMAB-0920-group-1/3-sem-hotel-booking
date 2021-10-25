@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
+using PrimeStayApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace PrimeStayApi.Controllers
         }
         // GET: BookingController
         [HttpGet]
-        public IEnumerable<BookingDto> Index(int? id, DateTime? start_date, DateTime? end_date, int? num_of_guests, int? room_id, int? customer_id )
+        public IEnumerable<BookingDto> Index(int? id, DateTime? start_date, DateTime? end_date, int? num_of_guests, int? room_id, int? customer_id)
             => _dao.ReadAll(new BookingEntity()
             {
                 Id = id,
@@ -35,70 +36,47 @@ namespace PrimeStayApi.Controllers
         // GET: BookingController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            throw new NotImplementedException();
         }
 
-        // GET: BookingController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BookingController/Create
+        // POST: BookingController/
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            try
+            int num_of_guests = new IntParser().parseInt(collection["num_of_guests"]);
+            int? room_id = DtoExtentions.GetIdFromHref(collection["roomHref"]);
+            int? customer_id = DtoExtentions.GetIdFromHref(collection["customerHref"]);
+
+            BookingEntity booking = new()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Start_date = Convert.ToDateTime(collection["start_date"]),
+                End_date = Convert.ToDateTime(collection["end_date"]),
+                Num_of_guests = num_of_guests,
+                Room_id = room_id,
+                Customer_id = customer_id
+            };
+
+            int id = _dao.Create(booking);
+            booking.Id = id;
+            BookingDto bookingDto = booking.Map();
+            return Created(id.ToString(), bookingDto);
+
         }
 
-        // GET: BookingController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: BookingController/Edit/5
-        [HttpPost]
+        // PUT: BookingController/Edit/5
+        [HttpPut]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            throw new NotImplementedException();
         }
 
-        // GET: BookingController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: BookingController/Delete/5
-        [HttpPost]
+        // DELETE: BookingController/Delete/5
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            throw new NotImplementedException();
         }
     }
 }
