@@ -1,4 +1,4 @@
-﻿namespace MVC.DataAccessLayer.DTO
+﻿namespace PrimeStay.MVC.DataAccessLayer.DTO
 {
     public class LocationDto : BaseDto
     {

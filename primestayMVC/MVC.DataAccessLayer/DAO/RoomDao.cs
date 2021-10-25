@@ -1,10 +1,10 @@
-﻿using MVC.DataAccessLayer.DTO;
+﻿using PrimeStay.MVC.DataAccessLayer.DTO;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MVC.DataAccessLayer.DAO
+namespace PrimeStay.MVC.DataAccessLayer.DAO
 {
     internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomDto>
     {
