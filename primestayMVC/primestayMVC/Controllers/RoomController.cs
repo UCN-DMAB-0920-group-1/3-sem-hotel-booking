@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MVC.DataAccessLayer;
-using MVC.DataAccessLayer.DTO;
+using PrimeStay.MVC.DataAccessLayer;
+using PrimeStay.MVC.DataAccessLayer.DTO;
 using primestayMVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;

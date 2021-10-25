@@ -1,4 +1,4 @@
-using MVC.DataAccessLayer.DTO;
+using PrimeStay.MVC.DataAccessLayer.DTO;
 using System;
 
 namespace primestayMVC.Model

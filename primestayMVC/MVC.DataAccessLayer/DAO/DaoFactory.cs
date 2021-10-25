@@ -1,8 +1,8 @@
-﻿using MVC.DataAccessLayer.DTO;
+﻿using PrimeStay.MVC.DataAccessLayer.DTO;
 using RestSharp;
 using System;
 
-namespace MVC.DataAccessLayer.DAO
+namespace PrimeStay.MVC.DataAccessLayer.DAO
 {
     public static class DaoFactory
     {

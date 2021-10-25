@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MVC.DataAccessLayer;
-using MVC.DataAccessLayer.DAO;
-using MVC.DataAccessLayer.DTO;
+using PrimeStay.MVC.DataAccessLayer;
+using PrimeStay.MVC.DataAccessLayer.DAO;
 using primestayMVC.Controllers;
 using RestSharp;
 

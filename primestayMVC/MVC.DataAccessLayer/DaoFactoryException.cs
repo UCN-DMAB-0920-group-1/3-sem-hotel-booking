@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MVC.DataAccessLayer
+namespace PrimeStay.MVC.DataAccessLayer
 {
     internal class DaoFactoryException : Exception
     {

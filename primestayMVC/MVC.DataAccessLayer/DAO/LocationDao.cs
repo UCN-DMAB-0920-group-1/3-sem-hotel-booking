@@ -1,9 +1,8 @@
-﻿using MVC.DataAccessLayer.DTO;
-using RestSharp;
+﻿using RestSharp;
 using System;
 using System.Collections.Generic;
 
-namespace MVC.DataAccessLayer.DAO
+namespace PrimeStay.MVC.DataAccessLayer.DAO
 {
     internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<LocationDto>
     {
