@@ -5,7 +5,6 @@ using PrimeStay.MVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace PrimeStay.MVC.Controllers
 {
