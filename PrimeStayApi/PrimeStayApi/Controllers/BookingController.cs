@@ -21,7 +21,7 @@ namespace PrimeStayApi.Controllers
         }
         // GET: BookingController
         [HttpGet]
-        public IEnumerable<BookingDto> Index(int? id, DateTime? start_date, DateTime? end_date, int? num_of_guests, int? room_id, int? customer_id )
+        public IEnumerable<BookingDto> Index(int? id, DateTime? start_date, DateTime? end_date, int? num_of_guests, int? room_id, int? customer_id)
             => _dao.ReadAll(new BookingEntity()
             {
                 Id = id,
@@ -36,13 +36,14 @@ namespace PrimeStayApi.Controllers
         // GET: BookingController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            throw new NotImplementedException();
         }
 
+        // POST: BookingController/
         [HttpPost]
         public ActionResult Create(IFormCollection collection)
         {
-            int num_of_guests = new IntParser().parseInt(collection["Num_of_guests"]);
+            int num_of_guests = new IntParser().parseInt(collection["num_of_guests"]);
             int? room_id = DtoExtentions.GetIdFromHref(collection["roomHref"]);
             int? customer_id = DtoExtentions.GetIdFromHref(collection["customerHref"]);
 
@@ -61,46 +62,20 @@ namespace PrimeStayApi.Controllers
 
         }
 
-        // GET: BookingController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: BookingController/Edit/5
-        [HttpPost]
+        // PUT: BookingController/Edit/5
+        [HttpPut]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            throw new NotImplementedException();
         }
 
-        // GET: BookingController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: BookingController/Delete/5
-        [HttpPost]
+        // DELETE: BookingController/Delete/5
+        [HttpDelete]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            throw new NotImplementedException();
         }
     }
 }
