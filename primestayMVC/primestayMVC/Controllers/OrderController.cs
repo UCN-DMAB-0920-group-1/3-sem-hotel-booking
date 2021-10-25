@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace PrimeStay.MVC.Controllers
             return View();
         }
 
-        public IActionResult Info()
+        public IActionResult Create(IFormCollection collection)
         {
             return View();
         }
