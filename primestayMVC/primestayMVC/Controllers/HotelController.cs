@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 
 namespace PrimeStay.MVC.Controllers
@@ -13,12 +15,15 @@ namespace PrimeStay.MVC.Controllers
         private readonly IDao<HotelDto> _dao;
         private readonly RoomController _RoomCTRL;
         private readonly LocationController _locationCTRL;
+        private dynamic myModel;
+
 
         public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomDto> roomDao)
         {
             _dao = dao;
             _locationCTRL = new LocationController(locationDao);
             _RoomCTRL = new RoomController(roomDao);
+            myModel = new ExpandoObject();
         }
         public IActionResult Index([FromQuery] Hotel hotel)
         {
@@ -26,13 +31,13 @@ namespace PrimeStay.MVC.Controllers
             IEnumerable<HotelDto> hotels = _dao.ReadAll(hotel.Map());
             List<Hotel> hotelList = hotels.Select(h => h.Map()).ToList();
             hotelList.ForEach(h => h.Location = getHotelLocation(h));
-
-            return View(hotelList);
+            myModel.HotelList = hotelList;
+            return View(myModel);
         }
 
 
         //[Route("Details")]
-        public IActionResult Details([FromQuery] string href)
+        public IActionResult Details([FromQuery] string href, IFormCollection collection)
         {
             int id = int.Parse(href[(href.LastIndexOf("/") + 1)..]);
             var hotel = GetHotel(id);

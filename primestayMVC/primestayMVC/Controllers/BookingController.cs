@@ -34,6 +34,8 @@ namespace PrimeStay.MVC.Controllers
             {
                 Booking booking = new()
                 {
+                    Start_date = null,
+                    End_date = null,
                     Customer = new Customer()
                     {
                         Name = collection["Customer.Name"],

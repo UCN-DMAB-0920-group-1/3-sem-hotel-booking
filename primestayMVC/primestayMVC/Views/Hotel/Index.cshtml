@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 
 }
-@model IEnumerable<Hotel>;
+@model dynamic
 
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
@@ -11,7 +11,7 @@
     </div>
     <div class="container" style=" max-height:600px; background-color:aliceblue; border-radius: 15px; padding:10px; ">
         <div style="padding:10px;">
-            <form>
+            <form asp-action="Index">
                 <div class="row">
 
                     <div class="col-sm-6">
@@ -58,7 +58,7 @@
                 </div>
                 <div style="padding: 15px;">
                     <center>
-                        <input class="btn btn-primary" type="button" name="Search" value="Search" style="width:100%;" />
+                        <input class="btn btn-primary" type="submit" name="Search" value="Search" style="width:100%;" />
                     </center>
                 </div>
             </form>
@@ -66,7 +66,7 @@
     </div>
 </div>
 
-@foreach (Hotel item in Model)
+@foreach (Hotel item in Model.HotelList)
 {
     <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
         <div class="card mb-3" style="max-width: 100%;">
