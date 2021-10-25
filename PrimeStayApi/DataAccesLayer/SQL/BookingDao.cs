@@ -16,8 +16,8 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id)" +
-                                                     @"OUTPUT INSERTED.booking_id" +
+                return connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id) " +
+                                                     @"OUTPUT INSERTED.booking_id " +
                                                      @"VALUES (@Start_date, @End_date, @Num_of_guests,@Room_id,@Customer_id)",
                                                      new { model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
             };
