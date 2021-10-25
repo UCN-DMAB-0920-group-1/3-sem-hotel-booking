@@ -44,7 +44,7 @@ namespace PrimeStayApi.Test
             _dao = DaoFactory.Create<BookingEntity>(_dataContext);
             var booking = new BookingEntity()
             {
-                Customer_id = -1,
+                Customer_id = 1,
                 End_date = System.DateTime.Parse("2021-10-10"),
                 Start_date = System.DateTime.Parse("2021-01-01"),
                 Num_of_guests = 10,
@@ -82,8 +82,29 @@ namespace PrimeStayApi.Test
             var actionResult  = _controllerWithDB.Create(collection);
 
             //Assert
-            Assert.IsInstanceOfType(actionResult, typeof(CreatedResult));
-          
+            Assert.IsInstanceOfType(actionResult, typeof(CreatedResult)); 
+        }
+
+        [TestMethod]
+        public void TestFetchBookings()
+        {
+            //Arrange
+            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            _controllerWithDB = new BookingController(_dao);
+
+            //Act
+            var bookings = _controllerWithDB.Index(null, null, null,null,null,null);
+
+            //Assert
+            Assert.IsTrue(bookings.Count() == 1);
+            Assert.IsNotNull(bookings.First());
+            Assert.IsNotNull(bookings.First().Start_date);
+            Assert.IsTrue(bookings.First().Start_date == System.DateTime.Parse("2010-11-04T00:00:00"));
+            Assert.IsTrue(bookings.First().End_date == System.DateTime.Parse("2010-11-16T00:00:00"));
+            Assert.IsTrue(bookings.First().Num_of_guests == 4);
+            Assert.IsTrue(bookings.First().Room_href == "api/Room/1");
+            Assert.IsTrue(bookings.First().Customer_href == "api/Customer/1");
+
         }
 
 
