@@ -32,7 +32,10 @@ namespace MVC.DataAccessLayer.DAO
 
         public RoomDto ReadById(int id)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest($"/api/room/", Method.GET, DataFormat.Json);
+            var res = restClient.Get<RoomDto>(restRequest).Data;
+            return res;
         }
 
         public int Update(RoomDto model)
