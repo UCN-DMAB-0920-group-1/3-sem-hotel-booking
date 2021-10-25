@@ -34,8 +34,8 @@ namespace PrimeStayApi.Controllers
             }).Select(h => h.Map());
 
         // GET: HotelController/Details/5
-        [Route("{id}")]
         [HttpGet]
+        [Route("{id}")]
         public HotelDto Details(int id) => _dao.ReadById(id).Map();
 
 
