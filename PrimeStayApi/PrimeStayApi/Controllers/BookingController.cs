@@ -43,14 +43,14 @@ namespace PrimeStayApi.Controllers
         [HttpPost]
         public ActionResult Create(IFormCollection collection)
         {
-            int num_of_guests = new IntParser().parseInt(collection["num_of_guests"]);
+            int num_of_guests = new IntParser().parseInt(collection["numOfGuests"]);
             int? room_id = DtoExtentions.GetIdFromHref(collection["roomHref"]);
             int? customer_id = DtoExtentions.GetIdFromHref(collection["customerHref"]);
 
             BookingEntity booking = new()
             {
-                Start_date = Convert.ToDateTime(collection["start_date"]),
-                End_date = Convert.ToDateTime(collection["end_date"]),
+                Start_date = Convert.ToDateTime(collection["startDate"]),
+                End_date = Convert.ToDateTime(collection["endDate"]),
                 Num_of_guests = num_of_guests,
                 Room_id = room_id,
                 Customer_id = customer_id
