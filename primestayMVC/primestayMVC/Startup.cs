@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DAO;
+using PrimeStay.MVC.DataAccessLayer.DTO;
 using primestayMVC.Controllers;
 using RestSharp;
 

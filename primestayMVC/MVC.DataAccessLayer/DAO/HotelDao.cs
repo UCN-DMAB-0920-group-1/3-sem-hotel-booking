@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using PrimeStay.MVC.DataAccessLayer.DTO;
+using RestSharp;
 using System.Collections.Generic;
 
 namespace PrimeStay.MVC.DataAccessLayer.DAO
