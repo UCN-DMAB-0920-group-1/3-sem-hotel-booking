@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace primestayMVC.Model
+namespace PrimeStay.MVC.Model
 {
     public class Hotel : BaseModel
     {

@@ -1,7 +1,7 @@
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using System;
 
-namespace primestayMVC.Model
+namespace PrimeStay.MVC.Model
 {
     public static class ModelMapper
     {
