@@ -18,6 +18,11 @@ namespace PrimeStay.MVC.Controllers
         {
             return View();
         }
-        
+
+        public IActionResult Info()
+        {
+            return View();
+        }
+
     }
 }
