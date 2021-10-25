@@ -14,7 +14,17 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         }
         public int Create(BookingEntity model)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.Query<BookingEntity>($"INSERT INTO Booking VALUES(" +
+                                                                 $"@Start_date," +
+                                                                 $"@End_date," +
+                                                                 $"@Num_of_guests," +
+                                                                 $"@Room_id," +
+                                                                 $"@Customer_id,)",
+                                                                 new {model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id});
+
+            };
         }
 
         public int Delete(BookingEntity model)

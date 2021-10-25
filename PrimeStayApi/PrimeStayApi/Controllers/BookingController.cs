@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
+using PrimeStayApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,25 +39,26 @@ namespace PrimeStayApi.Controllers
             return View();
         }
 
-        // GET: BookingController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BookingController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
-            try
+            int num_of_guests = new IntParser().parseInt(collection["Num_of_guests"]);
+            int? room_id = DtoExtentions.GetIdFromHref(collection["roomHref"]);
+            int? customer_id = DtoExtentions.GetIdFromHref(collection["customerHref"]);
+
+            BookingEntity booking = new()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Start_date = Convert.ToDateTime(collection["start_date"]),
+                End_date = Convert.ToDateTime(collection["end_date"]),
+                Num_of_guests = num_of_guests,
+                Room_id = room_id,
+                Customer_id = customer_id
+            };
+
+            int id = _dao.Create(booking);
+
+            return Created(id.ToString(), booking);
+
         }
 
         // GET: BookingController/Edit/5
