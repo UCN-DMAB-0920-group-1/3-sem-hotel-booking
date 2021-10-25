@@ -6,10 +6,10 @@ using Microsoft.Extensions.Hosting;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DAO;
 using PrimeStay.MVC.DataAccessLayer.DTO;
-using primestayMVC.Controllers;
+using PrimeStayMVC.Controllers;
 using RestSharp;
 
-namespace primestayMVC
+namespace PrimeStayMVC
 {
     public class Startup
     {

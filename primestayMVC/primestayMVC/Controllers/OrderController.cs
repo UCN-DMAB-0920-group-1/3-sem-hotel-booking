@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace primestayMVC.Controllers
+namespace PrimeStay.MVC.Controllers
 {
     public class OrderController : Controller
     {
