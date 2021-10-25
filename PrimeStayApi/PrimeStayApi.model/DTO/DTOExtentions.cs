@@ -31,6 +31,33 @@ namespace PrimeStayApi.Model.DTO
                 Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
             };
         }
+        public static BookingEntity Map(this BookingDto booking)
+        {
+            if (booking == null) return null;
+            return new BookingEntity()
+            {
+                Id = booking.ExtractId(),
+                Start_date = booking.Start_date,
+                End_date = booking.End_date,
+                Num_of_guests = booking.Num_of_guests,
+                Room_id = GetIdFromHref(booking.Room_href) ?? 0,
+                Customer_id = GetIdFromHref(booking.Customer_href) ?? 0
+            };
+        }
+
+        public static BookingDto Map(this BookingEntity booking)
+        {
+            if (booking == null) return null;
+            return new BookingDto()
+            {
+                Href = booking.ExtractHref(),
+                Start_date = booking.Start_date,
+                End_date = booking.Start_date,
+                Num_of_guests = booking.Num_of_guests,
+                Room_href = @$"api/Booking/{booking.Room_id}",
+                Customer_href = @$"api/Booking/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
+            };
+        }
 
         public static RoomDto Map(this RoomEntity room)
         {
