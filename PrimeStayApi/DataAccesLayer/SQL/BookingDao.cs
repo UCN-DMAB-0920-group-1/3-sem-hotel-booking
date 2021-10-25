@@ -16,14 +16,10 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<BookingEntity>($"INSERT INTO Booking VALUES(" +
-                                                                 $"@Start_date," +
-                                                                 $"@End_date," +
-                                                                 $"@Num_of_guests," +
-                                                                 $"@Room_id," +
-                                                                 $"@Customer_id,)",
-                                                                 new {model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id});
-
+                return connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id)" +
+                                                     @"OUTPUT INSERTED.booking_id" +
+                                                     @"VALUES (@Start_date, @End_date, @Num_of_guests,@Room_id,@Customer_id)",
+                                                     new { model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
             };
         }
 
@@ -34,7 +30,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public IEnumerable<BookingEntity> ReadAll(BookingEntity model)
         {
-  
+
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<BookingEntity>($"SELECT * FROM Booking WHERE " +
@@ -42,9 +38,9 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                  $"AND start_date >= ISNULL(@Start_date,Start_date)" +
                                                                  $"AND end_date <= ISNULL(@End_date, End_date)" +
                                                                  $"AND num_of_guests LIKE ISNULL(@Num_of_guests, num_of_guests)" +
-                                                                 $"AND room_id = ISNULL(@Room_id,Room_id)" + 
+                                                                 $"AND room_id = ISNULL(@Room_id,Room_id)" +
                                                                  $"AND customer_id = ISNULL(@Customer_id,Customer_id)",
-                                                                 new {model.Id, model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
+                                                                 new { model.Id, model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
 
             };
         }

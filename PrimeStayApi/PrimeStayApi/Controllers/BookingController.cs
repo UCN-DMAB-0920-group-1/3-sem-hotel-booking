@@ -57,8 +57,9 @@ namespace PrimeStayApi.Controllers
             };
 
             int id = _dao.Create(booking);
-
-            return Created(id.ToString(), booking);
+            booking.Id = id;
+            BookingDto bookingDto = booking.Map();
+            return Created(id.ToString(), bookingDto);
 
         }
 
