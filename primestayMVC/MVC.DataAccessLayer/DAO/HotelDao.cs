@@ -28,10 +28,10 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
             return restResponse.Data;
         }
 
-        public HotelDto ReadById(int id)
+        public HotelDto ReadByHref(string href)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest($"/api/hotel/{id}", Method.GET, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest(href, Method.GET, DataFormat.Json);
             return restClient.Get<HotelDto>(restRequest).Data;
         }
 

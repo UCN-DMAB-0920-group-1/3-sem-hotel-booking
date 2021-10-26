@@ -25,7 +25,7 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
             throw new System.NotImplementedException();
         }
 
-        public BookingDto ReadById(int id)
+        public BookingDto ReadByHref(string href)
         {
             throw new System.NotImplementedException();
         }
