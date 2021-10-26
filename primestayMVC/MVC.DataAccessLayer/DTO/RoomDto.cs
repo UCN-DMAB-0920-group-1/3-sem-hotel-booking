@@ -3,10 +3,10 @@
     public class RoomDto : BaseDto
     {
         public string Type { get; set; }
-        public int? Num_of_avaliable { get; set; }
-        public int? Num_of_beds { get; set; }
+        public int? NumOfAvaliable { get; set; }
+        public int? NumOfBeds { get; set; }
         public string Description { get; set; }
         public int? Rating { get; set; }
-        public int? Hotel_Id { get; set; }
+        public int? HotelId { get; set; }
     }
 }

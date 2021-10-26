@@ -5,10 +5,10 @@ namespace PrimeStay.MVC.DataAccessLayer.DTO
 {
     public class BookingDto : BaseDto
     {
-        public DateTime? Start_date { get; set; }
-        public DateTime? End_date { get; set; }
-        public int? Num_of_guests { get; set; }
-        public string Room_href { get; set; }
-        public string Customer_href { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int? NumOfGuests { get; set; }
+        public string RoomHref { get; set; }
+        public string CustomerHref { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace PrimeStay.MVC.Model
                 Href = hotel.Href,
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_Hours,
+                Staffed_hours = hotel.StaffedHours,
                 Stars = hotel.Stars,
                 Location_Id = GetIdFromHref(hotel.LocationHref)
             };
@@ -28,7 +28,7 @@ namespace PrimeStay.MVC.Model
                 Href = GetHrefFromId(typeof(Hotel), hotel.Id),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_Hours = hotel.Staffed_hours,
+                StaffedHours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
                 LocationHref = GetHrefFromId(typeof(Hotel), hotel.Id),
             };
@@ -42,11 +42,11 @@ namespace PrimeStay.MVC.Model
                 Id = GetIdFromHref(room.Href),
                 Href = room.Href,
                 Type = room.Type,
-                Num_of_avaliable = room.Num_of_avaliable,
-                Num_of_beds = room.Num_of_beds,
+                Num_of_avaliable = room.NumOfAvaliable,
+                Num_of_beds = room.NumOfBeds,
                 Description = room.Description,
                 Rating = room.Rating,
-                Hotel_Id = room.Hotel_Id,
+                Hotel_Id = room.HotelId,
             };
         }
         public static RoomDto Map(this Room room)
@@ -56,11 +56,11 @@ namespace PrimeStay.MVC.Model
             {
                 Href = GetHrefFromId(typeof(Room), room.Id),
                 Type = room.Type,
-                Num_of_avaliable = room.Num_of_avaliable,
-                Num_of_beds = room.Num_of_beds,
+                NumOfAvaliable = room.Num_of_avaliable,
+                NumOfBeds = room.Num_of_beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                Hotel_Id = room.Hotel_Id,
+                HotelId = room.Hotel_Id,
             };
         }
         public static Location Map(this LocationDto location)
@@ -69,10 +69,10 @@ namespace PrimeStay.MVC.Model
             return new Location()
             {
                 Id = GetIdFromHref(location.Href),
-                Street_Address = location.Street_Address,
+                Street_Address = location.StreetAddress,
                 City = location.City,
                 Country = location.Country,
-                Zip_code = location.Zip_code,
+                Zip_code = location.ZipCode,
             };
         }
 
@@ -82,10 +82,10 @@ namespace PrimeStay.MVC.Model
             return new LocationDto()
             {
                 Href = GetHrefFromId(typeof(Location), location.Id),
-                Street_Address = location.Street_Address,
+                StreetAddress = location.Street_Address,
                 City = location.City,
                 Country = location.Country,
-                Zip_code = location.Zip_code,
+                ZipCode = location.Zip_code,
             };
         }
 
@@ -95,11 +95,11 @@ namespace PrimeStay.MVC.Model
             return new BookingDto()
             {
                 Href = booking.Href,
-                End_date = booking.End_date,
-                Start_date = booking.Start_date,
-                Customer_href = booking.Customer_href,
-                Num_of_guests = booking.Num_of_guests,
-                Room_href = booking.Room_href,
+                EndDate = booking.End_date,
+                StartDate = booking.Start_date,
+                CustomerHref = booking.Customer_href,
+                NumOfGuests = booking.Num_of_guests,
+                RoomHref = booking.Room_href,
             };
         }
 
@@ -110,11 +110,11 @@ namespace PrimeStay.MVC.Model
             {
                 Id = booking.ExtractId(),
                 Href = booking.Href,
-                Customer_href = booking.Customer_href,
-                End_date = booking.End_date,
-                Start_date = booking.Start_date,
-                Num_of_guests = booking.Num_of_guests,
-                Room_href = booking.Room_href,
+                Customer_href = booking.CustomerHref,
+                End_date = booking.EndDate,
+                Start_date = booking.StartDate,
+                Num_of_guests = booking.NumOfGuests,
+                Room_href = booking.RoomHref,
 
             };
         }
