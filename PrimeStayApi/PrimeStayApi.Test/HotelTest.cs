@@ -65,7 +65,7 @@ namespace PrimeStayApi.Test
             Assert.IsTrue(hotels.Count() == 1);
             Assert.IsTrue(hotels.First().Name == hotel.Name);
             Assert.IsTrue(hotels.First().Description == hotel.Description);
-            Assert.IsTrue(hotels.First().Staffed_hours == hotel.Staffed_hours);
+            Assert.IsTrue(hotels.First().StaffedHours == hotel.Staffed_hours);
             Assert.IsTrue(hotels.First().Stars == hotel.Stars);
         }
 

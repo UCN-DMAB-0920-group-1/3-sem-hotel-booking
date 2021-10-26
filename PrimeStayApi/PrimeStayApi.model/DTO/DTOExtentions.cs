@@ -12,7 +12,7 @@ namespace PrimeStayApi.Model.DTO
                 Href = hotel.ExtractHref(),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_hours,
+                StaffedHours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
                 LocationHref = @$"api/Location/{hotel.Location_Id}" // TODO use helper method GetHrefFromId()
             };
@@ -26,7 +26,7 @@ namespace PrimeStayApi.Model.DTO
                 Id = hotel.ExtractId(),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.Staffed_hours,
+                Staffed_hours = hotel.StaffedHours,
                 Stars = hotel.Stars,
                 Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
             };
@@ -37,11 +37,11 @@ namespace PrimeStayApi.Model.DTO
             return new BookingEntity()
             {
                 Id = booking.ExtractId(),
-                Start_date = booking.Start_date,
-                End_date = booking.End_date,
-                Num_of_guests = booking.Num_of_guests,
-                Room_id = GetIdFromHref(booking.Room_href) ?? 0,
-                Customer_id = GetIdFromHref(booking.Customer_href) ?? 0
+                Start_date = booking.StartDate,
+                End_date = booking.EndDate,
+                Num_of_guests = booking.NumOfGuests,
+                Room_id = GetIdFromHref(booking.RoomHref) ?? 0,
+                Customer_id = GetIdFromHref(booking.CustomerHref) ?? 0
             };
         }
 
@@ -51,11 +51,11 @@ namespace PrimeStayApi.Model.DTO
             return new BookingDto()
             {
                 Href = booking.ExtractHref(),
-                Start_date = booking.Start_date,
-                End_date = booking.End_date,
-                Num_of_guests = booking.Num_of_guests,
-                Room_href = @$"api/Room/{booking.Room_id}",
-                Customer_href = @$"api/Customer/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
+                StartDate = booking.Start_date,
+                EndDate = booking.End_date,
+                NumOfGuests = booking.Num_of_guests,
+                RoomHref = @$"api/Room/{booking.Room_id}",
+                CustomerHref = @$"api/Customer/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
             };
         }
 
@@ -66,8 +66,8 @@ namespace PrimeStayApi.Model.DTO
             {
                 Href = room.ExtractHref(),
                 Type = room.Type,
-                Num_of_avaliable = room.Num_of_avaliable,
-                Num_of_beds = room.Num_of_beds,
+                NumOfAvaliable = room.Num_of_avaliable,
+                NumOfBeds = room.Num_of_beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 hotelHref = GetHrefFromId(typeof(HotelEntity), room.Hotel_Id)
@@ -81,8 +81,8 @@ namespace PrimeStayApi.Model.DTO
             {
                 Id = room.ExtractId(),
                 Type = room.Type,
-                Num_of_avaliable = room.Num_of_avaliable,
-                Num_of_beds = room.Num_of_beds,
+                Num_of_avaliable = room.NumOfAvaliable,
+                Num_of_beds = room.NumOfBeds,
                 Description = room.Description,
                 Rating = room.Rating,
                 Hotel_Id = GetIdFromHref(room.hotelHref) ?? 0
@@ -94,10 +94,10 @@ namespace PrimeStayApi.Model.DTO
             return new LocationDto()
             {
                 Href = location.ExtractHref(),
-                Street_Address = location.Street_Address,
+                StreetAddress = location.Street_Address,
                 City = location.City,
                 Country = location.Country,
-                Zip_code = location.Zip_code,
+                ZipCode = location.Zip_code,
             };
         }
 
