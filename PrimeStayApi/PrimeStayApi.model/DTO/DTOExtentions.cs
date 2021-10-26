@@ -52,10 +52,10 @@ namespace PrimeStayApi.Model.DTO
             {
                 Href = booking.ExtractHref(),
                 Start_date = booking.Start_date,
-                End_date = booking.Start_date,
+                End_date = booking.End_date,
                 Num_of_guests = booking.Num_of_guests,
-                Room_href = @$"api/Booking/{booking.Room_id}",
-                Customer_href = @$"api/Booking/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
+                Room_href = @$"api/Room/{booking.Room_id}",
+                Customer_href = @$"api/Customer/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
             };
         }
 

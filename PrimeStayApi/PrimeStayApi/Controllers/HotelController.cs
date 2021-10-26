@@ -43,7 +43,7 @@ namespace PrimeStayApi.Controllers
         [HttpPost]
         public ActionResult Create(IFormCollection collection)
         {
-            int stars = new IntParser().parseInt(collection["star"]);
+            int stars = new IntParser().parseInt(collection["stars"]);
 
             HotelEntity hotel = new()
             {
