@@ -25,7 +25,7 @@ namespace PrimeStay.MVC.Controllers
 
         public IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
         {
-            return _dao.ReadAll(new RoomDto() { Hotel_Id = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
+            return _dao.ReadAll(new RoomDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
         }
 
         public Room GetRoom(string href)

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Microsoft.AspNetCore.Mvc;
-
+using PrimeStayApi.Model.DTO;
 
 namespace PrimeStayApi.Test
 {
@@ -76,8 +76,17 @@ namespace PrimeStayApi.Test
                 { "endDate", "2021-10-10" },
             });
 
+            BookingDto booking = new BookingDto()
+            {
+                CustomerHref = "api/customer/1",
+                EndDate = System.DateTime.Now,
+                StartDate = System.DateTime.Now,
+                NumOfGuests = 1,
+                RoomHref = "api/room/1"
+            };
+
             //Act
-            var actionResult = _controllerWithDB.Create(collection);
+            var actionResult = _controllerWithDB.Create(booking);
 
             //Assert
             Assert.IsInstanceOfType(actionResult, typeof(CreatedResult));
