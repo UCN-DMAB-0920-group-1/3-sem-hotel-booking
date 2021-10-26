@@ -27,13 +27,13 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest($"/api/room/", Method.GET, DataFormat.Json);
             var res = restClient.Get<IEnumerable<RoomDto>>(restRequest).Data;
-            return res.Where(r => r.Hotel_Id == model.Hotel_Id);
+            return res;
         }
 
-        public RoomDto ReadById(int id)
+        public RoomDto ReadByHref(string href)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest($"/api/room/", Method.GET, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest(href, Method.GET, DataFormat.Json);
             var res = restClient.Get<RoomDto>(restRequest).Data;
             return res;
         }

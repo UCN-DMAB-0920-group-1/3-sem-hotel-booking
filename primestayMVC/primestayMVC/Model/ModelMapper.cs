@@ -89,6 +89,36 @@ namespace PrimeStay.MVC.Model
             };
         }
 
+        public static BookingDto Map(this Booking booking)
+        {
+            if (booking == null) return null;
+            return new BookingDto()
+            {
+                Href = booking.Href,
+                End_date = booking.End_date,
+                Start_date = booking.Start_date,
+                Customer_href = booking.Customer_href,
+                Num_of_guests = booking.Num_of_guests,
+                Room_href = booking.Room_href,
+            };
+        }
+
+        public static Booking Map(this BookingDto booking)
+        {
+            if (booking == null) return null;
+            return new Booking()
+            {
+                Id = booking.ExtractId(),
+                Href = booking.Href,
+                Customer_href = booking.Customer_href,
+                End_date = booking.End_date,
+                Start_date = booking.Start_date,
+                Num_of_guests = booking.Num_of_guests,
+                Room_href = booking.Room_href,
+
+            };
+        }
+
 
 
 

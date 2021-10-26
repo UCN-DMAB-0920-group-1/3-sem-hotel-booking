@@ -19,9 +19,9 @@ namespace PrimeStay.MVC.Controllers
             return View();
         }
 
-        public Location GetLocationById(int id)
+        public Location GetLocationById(string href)
         {
-            return _dao.ReadById(id).Map();
+            return _dao.ReadByHref(href).Map();
         }
     }
 }

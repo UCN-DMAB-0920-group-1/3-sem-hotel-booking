@@ -3,7 +3,7 @@
 
 namespace PrimeStayApi.Model.DTO
 {
-   public class BookingDto:BaseModelDto
+    public class BookingDto : BaseModelDto
     {
         public DateTime? Start_date { get; set; }
         public DateTime? End_date { get; set; }
