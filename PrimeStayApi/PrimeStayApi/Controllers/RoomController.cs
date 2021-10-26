@@ -21,7 +21,7 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<RoomDto> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id) 
+        public IEnumerable<RoomDto> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id)
             => _dao.ReadAll(new RoomEntity()
             {
                 Id = id,

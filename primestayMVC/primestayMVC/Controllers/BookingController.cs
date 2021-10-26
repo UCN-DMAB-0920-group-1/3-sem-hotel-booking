@@ -7,6 +7,7 @@ using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,39 +32,33 @@ namespace PrimeStay.MVC.Controllers
         public IActionResult Create(IFormCollection collection)
         {
 
-            
+            /*
+             * TODO:
+             *  Customer = new Customer()
+             *  {
+             *       Name = collection["Customer.Name"],
+             *       Email = collection["Customer.Email"],
+             *       Phone = collection["Customer.Phone"],
+             *  }
+             */
 
-            try
+
+            Booking booking = new()
             {
-
-                /*
-                 * TODO:
-                 *  Customer = new Customer()
-                 *  {
-                 *       Name = collection["Customer.Name"],
-                 *       Email = collection["Customer.Email"],
-                 *       Phone = collection["Customer.Phone"],
-                 *  }
-                 */
+                Start_date = DateTime.Parse(HttpContext.Session.GetString("checkIn") + "Z"),
+                End_date = DateTime.Parse(HttpContext.Session.GetString("checkOut") + "Z"),
+                Num_of_guests = HttpContext.Session.GetInt32("guests"),
+                Room_href = HttpContext.Session.GetString("selectedRoom"),
+                Customer_href = "api/cutomer/1", //TODO find actual customer ;-) 
 
 
-                Booking booking = new()
-                {
-                    Start_date = null,
-                    End_date = null,
-                    Num_of_guests 
-                    
-                };
+            };
 
-                _dao.Create()
+            _dao.Create(booking.Map());
 
-                return View("confirm");
-            }
-            catch (Exception)
-            {
+            return View("confirm");
 
-                throw;
-            }
+
         }
 
     }

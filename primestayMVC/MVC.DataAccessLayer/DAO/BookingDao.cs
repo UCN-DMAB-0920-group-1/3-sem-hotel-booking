@@ -12,7 +12,10 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
 
         public int Create(BookingDto model)
         {
-            throw new System.NotImplementedException();
+            IRestClient client = DataContext.Open();
+            IRestRequest request = new RestRequest("/api/booking", Method.POST, DataFormat.Json).AddJsonBody(model);
+            var res = client.Execute<int>(request).Data;
+            return res;
         }
 
         public int Delete(BookingDto model)
