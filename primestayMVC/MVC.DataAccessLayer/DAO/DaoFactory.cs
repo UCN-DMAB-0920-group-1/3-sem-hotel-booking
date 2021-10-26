@@ -17,6 +17,8 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
                     var dao when dao == typeof(HotelDto) => new HotelDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
                     var dao when dao == typeof(RoomDto) => new RoomDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
                     var dao when dao == typeof(LocationDto) => new LocationDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
+                    var dao when dao == typeof(BookingDto) => new BookingDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
+
                     _ => null,
                 };
             }

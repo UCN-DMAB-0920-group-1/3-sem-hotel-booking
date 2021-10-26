@@ -27,7 +27,6 @@ namespace PrimeStay.MVC.Controllers
         {
             return View();
         }
-        [HttpPost]
         public IActionResult Create(IFormCollection collection)
         {
             try

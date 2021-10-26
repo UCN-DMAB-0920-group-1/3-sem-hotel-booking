@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using primestay.MVC.Model;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
@@ -15,15 +17,12 @@ namespace PrimeStay.MVC.Controllers
         private readonly IDao<HotelDto> _dao;
         private readonly RoomController _RoomCTRL;
         private readonly LocationController _locationCTRL;
-        private dynamic myModel;
-
 
         public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomDto> roomDao)
         {
             _dao = dao;
             _locationCTRL = new LocationController(locationDao);
             _RoomCTRL = new RoomController(roomDao);
-            myModel = new ExpandoObject();
         }
         public IActionResult Index([FromQuery] Hotel hotel)
         {
@@ -31,11 +30,17 @@ namespace PrimeStay.MVC.Controllers
             IEnumerable<HotelDto> hotels = _dao.ReadAll(hotel.Map());
             List<Hotel> hotelList = hotels.Select(h => h.Map()).ToList();
             hotelList.ForEach(h => h.Location = getHotelLocation(h));
-            myModel.HotelList = hotelList;
-            return View(myModel);
+            return View(hotelList);
         }
 
-
+        public IActionResult Result(IFormCollection collection)
+        {
+            var test = collection["Location"];
+            IEnumerable<HotelDto> hotels = _dao.ReadAll(new HotelDto());
+            List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
+            hotelMatches.ForEach(h => h.Location = getHotelLocation(h));
+            return View((collection, hotelMatches));
+        }
         //[Route("Details")]
         public IActionResult Details([FromQuery] string href, IFormCollection collection)
         {
@@ -73,10 +78,7 @@ namespace PrimeStay.MVC.Controllers
             return _locationCTRL.GetLocationById(h.Id ?? 0);
         }
 
-        public void setViewDates()
-        {
-            var startdate = Request.Form["startDate"];
-        }
+
 
     }
 }

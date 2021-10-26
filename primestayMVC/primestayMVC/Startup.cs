@@ -27,6 +27,7 @@ namespace PrimeStay.MVC
             services.AddScoped<IDao<RoomDto>>(s => DaoFactory.Create<RoomDto>(dataContext));
             services.AddScoped<IDao<HotelDto>>(s => DaoFactory.Create<HotelDto>(dataContext));
             services.AddScoped<IDao<LocationDto>>(s => DaoFactory.Create<LocationDto>(dataContext));
+            services.AddScoped<IDao<BookingDto>>(s => DaoFactory.Create<BookingDto>(dataContext));
 
             services.AddControllersWithViews();
         }
