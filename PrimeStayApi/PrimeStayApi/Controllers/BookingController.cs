@@ -42,7 +42,6 @@ namespace PrimeStayApi.Controllers
         [HttpPost]
         public ActionResult Create([FromBody] BookingDto booking)
         {
-
             int id = _dao.Create(booking.Map());
             return Created(id.ToString(), booking);
         }

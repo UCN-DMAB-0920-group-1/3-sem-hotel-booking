@@ -88,7 +88,7 @@ INSERT INTO [dbo].[Booking]
            ,[end_date]
            ,[num_of_guests]
            ,[room_id]
-           ,[costumer_id])
+           ,[customer_id])
      VALUES
            ('2010-11-04'
            ,'2010-11-16'
