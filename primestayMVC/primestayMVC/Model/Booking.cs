@@ -1,4 +1,5 @@
-﻿using System;
+﻿using primestay.MVC.Model;
+using System;
 
 namespace PrimeStay.MVC.Model
 {
@@ -9,5 +10,6 @@ namespace PrimeStay.MVC.Model
         public int? Num_of_guests { get; set; }
         public string Room_href { get; set; }
         public string Customer_href { get; set; }
+        public Customer Customer { get; set; }
     }
 }

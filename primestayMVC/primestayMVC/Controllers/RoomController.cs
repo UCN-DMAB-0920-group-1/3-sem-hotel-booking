@@ -23,9 +23,17 @@ namespace PrimeStay.MVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IEnumerable<Room> getAllHotelRoomsForHotel(int hotel_id)
+        public IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
         {
-            return _dao.ReadAll(new RoomDto() { Hotel_Id = hotel_id }).Select(r => r.Map());
+            return _dao.ReadAll(new RoomDto() { Hotel_Id = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
         }
+
+        public Room GetRoom(string href)
+        {
+            //TODO Make Pretty
+            return _dao.ReadByHref(href).Map();
+        }
+
+
     }
 }

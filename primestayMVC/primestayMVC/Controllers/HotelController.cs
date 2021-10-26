@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using primestay.MVC.Model;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 
 namespace PrimeStay.MVC.Controllers
@@ -25,19 +29,37 @@ namespace PrimeStay.MVC.Controllers
             //if (hotels == null) 
             IEnumerable<HotelDto> hotels = _dao.ReadAll(hotel.Map());
             List<Hotel> hotelList = hotels.Select(h => h.Map()).ToList();
-            hotelList.ForEach(h => h.Location = getHotelLocation(h));
-
+            hotelList.ForEach(h => h.Location = GetHotelLocation(h));
             return View(hotelList);
         }
 
+        public IActionResult Result(IFormCollection collection)
+        {
+            IEnumerable<HotelDto> hotels = _dao.ReadAll(new HotelDto());
+            List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
+            hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
 
+            int guests = int.Parse(collection["guests"]);
+            int minPrice = int.Parse(collection["minPrice"]);
+            int maxPrice = int.Parse(collection["maxPrice"]);
+
+            HttpContext.Session.SetString("hotelLocation", collection["location"]);
+            HttpContext.Session.SetString("checkIn", collection["startDate"]);
+            HttpContext.Session.SetString("checkOut", collection["endDate"]);
+            HttpContext.Session.SetInt32("guests", guests);
+            HttpContext.Session.SetInt32("minPrice", minPrice);
+            HttpContext.Session.SetInt32("maxPrice", maxPrice);
+
+            return View((collection, hotelMatches));
+        }
         //[Route("Details")]
         public IActionResult Details([FromQuery] string href)
         {
-            int id = int.Parse(href[(href.LastIndexOf("/") + 1)..]);
-            var hotel = GetHotel(id);
-            hotel.Location = getHotelLocation(hotel);
-            hotel.rooms = _RoomCTRL.getAllHotelRoomsForHotel(id);
+            var hotel = GetHotel(href);
+            hotel.Location = GetHotelLocation(hotel);
+            hotel.rooms = _RoomCTRL.GetAllHotelRoomsForHotel(href);
+
+            HttpContext.Session.SetString("selectedHotel", href);
             return View(hotel);
         }
 
@@ -52,21 +74,22 @@ namespace PrimeStay.MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private Hotel GetHotel(int id)
+        private Hotel GetHotel(string href)
         {
-            return _dao.ReadById(id).Map();
-
+            return _dao.ReadByHref(href).Map();
         }
         public IEnumerable<Hotel> GetAllHotels()
         {
-            HotelDto emptyHotel = new HotelDto();
+            HotelDto emptyHotel = new();
             return _dao.ReadAll(emptyHotel).Select(h => h.Map());
         }
-        private Location getHotelLocation(Hotel h)
+        private Location GetHotelLocation(Hotel h)
         {
             //TODO get controller from 
-            return _locationCTRL.GetLocationById(h.Id ?? 0);
+            return _locationCTRL.GetLocationById(h.Href);
         }
+
+
 
     }
 }
