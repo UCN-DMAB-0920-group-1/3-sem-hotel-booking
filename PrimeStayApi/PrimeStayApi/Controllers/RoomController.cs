@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
+using PrimeStayApi.Model.DTO;
 using PrimeStayApi.Services;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PrimeStayApi.Controllers
 {
@@ -19,20 +21,21 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<RoomEntity> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id) => _dao.ReadAll(new RoomEntity()
-        {
-            Id = id,
-            Type = type,
-            Num_of_avaliable = num_of_available,
-            Num_of_beds = num_of_beds,
-            Description = description,
-            Rating = rating,
-            Hotel_Id = hotel_id
-        });
+        public IEnumerable<RoomDto> Index(int? id, string type, int? num_of_available, int? num_of_beds, string description, int? rating, int? hotel_id) 
+            => _dao.ReadAll(new RoomEntity()
+            {
+                Id = id,
+                Type = type,
+                Num_of_avaliable = num_of_available,
+                Num_of_beds = num_of_beds,
+                Description = description,
+                Rating = rating,
+                Hotel_Id = hotel_id
+            }).Select(r => r.Map());
 
         [HttpGet]
         [Route("{id}")]
-        public RoomEntity Details(int id) => _dao.ReadById(id);
+        public RoomDto Details(int id) => _dao.ReadById(id).Map();
 
         [HttpPost]
         public ActionResult Create(IFormCollection collection)

@@ -38,6 +38,18 @@ namespace PrimeStay.MVC.Controllers
             IEnumerable<HotelDto> hotels = _dao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
+
+            int beds = int.Parse(collection["beds"]);
+            int minPrice = int.Parse(collection["minPrice"]);
+            int maxPrice = int.Parse(collection["maxPrice"]);
+
+            HttpContext.Session.SetString("hotelLocation", collection["location"]);
+            HttpContext.Session.SetString("checkIn", collection["startDate"]);
+            HttpContext.Session.SetString("checkOut", collection["endDate"]);
+            HttpContext.Session.SetInt32("minBeds", beds);
+            HttpContext.Session.SetInt32("minPrice", minPrice);
+            HttpContext.Session.SetInt32("maxPrice", maxPrice);
+
             return View((collection, hotelMatches));
         }
         //[Route("Details")]
@@ -46,6 +58,8 @@ namespace PrimeStay.MVC.Controllers
             var hotel = GetHotel(href);
             hotel.Location = GetHotelLocation(hotel);
             hotel.rooms = _RoomCTRL.GetAllHotelRoomsForHotel(href);
+
+            HttpContext.Session.SetString("selectedHotel",href);
             return View(hotel);
         }
 

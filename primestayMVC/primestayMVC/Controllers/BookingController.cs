@@ -23,26 +23,41 @@ namespace PrimeStay.MVC.Controllers
 
         }
 
-        public IActionResult Info()
+        public IActionResult Info([FromQuery] string href)
         {
+            HttpContext.Session.SetString("selectedRoom", href);
             return View();
         }
         public IActionResult Create(IFormCollection collection)
         {
+
+            
+
             try
             {
+
+                /*
+                 * TODO:
+                 *  Customer = new Customer()
+                 *  {
+                 *       Name = collection["Customer.Name"],
+                 *       Email = collection["Customer.Email"],
+                 *       Phone = collection["Customer.Phone"],
+                 *  }
+                 */
+
+
                 Booking booking = new()
                 {
                     Start_date = null,
                     End_date = null,
-                    Customer = new Customer()
-                    {
-                        Name = collection["Customer.Name"],
-                        Email = collection["Customer.Email"],
-                        Phone = collection["Customer.Phone"],
-                    }
+                    Num_of_guests 
+                    
                 };
-                return RedirectToAction(nameof(Index), "Hotel");
+
+                _dao.Create()
+
+                return View("confirm");
             }
             catch (Exception)
             {

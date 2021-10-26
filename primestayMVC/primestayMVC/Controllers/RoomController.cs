@@ -34,5 +34,6 @@ namespace PrimeStay.MVC.Controllers
             return _dao.ReadByHref(href).Map();
         }
 
+
     }
 }
