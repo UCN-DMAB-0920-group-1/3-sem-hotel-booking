@@ -12,7 +12,7 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
         {
         }
 
-        public int Create(RoomDto model)
+        public string Create(RoomDto model)
         {
             throw new NotImplementedException();
         }

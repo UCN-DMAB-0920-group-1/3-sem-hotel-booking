@@ -1,10 +1,16 @@
-﻿@{
+﻿@using PrimeStay.MVC.DataAccessLayer.DTO;
+@{
     ViewData["Title"] = "Order";
 }
+@model Booking;
 
-<div class="container align-self-center">
-    <h1> You have made a booking </h1>
+<div class="card align-self-center" style="width: 18rem;">
+    <div class="card-header">
+        🎉 You have made a booking 🎉
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Number of people: @Model.Num_of_guests</li>
+        <li class="list-group-item">Start Date: @Model.Start_date</li>
+        <li class="list-group-item">End Date: @Model.End_date</li>
+    </ul>
 </div>
-<br />
-<br />
-<br />
