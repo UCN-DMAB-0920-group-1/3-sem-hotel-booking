@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStayApi.Controllers;
@@ -7,11 +8,9 @@ using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
+using PrimeStayApi.Model.DTO;
 using System.Collections.Generic;
 using System.Linq;
-
-using Microsoft.AspNetCore.Mvc;
-using PrimeStayApi.Model.DTO;
 
 namespace PrimeStayApi.Test
 {
@@ -111,6 +110,19 @@ namespace PrimeStayApi.Test
             Assert.IsTrue(bookings.First().NumOfGuests == 4);
             Assert.IsTrue(bookings.First().RoomHref == "api/Room/1");
             Assert.IsTrue(bookings.First().CustomerHref == "api/Customer/1");
+        }
+
+        [TestMethod]
+        public void TestReadById()
+        {
+            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            _controllerWithDB = new BookingController(_dao);
+            int id = 1;
+
+            var booking = _controllerWithDB.Details(id);
+
+            Assert.IsNotNull(booking);
+            Assert.IsTrue(booking.NumOfGuests == 4);
         }
     }
 }

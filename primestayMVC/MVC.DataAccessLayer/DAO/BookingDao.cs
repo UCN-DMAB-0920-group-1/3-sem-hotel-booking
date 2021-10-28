@@ -1,6 +1,7 @@
 ﻿using PrimeStay.MVC.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PrimeStay.MVC.DataAccessLayer.DAO
 {
@@ -10,11 +11,11 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
         {
         }
 
-        public int Create(BookingDto model)
+        public string Create(BookingDto model)
         {
             IRestClient client = DataContext.Open();
             IRestRequest request = new RestRequest("/api/booking", Method.POST, DataFormat.Json).AddJsonBody(model);
-            var res = client.Execute<int>(request).Data;
+            var res = client.Execute<int>(request).Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as string;
             return res;
         }
 
@@ -30,7 +31,10 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
 
         public BookingDto ReadByHref(string href)
         {
-            throw new System.NotImplementedException();
+            IRestClient client = DataContext.Open();
+            IRestRequest request = new RestRequest(href, Method.GET, DataFormat.Json);
+            var res = client.Execute<BookingDto>(request).Data;
+            return res;
         }
 
         public int Update(BookingDto model)

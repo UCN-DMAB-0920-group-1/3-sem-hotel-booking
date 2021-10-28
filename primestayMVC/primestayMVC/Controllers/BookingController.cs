@@ -16,11 +16,9 @@ namespace PrimeStay.MVC.Controllers
     public class BookingController : Controller
     {
         private readonly IDao<BookingDto> _dao;
-        private readonly RoomController _roomCTRL;
-        public BookingController(IDao<BookingDto> dao, IDao<RoomDto> roomDao)
+        public BookingController(IDao<BookingDto> dao)
         {
             _dao = dao;
-            _roomCTRL = new RoomController(roomDao);
 
         }
 
@@ -31,7 +29,6 @@ namespace PrimeStay.MVC.Controllers
         }
         public IActionResult Create(IFormCollection collection)
         {
-
             /*
              * TODO:
              *  Customer = new Customer()
@@ -41,8 +38,6 @@ namespace PrimeStay.MVC.Controllers
              *       Phone = collection["Customer.Phone"],
              *  }
              */
-
-
             Booking booking = new()
             {
                 Start_date = DateTime.Parse(HttpContext.Session.GetString("checkIn") + "Z"),
@@ -54,9 +49,10 @@ namespace PrimeStay.MVC.Controllers
 
             };
 
-            _dao.Create(booking.Map());
-
-            return View("confirm");
+            string href = _dao.Create(booking.Map());
+            var test = _dao.ReadByHref(href);
+            var newBooking = test.Map();
+            return View("confirm", newBooking);
 
 
         }
