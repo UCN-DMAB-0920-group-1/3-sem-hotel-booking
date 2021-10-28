@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using primestay.MVC.Model;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Dynamic;
 using System.Linq;
 
 namespace PrimeStay.MVC.Controllers
@@ -38,6 +35,7 @@ namespace PrimeStay.MVC.Controllers
             IEnumerable<HotelDto> hotels = _dao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
+            hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
 
             int guests = int.Parse(collection["guests"]);
             int minPrice = int.Parse(collection["minPrice"]);
@@ -86,9 +84,8 @@ namespace PrimeStay.MVC.Controllers
         private Location GetHotelLocation(Hotel h)
         {
             //TODO get controller from 
-            return _locationCTRL.GetLocationById(h.Href);
+            return _locationCTRL.GetLocationByHref($"/api/location/{h.Location_Id}");
         }
-
 
 
     }

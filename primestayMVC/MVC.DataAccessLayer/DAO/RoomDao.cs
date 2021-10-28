@@ -24,10 +24,14 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
 
         public IEnumerable<RoomDto> ReadAll(RoomDto model)
         {
+            var href = $"hotel_id={model.HotelId}&";
+
+
+
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest($"/api/room/", Method.GET, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest($"/api/room?{href}", Method.GET, DataFormat.Json);
             var res = restClient.Get<IEnumerable<RoomDto>>(restRequest).Data;
-            return res;
+            return res.Where(r => r.HotelId == model.HotelId); //TODO: Use parameterbinding
         }
 
         public RoomDto ReadByHref(string href)

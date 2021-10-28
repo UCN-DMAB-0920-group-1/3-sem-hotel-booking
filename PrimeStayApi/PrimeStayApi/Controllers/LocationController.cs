@@ -27,12 +27,6 @@ namespace PrimeStayApi.Controllers
         public LocationDto Details(int id) => _dao.ReadById(id).Map();
 
 
-        // GET: LocationController/Create
-        public ActionResult Create()
-        {
-            throw new NotImplementedException();
-        }
-
         // POST: LocationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,12 +42,6 @@ namespace PrimeStayApi.Controllers
             }
         }
 
-        // GET: LocationController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         // POST: LocationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,12 +55,6 @@ namespace PrimeStayApi.Controllers
             {
                 throw new NotImplementedException();
             }
-        }
-
-        // GET: LocationController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            throw new NotImplementedException();
         }
 
         // POST: LocationController/Delete/5
