@@ -18,7 +18,7 @@ namespace PrimeStayApi.Test
     {
         private HotelController _controllerWithDB;
         private IDao<HotelEntity> _dao;
-        private DataContext _dataContext;
+        private IDataContext _dataContext;
         private HotelController _controllerNoDB;
 
 
@@ -66,12 +66,12 @@ namespace PrimeStayApi.Test
                 Staffed_hours = "24/7",
             };
             //act 
-            var hotels = _controllerWithDB.Index(hotel.Name, hotel.Description, hotel.Staffed_hours, hotel.Stars);
+            var hotels = _controllerWithDB.Index(hotel.Map());
             //assert 
             Assert.IsTrue(hotels.Count() == 1);
             Assert.IsTrue(hotels.First().Name == hotel.Name);
             Assert.IsTrue(hotels.First().Description == hotel.Description);
-            Assert.IsTrue(hotels.First().Staffed_hours == hotel.Staffed_hours);
+            Assert.IsTrue(hotels.First().StaffedHours == hotel.Staffed_hours);
             Assert.IsTrue(hotels.First().Stars == hotel.Stars);
         }
 
@@ -99,6 +99,7 @@ namespace PrimeStayApi.Test
             //Arrange
             var hotel = new HotelEntity()
             {
+                Id = 1,
                 Name = "Test",
                 Description = "Test",
                 Staffed_hours = "Test",
@@ -110,9 +111,15 @@ namespace PrimeStayApi.Test
             _controllerNoDB = new HotelController(mockHotelDao.Object);
 
             //Act
-            var hotels = _controllerNoDB.Index(hotel.Name, hotel.Description, hotel.Staffed_hours, hotel.Stars);
+            var hotels = _controllerNoDB.Index(hotel.Map());
+
+            var test2 = mockHotelDao.Object.ReadAll(hotel.Map().Map());
+            var test = mockHotelDao.Object.ReadAll(hotel);
 
             //Assert
+            Assert.IsTrue(test.Any());
+
+
             Assert.IsTrue(mockHotelDao.Object.ReadAll(new HotelEntity()).Any());
 
             Assert.IsNotNull(hotels);
