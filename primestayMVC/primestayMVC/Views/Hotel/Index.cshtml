@@ -1,4 +1,6 @@
-﻿@using PrimeStay.MVC.Model
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@using PrimeStay.MVC.Model
 @{
     ViewData["Title"] = "Home Page";
 
@@ -65,7 +67,7 @@
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                    <img src="~/img/hotel-presidente.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                    <img src="~/img/hotel-presidente.jpg" id="@item.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body ">
@@ -83,11 +85,27 @@
         </div>
 
     </div>
-
+ <script>
+            $(function(){
+                var href = @item.Href;
+                var uri = "https://localhost:44312/picture";
+                axios.get(uri + zip)
+                    .then(res => {
+                        $('@item.Id').attr("src",res[0].Path );
+                    })
+                    .catch(error => {
+                        if (error.response.status === 404) {
+                            $('#result').text('Zip code not found');
+                        }
+                        else {
+                            $('#result').text(error.response.statusText);
+                        }
+                        $('#result').addClass('alert-danger');
+                    });
+            });
+    </script>
 }
-{
-
-}
+   
 
 @*<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
         <div class="card mb-3" style="max-width: 100%;">
