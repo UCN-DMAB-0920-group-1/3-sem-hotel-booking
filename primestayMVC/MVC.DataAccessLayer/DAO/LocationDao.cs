@@ -11,7 +11,7 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
         {
         }
 
-        public int Create(LocationDto model)
+        public string Create(LocationDto model)
         {
             throw new NotImplementedException();
         }

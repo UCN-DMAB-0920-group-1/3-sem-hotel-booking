@@ -33,9 +33,11 @@ namespace PrimeStayApi.Controllers
             }).Select(h => h.Map());
 
         // GET: BookingController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        [Route("{id}")]
+        public BookingDto Details(int id)
         {
-            throw new NotImplementedException();
+            return _dao.ReadById(id).Map();
         }
 
         // POST: BookingController/
@@ -43,7 +45,8 @@ namespace PrimeStayApi.Controllers
         public ActionResult Create([FromBody] BookingDto booking)
         {
             int id = _dao.Create(booking.Map());
-            return Created(id.ToString(), booking);
+            booking.Href = $"api/booking/{id}";
+            return Created(booking.Href, booking);
         }
 
         // PUT: BookingController/Edit/5

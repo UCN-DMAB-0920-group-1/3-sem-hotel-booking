@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -30,10 +29,9 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public IEnumerable<BookingEntity> ReadAll(BookingEntity model)
         {
-
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<BookingEntity>($"SELECT * FROM Booking WHERE " +
+                return connection.Query<BookingEntity>(@$"SELECT * FROM Booking WHERE " +
                                                                  $"booking_id=ISNULL(@id,booking_id)" +
                                                                  $"AND start_date >= ISNULL(@Start_date,Start_date)" +
                                                                  $"AND end_date <= ISNULL(@End_date, End_date)" +
@@ -47,7 +45,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public BookingEntity ReadById(int id)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                //TODO: Alias for booking_id for Dapper auto mappping 
+                return connection.QueryFirst<BookingEntity>(@$"SELECT * FROM Booking WHERE booking_id = @id", new { id });
+            }
         }
 
         public int Update(BookingEntity model)

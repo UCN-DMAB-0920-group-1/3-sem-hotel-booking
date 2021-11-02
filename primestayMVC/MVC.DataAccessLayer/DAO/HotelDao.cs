@@ -10,7 +10,7 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
         {
         }
 
-        public int Create(HotelDto model)
+        public string Create(HotelDto model)
         {
             throw new System.NotImplementedException();
         }
