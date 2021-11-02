@@ -22,7 +22,6 @@ INSERT INTO [dbo].[Room] ([type],[num_of_avaliable],[num_of_beds],[description],
      ('Penthouse Suite',5,1,'Penthouse suite with queen-size bed',5,2)
 GO
 
-
 INSERT INTO [dbo].[Price] ([start_date],[end_date],[amount],[room_id])
     VALUES 
     ('2010-10-10','2011-10-10',1,1)
@@ -52,14 +51,25 @@ GO
 
 INSERT INTO [dbo].[Picture] ([title],[description],[path])
     VALUES 
-    ('Test Picture', 'Testing some picture with description here', '../images/hotel1'),
-    ('Test Picture2', 'Testing2 some picture with description here', '../images/hotel1_2'),
-    ('Test Picture3', 'Testing3 some picture with description here', '../images/hotel1_3')
+    ('Hotel Petrús', 'Picture of hotel Petrús', 'https://juto.dk/semester/hotel/1.png'),
+    ('Hotel Petrús', 'Picture of hotel Petrús', 'https://juto.dk/semester/hotel/2.png'),
+    ('Hotel Petrús', 'Picture of hotel Petrús', 'https://juto.dk/semester/hotel/3.png'),
+    ('Hotel Grøtten', 'Picture of hotel Grøtten', 'https://juto.dk/semester/hotel/4.png'),
+    ('Hotel Grøtten', 'Picture of hotel Grøtten', 'https://juto.dk/semester/hotel/5.png'),
+    ('Petrus Room Suite', 'Suite description', 'https://juto.dk/semester/room/1.png'),
+    ('Grøtten Room Suite', 'Suite description', 'https://juto.dk/semester/room/2.png'),
+    ('Grøtten Room Junior Suite', 'Suite description', 'https://juto.dk/semester/room/3.png')
 GO
 
 INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_id],[type],[picture_id])
     VALUES 
     (1,null,'hotel',1),
     (1,null,'hotel',2),
-    (1,null,'hotel',3)
+    (1,null,'hotel',3),
+    (2,null,'hotel',4),
+    (2,null,'hotel',5),
+    (null,1,'room',6),
+    (null,1,'room',7),
+    (null,1,'room',8)
 GO
+
