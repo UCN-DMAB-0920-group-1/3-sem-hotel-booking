@@ -11,8 +11,8 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     {
         public LocationDao(IDataContext dataContext) : base(dataContext)
         {
-        }
 
+        }
         public int Create(LocationEntity model)
         {
             throw new NotImplementedException();
