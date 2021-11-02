@@ -100,6 +100,17 @@ namespace PrimeStayApi.Model.DTO
                 ZipCode = location.Zip_code,
             };
         }
+        public static PictureDto Map(this PictureEntity picture)
+        {
+            return new PictureDto()
+            {
+                Href = picture.ExtractHref(),
+                HotelHref = picture.Hotel_id,
+                Path = picture.Path,
+                Description = picture.Description
+
+             };
+        }
 
         public static int? ExtractId(this BaseModelDto dto)
         {
