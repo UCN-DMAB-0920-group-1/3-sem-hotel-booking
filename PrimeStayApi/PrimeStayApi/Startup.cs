@@ -12,6 +12,7 @@ namespace PrimeStayApi
 {
     public class Startup
     {
+        private string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +30,16 @@ namespace PrimeStayApi
             services.AddScoped<IDao<BookingEntity>>(s => DaoFactory.Create<BookingEntity>(dataContext));
             services.AddScoped<IDao<PictureEntity>>(s => DaoFactory.Create<PictureEntity>(dataContext));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
+                    });
+            });
             services.AddControllers();
         }
 
@@ -45,6 +56,8 @@ namespace PrimeStayApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
+
 
             app.UseAuthorization();
 
