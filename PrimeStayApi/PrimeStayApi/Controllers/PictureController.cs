@@ -18,7 +18,8 @@ namespace PrimeStayApi.Controllers
         {
             _dao = dao;
         }
-        // GET: PictureController/Hotel/{id}
+
+        // GET: PictureController/{type}/{id}
         [Route("{type}/{id}")]
         public IEnumerable<PictureDto> getPictureByType(string type, int id)
         {
@@ -31,9 +32,6 @@ namespace PrimeStayApi.Controllers
 
             return _dao.ReadAll(pictureEntity).Select(p => p.Map());
         }
-
-
-        // GET: PictureController/Room/{id}
 
         // GET: PictureController/Details/5
         public ActionResult Details(int id)
