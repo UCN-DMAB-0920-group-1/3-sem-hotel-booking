@@ -21,13 +21,11 @@ namespace PrimeStay.MVC.Controllers
             _LocationDao = locationDao;
             _RoomDao = roomDao;
         }
-        public IActionResult Index([FromQuery] Hotel hotel)
+        public IActionResult Index()
         {
             //if (hotels == null) 
-            IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(hotel.Map());
-            List<Hotel> hotelList = hotels.Select(h => h.Map()).ToList();
-            hotelList.ForEach(h => h.Location = GetHotelLocation(h));
-            return View(hotelList);
+
+            return View();
         }
 
         public IActionResult Result(IFormCollection collection)
@@ -37,7 +35,10 @@ namespace PrimeStay.MVC.Controllers
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
             hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
 
-            SetSessionSearchBar(collection["location"], collection["startDate"], collection["endDate"], int.Parse(collection["guests"]), int.Parse(collection["minPrice"]), int.Parse(collection["maxPrice"]));
+            if (HttpContext is not null) collection.Keys.ToList().ForEach(key =>
+            {
+                HttpContext.Session.SetString(key, collection[key]);
+            });
 
             return View((collection, hotelMatches));
         }
@@ -80,18 +81,7 @@ namespace PrimeStay.MVC.Controllers
         {
             return _LocationDao.ReadByHref($"/api/location/{h.Location_Id}").Map();
         }
-        private void SetSessionSearchBar(string location, string startDate, string endDate, int guests, int minPrice, int maxPrice)
-        {
-            if (HttpContext is not null)
-            {
-                HttpContext.Session.SetString("hotelLocation", location);
-                HttpContext.Session.SetString("checkIn", startDate);
-                HttpContext.Session.SetString("checkOut", endDate);
-                HttpContext.Session.SetInt32("guests", guests);
-                HttpContext.Session.SetInt32("minPrice", minPrice);
-                HttpContext.Session.SetInt32("maxPrice", maxPrice);
-            }
-        }
+
         private IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
         {
             return _RoomDao.ReadAll(new RoomDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
