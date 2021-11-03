@@ -1,4 +1,7 @@
-﻿@using PrimeStay.MVC.Model
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@using PrimeStay.MVC.Model
 @model Hotel;
 
 <!DOCTYPE html>
@@ -15,7 +18,7 @@
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                    <img src="~/img/hotel-presidente.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                    <img src="~/img/hotel-presidente.jpg" id="@Model.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body ">
@@ -24,21 +27,33 @@
                         <p class="card-text">@Model.Description</p>
                         <p class="card-text">Stars: @Model.Stars</p>
                         <p class="card-text">Staffed hours: @Model.Staffed_hours</p>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    @foreach (Room room in Model.rooms)
+    <script>
+        $(document).ready(function () {
+    console.log("hello world")
+    var href = "api/picture/hotel/" + @Model.Id;
+    var uri = "https://localhost:44312/";
+    axios.get(uri + href)
+        .then(res => {
+            $('#@Model.Id').attr("src", res.data[0].path);
+        }).catch(err => {
+            console.log(err);
+        })
+})
+    </script>
+
+    @foreach (Room room in Model.rooms) 
     {
         <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                        <img src="~/img/hotel-room.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                        <img src="~/img/hotel-room.jpg" id="@room.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
@@ -56,7 +71,23 @@
                 </div>
             </div>
 
-        </div>}
+        </div>
+ <script>
+      $(function(){
+    href = "picture/room/" + @room.Id;
+    console.log(href);
+    var uri = "https://localhost:44312/api/";
+    axios.get(uri + href)
+        .then(res => {
+            console.log(res.data[0].path);
+            $('#@room.Id').attr("src",res.data[0].path);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+    </script>   
+}
 
 </body>
 </html>

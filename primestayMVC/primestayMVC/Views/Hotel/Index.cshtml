@@ -67,7 +67,7 @@
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                    <img src="~/img/hotel-presidente.jpg" id="@item.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                    <img src="~/img/hotel-presidente.jpg" id="@item.Id"  class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body ">
@@ -86,23 +86,19 @@
 
     </div>
  <script>
-            $(function(){
-                var href = @item.Href;
-                var uri = "https://localhost:44312/picture";
-                axios.get(uri + zip)
-                    .then(res => {
-                        $('@item.Id').attr("src",res[0].Path );
-                    })
-                    .catch(error => {
-                        if (error.response.status === 404) {
-                            $('#result').text('Zip code not found');
-                        }
-                        else {
-                            $('#result').text(error.response.statusText);
-                        }
-                        $('#result').addClass('alert-danger');
-                    });
-            });
+      $(function(){
+    href = "picture/hotel/" + @item.Id;
+    console.log(href);
+    var uri = "https://localhost:44312/api/";
+    axios.get(uri + href)
+        .then(res => {
+            console.log(res.data[0].path);
+            $('#@item.Id').attr("src",res.data[0].path);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
     </script>
 }
    

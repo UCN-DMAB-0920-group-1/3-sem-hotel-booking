@@ -6,7 +6,6 @@ using PrimeStayApi.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PrimeStayApi.Controllers
 {
@@ -23,7 +22,7 @@ namespace PrimeStayApi.Controllers
         [Route("{type}/{id}")]
         public IEnumerable<PictureDto> getPictureByType(string type, int id)
         {
-            PictureEntity pictureEntity = new ()
+            PictureEntity pictureEntity = new()
             {
                 Type = type.ToLower(),
                 Hotel_id = id,
@@ -33,9 +32,9 @@ namespace PrimeStayApi.Controllers
             return _dao.ReadAll(pictureEntity).Select(p => p.Map());
         }
 
-        
+
         // GET: PictureController/Room/{id}
-        
+
         // GET: PictureController/Details/5
         public ActionResult Details(int id)
         {
