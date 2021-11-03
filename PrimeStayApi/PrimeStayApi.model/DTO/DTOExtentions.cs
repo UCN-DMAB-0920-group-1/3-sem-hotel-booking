@@ -105,9 +105,11 @@ namespace PrimeStayApi.Model.DTO
             return new PictureDto()
             {
                 Href = picture.ExtractHref(),
-                HotelHref = picture.Hotel_id,
+                HotelHref = picture.Type == "hotel" ? "api/hotel/" + picture.Hotel_id : null,
+                RoomHref = picture.Type == "room" ? "api/room/" + picture.Room_id : null,
                 Path = picture.Path,
-                Description = picture.Description
+                Description = picture.Description,
+                Title = picture.Title
 
              };
         }
