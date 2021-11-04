@@ -27,7 +27,7 @@ namespace PrimeStayApi.Controllers
         public ActionResult<IEnumerable<HotelDto>> Index([FromQuery] HotelDto hotel)
         {
             try
-            {
+            { 
                 return Ok(_dao.ReadAll(new HotelEntity()
                 {
                     Name = hotel.Name,
@@ -35,6 +35,7 @@ namespace PrimeStayApi.Controllers
                     Staffed_hours = hotel.StaffedHours,
                     Stars = hotel.Stars
                 }).Select(h => h.Map()));
+
             }
             catch (Exception ex)
             {

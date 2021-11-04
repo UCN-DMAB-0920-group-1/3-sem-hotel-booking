@@ -1,10 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStayApi.Controllers;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
+using PrimeStayApi.Model.DTO;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,10 +43,17 @@ namespace PrimeStayApi.Test
             _dao = DaoFactory.Create<HotelEntity>(_dataContext);
             _controllerWithDB = new HotelController(_dao);
             int hotelId = 1;
+
             //act 
-            var hotel = _controllerWithDB.Details(hotelId);
-            //assert 
-            Assert.IsTrue(hotel.Name.Equals("Hotel Petrús"));
+            var res = _controllerWithDB.Details(hotelId);
+
+            //assert
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
+
+            var hotel = (res.Result as OkObjectResult).Value as HotelDto;
+            Assert.IsNotNull(hotel);
+            Assert.AreEqual(hotel.Name, "Hotel Petrús");
+
         }
 
         [TestMethod]
@@ -52,21 +62,29 @@ namespace PrimeStayApi.Test
             //arrange
             _dao = DaoFactory.Create<HotelEntity>(_dataContext);
             _controllerWithDB = new HotelController(_dao);
-            var hotel = new HotelEntity()
+
+            
+            var hotel = new HotelDto()
             {
                 Name = "Hotel Petrús",
                 Description = "Classic old fashioned hotel with a river of red wine.",
                 Stars = 3,
-                Staffed_hours = "24/7",
+                StaffedHours = "24/7",
             };
+    
+
             //act 
-            var hotels = _controllerWithDB.Index(hotel.Name, hotel.Description, hotel.Staffed_hours, hotel.Stars);
-            //assert 
-            Assert.IsTrue(hotels.Count() == 1);
-            Assert.IsTrue(hotels.First().Name == hotel.Name);
-            Assert.IsTrue(hotels.First().Description == hotel.Description);
-            Assert.IsTrue(hotels.First().StaffedHours == hotel.Staffed_hours);
-            Assert.IsTrue(hotels.First().Stars == hotel.Stars);
+            var res = _controllerWithDB.Index(hotel);
+
+            //assert
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
+
+            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
+            Assert.AreEqual(hotels.Count(), 1);
+            Assert.AreEqual(hotels.First().Name, hotel.Name);
+            Assert.AreEqual(hotels.First().Description, hotel.Description);
+            Assert.AreEqual(hotels.First().StaffedHours, hotel.StaffedHours);
+            Assert.AreEqual(hotels.First().Stars, hotel.Stars);
         }
 
         internal class FakeHotelDao : IDao<HotelEntity>
@@ -107,7 +125,7 @@ namespace PrimeStayApi.Test
             var res = _controllerNoDB.Details(id);
 
             //Assert
-            Assert.IsTrue(string.IsNullOrEmpty(res.Name));
+            Assert.IsNull(res.Value);
         }
 
         [TestMethod]
@@ -115,18 +133,18 @@ namespace PrimeStayApi.Test
         {
             //Arrange
             _controllerNoDB = new HotelController(new FakeHotelDao());
-            var hotel = new HotelEntity()
+            var hotel = new HotelDto()
             {
                 Name = "Test",
                 Description = "Test",
-                Staffed_hours = "Test",
+                StaffedHours = "Test",
                 Stars = 1,
             };
 
             //Act
-            var res = _controllerNoDB.Index(hotel.Name, hotel.Description, hotel.Staffed_hours, hotel.Stars);
+            var res = _controllerNoDB.Index(hotel);
             //Assert
-            Assert.AreEqual(res.Count(), 0);
+            Assert.IsNull(res.Value);
         }
     }
 }
