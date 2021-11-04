@@ -14,16 +14,16 @@ namespace PrimeStay.MVC.Model
 
         public bool Matches(string input)
         {
-            input = input.Trim().ToLower();
-            //TODO:Make cool! 
+            if (input is null) return false;
+            else input = input.Trim().ToLower();
+
+            #region Matches
             if (string.IsNullOrWhiteSpace(input)) return true;
             if (Name.ToLower().Contains(input)) return true;
             if (Location.City.ToLower().Contains(input)) return true;
             if (Location.Country.ToLower().Contains(input)) return true;
             return false;
-
-
-
+            #endregion
         }
 
     }
