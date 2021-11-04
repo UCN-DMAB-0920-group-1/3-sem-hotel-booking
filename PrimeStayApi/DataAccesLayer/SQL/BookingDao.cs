@@ -13,13 +13,36 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         }
         public int Create(BookingEntity model)
         {
+            var res = -1;
+
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id) " +
+                var transaction = connection.BeginTransaction();
+                res = connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id) " +
                                                      @"OUTPUT INSERTED.booking_id " +
                                                      @"VALUES (@Start_date, @End_date, @Num_of_guests,@Room_id,@Customer_id)",
-                                                     new { model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
+                                                     new { model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id }, transaction: transaction);
+
+                var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT num_of_avaliable FROM room WHERE id=@room_id)" +
+                                                           " as Number_of_avail_Rooms FROM booking WHERE room_id = @room_id AND start_date BETWEEN @start_date AND @end_date" +
+                                                                                                       " AND end_date BETWEEN @start_date AND @end_date", new { model.Room_id, model.Start_date, model.End_date }, transaction: transaction);
+
+                if (avaliableRooms.Number_of_avail_Rooms - avaliableRooms.Num_of_bookings > -1)
+                {
+                    transaction.Commit();
+      
+                }
+                else
+                {
+                    res = -1;
+
+                    transaction.Rollback();
+             
+                }
+
+
             };
+            return res;
         }
 
         public int Delete(BookingEntity model)
