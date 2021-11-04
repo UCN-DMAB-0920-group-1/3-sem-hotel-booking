@@ -20,21 +20,21 @@ namespace PrimeStayApi.Controllers
         }
         // GET: BookingController
         [HttpGet]
-        public IEnumerable<BookingDto> Index(int? id, DateTime? start_date, DateTime? end_date, int? num_of_guests, int? room_id, int? customer_id)
+        public IEnumerable<BookingDto> Index([FromQuery] BookingDto booking)
             => _dao.ReadAll(new BookingEntity()
             {
-                Id = id,
-                Start_date = start_date,
-                End_date = end_date,
-                Num_of_guests = num_of_guests,
-                Room_id = room_id,
-                Customer_id = customer_id
+                Id = booking.ExtractId(),
+                Start_date = booking.StartDate,
+                End_date = booking.EndDate,
+                Num_of_guests = booking.NumOfGuests,
+                Room_id = DtoExtentions.GetIdFromHref(booking.RoomHref),
+                Customer_id = DtoExtentions.GetIdFromHref(booking.CustomerHref)
 
             }).Select(h => h.Map());
 
-        // GET: BookingController/Details/5
+        // GET: api/Booking/Details/5
         [HttpGet]
-        [Route("{id}")]
+        [Route("Details/{id}")]
         public BookingDto Details(int id)
         {
             return _dao.ReadById(id).Map();
