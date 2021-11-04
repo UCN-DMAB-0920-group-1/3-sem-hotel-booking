@@ -35,19 +35,18 @@
 
     <script>
         $(document).ready(function () {
-    console.log("hello world")
-    var href = "api/picture/hotel/" + @Model.Id;
-    var uri = "https://localhost:44312/";
-    axios.get(uri + href)
-        .then(result => {
-            $('#@Model.Href').attr("src", result.data[0].path);
-        }).catch(err => {
+            var href = "api/picture/hotel/" + @Model.Id;
+            var uri = "https://localhost:44312/";
+            axios.get(uri + href)
+            .then(result => {
+                $('#@Model.Href').attr("src", result.data[0].path);
+            }).catch(err => {
             console.log(err);
+            })
         })
-})
     </script>
 
-    @foreach (Room room in Model.rooms) 
+    @foreach (Room room in Model.rooms)
     {
         <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
             <div class="card mb-3" style="max-width: 100%;">
@@ -72,20 +71,19 @@
             </div>
 
         </div>
- <script>
+        <script>
         $(document).ready(function () {
-    console.log("hello world")
-    var href = "api/picture/room/" + @room.Id;
-    var uri = "https://localhost:44312/";
-    axios.get(uri + href)
-        .then(result => {
-            $('#@room.Type').attr("src", result.data[0].path);
-        }).catch(err => {
-            console.log(err);
+           var href = "api/picture/room/" + @room.Id;
+           var uri = "https://localhost:44312/";
+           axios.get(uri + href)
+           .then(result => {
+               $('#@room.Type').attr("src", result.data[0].path);
+           }).catch(err => {
+               console.log(err);
+           })
         })
-})
-    </script>   
-}
+        </script>
+    }
 
 </body>
 </html>
