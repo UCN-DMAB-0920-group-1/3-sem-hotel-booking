@@ -19,7 +19,7 @@ INSERT INTO [dbo].[Room] ([type],[num_of_avaliable],[num_of_beds],[description],
      ('Economy Suite',60,2,'Economy suite with 2 bunk beds',2,2),
      ('Standard Suite',55,2,'Standard suite with twin beds',4,2),
      ('Premium Suite',15,2,'Premium suite with champagne',5,2),
-     ('Penthouse Suite',5,1,'Penthouse suite with queen-size bed',5,2)
+     ('Penthouse Suite',1,1,'Penthouse suite with queen-size bed',5,2)
 GO
 
 INSERT INTO [dbo].[Price] ([start_date],[end_date],[amount],[room_id])
