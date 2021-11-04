@@ -15,6 +15,7 @@ using System.Linq;
  * You may have to look though the tests, in order to have proper tests
  */
 
+/*
 namespace PrimeStayApi.Test
 {
     [TestClass]
@@ -142,3 +143,4 @@ namespace PrimeStayApi.Test
         }
     }
 }
+*/
