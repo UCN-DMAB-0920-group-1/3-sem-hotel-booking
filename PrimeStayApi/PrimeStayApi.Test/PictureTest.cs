@@ -52,10 +52,10 @@ namespace PrimeStayApi.Test
 
             //assert 
             Assert.IsNotNull(pictureDtos);
-            Assert.IsTrue(pictureDtos.Count() == 3);
-            Assert.IsTrue(pictureDtos.ElementAt(0).Path == "https://juto.dk/semester/room/1.png");
-            Assert.IsTrue(pictureDtos.ElementAt(1).Path == "https://juto.dk/semester/room/2.png");
-            Assert.IsTrue(pictureDtos.ElementAt(2).Path == "https://juto.dk/semester/room/3.png");
+            Assert.AreEqual(pictureDtos.Count(), 3);
+            Assert.AreEqual(pictureDtos.ElementAt(0).Path, "https://juto.dk/semester/room/1.png");
+            Assert.AreEqual(pictureDtos.ElementAt(1).Path, "https://juto.dk/semester/room/2.png");
+            Assert.AreEqual(pictureDtos.ElementAt(2).Path, "https://juto.dk/semester/room/3.png");
         }
         [TestMethod]
         public void GetHotelPictureTest()
@@ -73,10 +73,10 @@ namespace PrimeStayApi.Test
 
             //assert 
             Assert.IsNotNull(pictureDtos);
-            Assert.IsTrue(pictureDtos.Count() == 3);
-            Assert.IsTrue(pictureDtos.ElementAt(0).Path == "https://juto.dk/semester/hotel/1.png");
-            Assert.IsTrue(pictureDtos.ElementAt(1).Path == "https://juto.dk/semester/hotel/2.png");
-            Assert.IsTrue(pictureDtos.ElementAt(2).Path == "https://juto.dk/semester/hotel/3.png");
+            Assert.AreEqual(pictureDtos.Count(),3);
+            Assert.AreEqual(pictureDtos.ElementAt(0).Path,"https://juto.dk/semester/hotel/1.png");
+            Assert.AreEqual(pictureDtos.ElementAt(1).Path,"https://juto.dk/semester/hotel/2.png");
+            Assert.AreEqual(pictureDtos.ElementAt(2).Path, "https://juto.dk/semester/hotel/3.png");
         }
     }
 }
