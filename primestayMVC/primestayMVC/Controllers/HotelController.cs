@@ -33,12 +33,16 @@ namespace PrimeStay.MVC.Controllers
             IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
-            hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
-
-            if (HttpContext is not null) collection.Keys.ToList().ForEach(key =>
+            if (collection is not null)
             {
-                HttpContext.Session.SetString(key, collection[key]);
-            });
+                hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
+
+                if (HttpContext is not null) collection.Keys.ToList().ForEach(key =>
+                {
+                    HttpContext.Session.SetString(key, collection[key]);
+                });
+            }
+            else hotelMatches = hotelMatches.Where(h => h.Matches(HttpContext.Session.GetString("location"))).ToList();
 
             return View((collection, hotelMatches));
         }
