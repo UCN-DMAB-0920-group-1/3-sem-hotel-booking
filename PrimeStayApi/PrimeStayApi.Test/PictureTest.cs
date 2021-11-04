@@ -42,20 +42,20 @@ namespace PrimeStayApi.Test
             //arrange
             _dao = DaoFactory.Create<PictureEntity>(_dataContext);
             _controllerWithDB = new PictureController(_dao);
-            PictureDto[] pictureDtos = { };
+            IEnumerable<PictureDto> pictureDtos = null;
             string type = "room";
             int id = 1;
 
 
             //act 
-            pictureDtos = _controllerWithDB.getPictureByType(type, id).ToArray();
+            pictureDtos = _controllerWithDB.getPictureByType(type, id);
 
             //assert 
             Assert.IsNotNull(pictureDtos);
-            Assert.IsTrue(pictureDtos.Length == 3);
-            Assert.IsTrue(pictureDtos[0].Path == "https://juto.dk/semester/room/1.png");
-            Assert.IsTrue(pictureDtos[1].Path == "https://juto.dk/semester/room/2.png");
-            Assert.IsTrue(pictureDtos[2].Path == "https://juto.dk/semester/room/3.png");
+            Assert.IsTrue(pictureDtos.Count() == 3);
+            Assert.IsTrue(pictureDtos.ElementAt(0).Path == "https://juto.dk/semester/room/1.png");
+            Assert.IsTrue(pictureDtos.ElementAt(1).Path == "https://juto.dk/semester/room/2.png");
+            Assert.IsTrue(pictureDtos.ElementAt(2).Path == "https://juto.dk/semester/room/3.png");
         }
         [TestMethod]
         public void GetHotelPictureTest()
@@ -63,20 +63,20 @@ namespace PrimeStayApi.Test
             //arrange
             _dao = DaoFactory.Create<PictureEntity>(_dataContext);
             _controllerWithDB = new PictureController(_dao);
-            PictureDto[] pictureDtos = { };
+            IEnumerable<PictureDto> pictureDtos = null;
             string type = "hotel";
             int id = 1;
 
 
             //act 
-            pictureDtos = _controllerWithDB.getPictureByType(type, id).ToArray();
+            pictureDtos = _controllerWithDB.getPictureByType(type, id);
 
             //assert 
             Assert.IsNotNull(pictureDtos);
-            Assert.IsTrue(pictureDtos.Length == 3);
-            Assert.IsTrue(pictureDtos[0].Path == "https://juto.dk/semester/hotel/1.png");
-            Assert.IsTrue(pictureDtos[1].Path == "https://juto.dk/semester/hotel/2.png");
-            Assert.IsTrue(pictureDtos[2].Path == "https://juto.dk/semester/hotel/3.png");
+            Assert.IsTrue(pictureDtos.Count() == 3);
+            Assert.IsTrue(pictureDtos.ElementAt(0).Path == "https://juto.dk/semester/hotel/1.png");
+            Assert.IsTrue(pictureDtos.ElementAt(1).Path == "https://juto.dk/semester/hotel/2.png");
+            Assert.IsTrue(pictureDtos.ElementAt(2).Path == "https://juto.dk/semester/hotel/3.png");
         }
     }
 }
