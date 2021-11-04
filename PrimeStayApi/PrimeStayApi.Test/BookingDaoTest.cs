@@ -29,7 +29,7 @@ namespace PrimeStayApi.Test
         }
 
         [TestMethod]
-        public void InsertBookingTest()
+        public void InsertBookingsTest()
         {
             //Arrange 
             _dao = DaoFactory.Create<BookingEntity>(_dataContext);
@@ -42,11 +42,28 @@ namespace PrimeStayApi.Test
                 Room_id = 8,
             };
             //Act 
-            var success = _dao.Create(booking);
+            var test = _dao.Create(booking);
+            //Assert
+            Assert.IsTrue(test > 0);
+        }
+        [TestMethod]
+        public void InsertTooManyBookingsTest()
+        {
+            //Arrange 
+            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            var booking = new BookingEntity()
+            {
+                Start_date = DateTime.Parse("2020-11-11"),
+                End_date = DateTime.Parse("2020-12-12"),
+                Customer_id = 1,
+                Num_of_guests = 1,
+                Room_id = 8,
+            };
+            //Act 
+            _dao.Create(booking);
             var fail = _dao.Create(booking);
             //Assert
-            Assert.AreEqual(fail, -1);
-            Assert.IsTrue(success > -1);
+            Assert.AreEqual(-1, fail);
         }
     }
 }
