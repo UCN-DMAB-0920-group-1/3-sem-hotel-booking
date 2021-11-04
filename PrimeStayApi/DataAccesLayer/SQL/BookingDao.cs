@@ -26,18 +26,18 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT num_of_avaliable FROM room WHERE id=@room_id)" +
                                                            " as Number_of_avail_Rooms FROM booking WHERE room_id = @room_id AND start_date BETWEEN @start_date AND @end_date" +
                                                                                                        " AND end_date BETWEEN @start_date AND @end_date", new { model.Room_id, model.Start_date, model.End_date }, transaction: transaction);
-                System.Console.WriteLine(avaliableRooms.Number_of_avail_Rooms + ":" + avaliableRooms.Num_of_bookings);
+
                 if (avaliableRooms.Number_of_avail_Rooms - avaliableRooms.Num_of_bookings > -1)
                 {
                     transaction.Commit();
-                    System.Console.WriteLine("commit");
+      
                 }
                 else
                 {
                     res = -1;
 
                     transaction.Rollback();
-                    System.Console.WriteLine("Rollback");
+             
                 }
 
 
