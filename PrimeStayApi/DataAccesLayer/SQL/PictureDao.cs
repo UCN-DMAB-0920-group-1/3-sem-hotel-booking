@@ -24,33 +24,30 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public IEnumerable<PictureEntity> ReadAll(PictureEntity model)
         {
+            string whereStatement = "";
             switch (model.Type)
             {
-                case "hotel":
-                    using (IDbConnection connection = DataContext.Open())
-                    {
-                        return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
-                                                            $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
-                                                            $"WHERE type = @Type AND hotel_id = @Hotel_id",
-                                                            new { model.Type, model.Hotel_id });
 
-                    };
+                case "hotel":
+                    whereStatement = $"WHERE type = @Type AND hotel_id = @Hotel_id";
                     break;
                 case "room":
-                        using (IDbConnection connection = DataContext.Open())
-                    {
-                        return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
-                                                            $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
-                                                            $"WHERE type = @Type AND room_id = @room_id",
-                                                            new { model.Type, model.Room_id });
-
-                    };
+                    whereStatement = $"WHERE type = @Type AND room_id = @Room_id";
                     break;
                 default:
-                    throw new System.Exception("Invalid type " + model.Type);
-                   
+                    throw new System.Exception("Invalid type " + model.Type);    
             }
-        
+
+
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
+                                                    $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
+                                                    whereStatement,
+                                                    new { model.Type, model.Hotel_id, model.Room_id });
+
+            };
+
         }
 
         public PictureEntity ReadById(int id)
