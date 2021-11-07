@@ -32,9 +32,9 @@ namespace PrimeStayApi.Controllers
 
             }).Select(h => h.Map());
 
-        // GET: api/Booking/Details/5
+        // GET: api/Booking/5
         [HttpGet]
-        [Route("Details/{id}")]
+        [Route("{id}")]
         public BookingDto Details(int id)
         {
             return _dao.ReadById(id).Map();

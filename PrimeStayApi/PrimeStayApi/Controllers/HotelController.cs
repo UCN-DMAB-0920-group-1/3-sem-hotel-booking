@@ -43,7 +43,7 @@ namespace PrimeStayApi.Controllers
             }
         }
 
-        // GET: HotelController/Details/5
+        // GET: HotelController/5
         [HttpGet]
         [Route("{id}")]
         public ActionResult<HotelDto> Details(int id)

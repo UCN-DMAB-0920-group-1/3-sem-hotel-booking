@@ -34,8 +34,8 @@ namespace PrimeStay.MVC.Controllers
              */
             Booking booking = new()
             {
-                Start_date = DateTime.Parse(HttpContext.Session.GetString("checkIn") + "Z"),
-                End_date = DateTime.Parse(HttpContext.Session.GetString("checkOut") + "Z"),
+                Start_date = DateTime.Parse(HttpContext.Session.GetString("startDate") + "Z"),
+                End_date = DateTime.Parse(HttpContext.Session.GetString("endDate") + "Z"),
                 Num_of_guests = int.Parse(HttpContext.Session.GetString("guests")),
                 Room_href = HttpContext.Session.GetString("selectedRoom"),
                 Customer_href = "api/cutomer/1", //TODO find actual customer ;-) 
