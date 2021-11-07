@@ -16,9 +16,10 @@ namespace PrimeStay.MVC.Model
 
         public bool Matches(string input)
         {
-            if (input is null) return false;                                                                          //return input is not null && matches.Contains(input);
-            var matches = new List<string> { Name, Location.City, Location.Country }; //things to match search with should be in this list
-            return (matches.Select(x => x.Contains(input, StringComparison.CurrentCultureIgnoreCase))).Contains(true);
+            if (input is null) return false;
+            //things to match search with should be in this list
+            var matches = new List<string> { Name, Location.City, Location.Country };
+            return matches.Select(x => x.Contains(input, StringComparison.CurrentCultureIgnoreCase)).Contains(true);
 
         }
 
