@@ -35,9 +35,8 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                             new { model.Type, model.Hotel_id });
 
                     };
-                    break;
                 case "room":
-                        using (IDbConnection connection = DataContext.Open())
+                    using (IDbConnection connection = DataContext.Open())
                     {
                         return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
                                                             $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
@@ -45,12 +44,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                             new { model.Type, model.Room_id });
 
                     };
-                    break;
                 default:
                     throw new System.Exception("Invalid type " + model.Type);
-                   
+
             }
-        
+
         }
 
         public PictureEntity ReadById(int id)
