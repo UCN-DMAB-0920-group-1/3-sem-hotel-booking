@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PrimeStay.MVC.Model
 {
@@ -14,17 +16,12 @@ namespace PrimeStay.MVC.Model
 
         public bool Matches(string input)
         {
-            if (input is null) return false;
-            else input = input.Trim().ToLower();
+            if (input is null) return false;                                                                          //return input is not null && matches.Contains(input);
+            var matches = new List<string> { Name, Location.City, Location.Country }; //things to match search with should be in this list
+            return (matches.Select(x => x.Contains(input, StringComparison.CurrentCultureIgnoreCase))).Contains(true);
 
-            #region Matches
-            if (string.IsNullOrWhiteSpace(input)) return true;
-            if (Name.ToLower().Contains(input)) return true;
-            if (Location.City.ToLower().Contains(input)) return true;
-            if (Location.Country.ToLower().Contains(input)) return true;
-            return false;
-            #endregion
         }
+
 
     }
 }
