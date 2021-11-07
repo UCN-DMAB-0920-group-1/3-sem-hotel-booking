@@ -18,8 +18,7 @@ namespace PrimeStayApi.Test
         private PictureController _controllerWithDB;
         private IDao<PictureEntity> _dao;
         private DataContext _dataContext;
-        private PictureController _controllerNoDB;
-       
+
 
 
         [TestInitialize]
@@ -73,9 +72,9 @@ namespace PrimeStayApi.Test
 
             //assert 
             Assert.IsNotNull(pictureDtos);
-            Assert.AreEqual(pictureDtos.Count(),3);
-            Assert.AreEqual(pictureDtos.ElementAt(0).Path,"https://juto.dk/semester/hotel/1.png");
-            Assert.AreEqual(pictureDtos.ElementAt(1).Path,"https://juto.dk/semester/hotel/2.png");
+            Assert.AreEqual(pictureDtos.Count(), 3);
+            Assert.AreEqual(pictureDtos.ElementAt(0).Path, "https://juto.dk/semester/hotel/1.png");
+            Assert.AreEqual(pictureDtos.ElementAt(1).Path, "https://juto.dk/semester/hotel/2.png");
             Assert.AreEqual(pictureDtos.ElementAt(2).Path, "https://juto.dk/semester/hotel/3.png");
         }
     }

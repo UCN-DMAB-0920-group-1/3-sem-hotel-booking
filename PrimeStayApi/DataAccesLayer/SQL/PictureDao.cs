@@ -47,7 +47,6 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                     new { model.Type, model.Hotel_id, model.Room_id });
 
             };
-
         }
 
         public PictureEntity ReadById(int id)

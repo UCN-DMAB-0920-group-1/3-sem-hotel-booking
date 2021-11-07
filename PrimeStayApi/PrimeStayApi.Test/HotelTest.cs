@@ -63,7 +63,7 @@ namespace PrimeStayApi.Test
             _dao = DaoFactory.Create<HotelEntity>(_dataContext);
             _controllerWithDB = new HotelController(_dao);
 
-            
+
             var hotel = new HotelDto()
             {
                 Name = "Hotel Petrús",
@@ -71,7 +71,7 @@ namespace PrimeStayApi.Test
                 Stars = 3,
                 StaffedHours = "24/7",
             };
-    
+
 
             //act 
             var res = _controllerWithDB.Index(hotel);
