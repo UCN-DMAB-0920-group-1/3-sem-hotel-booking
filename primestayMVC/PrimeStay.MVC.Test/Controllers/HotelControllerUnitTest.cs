@@ -3,7 +3,6 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
-using PrimeStay.MVC.Model;
 using System.Collections.Generic;
 
 namespace PrimeStay.MVC.Controllers.Tests
@@ -35,9 +34,8 @@ namespace PrimeStay.MVC.Controllers.Tests
         {
             //Arrange
             _controller = new HotelController(_hotelDao, _locationDao, _roomDao);
-            var testHotel = new Hotel();
             //Act 
-            var testView = _controller.Index(testHotel);
+            var testView = _controller.Index();
             //Assert 
             Assert.IsNotNull(testView);
         }
