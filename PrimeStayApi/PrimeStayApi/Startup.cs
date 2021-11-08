@@ -29,7 +29,7 @@ namespace PrimeStayApi
         {
             IDataContext dataContext = new DataContext(ENV.ConnectionString);
             services.AddScoped<IDao<HotelEntity>>(s => DaoFactory.Create<HotelEntity>(dataContext));
-            services.AddScoped<IDao<RoomEntity>>(s => DaoFactory.Create<RoomEntity>(dataContext));
+            services.AddScoped<IDao<RoomTypeEntity>>(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
             services.AddScoped<IDao<LocationEntity>>(s => DaoFactory.Create<LocationEntity>(dataContext));
             services.AddScoped<IDao<BookingEntity>>(s => DaoFactory.Create<BookingEntity>(dataContext));
             services.AddScoped<IDao<PictureEntity>>(s => DaoFactory.Create<PictureEntity>(dataContext));

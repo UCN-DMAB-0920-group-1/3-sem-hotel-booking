@@ -15,7 +15,7 @@ namespace PrimeStayApi.Test
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _controller = new RoomController(DaoFactory.Create<RoomEntity>(new DataContext(ENV.ConnectionStringTest)));
+            _controller = new RoomController(DaoFactory.Create<RoomTypeEntity>(new DataContext(ENV.ConnectionStringTest)));
         }
 
         [TestInitialize]

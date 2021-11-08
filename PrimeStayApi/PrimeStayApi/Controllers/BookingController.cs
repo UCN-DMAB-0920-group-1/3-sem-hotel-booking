@@ -26,7 +26,7 @@ namespace PrimeStayApi.Controllers
                 Id = booking.ExtractId(),
                 Start_date = booking.StartDate,
                 End_date = booking.EndDate,
-                Num_of_guests = booking.NumOfGuests,
+                Guests = booking.Guests,
                 Room_id = DtoExtentions.GetIdFromHref(booking.RoomHref),
                 Customer_id = DtoExtentions.GetIdFromHref(booking.CustomerHref)
 

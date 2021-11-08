@@ -43,22 +43,18 @@ namespace PrimeStayApi.Test
             var booking = new BookingEntity()
             {
                 Customer_id = 1,
-                End_date = System.DateTime.Parse("2021-10-10"),
-                Start_date = System.DateTime.Parse("2021-01-01"),
-                Num_of_guests = 10,
-                Room_id = 1,
+                End_date = System.DateTime.Parse("2010-11-01"),
+                Start_date = System.DateTime.Parse("2010-11-02"),
+                Guests = 10,
+                //TODO set room_type_id
             };
-
 
             //Act
             int id = _dao.Create(booking);
 
             //Assert
-
-            
-
             Assert.IsNotNull(id);
-            Assert.AreEqual(id, 21);
+            Assert.AreEqual(18, id);
         }
 
 
@@ -75,7 +71,7 @@ namespace PrimeStayApi.Test
                 CustomerHref = "api/customer/1",
                 EndDate = System.DateTime.Now,
                 StartDate = System.DateTime.Now,
-                NumOfGuests = 1,
+                Guests = 1,
                 RoomHref = "api/room/1"
             };
 
@@ -98,7 +94,7 @@ namespace PrimeStayApi.Test
                 CustomerHref = null,
                 EndDate = null,
                 StartDate = null,
-                NumOfGuests = null,
+                Guests = null,
                 RoomHref = null,
             };
 
@@ -109,11 +105,11 @@ namespace PrimeStayApi.Test
             Assert.AreEqual(bookings.Count(), 20);
             Assert.IsNotNull(bookings.First());
             Assert.IsNotNull(bookings.First().StartDate);
-            Assert.AreEqual(bookings.First().StartDate,System.DateTime.Parse("2010-11-04T00:00:00"));
-            Assert.AreEqual(bookings.First().EndDate,System.DateTime.Parse("2010-11-16T00:00:00"));
-            Assert.AreEqual(bookings.First().NumOfGuests,4);
-            Assert.AreEqual(bookings.First().RoomHref,"api/Room/1");
-            Assert.AreEqual(bookings.First().CustomerHref,"api/Customer/1");
+            Assert.AreEqual(bookings.First().StartDate, System.DateTime.Parse("2010-11-04T00:00:00"));
+            Assert.AreEqual(bookings.First().EndDate, System.DateTime.Parse("2010-11-16T00:00:00"));
+            Assert.AreEqual(bookings.First().Guests, 4);
+            Assert.AreEqual(bookings.First().RoomHref, "api/Room/1");
+            Assert.AreEqual(bookings.First().CustomerHref, "api/Customer/1");
         }
 
         [TestMethod]
@@ -126,7 +122,7 @@ namespace PrimeStayApi.Test
             var booking = _controllerWithDB.Details(id);
 
             Assert.IsNotNull(booking);
-            Assert.IsTrue(booking.NumOfGuests == 4);
+            Assert.IsTrue(booking.Guests == 4);
         }
     }
 }

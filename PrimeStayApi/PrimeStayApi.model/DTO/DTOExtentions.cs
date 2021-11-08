@@ -39,7 +39,7 @@ namespace PrimeStayApi.Model.DTO
                 Id = booking.ExtractId(),
                 Start_date = booking.StartDate,
                 End_date = booking.EndDate,
-                Num_of_guests = booking.NumOfGuests,
+                Guests = booking.Guests,
                 Room_id = GetIdFromHref(booking.RoomHref),
                 Customer_id = GetIdFromHref(booking.CustomerHref),
             };
@@ -53,36 +53,36 @@ namespace PrimeStayApi.Model.DTO
                 Href = booking.ExtractHref(),
                 StartDate = booking.Start_date,
                 EndDate = booking.End_date,
-                NumOfGuests = booking.Num_of_guests,
+                Guests = booking.Guests,
                 RoomHref = @$"api/Room/{booking.Room_id}",
                 CustomerHref = @$"api/Customer/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
             };
         }
 
-        public static RoomDto Map(this RoomEntity room)
+        public static RoomDto Map(this RoomTypeEntity room)
         {
             if (room == null) return null;
             return new RoomDto()
             {
                 Href = room.ExtractHref(),
                 Type = room.Type,
-                NumOfAvaliable = room.Num_of_avaliable,
-                NumOfBeds = room.Num_of_beds,
+                Avaliable = room.Avaliable,
+                Beds = room.beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 hotelHref = GetHrefFromId(typeof(HotelEntity), room.Hotel_Id)
             };
         }
 
-        public static RoomEntity Map(this RoomDto room)
+        public static RoomTypeEntity Map(this RoomDto room)
         {
             if (room == null) return null;
-            return new RoomEntity()
+            return new RoomTypeEntity()
             {
                 Id = room.ExtractId(),
                 Type = room.Type,
-                Num_of_avaliable = room.NumOfAvaliable,
-                Num_of_beds = room.NumOfBeds,
+                Avaliable = room.Avaliable,
+                beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 Hotel_Id = GetIdFromHref(room.hotelHref),
@@ -111,7 +111,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = picture.Description,
                 Title = picture.Title
 
-             };
+            };
         }
 
         public static int? ExtractId(this BaseModelDto dto)

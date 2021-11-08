@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Dapper.Transaction;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
 using System.Collections.Generic;
@@ -15,35 +16,26 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             var res = -1;
 
-            using (IDbConnection connection = DataContext.Open())
+            using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
             {
-                var transaction = connection.BeginTransaction();
-                res = connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id) " +
-                                                     @"OUTPUT INSERTED.booking_id " +
-                                                     @"VALUES (@Start_date, @End_date, @Num_of_guests,@Room_id,@Customer_id)",
-                                                     new { model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id }, transaction: transaction);
+                model.Room_id = transaction.ExecuteScalar<int>("SELECT TOP 1 Room.id FROM Room "
+                                                            + "WHERE room.room_type_id = @Room_type_id AND Room.id NOT IN "
+                                                            + "( "
+                                                            + "SELECT R.id "
+                                                                + "FROM  Booking B "
+                                                                + "JOIN ROOM R "
+                                                                 + "ON B.room_id = R.id "
+                                                                + "WHERE((B.start_date <= @start_date AND B.end_date >= @start_date) "
+                                                                  + "OR(B.start_date < @end_date AND B.end_date >= @end_date) "
+                                                                       + "OR(@start_date <= B.start_date AND @end_date >= B.start_date)) AND Room.room_type_id = @room_type_id "
+                                                            + ") "
+                                                            + "ORDER BY NEWID()"
+                                , new { model.Room_type_id, model.Start_date, model.End_date });
 
-                var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT num_of_avaliable FROM room WHERE id=@room_id) " + //Query inspired by "https://stackoverflow.com/questions/29213183/sql-query-to-search-for-room-availability" 04/11/2021
-                                                                                 "as Number_of_avail_Rooms FROM booking WHERE(start_date <= @start_date" +
-                                                                                 " AND end_date >= @start_date) OR(start_date < @end_date AND end_date " +
-                                                                                             ">= @end_date) OR(@start_date <= start_date AND @end_date " +
-                                                                                 ">= start_date) AND room_id = @room_id", new { model.Room_id, model.Start_date, model.End_date },
-                                                                                                                                transaction: transaction);
-
-                if (avaliableRooms.Number_of_avail_Rooms - avaliableRooms.Num_of_bookings > -1)
-                {
-                    transaction.Commit();
-
-                }
-                else
-                {
-                    res = -1;
-
-                    transaction.Rollback();
-
-                }
-
-
+                res = transaction.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
+                                                     @"OUTPUT INSERTED.id " +
+                                                     @"VALUES (@Start_date, @End_date, @Guests,@Room_id,@Customer_id)",
+                                                     new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
             };
             return res;
         }
@@ -58,13 +50,13 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<BookingEntity>(@$"SELECT * FROM Booking WHERE " +
-                                                                 $"booking_id=ISNULL(@id,booking_id)" +
+                                                                 $"id=ISNULL(@id,id)" +
                                                                  $"AND start_date >= ISNULL(@Start_date,Start_date)" +
                                                                  $"AND end_date <= ISNULL(@End_date, End_date)" +
-                                                                 $"AND num_of_guests LIKE ISNULL(@Num_of_guests, num_of_guests)" +
+                                                                 $"AND guests LIKE ISNULL(@guests, guests)" +
                                                                  $"AND room_id = ISNULL(@Room_id,Room_id)" +
                                                                  $"AND customer_id = ISNULL(@Customer_id,Customer_id)",
-                                                                 new { model.Id, model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
+                                                                 new { model.Id, model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
 
             };
         }
@@ -74,7 +66,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 //TODO: Alias for booking_id for Dapper auto mappping 
-                return connection.QueryFirst<BookingEntity>(@$"SELECT * FROM Booking WHERE booking_id = @id", new { id });
+                return connection.QueryFirst<BookingEntity>(@$"SELECT * FROM Booking WHERE id = @id", new { id });
             }
         }
 
