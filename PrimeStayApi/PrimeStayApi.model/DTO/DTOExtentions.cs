@@ -28,7 +28,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = hotel.Description,
                 Staffed_hours = hotel.StaffedHours,
                 Stars = hotel.Stars,
-                Location_Id = GetIdFromHref(hotel.LocationHref) ?? 0
+                Location_Id = GetIdFromHref(hotel.LocationHref),
             };
         }
         public static BookingEntity Map(this BookingDto booking)
@@ -40,8 +40,8 @@ namespace PrimeStayApi.Model.DTO
                 Start_date = booking.StartDate,
                 End_date = booking.EndDate,
                 Num_of_guests = booking.NumOfGuests,
-                Room_id = GetIdFromHref(booking.RoomHref) ?? 0,
-                Customer_id = GetIdFromHref(booking.CustomerHref) ?? 0
+                Room_id = GetIdFromHref(booking.RoomHref),
+                Customer_id = GetIdFromHref(booking.CustomerHref),
             };
         }
 
@@ -85,7 +85,7 @@ namespace PrimeStayApi.Model.DTO
                 Num_of_beds = room.NumOfBeds,
                 Description = room.Description,
                 Rating = room.Rating,
-                Hotel_Id = GetIdFromHref(room.hotelHref) ?? 0
+                Hotel_Id = GetIdFromHref(room.hotelHref),
             };
         }
 
@@ -99,6 +99,19 @@ namespace PrimeStayApi.Model.DTO
                 Country = location.Country,
                 ZipCode = location.Zip_code,
             };
+        }
+        public static PictureDto Map(this PictureEntity picture)
+        {
+            return new PictureDto()
+            {
+                Href = picture.ExtractHref(),
+                HotelHref = picture.Type == "hotel" ? "api/hotel/" + picture.Hotel_id : null,
+                RoomHref = picture.Type == "room" ? "api/room/" + picture.Room_id : null,
+                Path = picture.Path,
+                Description = picture.Description,
+                Title = picture.Title
+
+             };
         }
 
         public static int? ExtractId(this BaseModelDto dto)

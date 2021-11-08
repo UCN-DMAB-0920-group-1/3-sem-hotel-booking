@@ -1,4 +1,7 @@
-﻿@using PrimeStay.MVC.Model
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@using PrimeStay.MVC.Model
 @using Microsoft.AspNetCore.Http;
 
 @model (IFormCollection collection, List<Hotel> hotels)
@@ -9,7 +12,7 @@
     </div>
     <div class="container" style=" max-height:600px; background-color:aliceblue; border-radius: 15px; padding:10px; ">
         <div style="padding:10px;">
-            <form asp-action="Result">
+            <form asp-action="Result" method="get">
                 <div class="row">
 
                     <div class="col-sm-6">
@@ -37,13 +40,13 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Price from:</span>
-                            <input class="form-control" name="minPrice" value="@Model.collection["minPrice"]" type="number" required="">
+                            <input class="form-control" name="minPrice" value="@Model.collection["minPrice"]" type="number">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Price to:</span>
-                            <input class="form-control" name="maxPrice" value="@Model.collection["maxPrice"]" type="number" required="">
+                            <input class="form-control" name="maxPrice" value="@Model.collection["maxPrice"]" type="number">
                         </div>
                     </div>
                 </div>
@@ -63,7 +66,7 @@
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                    <img src="~/img/hotel-presidente.jpg" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                    <img src="~/img/hotel-presidente.jpg" id="@item.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body ">
@@ -81,4 +84,17 @@
         </div>
 
     </div>
+    <script>
+      $(function(){
+        href = "picture/hotel/" + @item.Id;
+        var uri = "https://localhost:44312/api/";
+        axios.get(uri + href)
+        .then(res => {
+            $('#@item.Id').attr("src",res.data[0].path);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    });
+    </script>
 }

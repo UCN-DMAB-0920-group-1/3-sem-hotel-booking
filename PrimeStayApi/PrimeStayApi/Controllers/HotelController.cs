@@ -5,6 +5,7 @@ using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
 using PrimeStayApi.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,33 +24,57 @@ namespace PrimeStayApi.Controllers
 
         // GET: HotelController
         [HttpGet]
-        public IEnumerable<HotelDto> Index([FromQuery] HotelDto hotel)
-            => _dao.ReadAll(hotel.Map()).Select(h => h.Map());
+        public ActionResult<IEnumerable<HotelDto>> Index([FromQuery] HotelDto hotel)
+        {
+            try
+            {
+                return Ok(_dao.ReadAll(new HotelEntity()
+                {
+                    Name = hotel.Name,
+                    Description = hotel.Description,
+                    Staffed_hours = hotel.StaffedHours,
+                    Stars = hotel.Stars
+                }).Select(h => h.Map()));
 
-        // GET: HotelController/Details/5
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        // GET: HotelController/5
         [HttpGet]
         [Route("{id}")]
-        public HotelDto Details(int id) => _dao.ReadById(id).Map();
-
-
+        public ActionResult<HotelDto> Details(int id)
+        {
+            try
+            {
+                return Ok(_dao.ReadById(id).Map());
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
 
         [HttpPost]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult<HotelDto> Create(IFormCollection collection)
         {
-            int stars = new IntParser().parseInt(collection["stars"]);
-
             HotelEntity hotel = new()
             {
                 Name = collection["name"],
                 Description = collection["description"],
                 Staffed_hours = collection["staffedHours"],
-                Stars = stars,
+                Stars = int.Parse(collection["stars"]),
+                Location_Id = int.Parse(collection["locationHref"]),
             };
 
-            int id = _dao.Create(hotel);
+            hotel.Id = _dao.Create(hotel);
 
-            return Created(id.ToString(), hotel);
+            HotelDto dto = hotel.Map();
 
+            return Created(dto.Href, dto);
         }
 
         [HttpPut]
