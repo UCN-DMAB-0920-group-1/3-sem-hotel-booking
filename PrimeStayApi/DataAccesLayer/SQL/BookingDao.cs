@@ -73,7 +73,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 //TODO: Alias for booking_id for Dapper auto mappping 
-                return connection.QueryFirst<BookingEntity>(@$"SELECT * FROM Booking WHERE booking_id = @id", new { id });
+                return connection.QueryFirst<BookingEntity>(@$"SELECT * FROM Booking WHERE id = @id", new { id });
             }
         }
 

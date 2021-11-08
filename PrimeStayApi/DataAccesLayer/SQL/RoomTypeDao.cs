@@ -30,7 +30,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomTypeEntity>($"SELECT * FROM Room WHERE " +
+                return connection.Query<RoomTypeEntity>($"SELECT * FROM RoomType WHERE " +
                                                      $"id=ISNULL(@id,id)" +
                                                      $"AND type LIKE ISNULL(@type,type)" +
                                                      $"AND description LIKE ISNULL(@description,description)" +

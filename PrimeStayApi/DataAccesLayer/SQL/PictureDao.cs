@@ -32,10 +32,10 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                     whereStatement = $"WHERE type = @Type AND hotel_id = @Hotel_id";
                     break;
                 case "room":
-                    whereStatement = $"WHERE type = @Type AND room_id = @Room_id";
+                    whereStatement = $"WHERE type = @Type AND room_type_id = @Room_id";
                     break;
                 default:
-                    throw new System.Exception("Invalid type " + model.Type);    
+                    throw new System.Exception("Invalid type " + model.Type);
             }
 
 
