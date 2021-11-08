@@ -15,20 +15,14 @@
         ViewData["Title"] = "Choose room";
     }
     <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
-        <div class="card mb-3" style="max-width: 100%;">
+        <div class="jumbotron">
             <div class="row g-0">
-                <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                    <img src="~/img/hotel-presidente.jpg" id="Hotel" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body ">
-                        <h5 class="card-title">@Model.Name</h5>
-                        <p class=" card-text"> @Model.Location.Country </p>
-                        <p class="card-text">@Model.Description</p>
-                        <p class="card-text">Stars: @Model.Stars</p>
-                        <p class="card-text">Staffed hours: @Model.Staffed_hours</p>
-                    </div>
-                </div>
+                    <img src="https://c.tenor.com/wXTO9bFFJXMAAAAC/loading-slow-internet.gif" id="Hotel" class=" rounded-start" alt="penis." style="width: 100%; height: 35%; object-fit: cover; border-radius: 50px; ">
+                        <h1 class="display-4">@Model.Name</h1>
+                        <p> @Model.Location.Country </p>
+                        <p>@Model.Description</p>
+                        <p>Stars: @Model.Stars</p>
+                        <p>Staffed hours: @Model.Staffed_hours</p>
             </div>
         </div>
     </div>
@@ -52,7 +46,7 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                        <img src="~/img/hotel-room.jpg" id="@room.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                        <img src="https://c.tenor.com/wXTO9bFFJXMAAAAC/loading-slow-internet.gif" id="@room.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
