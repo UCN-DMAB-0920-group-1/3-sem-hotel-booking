@@ -49,16 +49,12 @@ namespace PrimeStayApi.Test
                 //TODO set room_type_id
             };
 
-
             //Act
             int id = _dao.Create(booking);
 
             //Assert
-
-            
-
             Assert.IsNotNull(id);
-            Assert.AreEqual(id, 21);
+            Assert.AreEqual(18, id);
         }
 
 
@@ -109,11 +105,11 @@ namespace PrimeStayApi.Test
             Assert.AreEqual(bookings.Count(), 20);
             Assert.IsNotNull(bookings.First());
             Assert.IsNotNull(bookings.First().StartDate);
-            Assert.AreEqual(bookings.First().StartDate,System.DateTime.Parse("2010-11-04T00:00:00"));
-            Assert.AreEqual(bookings.First().EndDate,System.DateTime.Parse("2010-11-16T00:00:00"));
-            Assert.AreEqual(bookings.First().Guests,4);
-            Assert.AreEqual(bookings.First().RoomHref,"api/Room/1");
-            Assert.AreEqual(bookings.First().CustomerHref,"api/Customer/1");
+            Assert.AreEqual(bookings.First().StartDate, System.DateTime.Parse("2010-11-04T00:00:00"));
+            Assert.AreEqual(bookings.First().EndDate, System.DateTime.Parse("2010-11-16T00:00:00"));
+            Assert.AreEqual(bookings.First().Guests, 4);
+            Assert.AreEqual(bookings.First().RoomHref, "api/Room/1");
+            Assert.AreEqual(bookings.First().CustomerHref, "api/Customer/1");
         }
 
         [TestMethod]
