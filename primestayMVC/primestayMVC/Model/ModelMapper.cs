@@ -34,7 +34,7 @@ namespace PrimeStay.MVC.Model
             };
         }
 
-        public static Room Map(this RoomDto room)
+        public static Room Map(this RoomTypeDto room)
         {
             if (room == null) return null;
             return new Room()
@@ -42,22 +42,22 @@ namespace PrimeStay.MVC.Model
                 Id = GetIdFromHref(room.Href),
                 Href = room.Href,
                 Type = room.Type,
-                Num_of_avaliable = room.NumOfAvaliable,
-                Num_of_beds = room.NumOfBeds,
+                Avaliable = room.Avaliable,
+                Beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 Hotel_Id = room.HotelId,
             };
         }
-        public static RoomDto Map(this Room room)
+        public static RoomTypeDto Map(this Room room)
         {
             if (room == null) return null;
-            return new RoomDto()
+            return new RoomTypeDto()
             {
                 Href = GetHrefFromId(typeof(Room), room.Id),
                 Type = room.Type,
-                NumOfAvaliable = room.Num_of_avaliable,
-                NumOfBeds = room.Num_of_beds,
+                Avaliable = room.Avaliable,
+                Beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 HotelId = room.Hotel_Id,

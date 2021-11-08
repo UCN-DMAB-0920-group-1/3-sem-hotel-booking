@@ -12,10 +12,10 @@ namespace PrimeStay.MVC.Controllers
     public class HotelController : Controller
     {
         private readonly IDao<HotelDto> _HotelDao;
-        private readonly IDao<RoomDto> _RoomDao;
+        private readonly IDao<RoomTypeDto> _RoomDao;
         private readonly IDao<LocationDto> _LocationDao;
 
-        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomDto> roomDao)
+        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomTypeDto> roomDao)
         {
             _HotelDao = dao;
             _LocationDao = locationDao;
@@ -23,8 +23,6 @@ namespace PrimeStay.MVC.Controllers
         }
         public IActionResult Index()
         {
-            //if (hotels == null) 
-
             return View();
         }
 
@@ -88,7 +86,7 @@ namespace PrimeStay.MVC.Controllers
 
         private IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
         {
-            return _RoomDao.ReadAll(new RoomDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
+            return _RoomDao.ReadAll(new RoomTypeDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
         }
         #endregion
 

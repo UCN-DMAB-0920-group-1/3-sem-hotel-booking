@@ -18,7 +18,7 @@
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">
                 <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                    <img src="~/img/hotel-presidente.jpg" id="@Model.Href" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                    <img src="~/img/hotel-presidente.jpg" id="Hotel" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body ">
@@ -39,7 +39,7 @@
             var uri = "https://localhost:44312/";
             axios.get(uri + href)
             .then(result => {
-                $('#@Model.Href').attr("src", result.data[0].path);
+                $('#Hotel').attr("src", result.data[0].path);
             }).catch(err => {
             console.log(err);
             })
@@ -52,7 +52,7 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                        <img src="~/img/hotel-room.jpg" id="@room.Type" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
+                        <img src="~/img/hotel-room.jpg" id="@room.Id" class=" rounded-start" alt="..." style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; ">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body ">
@@ -69,20 +69,23 @@
                     </div>
                 </div>
             </div>
-
-        </div>
         <script>
         $(document).ready(function () {
            var href = "api/picture/room/" + @room.Id;
            var uri = "https://localhost:44312/";
+           console.log(uri + href)
            axios.get(uri + href)
            .then(result => {
-               $('#@room.Type').attr("src", result.data[0].path);
+                console.log("i am fetching", result.data)
+               $('#@room.Id').attr("src", result.data[0].path);
+
            }).catch(err => {
                console.log(err);
            })
         })
         </script>
+        </div>
+
     }
 
 </body>

@@ -67,7 +67,7 @@ namespace PrimeStayApi.Model.DTO
                 Href = room.ExtractHref(),
                 Type = room.Type,
                 Avaliable = room.Avaliable,
-                NumOfBeds = room.beds,
+                Beds = room.beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 hotelHref = GetHrefFromId(typeof(HotelEntity), room.Hotel_Id)
@@ -82,7 +82,7 @@ namespace PrimeStayApi.Model.DTO
                 Id = room.ExtractId(),
                 Type = room.Type,
                 Avaliable = room.Avaliable,
-                beds = room.NumOfBeds,
+                beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
                 Hotel_Id = GetIdFromHref(room.hotelHref),

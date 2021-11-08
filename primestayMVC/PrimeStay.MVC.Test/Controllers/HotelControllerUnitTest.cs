@@ -12,7 +12,7 @@ namespace PrimeStay.MVC.Controllers.Tests
     {
         private IDao<HotelDto> _hotelDao;
         private IDao<LocationDto> _locationDao;
-        private IDao<RoomDto> _roomDao;
+        private IDao<RoomTypeDto> _roomDao;
         private HotelController _controller;
 
         [TestInitialize]
@@ -91,15 +91,15 @@ namespace PrimeStay.MVC.Controllers.Tests
             public LocationDto ReadByHref(string href) => new LocationDto() { City = "test" };
             public int Update(LocationDto model) => -1;
         }
-        internal class mockRoomDao : IDao<RoomDto>
+        internal class mockRoomDao : IDao<RoomTypeDto>
         {
-            public string Create(RoomDto model) => "test";
-            public int Delete(RoomDto model) => -1;
+            public string Create(RoomTypeDto model) => "test";
+            public int Delete(RoomTypeDto model) => -1;
 
-            public IEnumerable<RoomDto> ReadAll(RoomDto model) => new List<RoomDto>() { new RoomDto() { Type = "test1" }, new RoomDto() { Type = "test2" } };
-            public RoomDto ReadByHref(string href) => new RoomDto() { Type = "test" };
+            public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model) => new List<RoomTypeDto>() { new RoomTypeDto() { Type = "test1" }, new RoomTypeDto() { Type = "test2" } };
+            public RoomTypeDto ReadByHref(string href) => new RoomTypeDto() { Type = "test" };
 
-            public int Update(RoomDto model) => -1;
+            public int Update(RoomTypeDto model) => -1;
         }
 
     }
