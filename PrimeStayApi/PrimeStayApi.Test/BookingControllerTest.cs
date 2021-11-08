@@ -43,10 +43,10 @@ namespace PrimeStayApi.Test
             var booking = new BookingEntity()
             {
                 Customer_id = 1,
-                End_date = System.DateTime.Parse("2021-10-10"),
-                Start_date = System.DateTime.Parse("2021-01-01"),
+                End_date = System.DateTime.Parse("2010-11-01"),
+                Start_date = System.DateTime.Parse("2010-11-02"),
                 Guests = 10,
-                Room_id = 1,
+                //TODO set room_type_id
             };
 
 

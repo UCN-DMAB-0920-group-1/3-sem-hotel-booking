@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Dapper.Transaction;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
 using System.Collections.Generic;
@@ -15,34 +16,26 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             var res = -1;
 
-            using (IDbConnection connection = DataContext.Open())
+            using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
             {
-                var transaction = connection.BeginTransaction();
-                res = connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, guests,Room_id,Customer_id) " +
+                model.Room_id = transaction.ExecuteScalar<int>("SELECT TOP 1 Room.id FROM Room "
+                                                            + "WHERE room.room_type_id = @Room_type_id AND Room.id NOT IN "
+                                                            + "( "
+                                                            + "SELECT R.id "
+                                                                + "FROM  Booking B "
+                                                                + "JOIN ROOM R "
+                                                                 + "ON B.room_id = R.id "
+                                                                + "WHERE((B.start_date <= @start_date AND B.end_date >= @start_date) "
+                                                                  + "OR(B.start_date < @end_date AND B.end_date >= @end_date) "
+                                                                       + "OR(@start_date <= B.start_date AND @end_date >= B.start_date)) AND Room.room_type_id = @room_type_id "
+                                                            + ") "
+                                                            + "ORDER BY NEWID()"
+                                , new { model.Room_type_id, model.Start_date, model.End_date });
+
+                res = transaction.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
                                                      @"OUTPUT INSERTED.id " +
-                                                     @"VALUES (@Start_date, @End_date, @guests,@Room_id,@Customer_id)",
-                                                     new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id }, transaction: transaction);
-
-
-                var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT avaliable FROM room WHERE id=@room_id)" +
-                                                           " as avail_Rooms FROM booking WHERE room_id = @room_id AND start_date BETWEEN @start_date AND @end_date" +
-                                                                                                       " AND end_date BETWEEN @start_date AND @end_date", new { model.Room_id, model.Start_date, model.End_date }, transaction: transaction);
-
-
-                if (avaliableRooms.Number_of_avail_Rooms - avaliableRooms.Num_of_bookings > -1)
-                {
-                    transaction.Commit();
-
-                }
-                else
-                {
-                    res = -1;
-
-                    transaction.Rollback();
-
-                }
-
-
+                                                     @"VALUES (@Start_date, @End_date, @Guests,@Room_id,@Customer_id)",
+                                                     new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
             };
             return res;
         }
