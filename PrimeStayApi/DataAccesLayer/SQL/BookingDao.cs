@@ -23,18 +23,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                      @"VALUES (@Start_date, @End_date, @guests,@Room_id,@Customer_id)",
                                                      new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id }, transaction: transaction);
 
-<<<<<<< Updated upstream
-                var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT num_of_avaliable FROM room WHERE id=@room_id) " + //Query inspired by "https://stackoverflow.com/questions/29213183/sql-query-to-search-for-room-availability" 04/11/2021
-                                                                                 "as Number_of_avail_Rooms FROM booking WHERE(start_date <= @start_date" +
-                                                                                 " AND end_date >= @start_date) OR(start_date < @end_date AND end_date " +
-                                                                                             ">= @end_date) OR(@start_date <= start_date AND @end_date " +
-                                                                                 ">= start_date) AND room_id = @room_id", new { model.Room_id, model.Start_date, model.End_date },
-                                                                                                                                transaction: transaction);
-=======
+
                 var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT avaliable FROM room WHERE id=@room_id)" +
                                                            " as avail_Rooms FROM booking WHERE room_id = @room_id AND start_date BETWEEN @start_date AND @end_date" +
                                                                                                        " AND end_date BETWEEN @start_date AND @end_date", new { model.Room_id, model.Start_date, model.End_date }, transaction: transaction);
->>>>>>> Stashed changes
+
 
                 if (avaliableRooms.Number_of_avail_Rooms - avaliableRooms.Num_of_bookings > -1)
                 {
