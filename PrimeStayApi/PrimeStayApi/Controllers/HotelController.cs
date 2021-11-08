@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
@@ -59,22 +60,15 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<HotelDto> Create(IFormCollection collection)
+        //[Route("create")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create([FromBody] HotelDto hotel)
         {
-            HotelEntity hotel = new()
-            {
-                Name = collection["name"],
-                Description = collection["description"],
-                Staffed_hours = collection["staffedHours"],
-                Stars = int.Parse(collection["stars"]),
-                Location_Id = int.Parse(collection["locationHref"]),
-            };
-
-            hotel.Id = _dao.Create(hotel);
-
-            HotelDto dto = hotel.Map();
-
-            return Created(dto.Href, dto);
+            System.Console.WriteLine("hey");
+            var tesmp = hotel.Map();
+            tesmp.Id = 100;
+            hotel = tesmp.Map();
+            return Created(hotel.Href, hotel);
         }
 
         [HttpPut]
