@@ -29,13 +29,43 @@ INSERT INTO [dbo].[Room] ([RoomNumber], [Room_Type_id], [notes])
     (3, 1, ''),
     (4, 1, ''),
 
-    (1, 2, 'Lugter af nutella'),
-    (2, 2, 'Lugter ïkke af nutella'),
+    (1, 2, 'Lugter af slik'),
+    (2, 2, 'Lugter ïkke af slik'),
     (3, 2, ''),
-    (4, 2, '')
+    (4, 2, ''),
+    
+    (1, 3, 'Lugter af monster'),
+    (2, 3, 'Lugter ïkke af monster'),
+    (3, 3, ''),
+    (4, 3, ''),
+    
+    (1, 4, 'Lugter af crispy-chicken'),
+    (2, 4, 'Lugter ïkke af crispy-chicken'),
+    (3, 4, ''),
+    (4, 4, ''),
+    
+    (1, 5, 'Lugter af coca cola'),
+    (2, 5, 'Lugter ïkke af coca cola'),
+    (3, 5, ''),
+    (4, 5, ''),
+    
+    (1, 6, 'Lugter af pepsi'),
+    (2, 6, 'Lugter ïkke af pepsi'),
+    (3, 6, ''),
+    (4, 6, ''),
+    
+    (1, 7, 'Lugter af kaffe'),
+    (2, 7, 'Lugter ïkke af kaffe'),
+    (3, 7, ''),
+    (4, 7, ''),
+    
+    (1, 8, 'Lugter af ild'),
+    (2, 8, 'Lugter ïkke af ild'),
+    (3, 8, ''),
+    (4, 8, '')
 GO
 
-INSERT INTO [dbo].[Price] ([start_date],[end_date],[amount],[room_id])
+INSERT INTO [dbo].[Price] ([start_date],[end_date],[amount],[room_type_id])
     VALUES 
     ('2010-10-10','2011-10-10',1,1)
 GO
@@ -98,7 +128,7 @@ INSERT INTO [dbo].[Picture] ([title],[description],[path])
     ('Grøtten Room Junior Suite', 'Suite description', 'https://juto.dk/semester/room/3.png')
 GO
 
-INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_id],[type],[picture_id])
+INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_type_id],[type],[picture_id])
     VALUES 
     (1,null,'hotel',1),
     (1,null,'hotel',2),

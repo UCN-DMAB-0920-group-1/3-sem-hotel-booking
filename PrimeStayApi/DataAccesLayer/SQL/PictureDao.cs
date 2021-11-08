@@ -28,6 +28,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             switch (model.Type)
             {
 
+<<<<<<< Updated upstream
                 case "hotel":
                     whereStatement = $"WHERE type = @Type AND hotel_id = @Hotel_id";
                     break;
@@ -47,6 +48,24 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                     new { model.Type, model.Hotel_id, model.Room_id });
 
             };
+=======
+                    };
+                case "room":
+                    using (IDbConnection connection = DataContext.Open())
+                    {
+                        return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
+                                                            $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
+                                                            $"WHERE type = @Type AND room_type_id = @room_id",
+                                                            new { model.Type, model.Room_id });
+
+                    };
+                    break;
+                default:
+                    throw new System.Exception("Invalid type " + model.Type);
+
+            }
+
+>>>>>>> Stashed changes
         }
 
         public PictureEntity ReadById(int id)

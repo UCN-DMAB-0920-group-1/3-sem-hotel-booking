@@ -18,17 +18,23 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 var transaction = connection.BeginTransaction();
-                res = connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Num_of_guests,Room_id,Customer_id) " +
-                                                     @"OUTPUT INSERTED.booking_id " +
-                                                     @"VALUES (@Start_date, @End_date, @Num_of_guests,@Room_id,@Customer_id)",
-                                                     new { model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id }, transaction: transaction);
+                res = connection.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, guests,Room_id,Customer_id) " +
+                                                     @"OUTPUT INSERTED.id " +
+                                                     @"VALUES (@Start_date, @End_date, @guests,@Room_id,@Customer_id)",
+                                                     new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id }, transaction: transaction);
 
+<<<<<<< Updated upstream
                 var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT num_of_avaliable FROM room WHERE id=@room_id) " + //Query inspired by "https://stackoverflow.com/questions/29213183/sql-query-to-search-for-room-availability" 04/11/2021
                                                                                  "as Number_of_avail_Rooms FROM booking WHERE(start_date <= @start_date" +
                                                                                  " AND end_date >= @start_date) OR(start_date < @end_date AND end_date " +
                                                                                              ">= @end_date) OR(@start_date <= start_date AND @end_date " +
                                                                                  ">= start_date) AND room_id = @room_id", new { model.Room_id, model.Start_date, model.End_date },
                                                                                                                                 transaction: transaction);
+=======
+                var avaliableRooms = connection.QueryFirst("SELECT count(*) as Num_of_bookings, (SELECT avaliable FROM room WHERE id=@room_id)" +
+                                                           " as avail_Rooms FROM booking WHERE room_id = @room_id AND start_date BETWEEN @start_date AND @end_date" +
+                                                                                                       " AND end_date BETWEEN @start_date AND @end_date", new { model.Room_id, model.Start_date, model.End_date }, transaction: transaction);
+>>>>>>> Stashed changes
 
                 if (avaliableRooms.Number_of_avail_Rooms - avaliableRooms.Num_of_bookings > -1)
                 {
@@ -58,13 +64,13 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<BookingEntity>(@$"SELECT * FROM Booking WHERE " +
-                                                                 $"booking_id=ISNULL(@id,booking_id)" +
+                                                                 $"id=ISNULL(@id,id)" +
                                                                  $"AND start_date >= ISNULL(@Start_date,Start_date)" +
                                                                  $"AND end_date <= ISNULL(@End_date, End_date)" +
-                                                                 $"AND num_of_guests LIKE ISNULL(@Num_of_guests, num_of_guests)" +
+                                                                 $"AND guests LIKE ISNULL(@guests, guests)" +
                                                                  $"AND room_id = ISNULL(@Room_id,Room_id)" +
                                                                  $"AND customer_id = ISNULL(@Customer_id,Customer_id)",
-                                                                 new { model.Id, model.Start_date, model.End_date, model.Num_of_guests, model.Room_id, model.Customer_id });
+                                                                 new { model.Id, model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
 
             };
         }

@@ -1,4 +1,5 @@
-﻿CREATE TABLE [Hotel] (
+﻿
+CREATE TABLE [Hotel] (
   [id] int NOT NULL IDENTITY(1, 1),
   [name] VARCHAR(500) NOT NULL,
   [description] VARCHAR(6000) NOT NULL,
@@ -144,10 +145,10 @@ REFERENCES [Location] ([id])
 
 ALTER TABLE [Hotel] CHECK CONSTRAINT [FK_Hotel_location_id]
 
-ALTER TABLE [RoomType] WITH CHECK ADD CONSTRAINT [FK_Room_hotel_id] FOREIGN KEY([hotel_id])
+ALTER TABLE [RoomType] WITH CHECK ADD CONSTRAINT [FK_RoomType_hotel_id] FOREIGN KEY([hotel_id])
 REFERENCES [Hotel] ([id])
 
-ALTER TABLE [Room] CHECK CONSTRAINT [FK_Room_hotel_id]
+ALTER TABLE [RoomType] CHECK CONSTRAINT [FK_RoomType_hotel_id]
 
 ALTER TABLE [Booking] WITH CHECK ADD CONSTRAINT [FK_Booking_room_id] FOREIGN KEY([room_id])
 REFERENCES [Room] ([id])

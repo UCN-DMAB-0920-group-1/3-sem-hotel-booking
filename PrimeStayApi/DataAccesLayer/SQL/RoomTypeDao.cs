@@ -7,49 +7,48 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class RoomDao : BaseDao<IDataContext>, IDao<RoomEntity>
+    internal class RoomTypeDao : BaseDao<IDataContext>, IDao<RoomTypeEntity>
     {
-        public RoomDao(IDataContext dataContext) : base(dataContext)
+        public RoomTypeDao(IDataContext dataContext) : base(dataContext)
         {
         }
 
-        public int Create(RoomEntity model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Delete(RoomEntity model)
+        public int Create(RoomTypeEntity model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RoomEntity> ReadAll(RoomEntity model)
+        public int Delete(RoomTypeEntity model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<RoomTypeEntity> ReadAll(RoomTypeEntity model)
         {
             model.Type = model.Type != null ? "%" + model.Type + "%" : null;
             model.Description = model.Description != null ? "%" + model.Description + "%" : null;
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomEntity>($"SELECT * FROM Room WHERE " +
+                return connection.Query<RoomTypeEntity>($"SELECT * FROM Room WHERE " +
                                                      $"id=ISNULL(@id,id)" +
                                                      $"AND type LIKE ISNULL(@type,type)" +
                                                      $"AND description LIKE ISNULL(@description,description)" +
-                                                     $"AND num_of_avaliable LIKE ISNULL(@num_of_avaliable,num_of_avaliable)" +
-                                                     $"AND num_of_beds LIKE ISNULL(@num_of_beds,num_of_beds)" +
+                                                     $"AND beds LIKE ISNULL(@beds,beds)" +
                                                      $"AND rating LIKE ISNULL(@rating,rating)" +
                                                      $"AND hotel_id LIKE ISNULL(@Hotel_Id,hotel_Id)",
-                                                     new { model.Id, model.Type, model.Num_of_avaliable, model.Num_of_beds, model.Description, model.Rating, model.Hotel_Id });
+                                                     new { model.Id, model.Type, model.beds, model.Description, model.Rating, model.Hotel_Id });
 
             };
 
         }
 
-        public RoomEntity ReadById(int id)
+        public RoomTypeEntity ReadById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(RoomEntity model)
+        public int Update(RoomTypeEntity model)
         {
             throw new NotImplementedException();
         }

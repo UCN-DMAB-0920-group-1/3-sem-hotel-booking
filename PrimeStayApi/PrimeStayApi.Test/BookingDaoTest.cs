@@ -38,7 +38,7 @@ namespace PrimeStayApi.Test
                 Start_date = DateTime.Parse("2020-11-11"),
                 End_date = DateTime.Parse("2020-12-12"),
                 Customer_id = 1,
-                Num_of_guests = 1,
+                Guests = 1,
                 Room_id = 8,
             };
             //Act 
@@ -56,7 +56,7 @@ namespace PrimeStayApi.Test
                 Start_date = DateTime.Parse("2020-11-11"),
                 End_date = DateTime.Parse("2020-12-12"),
                 Customer_id = 1,
-                Num_of_guests = 1,
+                Guests = 1,
                 Room_id = 8,
             };
             //Act 
