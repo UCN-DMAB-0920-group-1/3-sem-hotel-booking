@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStayApi.Controllers;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.DataAccessLayer.DAO;
@@ -42,9 +43,12 @@ namespace PrimeStayApi.Test
             int hotelId = 1;
 
             //act 
-            var hotel = controller.Details(hotelId);
+            var res = controller.Details(hotelId);
 
             //assert 
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
+            var hotel = (res.Result as OkObjectResult).Value as HotelDto;
+
             Assert.IsNotNull(hotel);
             Assert.AreEqual(hotelId, hotel.ExtractId());
             Assert.IsFalse(string.IsNullOrEmpty(hotel.Name));
@@ -54,9 +58,8 @@ namespace PrimeStayApi.Test
         public void GetHotelFromTestDBWithHotel()
         {
             //arrange
-            _dao = DaoFactory.Create<HotelEntity>(_dataContext);
-            _controllerWithDB = new HotelController(_dao);
-
+            IDao<HotelEntity> dao = DaoFactory.Create<HotelEntity>(_dataContext);
+            HotelController controller = new HotelController(dao);
 
             var hotel = new HotelDto()
             {
@@ -66,14 +69,13 @@ namespace PrimeStayApi.Test
                 StaffedHours = "24/7",
             };
 
-
             //act 
-            var res = _controllerWithDB.Index(hotel);
+            var res = controller.Index(hotel);
 
             //assert
             Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
-
             var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
+
             Assert.AreEqual(hotels.Count(), 1);
             Assert.AreEqual(hotels.First().Name, hotel.Name);
             Assert.AreEqual(hotels.First().Description, hotel.Description);
@@ -92,9 +94,12 @@ namespace PrimeStayApi.Test
             var res = controller.Details(hotelId);
 
             //Assert
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
+            var hotel = (res.Result as OkObjectResult).Value as HotelDto;
+
             Assert.IsNotNull(res);
-            Assert.AreEqual(hotelId, res.ExtractId());
-            Assert.IsFalse(string.IsNullOrEmpty(res.Name));
+            Assert.AreEqual(hotelId, hotel.ExtractId());
+            Assert.IsFalse(string.IsNullOrEmpty(hotel.Name));
         }
 
         [TestMethod]
@@ -114,10 +119,13 @@ namespace PrimeStayApi.Test
             var res = controller.Index(hotel.Map());
 
             //Assert
-            Assert.IsNotNull(res);
-            Assert.IsTrue(res.Any());
-            Assert.IsFalse(res.Where(h => h is null).Any());
-            Assert.AreEqual(2, res.Count());
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
+            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
+
+            Assert.IsNotNull(hotels);
+            Assert.IsTrue(hotels.Any());
+            Assert.IsFalse(hotels.Where(h => h is null).Any());
+            Assert.AreEqual(2, hotels.Count());
         }
     }
 
