@@ -41,6 +41,7 @@ namespace PrimeStayApi.Model.DTO
                 End_date = booking.EndDate,
                 Guests = booking.Guests,
                 Room_id = GetIdFromHref(booking.RoomHref),
+                Room_type_id = GetIdFromHref(booking.RoomTypeHref),
                 Customer_id = GetIdFromHref(booking.CustomerHref),
             };
         }
@@ -55,6 +56,7 @@ namespace PrimeStayApi.Model.DTO
                 EndDate = booking.End_date,
                 Guests = booking.Guests,
                 RoomHref = @$"api/Room/{booking.Room_id}",
+                RoomTypeHref = $@"api/RoomType/{booking.Room_type_id}",
                 CustomerHref = @$"api/Customer/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
             };
         }

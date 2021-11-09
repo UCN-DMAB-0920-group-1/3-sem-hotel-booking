@@ -4,10 +4,7 @@ namespace PrimeStayApi.Model
 {
     public class BookingEntity : BaseEntity
     {
-        public BookingEntity()
-        {
-            Room_type_id = 1; // TODO only for now, pls fix
-        }
+
 
         public DateTime? Start_date { get; set; }
         public DateTime? End_date { get; set; }
