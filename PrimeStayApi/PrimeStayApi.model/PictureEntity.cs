@@ -10,7 +10,7 @@ namespace PrimeStayApi.Model
     {
         public int? Hotel_id { get; set; }
         public int? Room_id { get; set; }
-        public string Type { get; set; }
+        public string Type { get; set; } // TODO Brug ENUM i stedet?
         public string Path { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }

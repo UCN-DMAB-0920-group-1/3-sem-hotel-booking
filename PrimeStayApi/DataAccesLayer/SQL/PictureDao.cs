@@ -8,6 +8,13 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 {
     internal class PictureDao : BaseDao<IDataContext>, IDao<PictureEntity>
     {
+        #region SQL-Queries
+        private static readonly string SELECTALLPICTURES = "SELECT * FROM TablePictures " +
+                                                            "INNER JOIN picture " +
+                                                                "ON picture.id = TablePictures.picture_id";
+
+        #endregion
+
         public PictureDao(IDataContext dataContext) : base(dataContext)
         {
 
@@ -24,26 +31,17 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public IEnumerable<PictureEntity> ReadAll(PictureEntity model)
         {
-            string whereStatement = "";
-            switch (model.Type)
+            string whereStatement = model.Type switch
             {
-
-                case "hotel":
-                    whereStatement = $"WHERE type = @Type AND hotel_id = @Hotel_id";
-                    break;
-                case "room":
-                    whereStatement = $"WHERE type = @Type AND room_type_id = @Room_id";
-                    break;
-                default:
-                    throw new System.Exception("Invalid type " + model.Type);
-            }
+                "hotel" => $"WHERE type = @Type AND hotel_id = @Hotel_id",
+                "room" => $"WHERE type = @Type AND room_type_id = @Room_id",
+                _ => throw new System.Exception("Invalid type " + model.Type),
+            };
 
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
-                                                    $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
-                                                    whereStatement,
+                return connection.Query<PictureEntity>($"{SELECTALLPICTURES} {whereStatement}",
                                                     new { model.Type, model.Hotel_id, model.Room_id });
 
             };
