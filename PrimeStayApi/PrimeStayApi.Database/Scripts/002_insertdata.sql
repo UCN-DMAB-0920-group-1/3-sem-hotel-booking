@@ -123,6 +123,8 @@ INSERT INTO [dbo].[Picture] ([title],[description],[path])
     ('Petrus Room Suite', 'Suite description', 'https://juto.dk/semester/room/1.png'),
     ('Grøtten Room Suite', 'Suite description', 'https://juto.dk/semester/room/2.png'),
     ('Grøtten Room Junior Suite', 'Suite description', 'https://juto.dk/semester/room/3.png')
+    ('Test room', 'Suite description', 'https://juto.dk/semester/room/4.png'),
+    ('Some suite', 'Suite description', 'https://juto.dk/semester/room/5.png')
 GO
 
 INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_type_id],[type],[picture_id])
@@ -134,6 +136,13 @@ INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_type_id],[type],[picture_id]
     (2,null,'hotel',5),
     (null,1,'room',6),
     (null,1,'room',7),
-    (null,1,'room',8)
+    (null,1,'room',8),
+    (null,2,'room',7),
+    (null,3,'room',9),
+    (null,4,'room',10),
+    (null,5,'room',2),
+    (null,6,'room',7),
+    (null,7,'room',9),
+    (null,8,'room',10)
 GO
 
