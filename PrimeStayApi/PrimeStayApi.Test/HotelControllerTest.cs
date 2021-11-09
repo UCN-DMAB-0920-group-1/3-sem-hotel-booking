@@ -9,7 +9,7 @@ using PrimeStayApi.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Version = PrimeStayApi.Database.Version;
 
 namespace PrimeStayApi.Test
@@ -17,22 +17,28 @@ namespace PrimeStayApi.Test
     [TestClass]
     public class HotelControllerTest
     {
-        private DataContext _dataContext;
-
+        private string connectionString = new ENV().ConnectionStringTest;
+        private static DataContext _dataContext;
+        private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
         public void SetUp()
         {
-            Version.Upgrade(ENV.ConnectionStringTest);
-            _dataContext = new DataContext(ENV.ConnectionStringTest);
-
+            _dataContext = new DataContext(connectionString);
+            Version.Upgrade(connectionString);
         }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            Parallel.Invoke(_dropDatabaseActions.ToArray());
+        }
+
         [TestCleanup]
         public void CleanUp()
         {
-            Version.Drop(ENV.ConnectionStringTest);
+            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
         }
-
 
         [TestMethod]
         public void GetHotelFromTestDBWithId()

@@ -6,8 +6,11 @@ using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Version = PrimeStayApi.Database.Version;
 
 namespace PrimeStayApi.Test
 {
@@ -15,39 +18,42 @@ namespace PrimeStayApi.Test
     [TestClass]
     public class PictureTest
     {
-        private PictureController _controllerWithDB;
-        private IDao<PictureEntity> _dao;
-        private DataContext _dataContext;
-
-
+        private string connectionString = new ENV().ConnectionStringTest;
+        private static DataContext _dataContext;
+        private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
         public void SetUp()
         {
-            Version.Upgrade(ENV.ConnectionStringTest);
-            _dataContext = new DataContext(ENV.ConnectionStringTest);
-
+            _dataContext = new DataContext(connectionString);
+            Version.Upgrade(connectionString);
         }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            Parallel.Invoke(_dropDatabaseActions.ToArray());
+        }
+
         [TestCleanup]
         public void CleanUp()
         {
-            Version.Drop(ENV.ConnectionStringTest);
+            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
         }
-
 
         [TestMethod]
         public void GetRoomPictureTest()
         {
             //arrange
-            _dao = DaoFactory.Create<PictureEntity>(_dataContext);
-            _controllerWithDB = new PictureController(_dao);
+            IDao<PictureEntity> dao = DaoFactory.Create<PictureEntity>(_dataContext);
+            PictureController controller = new PictureController(dao);
             IEnumerable<PictureDto> pictureDtos = null;
             string type = "room";
             int id = 1;
 
 
             //act 
-            pictureDtos = _controllerWithDB.getPictureByType(type, id);
+            pictureDtos = controller.getPictureByType(type, id);
 
             //assert 
             Assert.IsNotNull(pictureDtos);
@@ -56,19 +62,20 @@ namespace PrimeStayApi.Test
             Assert.AreEqual(pictureDtos.ElementAt(1).Path, "https://juto.dk/semester/room/2.png");
             Assert.AreEqual(pictureDtos.ElementAt(2).Path, "https://juto.dk/semester/room/3.png");
         }
+
         [TestMethod]
         public void GetHotelPictureTest()
         {
             //arrange
-            _dao = DaoFactory.Create<PictureEntity>(_dataContext);
-            _controllerWithDB = new PictureController(_dao);
+            IDao<PictureEntity> dao = DaoFactory.Create<PictureEntity>(_dataContext);
+            PictureController controller = new PictureController(dao);
             IEnumerable<PictureDto> pictureDtos = null;
             string type = "hotel";
             int id = 1;
 
 
             //act 
-            pictureDtos = _controllerWithDB.getPictureByType(type, id);
+            pictureDtos = controller.getPictureByType(type, id);
 
             //assert 
             Assert.IsNotNull(pictureDtos);

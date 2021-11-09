@@ -1,45 +1,50 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStayApi.Controllers;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Version = PrimeStayApi.Database.Version;
 
 namespace PrimeStayApi.Test
 {
     [TestClass]
     public class BookingControllerTest
     {
-        private BookingController _controllerWithDB;
-        private IDao<BookingEntity> _dao;
-        private DataContext _dataContext;
-
+        private string connectionString = new ENV().ConnectionStringTest;
+        private static DataContext _dataContext;
+        private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
         public void SetUp()
         {
-            Version.Upgrade(ENV.ConnectionStringTest);
-            _dataContext = new DataContext(ENV.ConnectionStringTest);
+            _dataContext = new DataContext(connectionString);
+            Version.Upgrade(connectionString);
         }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            Parallel.Invoke(_dropDatabaseActions.ToArray());
+        }
+
         [TestCleanup]
         public void CleanUp()
         {
-            Version.Drop(ENV.ConnectionStringTest);
+            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
         }
-
 
         [TestMethod]
         public void TestCreateBookingDao()
         {
             //Arrange
-            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
             var booking = new BookingEntity()
             {
                 Customer_id = 1,
@@ -50,7 +55,7 @@ namespace PrimeStayApi.Test
             };
 
             //Act
-            int id = _dao.Create(booking);
+            int id = dao.Create(booking);
 
             //Assert
             Assert.IsNotNull(id);
@@ -62,8 +67,8 @@ namespace PrimeStayApi.Test
         public void TestCreateBookingController()
         {
             //Arrange
-            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
-            _controllerWithDB = new BookingController(_dao);
+            IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            BookingController controller = new BookingController(dao);
 
 
             BookingDto booking = new BookingDto()
@@ -76,7 +81,7 @@ namespace PrimeStayApi.Test
             };
 
             //Act
-            var actionResult = _controllerWithDB.Create(booking);
+            var actionResult = controller.Create(booking);
 
             //Assert
             Assert.IsInstanceOfType(actionResult, typeof(CreatedResult));
@@ -86,8 +91,8 @@ namespace PrimeStayApi.Test
         public void TestFetchBookings()
         {
             //Arrange
-            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
-            _controllerWithDB = new BookingController(_dao);
+            IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            BookingController controller = new BookingController(dao);
 
             BookingDto booking = new BookingDto()
             {
@@ -99,27 +104,27 @@ namespace PrimeStayApi.Test
             };
 
             //Act
-            var bookings = _controllerWithDB.Index(booking);
+            var bookings = controller.Index(booking);
 
             //Assert
-            Assert.AreEqual(bookings.Count(), 20);
+            Assert.AreEqual(17, bookings.Count());
             Assert.IsNotNull(bookings.First());
             Assert.IsNotNull(bookings.First().StartDate);
-            Assert.AreEqual(bookings.First().StartDate, System.DateTime.Parse("2010-11-04T00:00:00"));
-            Assert.AreEqual(bookings.First().EndDate, System.DateTime.Parse("2010-11-16T00:00:00"));
-            Assert.AreEqual(bookings.First().Guests, 4);
-            Assert.AreEqual(bookings.First().RoomHref, "api/Room/1");
-            Assert.AreEqual(bookings.First().CustomerHref, "api/Customer/1");
+            Assert.AreEqual(DateTime.Parse("2010-11-04T00:00:00"), bookings.First().StartDate);
+            Assert.AreEqual(DateTime.Parse("2010-11-16T00:00:00"), bookings.First().EndDate);
+            Assert.AreEqual(4, bookings.First().Guests);
+            Assert.AreEqual("api/Room/1", bookings.First().RoomHref);
+            Assert.AreEqual("api/Customer/1", bookings.First().CustomerHref);
         }
 
         [TestMethod]
         public void TestReadById()
         {
-            _dao = DaoFactory.Create<BookingEntity>(_dataContext);
-            _controllerWithDB = new BookingController(_dao);
+            IDao<BookingEntity>  dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            BookingController controller = new BookingController(dao);
             int id = 1;
 
-            var booking = _controllerWithDB.Details(id);
+            var booking = controller.Details(id);
 
             Assert.IsNotNull(booking);
             Assert.IsTrue(booking.Guests == 4);
