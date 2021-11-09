@@ -28,7 +28,7 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
 
 
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest($"/api/room?{query_hotelId}", Method.GET, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest($"/api/RoomType?{query_hotelId}", Method.GET, DataFormat.Json);
             var res = restClient.Get<IEnumerable<RoomTypeDto>>(restRequest).Data;
             return res; //TODO: Use parameterbinding
         }
