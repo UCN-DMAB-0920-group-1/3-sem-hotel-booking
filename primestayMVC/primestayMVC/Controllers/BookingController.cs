@@ -44,9 +44,10 @@ namespace PrimeStay.MVC.Controllers
             };
 
             string href = _dao.Create(booking.Map());
-            var test = _dao.ReadByHref(href);
-            var newBooking = test.Map();
-            return View("confirm", newBooking);
+
+            if (href.EndsWith("-1")) return View("error");
+
+            return View("confirm", _dao.ReadByHref(href).Map());
 
 
         }
