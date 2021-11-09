@@ -39,7 +39,9 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                          @"OUTPUT INSERTED.id " +
                                                          @"VALUES (@Start_date, @End_date, @Guests,@Room_id,@Customer_id)",
                                                          new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
+                    transaction.Commit();
                 }
+                else transaction.Rollback();
             };
             return res;
         }
