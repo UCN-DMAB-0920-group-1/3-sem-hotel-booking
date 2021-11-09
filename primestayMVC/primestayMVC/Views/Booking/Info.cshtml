@@ -12,31 +12,31 @@
     <div class=" order-md-1">
         <h4 class="mb-3">Billing address</h4>
         <form asp-action="Create">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Customer.Name">Name</label>
-                    <input asp-for="Customer.Name" class="form-control">
-                    <span asp-validation-for="Customer.Name" class="text-danger"></span>
-                </div>
-            </div>
+           
+                <label asp-for="Customer.Name">Name</label>
+                <input asp-for="Customer.Name" style="width:100%;" class="form-control" required="">
+                <span asp-validation-for="Customer.Name" class="text-danger"></span>
+        
 
-            <div class="mb-3">
-                <label asp-for="Customer.Email" for="email">Email <span class="text-muted">(Optional)</span></label>
-                <input asp-for="Customer.Email" type="email" class="form-control" id="email" placeholder="you@example.com">
+                <label asp-for="Customer.Email" for="email">Email </label>
+                <input asp-for="Customer.Email" type="email" class="form-control" id="email" placeholder="you@example.com" style="width:100%;" required="">
                 <span asp-validation-for="Customer.Email" class="text-danger"></span>
                 <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
                 </div>
-            </div>
+      
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
+          
                     <label asp-for="Customer.Phone">Phone</label>
-                    <input asp-for="Customer.Phone" class="form-control">
+                    <input asp-for="Customer.Phone" class="form-control" style="width:100%;" required="">
                     <span asp-validation-for="Customer.Phone" class="text-danger"></span>
-                </div>
-            </div>
+               
 
+            
+            <input type="submit" value="Checkout" class="btn btn-primary" style="margin-left:45%; margin-top:25px;"/>
+
+        </form>
+    </div>
 
 
             @*<div class="row">
@@ -107,11 +107,6 @@
                         </div>
                     </div>
                 </div>*@
-            <hr class="mb-4">
-            <input type="submit" value="Checkout" class="btn btn-primary" />
-
-        </form>
-    </div>
 
 </div>
 <br />
