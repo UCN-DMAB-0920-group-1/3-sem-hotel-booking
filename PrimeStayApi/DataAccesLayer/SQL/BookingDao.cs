@@ -54,8 +54,16 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM, 
                     new { model.Room_type_id, model.Start_date, model.End_date });
 
-                res = transaction.ExecuteScalar<int>(INSERTBOOKINGRETURNID,
-                    new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
+                if (model.Room_id is not null && model.Room_id != 0 && model.Room_id != -1)
+                {
+
+                    res = transaction.ExecuteScalar<int>(@"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
+                                                         @"OUTPUT INSERTED.id " +
+                                                         @"VALUES (@Start_date, @End_date, @Guests,@Room_id,@Customer_id)",
+                                                         new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
+                    transaction.Commit();
+                }
+                else transaction.Rollback();
             };
             return res;
         }
