@@ -98,8 +98,8 @@ namespace PrimeStay.MVC.Model
                 EndDate = booking.End_date,
                 StartDate = booking.Start_date,
                 CustomerHref = booking.Customer_href,
-                Guests = booking.Num_of_guests,
-                RoomTypeHref = booking.Room_Type_href,
+                Guests = booking.Guests,
+                RoomTypeHref = booking.Room_type_href,
             };
         }
 
@@ -113,8 +113,8 @@ namespace PrimeStay.MVC.Model
                 Customer_href = booking.CustomerHref,
                 End_date = booking.EndDate,
                 Start_date = booking.StartDate,
-                Num_of_guests = booking.Guests,
-                Room_Type_href = booking.RoomTypeHref,
+                Guests = booking.Guests,
+                Room_type_href = booking.RoomTypeHref,
 
             };
         }
