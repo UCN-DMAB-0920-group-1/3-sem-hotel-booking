@@ -7,9 +7,9 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class RoomTypeDao : BaseDao<IDataContext>, IDao<RoomTypeEntity>
+    internal class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>
     {
-        public RoomTypeDao(IDataContext dataContext) : base(dataContext)
+        public RoomTypeDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 

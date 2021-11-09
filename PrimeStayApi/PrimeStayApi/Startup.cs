@@ -27,7 +27,7 @@ namespace PrimeStayApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext dataContext = new DataContext(ENV.ConnectionString);
+            IDataContext dataContext = new SqlDataContext(ENV.ConnectionString);
             services.AddScoped<IDao<HotelEntity>>(s => DaoFactory.Create<HotelEntity>(dataContext));
             services.AddScoped<IDao<RoomTypeEntity>>(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
             services.AddScoped<IDao<LocationEntity>>(s => DaoFactory.Create<LocationEntity>(dataContext));

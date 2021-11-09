@@ -7,9 +7,9 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class LocationDao : BaseDao<IDataContext>, IDao<LocationEntity>
+    internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<LocationEntity>
     {
-        public LocationDao(IDataContext dataContext) : base(dataContext)
+        public LocationDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
 
         }
