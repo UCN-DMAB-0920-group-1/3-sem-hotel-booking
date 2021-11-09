@@ -3,31 +3,37 @@ using PrimeStayApi.Controllers;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Version = PrimeStayApi.Database.Version;
 
 namespace PrimeStayApi.Test
 {
     [TestClass]
     public class RoomControllerTest
     {
-
-        private static RoomController _controller;
-
-        [ClassInitialize]
-        public static void Setup(TestContext context)
-        {
-            _controller = new RoomController(DaoFactory.Create<RoomTypeEntity>(new DataContext(ENV.ConnectionStringTest)));
-        }
+        private string connectionString = new ENV().ConnectionStringTest;
+        private static DataContext _dataContext;
+        private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
-        public void SetupDatabase()
+        public void SetUp()
         {
-            Database.Version.Upgrade(Enviroment.ENV.ConnectionStringTest);
+            _dataContext = new DataContext(connectionString);
+            Version.Upgrade(connectionString);
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            Parallel.Invoke(_dropDatabaseActions.ToArray());
         }
 
         [TestCleanup]
-        public void TearDown()
+        public void CleanUp()
         {
-            Database.Version.Drop(Enviroment.ENV.ConnectionStringTest);
+            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
         }
 
         //[TestMethod]
