@@ -13,24 +13,20 @@
         <h4 class="mb-3">Billing address</h4>
         <form asp-action="Create">
            
-                <label asp-for="Customer.Name">Name</label>
-                <input asp-for="Customer.Name" style="width:100%;" class="form-control" required="">
-                <span asp-validation-for="Customer.Name" class="text-danger"></span>
+                <label>Name</label>
+                <input name="Name" style="width:100%;" class="form-control" required="">
         
 
-                <label asp-for="Customer.Email" for="email">Email </label>
-                <input asp-for="Customer.Email" type="email" class="form-control" id="email" placeholder="you@example.com" style="width:100%;" required="">
-                <span asp-validation-for="Customer.Email" class="text-danger"></span>
+                <label >Email </label>
+                <input name="Email" class="form-control" placeholder="you@example.com" style="width:100%;" required="">
                 <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
                 </div>
       
 
           
-                    <label asp-for="Customer.Phone">Phone</label>
-                    <input asp-for="Customer.Phone" class="form-control" style="width:100%;" required="">
-                    <span asp-validation-for="Customer.Phone" class="text-danger"></span>
-               
+                <label>Phone</label>
+                <input name="Phone" class="form-control" style="width:100%;" required="">
 
             
             <input type="submit" value="Checkout" class="btn btn-primary" style="margin-left:45%; margin-top:25px;"/>
