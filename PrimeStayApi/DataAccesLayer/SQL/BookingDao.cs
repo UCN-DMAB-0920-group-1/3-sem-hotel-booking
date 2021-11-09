@@ -9,6 +9,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 {
     internal class BookingDao : BaseDao<IDataContext>, IDao<BookingEntity>
     {
+        #region SQL-Queries
         private static readonly string SELECTBOOKINGBYID = @"SELECT * FROM Booking WHERE id = @id";
 
         private static readonly string SELECTALLBOOKINGS = @"SELECT * FROM Booking WHERE " +
@@ -39,7 +40,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                         "AND Room.room_type_id = @room_type_id " +
                                                                 ") " +
                                                                 "ORDER BY NEWID()";
-
+        #endregion
         public BookingDao(IDataContext dataContext) : base(dataContext)
         {
         }
@@ -51,7 +52,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
             {
-                model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM, 
+                model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM,
                     new { model.Room_type_id, model.Start_date, model.End_date });
 
                 if (model.Room_id is not null && model.Room_id != 0 && model.Room_id != -1)
@@ -85,7 +86,6 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                //TODO: Alias for booking_id for Dapper auto mappping 
                 return connection.QueryFirst<BookingEntity>(SELECTBOOKINGBYID, new { id });
             }
         }

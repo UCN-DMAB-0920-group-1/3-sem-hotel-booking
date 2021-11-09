@@ -9,10 +9,10 @@ namespace PrimeStayApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RoomController : Controller
+    public class RoomTypeController : Controller
     {
         private readonly IDao<RoomTypeEntity> _dao;
-        public RoomController(IDao<RoomTypeEntity> dao)
+        public RoomTypeController(IDao<RoomTypeEntity> dao)
         {
             _dao = dao;
         }
