@@ -6,7 +6,7 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class HotelDao : BaseDao<IDataContext>, IDao<HotelEntity>
+    internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<HotelEntity>
     {
         #region SQL-Queries
         private static readonly string SELECTHOTELBYID = @"Select * FROM Hotel WHERE ID = @id";
@@ -19,7 +19,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                             "AND stars = ISNULL(@stars, stars)";
         #endregion
 
-        public HotelDao(IDataContext dataContext) : base(dataContext)
+        public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 

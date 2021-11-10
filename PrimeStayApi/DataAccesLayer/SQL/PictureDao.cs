@@ -6,7 +6,7 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class PictureDao : BaseDao<IDataContext>, IDao<PictureEntity>
+    internal class PictureDao : BaseDao<IDataContext<IDbConnection>>, IDao<PictureEntity>
     {
         #region SQL-Queries
         private static readonly string SELECTALLPICTURES = "SELECT * FROM TablePictures " +
@@ -15,7 +15,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         #endregion
 
-        public PictureDao(IDataContext dataContext) : base(dataContext)
+        public PictureDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
 
         }

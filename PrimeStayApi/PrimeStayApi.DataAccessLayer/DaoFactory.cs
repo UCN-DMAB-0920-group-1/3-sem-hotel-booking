@@ -12,15 +12,22 @@ namespace PrimeStayApi.DataAccessLayer
     {
         public static IDao<T> Create<T>(IDataContext dataContext)
         {
-            return typeof(T) switch
+            Type DataContextType = dataContext.GetType(); // throws exeption if datacontext is null
+
+            if (typeof(IDataContext<IDbConnection>).IsAssignableFrom(DataContextType))
             {
-                var dao when dao == typeof(Hotel) => new HotelDao(dataContext) as IDao<T>,
-                var dao when dao == typeof(Room) => new RoomDao(dataContext) as IDao<T>,
-                var dao when dao == typeof(Location) => new LocationDao(dataContext)as IDao<T>,
-                _ => null,
+                return typeof(T) switch
+                {
+                    var dao when dao == typeof(Hotel) => new HotelDao(dataContext) as IDao<T>,
+                    var dao when dao == typeof(Room) => new RoomDao(dataContext) as IDao<T>,
+                    var dao when dao == typeof(Location) => new LocationDao(dataContext) as IDao<T>,
+                    _ => null,
 
-            };
+                };
 
+            }
+
+            throw new DaoFactoryException("DataContext type not known");
         }
     }
 }

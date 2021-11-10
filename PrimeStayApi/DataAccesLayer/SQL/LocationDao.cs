@@ -7,7 +7,7 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class LocationDao : BaseDao<IDataContext>, IDao<LocationEntity>
+    internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<LocationEntity>
     {
         #region SQL-Queries
         private static readonly string SELECTLOCATIONBYID = @"SELECT * FROM Location WHERE id = @id";
@@ -20,7 +20,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                             "AND Country=ISNULL(@Country, Country)";
         #endregion
 
-        public LocationDao(IDataContext dataContext) : base(dataContext)
+        public LocationDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
 
         }

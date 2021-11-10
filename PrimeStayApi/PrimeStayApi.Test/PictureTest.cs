@@ -2,7 +2,6 @@
 using PrimeStayApi.Controllers;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
@@ -19,13 +18,13 @@ namespace PrimeStayApi.Test
     public class PictureTest
     {
         private string connectionString = new ENV().ConnectionStringTest;
-        private static DataContext _dataContext;
+        private static SqlDataContext _dataContext;
         private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
         public void SetUp()
         {
-            _dataContext = new DataContext(connectionString);
+            _dataContext = new SqlDataContext(connectionString);
             Version.Upgrade(connectionString);
         }
 
@@ -78,11 +77,10 @@ namespace PrimeStayApi.Test
             pictureDtos = controller.getPictureByType(type, id);
 
             //assert 
-            Assert.IsNotNull(pictureDtos);
-            Assert.AreEqual(pictureDtos.Count(), 3);
-            Assert.AreEqual(pictureDtos.ElementAt(0).Path, "https://juto.dk/semester/hotel/1.png");
-            Assert.AreEqual(pictureDtos.ElementAt(1).Path, "https://juto.dk/semester/hotel/2.png");
-            Assert.AreEqual(pictureDtos.ElementAt(2).Path, "https://juto.dk/semester/hotel/3.png");
+            Assert.IsTrue(pictureDtos.Any());
+            Assert.AreEqual("https://juto.dk/semester/hotel/1.png", pictureDtos.ElementAt(0).Path);
+            Assert.AreEqual("https://juto.dk/semester/hotel/2.png", pictureDtos.ElementAt(1).Path);
+            Assert.AreEqual("https://juto.dk/semester/hotel/3.png", pictureDtos.ElementAt(2).Path);
         }
     }
 }

@@ -137,8 +137,8 @@ namespace PrimeStayApi.Model.DTO
         public static int? GetIdFromHref(string href)
         {
             if (string.IsNullOrEmpty(href)) return null;
-
-            return int.Parse(href[(href.LastIndexOf("/") + 1)..]);
+            _ = int.TryParse(href[(href.LastIndexOf("/") + 1)..], out int result);
+            return result;
         }
     }
 }

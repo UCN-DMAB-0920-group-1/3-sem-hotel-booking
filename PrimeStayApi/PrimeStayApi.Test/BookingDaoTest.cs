@@ -14,13 +14,13 @@ namespace PrimeStayApi.Test
     public class BookingDaoTest
     {
         private string connectionString = new ENV().ConnectionStringTest;
-        private static DataContext _dataContext;
+        private static SqlDataContext _dataContext;
         private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
         public void SetUp()
         {
-            _dataContext = new DataContext(connectionString);
+            _dataContext = new SqlDataContext(connectionString);
             Version.Upgrade(connectionString);
         }
 
@@ -47,7 +47,7 @@ namespace PrimeStayApi.Test
                 End_date = DateTime.Parse("2020-12-12"),
                 Customer_id = 1,
                 Guests = 1,
-                Room_id = 8,
+                Room_type_id = 2,
             };
             //Act 
             var test = dao.Create(booking);

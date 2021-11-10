@@ -4,11 +4,11 @@ using System.Data.SqlClient;
 
 namespace PrimeStayApi
 {
-    public class DataContext : IDataContext
+    public class SqlDataContext : IDataContext<IDbConnection>
     {
         private string _connectionString;
 
-        public DataContext(string connectionString)
+        public SqlDataContext(string connectionString)
         {
             _connectionString = connectionString;
         }
