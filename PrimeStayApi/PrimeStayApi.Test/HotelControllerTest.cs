@@ -17,6 +17,7 @@ namespace PrimeStayApi.Test
     [TestClass]
     public class HotelControllerTest
     {
+        #region setup
         private string connectionString = new ENV().ConnectionStringTest;
         private static SqlDataContext _dataContext;
         private static List<Action> _dropDatabaseActions = new();
@@ -39,6 +40,7 @@ namespace PrimeStayApi.Test
         {
             _dropDatabaseActions.Add(() => Version.Drop(connectionString));
         }
+        #endregion
 
         [TestMethod]
         public void GetHotelFromTestDBWithId()
