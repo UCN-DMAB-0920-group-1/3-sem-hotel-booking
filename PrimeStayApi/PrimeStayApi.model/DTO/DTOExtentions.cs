@@ -115,7 +115,28 @@ namespace PrimeStayApi.Model.DTO
 
             };
         }
+        public static RoomDto Map(this RoomEntity room)
+        {
+            return new RoomDto()
+            {
+                Href = room.ExtractHref(),
+                RoomTypeHref = $"api/roomType/{room.Room_type_id}",
+                Room_number = room.Room_number,
+                Notes = room.Notes,
+            };
+        }
 
+        public static RoomEntity Map(this RoomDto room)
+        {
+            return new RoomEntity()
+            {
+                Id = room.ExtractId(),
+                Room_type_id = GetIdFromHref(room.RoomTypeHref),
+                Room_number = room.Room_number,
+                Notes = room.Notes,
+            };
+        }
+        #region helperMethods
         public static int? ExtractId(this BaseModelDto dto)
         {
             return GetIdFromHref(dto.Href);
@@ -140,5 +161,6 @@ namespace PrimeStayApi.Model.DTO
             _ = int.TryParse(href[(href.LastIndexOf("/") + 1)..], out int result);
             return result;
         }
+        #endregion
     }
 }

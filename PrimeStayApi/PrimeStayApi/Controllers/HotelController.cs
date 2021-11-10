@@ -64,7 +64,6 @@ namespace PrimeStayApi.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create([FromBody] HotelDto hotel)
         {
-            System.Console.WriteLine("hey");
             var tesmp = hotel.Map();
             tesmp.Id = 100;
             hotel = tesmp.Map();

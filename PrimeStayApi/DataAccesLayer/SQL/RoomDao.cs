@@ -7,9 +7,9 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class RoomDao : BaseDao<IDataContext>, IDao<RoomEntity>
+    internal class RoomDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomEntity>
     {
-        public RoomDao(IDataContext dataContext) : base(dataContext)
+        public RoomDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 
@@ -41,7 +41,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public RoomEntity ReadById(int id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.QueryFirst<RoomEntity>($"SELECT * FROM Room WHERE id=@id", new { id });
+
+            };
         }
 
         public int Update(RoomEntity model)
