@@ -18,13 +18,13 @@ namespace PrimeStayApi.Test
     public class HotelControllerTest
     {
         private string connectionString = new ENV().ConnectionStringTest;
-        private static DataContext _dataContext;
+        private static SqlDataContext _dataContext;
         private static List<Action> _dropDatabaseActions = new();
 
         [TestInitialize]
         public void SetUp()
         {
-            _dataContext = new DataContext(connectionString);
+            _dataContext = new SqlDataContext(connectionString);
             Version.Upgrade(connectionString);
         }
 
