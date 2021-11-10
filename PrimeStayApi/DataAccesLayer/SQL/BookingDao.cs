@@ -2,8 +2,10 @@
 using Dapper.Transaction;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
@@ -45,26 +47,32 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
         }
 
-
         public int Create(BookingEntity model)
         {
-            var res = -1;
-
-            using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
+            TransactionOptions option = new();
+            option.IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted;
+            using TransactionScope scope = new(TransactionScopeOption.Required, option);
+            try
             {
-                model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM,
+                using IDbConnection connection = DataContext.Open();
+
+                var res = -1;
+                model.Room_id = connection.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM,
                     new { model.Room_type_id, model.Start_date, model.End_date });
 
                 if (model.Room_id is not null && model.Room_id != 0 && model.Room_id != -1)
                 {
-
-                    res = transaction.ExecuteScalar<int>(INSERTBOOKINGRETURNID,
+                    res = connection.ExecuteScalar<int>(INSERTBOOKINGRETURNID,
                         new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
-                    transaction.Commit();
+                    scope.Complete();
                 }
-                else transaction.Rollback();
-            };
-            return res;
+
+                return res;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Booking not created");
+            }
         }
 
         public int Delete(BookingEntity model)
