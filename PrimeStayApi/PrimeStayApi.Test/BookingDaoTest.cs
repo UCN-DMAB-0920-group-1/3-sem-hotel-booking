@@ -47,7 +47,7 @@ namespace PrimeStayApi.Test
                 End_date = DateTime.Parse("2020-12-12"),
                 Customer_id = 1,
                 Guests = 1,
-                Room_id = 8,
+                Room_type_id = 2,
             };
             //Act 
             var test = dao.Create(booking);
