@@ -61,7 +61,6 @@ namespace PrimeStayApi.Controllers
             try
             {
                 var res = (_dao as RoomTypeDao).CustomRoomAvailability(hotel, startDate, endDate);
-                res.Select(r => r.Hotel_Id = hotel);
                 return Ok(res.Select(r => r.Map()));
             }
             catch (Exception ex)
