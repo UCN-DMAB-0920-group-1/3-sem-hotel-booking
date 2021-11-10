@@ -2,7 +2,6 @@
 using PrimeStayApi.Controllers;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Database;
 using PrimeStayApi.Enviroment;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
