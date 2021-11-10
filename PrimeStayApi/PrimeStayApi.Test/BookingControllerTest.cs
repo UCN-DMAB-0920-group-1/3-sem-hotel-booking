@@ -51,7 +51,7 @@ namespace PrimeStayApi.Test
                 End_date = System.DateTime.Parse("2010-11-01"),
                 Start_date = System.DateTime.Parse("2010-11-02"),
                 Guests = 10,
-                //TODO set room_type_id
+                Room_type_id = 1,
             };
 
             //Act
@@ -120,7 +120,7 @@ namespace PrimeStayApi.Test
         [TestMethod]
         public void TestReadById()
         {
-            IDao<BookingEntity>  dao = DaoFactory.Create<BookingEntity>(_dataContext);
+            IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
             BookingController controller = new BookingController(dao);
             int id = 1;
 
