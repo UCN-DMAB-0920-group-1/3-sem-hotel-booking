@@ -122,7 +122,7 @@ INSERT INTO [dbo].[Picture] ([title],[description],[path])
     ('Hotel Grøtten', 'Picture of hotel Grøtten', 'https://juto.dk/semester/hotel/5.png'),
     ('Petrus Room Suite', 'Suite description', 'https://juto.dk/semester/room/1.png'),
     ('Grøtten Room Suite', 'Suite description', 'https://juto.dk/semester/room/2.png'),
-    ('Grøtten Room Junior Suite', 'Suite description', 'https://juto.dk/semester/room/3.png')
+    ('Grøtten Room Junior Suite', 'Suite description', 'https://juto.dk/semester/room/3.png'),
     ('Test room', 'Suite description', 'https://juto.dk/semester/room/4.png'),
     ('Some suite', 'Suite description', 'https://juto.dk/semester/room/5.png')
 GO
