@@ -38,15 +38,12 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 _ => throw new System.Exception("Invalid type " + model.Type),
             };
 
-
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<PictureEntity>($"{SELECTALLPICTURES} {whereStatement}",
-                                                    new { model.Type, model.Hotel_id, model.Room_id });
-
+                return connection.Query<PictureEntity>($"{SELECTALLPICTURES} {whereStatement}", model);
             };
         }
-
+        
         public PictureEntity ReadById(int id)
         {
             throw new System.NotImplementedException();
