@@ -6,9 +6,9 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class PictureDao : BaseDao<IDataContext>, IDao<PictureEntity>
+    internal class PictureDao : BaseDao<IDataContext<IDbConnection>>, IDao<PictureEntity>
     {
-        public PictureDao(IDataContext dataContext) : base(dataContext)
+        public PictureDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
 
         }

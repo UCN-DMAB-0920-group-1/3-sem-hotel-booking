@@ -6,10 +6,10 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class HotelDao : BaseDao<IDataContext>, IDao<HotelEntity>
+    internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<HotelEntity>
     {
 
-        public HotelDao(IDataContext dataContext) : base(dataContext)
+        public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 

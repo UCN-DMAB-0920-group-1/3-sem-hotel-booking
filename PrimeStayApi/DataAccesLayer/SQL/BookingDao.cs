@@ -7,7 +7,7 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    internal class BookingDao : BaseDao<IDataContext>, IDao<BookingEntity>
+    internal class BookingDao : BaseDao<IDataContext<IDbConnection>>, IDao<BookingEntity>
     {
         #region SQL-Queries
         private static readonly string SELECTBOOKINGBYID = @"SELECT * FROM Booking WHERE id = @id";
@@ -41,7 +41,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                 ") " +
                                                                 "ORDER BY NEWID()";
         #endregion
-        public BookingDao(IDataContext dataContext) : base(dataContext)
+        public BookingDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
 
