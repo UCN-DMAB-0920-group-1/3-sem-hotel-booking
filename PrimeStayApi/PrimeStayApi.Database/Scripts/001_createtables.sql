@@ -24,7 +24,7 @@ GO
 CREATE TABLE [Room] (
   [id] int NOT NULL IDENTITY(1, 1),
   [room_type_id] int NOT NULL,
-  [roomNumber] VARCHAR(250),
+  [room_number] VARCHAR(250),
   [notes] VARCHAR(1000),
   PRIMARY KEY ([id])
 )

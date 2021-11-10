@@ -1,6 +1,6 @@
 ﻿namespace PrimeStayApi.Model.DTO
 {
-    public class RoomDto : BaseModelDto
+    public class RoomTypeDto : BaseModelDto
     {
         public string Type { get; set; }
         public int? Avaliable { get; set; }

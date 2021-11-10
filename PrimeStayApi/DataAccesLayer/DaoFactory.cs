@@ -14,6 +14,7 @@ namespace PrimeStayApi.DataAccessLayer.DAO
                 var dao when dao == typeof(RoomTypeEntity) => new SQL.RoomTypeDao(dataContext as IDataContext) as IDao<T>,
                 var dao when dao == typeof(BookingEntity) => new SQL.BookingDao(dataContext as IDataContext) as IDao<T>,
                 var dao when dao == typeof(PictureEntity) => new SQL.PictureDao(dataContext as IDataContext) as IDao<T>,
+                var dao when dao == typeof(RoomEntity) => new SQL.RoomDao(dataContext as IDataContext) as IDao<T>,
 
                 _ => null,
             };

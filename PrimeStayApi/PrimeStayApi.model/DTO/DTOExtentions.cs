@@ -61,10 +61,10 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static RoomDto Map(this RoomTypeEntity room)
+        public static RoomTypeDto Map(this RoomTypeEntity room)
         {
             if (room == null) return null;
-            return new RoomDto()
+            return new RoomTypeDto()
             {
                 Href = room.ExtractHref(),
                 Type = room.Type,
@@ -76,7 +76,7 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static RoomTypeEntity Map(this RoomDto room)
+        public static RoomTypeEntity Map(this RoomTypeDto room)
         {
             if (room == null) return null;
             return new RoomTypeEntity()

@@ -19,15 +19,15 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<RoomDto> Index([FromQuery] RoomDto room)
+        public IEnumerable<RoomTypeDto> Index([FromQuery] RoomTypeDto room)
             => _dao.ReadAll(room.Map()).Select(r => r.Map());
 
         [HttpGet]
         [Route("{id}")]
-        public RoomDto Details(int id) => _dao.ReadById(id).Map();
+        public RoomTypeDto Details(int id) => _dao.ReadById(id).Map();
 
         [HttpPost]
-        public ActionResult Create(RoomDto room)
+        public ActionResult Create(RoomTypeDto room)
         {
             int id = _dao.Create(room.Map());
             return Created(id.ToString(), room);
@@ -35,7 +35,7 @@ namespace PrimeStayApi.Controllers
 
 
         [HttpPut]
-        public ActionResult Edit(int id, RoomDto room)
+        public ActionResult Edit(int id, RoomTypeDto room)
         {
             return _dao.Update(room.Map()) == 1 ? Ok() : NotFound();
         }
