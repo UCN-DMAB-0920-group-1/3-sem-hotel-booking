@@ -7,23 +7,21 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    public class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>
+    public class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>, IDaoDateExtension<RoomTypeEntity>
     {
         #region SQL-Queries
-        private static readonly string GETNUMBEROFAVAILABLEROOMS = "SELECT room_type_id as id, COUNT(room.id) as Avaliable, type, hotel_id " +
-                                                                   "FROM Room " +
-                                                                   "INNER JOIN RoomType on Room.room_type_id = RoomType.id " +
-                                                                   "WHERE room.id NOT IN( " +
-                                                                        "SELECT R.id " +
-                                                                        "FROM Booking B " +
-                                                                        "JOIN Room R ON B.room_id = R.id " +
-                                                                        "WHERE " +
-                                                                        "((B.start_date <= @start_date AND B.end_date >= @start_date) " +
-                                                                        "OR(B.start_date<@end_date AND B.end_date >= @end_date) " +
-                                                                        "OR(@start_date <= B.start_date AND @end_date >= B.start_date)) " +
-                                                                        "AND room_type_id IN(select id from RoomType where hotel_id = @hotel_id)) " +
-                                                                   "AND room_type_id IN(select id from RoomType where hotel_id = @hotel_id) " +
-                                                                   "GROUP BY room_type_id,type,hotel_id ";
+        private static readonly string GETNUMBEROFAVAILABLEROOMS = "SELECT COUNT(*) as Available " +
+                                                                "  FROM Room   " +
+                                                                "  WHERE room.id NOT IN(   " +
+                                                                "  SELECT R.id   " +
+                                                                "  FROM Booking B   " +
+                                                                "  JOIN Room R ON B.room_id = R.id   " +
+                                                                "  WHERE   " +
+                                                                "  ((B.start_date <= @start_date AND B.end_date >= @start_date)   " +
+                                                                "  OR(B.start_date<@end_date AND B.end_date >= @end_date)   " +
+                                                                "  OR(@start_date <= B.start_date AND @end_date >= B.start_date))   " +
+                                                                "  AND room_type_id = @room_type_id)   " +
+                                                                "AND room_type_id = @room_type_id";
         #endregion
         public RoomTypeDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
@@ -69,11 +67,13 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RoomTypeEntity> CustomRoomAvailability(int hotel_id, DateTime start_Date, DateTime end_Date)
+        public RoomTypeEntity CheckAvailability(int room_type_id, DateTime start_Date, DateTime end_Date)
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomTypeEntity>(GETNUMBEROFAVAILABLEROOMS, new { hotel_id, start_Date, end_Date });
+                var res = ReadById(room_type_id);
+                res.Avaliable = connection.QueryFirst<int>(GETNUMBEROFAVAILABLEROOMS, new { room_type_id, start_Date, end_Date });
+                return res;
             };
         }
     }

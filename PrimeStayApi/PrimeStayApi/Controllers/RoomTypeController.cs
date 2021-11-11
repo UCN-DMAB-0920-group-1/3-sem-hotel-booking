@@ -56,12 +56,12 @@ namespace PrimeStayApi.Controllers
         // GET: RoomController/?hotel={id}&startDate={startDate}&endDate={endDate}
         [HttpGet]
         [Route("available")]
-        public ActionResult<IEnumerable<RoomDto>> roomAvailibility([FromQuery] int hotel, DateTime startDate, DateTime endDate)
+        public ActionResult<RoomDto> roomAvailibility([FromQuery] int roomTypeId, DateTime startDate, DateTime endDate)
         {
             try
             {
-                var res = (_dao as RoomTypeDao).CustomRoomAvailability(hotel, startDate, endDate);
-                return Ok(res.Select(r => r.Map()));
+                var res = (_dao as IDaoDateExtension<RoomTypeEntity>).CheckAvailability(roomTypeId, startDate, endDate);
+                return Ok(res.Map());
             }
             catch (Exception ex)
             {
