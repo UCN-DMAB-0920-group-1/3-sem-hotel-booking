@@ -3,8 +3,17 @@
 
 @using PrimeStay.MVC.Model
 @using Microsoft.AspNetCore.Http;
+@{
+    var queryParams = new Dictionary<string, string>()
+            {
+                {"hotelHref",string.Empty},
+            };
+    var query = Context.Request.Query;
+    query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
 
-@model (IFormCollection collection, List<Hotel> hotels)
+};
+
+@model  List<Hotel> 
 
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
@@ -12,41 +21,42 @@
     </div>
     <div class="container" style=" max-height:600px; background-color:aliceblue; border-radius: 15px; padding:10px; ">
         <div style="padding:10px;">
-            <form asp-action="Result" >
+            <form asp-action="Result" method="get">
                 <div class="row">
 
                     <div class="col-sm-6">
                         <span class="form-label"> Location</span>
-                        <input type="text" name="Location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="@Model.collection["Location"]">
+                        <input type="text" name="Location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="@queryParams["location"]" />
+
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Check In</span>
-                            <input class="form-control" name="startDate" type="date" value="@Model.collection["startDate"]" required="">
+                            <input class="form-control" name="startDate" type="date" value="@queryParams["startDate"]" required="">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Check out</span>
-                            <input class="form-control" type="date" required="" value="@Model.collection["endDate"]" name="endDate">
+                            <input class="form-control" type="date" required="" value="@queryParams["endDate"]" name="endDate">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-3">
                         <span class="form-label">Guests:</span>
-                        <input class="form-control" name="guests" type="number" value="@Model.collection["guests"]" required="">
+                        <input class="form-control" name="guests" type="number" value="@queryParams["guests"]" required="" >
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Price from:</span>
-                            <input class="form-control" name="minPrice" value="@Model.collection["minPrice"]" type="number">
+                            <input class="form-control" name="minPrice" value="@queryParams["minPrice"]" type="number">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Price to:</span>
-                            <input class="form-control" name="maxPrice" value="@Model.collection["maxPrice"]" type="number">
+                            <input class="form-control" name="maxPrice" value="@queryParams["maxPrice"]" type="number">
                         </div>
                     </div>
                 </div>
@@ -60,8 +70,10 @@
     </div>
 </div>
 
-@foreach (Hotel item in Model.hotels)
+@foreach (Hotel item in Model)
 {
+
+    queryParams["hotelHref"] = item.Href;
     <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">
@@ -76,7 +88,8 @@
 
                         <div class="form-group float-right">
                             <br />
-                            <a asp-action="Details" asp-route-href="@item.Href"><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
+                            <a asp-action="Details" 
+                            asp-all-route-data=@queryParams ><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
                         </div>
                     </div>
                 </div>
