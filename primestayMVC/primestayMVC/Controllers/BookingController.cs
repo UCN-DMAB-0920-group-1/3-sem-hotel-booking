@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
@@ -20,15 +19,20 @@ namespace PrimeStay.MVC.Controllers
         {
             return View();
         }
-        public IActionResult Create(IFormCollection collection, string hotelHref, string startDate, string endDate, string guests, string roomType)
+        public IActionResult Create()
         {
-
+            Customer customer = new()
+            {
+                Name = Request.Form["name"],
+                Email = Request.Form["email"],
+                Phone = Request.Form["phone"],
+            };
             Booking booking = new()
             {
-                Start_date = DateTime.Parse(startDate + "Z"),
-                End_date = DateTime.Parse(endDate + "Z"),
-                Guests = int.Parse(guests),
-                Room_type_href = roomType,
+                Start_date = DateTime.Parse(Request.Query["startDate"] + "Z"),
+                End_date = DateTime.Parse(Request.Query["endDate"] + "Z"),
+                Guests = int.Parse(Request.Query["guests"]),
+                Room_type_href = Request.Query["roomType"],
                 Customer_href = "api/cutomer/1", //TODO find actual customer ;-) 
 
 

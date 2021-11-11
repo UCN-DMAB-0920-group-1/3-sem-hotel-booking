@@ -11,11 +11,11 @@
 <div class="container align-self-center">
     <br />
     <br />
-    <h1> Confirm and finish our Order</h1>
+    <h1> Confirm and finish your Order</h1>
     <br />
     <div class=" order-md-1">
         <h4 class="mb-3">Billing address</h4>
-        <form>
+        <form >
            
                 <label>Name</label>
                 <input name="Name" style="width:100%;" class="form-control" required="">
@@ -33,7 +33,7 @@
                 <input name="Phone" class="form-control" style="width:100%;" required="">
 
             
-            <input asp-action="Create" asp-all-route-data=@queryParams formmethod="POST" type="submit" value="Checkout" class="btn btn-primary" style="margin-left:45%; margin-top:25px;"/>
+            <input asp-action="Create" asp-all-route-data=@queryParams formmethod="post"  type="submit" value="Checkout" class="btn btn-primary" style="margin-left:45%; margin-top:25px;"/>
 
         </form>
     </div>

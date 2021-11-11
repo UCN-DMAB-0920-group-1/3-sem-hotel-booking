@@ -1,5 +1,4 @@
-﻿using primestay.MVC.Model;
-using System;
+﻿using System;
 
 namespace PrimeStay.MVC.Model
 {
