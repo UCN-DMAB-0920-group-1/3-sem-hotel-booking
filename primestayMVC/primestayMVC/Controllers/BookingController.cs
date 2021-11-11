@@ -20,7 +20,7 @@ namespace PrimeStay.MVC.Controllers
         {
             return View();
         }
-        public IActionResult Create(IFormCollection collection, string hotel_href, string startDate, string endDate, string guests, string roomType)
+        public IActionResult Create(IFormCollection collection, string hotelHref, string startDate, string endDate, string guests, string roomType)
         {
 
             Booking booking = new()

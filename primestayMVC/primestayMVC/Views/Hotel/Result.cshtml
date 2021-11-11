@@ -6,7 +6,7 @@
 @{
     var queryParams = new Dictionary<string, string>()
             {
-                {"hotel_href",string.Empty},
+                {"hotelHref",string.Empty},
             };
     var query = Context.Request.Query;
     query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
@@ -73,7 +73,7 @@
 @foreach (Hotel item in Model)
 {
 
-    queryParams["hotel_href"] = item.Href;
+    queryParams["hotelHref"] = item.Href;
     <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
         <div class="card mb-3" style="max-width: 100%;">
             <div class="row g-0">

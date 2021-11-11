@@ -42,11 +42,11 @@ namespace PrimeStay.MVC.Controllers
 
 
         //[Route("Details")]
-        public IActionResult Details(string hotel_href, string location, string startDate, string endDate, string guests, string minPrice, string maxPrice)
+        public IActionResult Details(string hotelHref, string location, string startDate, string endDate, string guests, string minPrice, string maxPrice)
         {
-            var hotel = GetHotel(hotel_href);
+            var hotel = GetHotel(hotelHref);
             hotel.Location = GetHotelLocation(hotel);
-            hotel.rooms = GetAllHotelRoomsForHotel(hotel_href);
+            hotel.rooms = GetAllHotelRoomsForHotel(hotelHref);
 
             return View(hotel);
         }
