@@ -8,10 +8,10 @@ namespace PrimeStay.MVC.Controllers
 {
     public class BookingController : Controller
     {
-        private readonly IDao<BookingDto> _dao;
-        public BookingController(IDao<BookingDto> dao)
+        private readonly IDao<BookingDto> _bookingDao;
+        public BookingController(IDao<BookingDto> bookingDao)
         {
-            _dao = dao;
+            _bookingDao = bookingDao;
 
         }
 
@@ -38,11 +38,11 @@ namespace PrimeStay.MVC.Controllers
 
             };
 
-            string href = _dao.Create(booking.Map());
+            string href = _bookingDao.Create(booking.Map());
 
             if (href.EndsWith("-1")) return View("BookingError");
 
-            return View("confirm", _dao.ReadByHref(href).Map());
+            return View("confirm", _bookingDao.ReadByHref(href).Map());
 
 
         }
