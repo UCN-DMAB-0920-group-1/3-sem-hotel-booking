@@ -26,23 +26,24 @@ namespace PrimeStay.MVC.Controllers
             return View();
         }
 
-        public IActionResult Result(IFormCollection collection)
+        public IActionResult Result([FromQuery] dynamic input)
         {
             IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
-            if (collection is not null)
-            {
-                hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
-
-                if (HttpContext is not null) collection.Keys.ToList().ForEach(key =>
-                {
-                    HttpContext.Session.SetString(key, collection[key]);
-                });
-            }
-            else hotelMatches = hotelMatches.Where(h => h.Matches(HttpContext.Session.GetString("location"))).ToList();
-
-            return View((collection, hotelMatches));
+            //if (collection is not null)
+            //{
+            //    hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
+            //
+            //    if (HttpContext is not null) collection.Keys.ToList().ForEach(key =>
+            //    {
+            //        HttpContext.Session.SetString(key, collection[key]);
+            //    });
+            //}
+            //else hotelMatches = hotelMatches.Where(h => h.Matches(HttpContext.Session.GetString("location"))).ToList();
+            //
+            //return View((collection, hotelMatches));
+            return null;
         }
 
 
