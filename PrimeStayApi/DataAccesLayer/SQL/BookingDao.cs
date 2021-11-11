@@ -49,7 +49,6 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         public int Create(BookingEntity model)
         {
             var res = -1;
-
             using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
             {
                 model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM,
