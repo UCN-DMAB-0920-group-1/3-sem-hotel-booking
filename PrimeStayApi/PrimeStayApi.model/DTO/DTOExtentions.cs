@@ -61,10 +61,10 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static RoomDto Map(this RoomTypeEntity room)
+        public static RoomTypeDto Map(this RoomTypeEntity room)
         {
             if (room == null) return null;
-            return new RoomDto()
+            return new RoomTypeDto()
             {
                 Href = room.ExtractHref(),
                 Type = room.Type,
@@ -76,7 +76,7 @@ namespace PrimeStayApi.Model.DTO
             };
         }
 
-        public static RoomTypeEntity Map(this RoomDto room)
+        public static RoomTypeEntity Map(this RoomTypeDto room)
         {
             if (room == null) return null;
             return new RoomTypeEntity()
@@ -115,7 +115,28 @@ namespace PrimeStayApi.Model.DTO
 
             };
         }
+        public static RoomDto Map(this RoomEntity room)
+        {
+            return new RoomDto()
+            {
+                Href = room.ExtractHref(),
+                RoomTypeHref = $"api/roomType/{room.Room_type_id}",
+                Room_number = room.Room_number,
+                Notes = room.Notes,
+            };
+        }
 
+        public static RoomEntity Map(this RoomDto room)
+        {
+            return new RoomEntity()
+            {
+                Id = room.ExtractId(),
+                Room_type_id = GetIdFromHref(room.RoomTypeHref),
+                Room_number = room.Room_number,
+                Notes = room.Notes,
+            };
+        }
+        #region helperMethods
         public static int? ExtractId(this BaseModelDto dto)
         {
             return GetIdFromHref(dto.Href);
@@ -140,5 +161,6 @@ namespace PrimeStayApi.Model.DTO
             _ = int.TryParse(href[(href.LastIndexOf("/") + 1)..], out int result);
             return result;
         }
+        #endregion
     }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrimeStayApi.Model
+﻿namespace PrimeStayApi.Model
 {
-    public class PictureEntity:BaseEntity
+    public class PictureEntity : BaseEntity
     {
         public int? Hotel_id { get; set; }
         public int? Room_id { get; set; }

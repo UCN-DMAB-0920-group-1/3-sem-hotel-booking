@@ -22,7 +22,7 @@ INSERT INTO [dbo].[RoomType] ([type],[beds],[description],[rating],[hotel_id])
      ('Penthouse Suite',1,'Penthouse suite with queen-size bed',5,2)
 GO
 
-INSERT INTO [dbo].[Room] ([RoomNumber], [Room_Type_id], [notes])
+INSERT INTO [dbo].[Room] ([Room_number], [Room_Type_id], [notes])
      VALUES 
     (1, 1, 'Lugter af nutella'),
     (2, 1, 'Lugter ïkke af nutella'),
