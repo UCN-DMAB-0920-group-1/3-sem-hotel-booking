@@ -55,7 +55,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM,
                     new { model.Room_type_id, model.Start_date, model.End_date });
 
-                if (model.Room_id is not null && model.Room_id != 0 && model.Room_id != -1)
+                if (model.Room_id is not null && model.Room_id > 0)
                 {
 
                     res = transaction.ExecuteScalar<int>(INSERTBOOKINGRETURNID,
