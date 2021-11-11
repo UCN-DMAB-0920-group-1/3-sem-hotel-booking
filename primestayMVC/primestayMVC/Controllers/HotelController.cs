@@ -26,7 +26,7 @@ namespace PrimeStay.MVC.Controllers
             return View();
         }
 
-        public IActionResult Result(string location, string startDate, string endDate, string guests, string minPrice, string maxPrice)
+        public IActionResult Result(string location)
         {
 
             if (location is null) location = string.Empty;
@@ -42,7 +42,7 @@ namespace PrimeStay.MVC.Controllers
 
 
         //[Route("Details")]
-        public IActionResult Details(string hotelHref, string location, string startDate, string endDate, string guests, string minPrice, string maxPrice)
+        public IActionResult Details(string hotelHref)
         {
             var hotel = GetHotel(hotelHref);
             hotel.Location = GetHotelLocation(hotel);
