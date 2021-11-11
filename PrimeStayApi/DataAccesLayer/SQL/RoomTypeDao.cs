@@ -10,6 +10,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     public class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>
     {
         #region SQL-Queries
+        private static readonly string GETONEROOMTYPE = "SELECT * FROM roomType WHERE id=@id";
         private static readonly string GETNUMBEROFAVAILABLEROOMS = "SELECT room_type_id as id, COUNT(room.id) as Avaliable, type, hotel_id " +
                                                                    "FROM Room " +
                                                                    "INNER JOIN RoomType on Room.room_type_id = RoomType.id " +
@@ -61,7 +62,10 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public RoomTypeEntity ReadById(int id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.QueryFirst<RoomTypeEntity>(GETONEROOMTYPE, new { id });
+            };
         }
 
         public int Update(RoomTypeEntity model)
