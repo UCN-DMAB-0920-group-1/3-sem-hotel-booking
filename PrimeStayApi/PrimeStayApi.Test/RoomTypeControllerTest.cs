@@ -1,8 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStayApi.Controllers;
-using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +8,7 @@ using Version = PrimeStayApi.Database.Version;
 namespace PrimeStayApi.Test
 {
     [TestClass]
-    public class RoomControllerTest
+    public class RoomTypeControllerTest
     {
         private string connectionString = new ENV().ConnectionStringTest;
         private static SqlDataContext _dataContext;
