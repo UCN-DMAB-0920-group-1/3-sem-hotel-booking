@@ -22,6 +22,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                 "  OR(@start_date <= B.start_date AND @end_date >= B.start_date))   " +
                                                                 "  AND room_type_id = @room_type_id)   " +
                                                                 "AND room_type_id = @room_type_id";
+         private static readonly string GETONEROOMTYPE = "SELECT * FROM roomType WHERE id=@id";
         #endregion
         public RoomTypeDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
@@ -59,7 +60,10 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public RoomTypeEntity ReadById(int id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.QueryFirst<RoomTypeEntity>(GETONEROOMTYPE, new { id });
+            };
         }
 
         public int Update(RoomTypeEntity model)
