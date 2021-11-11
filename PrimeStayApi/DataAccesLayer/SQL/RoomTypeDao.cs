@@ -22,7 +22,14 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                 "  OR(@start_date <= B.start_date AND @end_date >= B.start_date))   " +
                                                                 "  AND room_type_id = @room_type_id)   " +
                                                                 "AND room_type_id = @room_type_id";
-         private static readonly string GETONEROOMTYPE = "SELECT * FROM roomType WHERE id=@id";
+        private static readonly string GETONEROOMTYPE = "SELECT * FROM roomType WHERE id=@id";
+        private static readonly string GETALLROOMTYPE = $"SELECT * FROM RoomType WHERE " +
+                                                     $"id=ISNULL(@id,id)" +
+                                                     $"AND type LIKE ISNULL(@type,type)" +
+                                                     $"AND description LIKE ISNULL(@description,description)" +
+                                                     $"AND beds LIKE ISNULL(@beds,beds)" +
+                                                     $"AND rating LIKE ISNULL(@rating,rating)" +
+                                                     $"AND hotel_id LIKE ISNULL(@Hotel_Id,hotel_Id)";
         #endregion
         public RoomTypeDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
@@ -45,14 +52,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomTypeEntity>($"SELECT * FROM RoomType WHERE " +
-                                                     $"id=ISNULL(@id,id)" +
-                                                     $"AND type LIKE ISNULL(@type,type)" +
-                                                     $"AND description LIKE ISNULL(@description,description)" +
-                                                     $"AND beds LIKE ISNULL(@beds,beds)" +
-                                                     $"AND rating LIKE ISNULL(@rating,rating)" +
-                                                     $"AND hotel_id LIKE ISNULL(@Hotel_Id,hotel_Id)",
-                                                     new { model.Id, model.Type, model.beds, model.Description, model.Rating, model.Hotel_Id });
+                return connection.Query<RoomTypeEntity>(GETALLROOMTYPE, model);
 
             };
 
