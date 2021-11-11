@@ -64,17 +64,18 @@
         @foreach (Room roomType in Model.rooms)
         {
             queryParams["roomType"] = roomType.Href;
-            <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+            <div class="container" style="padding-top: 30px; padding-bottom: 30px;" id="@roomType.Id">
                 <div class="card mb-3" style="max-width: 100%;">
                     <div class="row g-0">
                         <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center; overflow: hidden; object-fit: cover; ">
-                            <img src="https://c.tenor.com/wXTO9bFFJXMAAAAC/loading-slow-internet.gif" id="@roomType.Id" class=" rounded-start" alt="..." style="min-width: 100%; height: 200px; width: auto;object-fit: cover; ">
+                            <img src="https://c.tenor.com/wXTO9bFFJXMAAAAC/loading-slow-internet.gif"  class=" rounded-start" alt="..." style="min-width: 100%; height: 200px; width: auto;object-fit: cover; ">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body ">
                                 <h5 class="card-title">@roomType.Type</h5>
 
                                 <p class="card-text">@roomType.Description</p>
+                                <p1 class="card-text" id="avaliable">Avaliable rooms: </p1>
 
                                 <div class="form-group float-right">
                                     <span class="form-label" style="padding-bottom:10px;">Price: KOMMER SNART kr/night</span>
@@ -85,21 +86,33 @@
                         </div>
                     </div>
                 </div>
-                <script>
+        <script>
         $(document).ready(function () {
            var href = "api/picture/room/" + @roomType.Id;
            var uri = "https://localhost:44312/";
-           console.log(uri + href)
            axios.get(uri + href)
            .then(result => {
-                console.log("i am fetching", result.data)
-               $('#@roomType.Id').attr("src", result.data[0].path);
+               $('#@roomType.Id').find("img").attr("src", result.data[0].path);
 
            }).catch(err => {
                console.log(err);
            })
         })
-                </script>
+        </script>
+        <script>
+        $(document).ready(function () {
+           var href = "api/roomType/available?roomTypeId=@roomType.Id&startDate=@queryParams["startDate"]&endDate=@queryParams["endDate"]";
+           var uri = "https://localhost:44312/";
+           console.log(uri + href)
+           axios.get(uri + href)
+           .then(result => {
+               $('#@roomType.Id').find("p1").append(result.data.avaliable);
+
+           }).catch(err => {
+               console.log(err);
+           })
+        })
+        </script>
             </div>
 
         }
