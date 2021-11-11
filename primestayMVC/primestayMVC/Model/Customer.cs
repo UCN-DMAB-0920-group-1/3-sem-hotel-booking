@@ -1,4 +1,6 @@
-﻿namespace PrimeStay.MVC.Model
+﻿using System;
+
+namespace PrimeStay.MVC.Model
 {
     public class Customer
     {
