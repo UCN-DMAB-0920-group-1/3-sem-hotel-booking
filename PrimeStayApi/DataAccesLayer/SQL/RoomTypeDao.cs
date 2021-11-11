@@ -7,7 +7,7 @@ using System.Data;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
-    public class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>, IDaoDateExtension<RoomTypeEntity>
+    internal class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>, IDaoDateExtension<RoomTypeEntity>
     {
         #region SQL-Queries
         private static readonly string GETNUMBEROFAVAILABLEROOMS = "SELECT COUNT(*) as Available " +
