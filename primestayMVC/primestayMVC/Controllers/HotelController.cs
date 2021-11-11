@@ -26,35 +26,28 @@ namespace PrimeStay.MVC.Controllers
             return View();
         }
 
-        public IActionResult Result([FromQuery] dynamic input)
+        public IActionResult Result(string location, string startDate, string endDate, string guests, string minPrice, string maxPrice)
         {
+
+            if (location is null) location = string.Empty;
             IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
-            //if (collection is not null)
-            //{
-            //    hotelMatches = hotelMatches.Where(h => h.Matches(collection["Location"])).ToList();
-            //
-            //    if (HttpContext is not null) collection.Keys.ToList().ForEach(key =>
-            //    {
-            //        HttpContext.Session.SetString(key, collection[key]);
-            //    });
-            //}
-            //else hotelMatches = hotelMatches.Where(h => h.Matches(HttpContext.Session.GetString("location"))).ToList();
-            //
-            //return View((collection, hotelMatches));
-            return null;
+            hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
+
+            hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
+
+            return View(hotelMatches);
         }
 
 
         //[Route("Details")]
-        public IActionResult Details([FromQuery] string href)
+        public IActionResult Details(string hotel_href, string location, string startDate, string endDate, string guests, string minPrice, string maxPrice)
         {
-            var hotel = GetHotel(href);
+            var hotel = GetHotel(hotel_href);
             hotel.Location = GetHotelLocation(hotel);
-            hotel.rooms = GetAllHotelRoomsForHotel(href);
+            hotel.rooms = GetAllHotelRoomsForHotel(hotel_href);
 
-            if (HttpContext is not null) HttpContext.Session.SetString("selectedHotel", href);
             return View(hotel);
         }
 

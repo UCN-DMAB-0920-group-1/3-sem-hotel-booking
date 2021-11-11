@@ -1,5 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Order";
+
+    var queryParams = new Dictionary<string, string>();
+    var query = Context.Request.Query;
+    query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
 }
 
 @model Booking
@@ -11,7 +15,7 @@
     <br />
     <div class=" order-md-1">
         <h4 class="mb-3">Billing address</h4>
-        <form asp-action="Create">
+        <form>
            
                 <label>Name</label>
                 <input name="Name" style="width:100%;" class="form-control" required="">
@@ -29,80 +33,13 @@
                 <input name="Phone" class="form-control" style="width:100%;" required="">
 
             
-            <input type="submit" value="Checkout" class="btn btn-primary" style="margin-left:45%; margin-top:25px;"/>
+            <input asp-action="Create" asp-all-route-data=@queryParams formmethod="POST" type="submit" value="Checkout" class="btn btn-primary" style="margin-left:45%; margin-top:25px;"/>
 
         </form>
     </div>
 
 
-            @*<div class="row">
-                    <div class="col-md-5 mb-3">
-                        <label asp-for="" for="country">Country</label>
-                        <select class="custom-select d-block w-100" id="country" required="">
-                            <option value="">Choose...</option>
-                            <option>United States</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid country.
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="state">State</label>
-                        <select class="custom-select d-block w-100" id="state" required="">
-                            <option value="">Choose...</option>
-                            <option>California</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="zip">Zip_Code</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Zip code required.
-                        </div>
-                    </div>
-                </div>*@
-
-
-            @*<hr class="mb-4">
-
-                <h4 class="mb-3">Payment</h4>
-
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="cc-name">Name on card</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                        <small class="text-muted">Full name as displayed on card</small>
-                        <div class="invalid-feedback">
-                            Name on card is required
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="cc-number">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Credit card number is required
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label for="cc-expiration">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Expiration date required
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="cc-expiration">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                        <div class="invalid-feedback">
-                            Security code required
-                        </div>
-                    </div>
-                </div>*@
+            
 
 </div>
 <br />

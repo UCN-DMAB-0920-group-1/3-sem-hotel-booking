@@ -16,28 +16,19 @@ namespace PrimeStay.MVC.Controllers
 
         }
 
-        public IActionResult Info([FromQuery] string href)
+        public IActionResult Info()
         {
-            HttpContext.Session.SetString("selectedRoom", href);
             return View();
         }
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create(IFormCollection collection, string hotel_href, string startDate, string endDate, string guests, string roomType)
         {
-            /*
-             * TODO:
-             *  Customer = new Customer()
-             *  {
-             *       Name = collection["Customer.Name"],
-             *       Email = collection["Customer.Email"],
-             *       Phone = collection["Customer.Phone"],
-             *  }
-             */
+
             Booking booking = new()
             {
-                Start_date = DateTime.Parse(HttpContext.Session.GetString("startDate") + "Z"),
-                End_date = DateTime.Parse(HttpContext.Session.GetString("endDate") + "Z"),
-                Guests = int.Parse(HttpContext.Session.GetString("guests")),
-                Room_type_href = HttpContext.Session.GetString("selectedRoom"),
+                Start_date = DateTime.Parse(startDate + "Z"),
+                End_date = DateTime.Parse(endDate + "Z"),
+                Guests = int.Parse(guests),
+                Room_type_href = roomType,
                 Customer_href = "api/cutomer/1", //TODO find actual customer ;-) 
 
 

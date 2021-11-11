@@ -1,7 +1,8 @@
 ﻿@using PrimeStay.MVC.Model
 @{
     ViewData["Title"] = "Home Page";
-
+    var today = DateTime.Today.ToString("yyyy-MM-dd").Substring(0, 10);
+    var tomorrow = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd").Substring(0, 10);
 }
 
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
@@ -20,20 +21,20 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Check In</span>
-                            <input class="form-control" name="startDate" type="date" required="">
+                            <input class="form-control" name="startDate" type="date" value="@today" required="">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Check out</span>
-                            <input class="form-control" type="date" required="" name="endDate">
+                            <input class="form-control" type="date" required="" value="@tomorrow" name="endDate">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-3">
                         <span class="form-label">Guests:</span>
-                        <input class="form-control" name="guests" type="number" required="">
+                        <input class="form-control" name="guests" value="1" type="number" required="">
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -50,7 +51,7 @@
                 </div>
                 <div style="padding: 15px;">
                     <center>
-                        <input class="btn btn-primary" type="submit" name="Search" style="width:100%;" />
+                        <input class="btn btn-primary" type="submit" style="width:100%;" />
                     </center>
                 </div>
             </form>
