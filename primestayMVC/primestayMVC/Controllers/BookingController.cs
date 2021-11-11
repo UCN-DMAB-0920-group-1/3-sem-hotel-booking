@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Model;
@@ -9,45 +8,41 @@ namespace PrimeStay.MVC.Controllers
 {
     public class BookingController : Controller
     {
-        private readonly IDao<BookingDto> _dao;
-        public BookingController(IDao<BookingDto> dao)
+        private readonly IDao<BookingDto> _bookingDao;
+        public BookingController(IDao<BookingDto> bookingDao)
         {
-            _dao = dao;
+            _bookingDao = bookingDao;
 
         }
 
-        public IActionResult Info([FromQuery] string href)
+        public IActionResult Info()
         {
-            HttpContext.Session.SetString("selectedRoom", href);
             return View();
         }
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create()
         {
-            /*
-             * TODO:
-             *  Customer = new Customer()
-             *  {
-             *       Name = collection["Customer.Name"],
-             *       Email = collection["Customer.Email"],
-             *       Phone = collection["Customer.Phone"],
-             *  }
-             */
+            Customer customer = new()
+            {
+                Name = Request.Form["name"],
+                Email = Request.Form["email"],
+                Phone = Request.Form["phone"],
+            };
             Booking booking = new()
             {
-                Start_date = DateTime.Parse(HttpContext.Session.GetString("startDate") + "Z"),
-                End_date = DateTime.Parse(HttpContext.Session.GetString("endDate") + "Z"),
-                Guests = int.Parse(HttpContext.Session.GetString("guests")),
-                Room_type_href = HttpContext.Session.GetString("selectedRoom"),
+                Start_date = DateTime.Parse(Request.Query["startDate"] + "Z"),
+                End_date = DateTime.Parse(Request.Query["endDate"] + "Z"),
+                Guests = int.Parse(Request.Query["guests"]),
+                Room_type_href = Request.Query["roomType"],
                 Customer_href = "api/cutomer/1", //TODO find actual customer ;-) 
 
 
             };
 
-            string href = _dao.Create(booking.Map());
+            string href = _bookingDao.Create(booking.Map());
 
             if (href.EndsWith("-1")) return View("BookingError");
 
-            return View("confirm", _dao.ReadByHref(href).Map());
+            return View("confirm", _bookingDao.ReadByHref(href).Map());
 
 
         }
