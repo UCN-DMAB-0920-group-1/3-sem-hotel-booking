@@ -9,6 +9,17 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 {
     internal class RoomDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomEntity>
     {
+        #region SQL-Queries 
+        private static readonly string SELECTALLROOMS = $"SELECT * FROM Room WHERE " +
+                                                     $"id=ISNULL(@id,id)" +
+                                                     $"AND room_type_id = ISNULL(@room_type_id,room_type_id)" +
+                                                     $"AND room_number = ISNULL(@room_number,room_number)" +
+                                                     $"AND notes = ISNULL(@notes,notes)";
+
+        private static readonly string SELECTROOMBYID = $"SELECT * FROM Room WHERE id=@id";
+
+
+        #endregion
         public RoomDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
@@ -29,11 +40,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomEntity>($"SELECT * FROM Room WHERE " +
-                                                     $"id=ISNULL(@id,id)" +
-                                                     $"AND room_type_id = ISNULL(@room_type_id,room_type_id)" +
-                                                     $"AND room_number = ISNULL(@room_number,room_number)" +
-                                                     $"AND notes = ISNULL(@notes,notes)", model);
+                return connection.Query<RoomEntity>(SELECTALLROOMS, model);
 
             };
 
@@ -43,7 +50,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<RoomEntity>($"SELECT * FROM Room WHERE id=@id", new { id });
+                return connection.QueryFirst<RoomEntity>(SELECTROOMBYID, new { id });
 
             };
         }
