@@ -8,6 +8,10 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 {
     internal class PictureDao : BaseDao<IDataContext<IDbConnection>>, IDao<PictureEntity>
     {
+        #region SQL-Queries
+        private readonly static string SELECTALLPICTURES = $"SELECT * FROM TablePictures " +
+                                                    $"INNER JOIN picture ON picture.id = TablePictures.picture_id ";
+        #endregion
         public PictureDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
 
@@ -24,7 +28,28 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public IEnumerable<PictureEntity> ReadAll(PictureEntity model)
         {
-            string whereStatement = "";
+            string whereStatement = GetWhereStatement(model);
+
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.Query<PictureEntity>(SELECTALLPICTURES + whereStatement, model);
+
+            };
+        }
+
+
+        public PictureEntity ReadById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Update(PictureEntity model)
+        {
+            throw new System.NotImplementedException();
+        }
+        private static string GetWhereStatement(PictureEntity model)
+        {
+            string whereStatement;
             switch (model.Type)
             {
 
@@ -38,25 +63,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                     throw new System.Exception("Invalid type " + model.Type);
             }
 
-
-            using (IDbConnection connection = DataContext.Open())
-            {
-                return connection.Query<PictureEntity>($"SELECT * FROM TablePictures " +
-                                                    $"INNER JOIN picture ON picture.id = TablePictures.picture_id " +
-                                                    whereStatement,
-                                                    new { model.Type, model.Hotel_id, model.Room_id });
-
-            };
-        }
-
-        public PictureEntity ReadById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int Update(PictureEntity model)
-        {
-            throw new System.NotImplementedException();
+            return whereStatement;
         }
     }
 }
