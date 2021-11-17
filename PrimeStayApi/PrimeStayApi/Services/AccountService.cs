@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PrimeStayApi.DataAccessLayer;
+using PrimeStayApi.Model;
 using PrimeStayApi.Services.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 /**
@@ -19,10 +22,37 @@ namespace PrimeStayApi.Services
     public class AccountService : IAccountService
     {
         private readonly IConfiguration _configuration;
+        private readonly IDao<UserEntity> _dao;
 
-        public AccountService(IConfiguration configuration)
+        public AccountService(IConfiguration configuration, IDao<UserEntity> dao)
         {
             _configuration = configuration;
+            _dao = dao;
+        }
+
+        public void Save(string username, string password)
+        {
+            var rngCSP = RNGCryptoServiceProvider.Create();
+
+            byte[] randomSeq = new byte[256];
+            rngCSP.GetNonZeroBytes(randomSeq);
+            string salt = Convert.ToBase64String(randomSeq);
+
+            HashAlgorithm hashAlgorithm = SHA256.Create();
+            string passwordHash = Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(SaltPassword(password, salt))));
+
+            _dao.Create(new UserEntity()
+            {
+                Username = username,
+                PasswordHash = passwordHash,
+                Salt = salt,
+            });
+
+        }
+
+        private string SaltPassword(string password, string salt)
+        {
+            return salt.Insert(salt.Length / 2, password);
         }
 
         public Userinfo Authenticate(string username, string password)
