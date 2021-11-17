@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeStayApi.Model
 {
-    public class UserEntity
+    public class UserEntity : BaseEntity
     {
         public string Username { get; set; }
         public string PasswordHash { get; set; }

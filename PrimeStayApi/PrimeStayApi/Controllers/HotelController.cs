@@ -64,13 +64,14 @@ namespace PrimeStayApi.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create([FromBody] HotelDto hotel)
         {
-            var tesmp = hotel.Map();
-            tesmp.Id = 100;
-            hotel = tesmp.Map();
+            var temp = hotel.Map();
+            temp.Id = 100;
+            hotel = temp.Map();
             return Created(hotel.Href, hotel);
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             int stars = new IntParser().parseInt(collection["star"]);

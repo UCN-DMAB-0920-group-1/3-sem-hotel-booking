@@ -5,6 +5,7 @@ using PrimeStayApi.Model;
 using PrimeStayApi.Services.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -38,8 +39,7 @@ namespace PrimeStayApi.Services
             rngCSP.GetNonZeroBytes(randomSeq);
             string salt = Convert.ToBase64String(randomSeq);
 
-            HashAlgorithm hashAlgorithm = SHA256.Create();
-            string passwordHash = Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(SaltPassword(password, salt))));
+            string passwordHash = HashPassword(password, salt);
 
             _dao.Create(new UserEntity()
             {
@@ -50,23 +50,38 @@ namespace PrimeStayApi.Services
 
         }
 
-        private string SaltPassword(string password, string salt)
+        private string HashPassword(string password, string salt)
         {
-            return salt.Insert(salt.Length / 2, password);
+            HashAlgorithm hashAlgorithm = SHA256.Create();
+            return Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(salt.Insert(salt.Length / 2, password))));
         }
 
         public Userinfo Authenticate(string username, string password)
         {
+            UserEntity user = _dao.ReadAll(new UserEntity()
+            {
+                Username = username,
+            }).SingleOrDefault();
+
+            if (user is null) return null;
+
+            string passwordHash = HashPassword(password, user.Salt);
+            if (!user.PasswordHash.Equals(passwordHash)) throw new Exception("Error, incorrect password");
+            return CreateAuthenticatedUser(username);
+        }
+
+        private Userinfo CreateAuthenticatedUser(string username)
+        {
             var expires = DateTime.Now.AddDays(1);
 
-            var user = new Userinfo
+            var userInfo = new Userinfo
             {
                 IsAuthenticated = true,
                 Username = username,
                 Expires = expires,
             };
-            user.Token = GenerateJwt(user, expires);
-            return user;
+            userInfo.Token = GenerateJwt(userInfo, expires);
+            return userInfo;
         }
 
         private string GenerateJwt(Userinfo userinfo, DateTime expires)
