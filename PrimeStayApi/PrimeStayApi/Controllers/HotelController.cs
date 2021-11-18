@@ -1,11 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
-using PrimeStayApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,33 +69,17 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpPut]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromBody] HotelDto hotel)
         {
-            int stars = new IntParser().parseInt(collection["star"]);
-
-            HotelEntity hotel = new()
-            {
-                Name = collection["name"],
-                Description = collection["description"],
-                Staffed_hours = collection["staffedHours"],
-                Stars = stars,
-                Id = id,
-            };
-
-            return _dao.Update(hotel) == 1 ? Ok() : NotFound();
+            return _dao.Update(hotel.Map()) == 1 ? Ok() : NotFound();
 
 
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromBody] HotelDto hotel)
         {
-            HotelEntity hotel = new()
-            {
-                Id = id,
-            };
-
-            return _dao.Delete(hotel) == 1 ? Ok() : NotFound();
+            return _dao.Delete(hotel.Map()) == 1 ? Ok() : NotFound();
         }
 
 
