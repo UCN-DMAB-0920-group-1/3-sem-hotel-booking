@@ -17,6 +17,7 @@ namespace PrimeStayApi.Services
 {
     public interface IAccountService
     {
+        Userinfo Save(string username, string password);
         Userinfo Authenticate(string username, string password);
     }
 
@@ -31,7 +32,7 @@ namespace PrimeStayApi.Services
             _dao = dao;
         }
 
-        public void Save(string username, string password)
+        public Userinfo Save(string username, string password)
         {
             var rngCSP = RNGCryptoServiceProvider.Create();
 
@@ -41,13 +42,21 @@ namespace PrimeStayApi.Services
 
             string passwordHash = HashPassword(password, salt);
 
-            _dao.Create(new UserEntity()
+            try
             {
-                Username = username,
-                PasswordHash = passwordHash,
-                Salt = salt,
-            });
+                _dao.Create(new UserEntity()
+                {
+                    Username = username,
+                    PasswordHash = passwordHash,
+                    Salt = salt,
+                });
 
+                return CreateAuthenticatedUser(username);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private string HashPassword(string password, string salt)
