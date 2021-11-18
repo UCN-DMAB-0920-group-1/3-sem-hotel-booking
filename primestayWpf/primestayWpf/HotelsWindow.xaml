@@ -11,7 +11,15 @@
             <RowDefinition Height="106*"/>
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
-        <ListView  x:Name="HotelListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822">
+        <ListView  x:Name="HotelListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5">
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -25,8 +33,35 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Create" Margin="0,0,79,134" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom"/>
-        <Button Content="Edit" Margin="0,0,79,74" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom"/>
-        <Button Content="Delete" Margin="0,0,79,14" VerticalAlignment="Bottom" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139"/>
+        <Button Content="Create" Margin="0,0,-177,155" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Edit" Margin="0,0,-177,112" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Delete" Margin="0,0,-177,69" VerticalAlignment="Bottom" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>
