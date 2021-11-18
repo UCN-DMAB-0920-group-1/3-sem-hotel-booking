@@ -10,7 +10,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>, IDaoDateExtension<RoomTypeEntity>
     {
         #region SQL-Queries
-        private static readonly string GETNUMBEROFAVAILABLEROOMS = "SELECT COUNT(*) as Available " +
+        private static readonly string SELECTNUMBEROFAVAILABLEROOMS = "SELECT COUNT(*) as Available " +
                                                                 "  FROM Room   " +
                                                                 "  WHERE room.id NOT IN(   " +
                                                                 "  SELECT R.id   " +
@@ -22,7 +22,14 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                 "  OR(@start_date <= B.start_date AND @end_date >= B.start_date))   " +
                                                                 "  AND room_type_id = @room_type_id)   " +
                                                                 "AND room_type_id = @room_type_id";
-         private static readonly string GETONEROOMTYPE = "SELECT * FROM roomType WHERE id=@id";
+        private static readonly string SELECTONEROOMTYPE = "SELECT * FROM roomType WHERE id=@id";
+        private static readonly string SELECTALLROOMTYPE = $"SELECT * FROM RoomType WHERE " +
+                                                     $"id=ISNULL(@id,id)" +
+                                                     $"AND type LIKE ISNULL(@type,type)" +
+                                                     $"AND description LIKE ISNULL(@description,description)" +
+                                                     $"AND beds LIKE ISNULL(@beds,beds)" +
+                                                     $"AND rating LIKE ISNULL(@rating,rating)" +
+                                                     $"AND hotel_id LIKE ISNULL(@Hotel_Id,hotel_Id)";
         #endregion
         public RoomTypeDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
@@ -45,14 +52,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<RoomTypeEntity>($"SELECT * FROM RoomType WHERE " +
-                                                     $"id=ISNULL(@id,id)" +
-                                                     $"AND type LIKE ISNULL(@type,type)" +
-                                                     $"AND description LIKE ISNULL(@description,description)" +
-                                                     $"AND beds LIKE ISNULL(@beds,beds)" +
-                                                     $"AND rating LIKE ISNULL(@rating,rating)" +
-                                                     $"AND hotel_id LIKE ISNULL(@Hotel_Id,hotel_Id)",
-                                                     new { model.Id, model.Type, model.beds, model.Description, model.Rating, model.Hotel_Id });
+                return connection.Query<RoomTypeEntity>(SELECTALLROOMTYPE, model);
 
             };
 
@@ -62,7 +62,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<RoomTypeEntity>(GETONEROOMTYPE, new { id });
+                return connection.QueryFirst<RoomTypeEntity>(SELECTONEROOMTYPE, new { id });
             };
         }
 
@@ -76,7 +76,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 var res = ReadById(room_type_id);
-                res.Avaliable = connection.QueryFirst<int>(GETNUMBEROFAVAILABLEROOMS, new { room_type_id, start_Date, end_Date });
+                res.Avaliable = connection.QueryFirst<int>(SELECTNUMBEROFAVAILABLEROOMS, new { room_type_id, start_Date, end_Date });
                 return res;
             };
         }

@@ -112,6 +112,19 @@ CREATE TABLE [TablePictures] (
 )
 GO
 
+CREATE TABLE [User] (
+  [id] int NOT NULL IDENTITY(1, 1),
+  [username]  VARCHAR(250) NOT NULL,
+  [password] VARCHAR(250) NOT NULL,
+  [role] VARCHAR(250) NOT NULL,
+  [salt] VARCHAR(250) NOT NULL,
+  PRIMARY KEY ([id])
+)
+GO
+
+CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
+GO
+
 CREATE UNIQUE INDEX [UK_Hotel_name] ON [Hotel] ("name")
 GO
 

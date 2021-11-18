@@ -146,3 +146,8 @@ INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_type_id],[type],[picture_id]
     (null,8,'room',10)
 GO
 
+INSERT INTO [dbo].[User] ([username], [password], [role], [salt])
+    VALUES
+    ('Michael', 'Ujm4jtwLY9/yLNBKIonnw85QmQ77UQDPEn0K0Cor2/k=', 'admin', '/9tABheeC6iXYRopgpe1bIe/xBM3jK41vYjfkPvbo0bVYAWyhhcYLZzh/xBcMalElw5n/eTiz55fB3XCdLWKaD79w5jyvS4rUeBRFzT/wqamWvvWAt0rv0MWRBAd18SYUGLdUluSzpo+znAGcov5jB6wKo0eVZ25vBBu14ZFkP7ltN6DZIc35YshNgVYIvheQlsEG7gZ8VAJhAn1dsaqJrTPcZBFLykJ9Das6kk8+enWNd/QpfqundOSoq0OHzeLPYBuiPJB1Q8CVCll05TKBiytShFpxeZJa72AFpHfQX5eHxhshJzy0eCxRCBu9UV67vbi2BC1WqObM1gN2BxP9g=='),
+    ('Mike', 'kyp0iPlRSWkgex3AWXfAV4/8mEi4EynEyjMAY4JB9ek=', 'admin', '364zVZ1Z2n5DOp6G20kLE1cmenpaZ4FlcftJpe8UZO2ErCsPOrcCgMPRqF86ZFbq6x/NMmNOVVLpr7dxJ8Ik8ZDLoaWHI5ewc1XOXGZAsjLRSW7NZnfvMMN1a9BwiBEoPuS7RuLcEiWwUoi+8oK9tR2S3JKPfcwoW5tpTnCIxYg/jOvupv6QsNlzD+FMBMWDZWuf0uW5IpPA2Y2Ilvxc1U0Pxegd2qgx/fK9xYO+8ZtB9do7WmD0vHLWb9cChv8PNtsQxXwQYGs96hbGl6M2GX5K83sLk8hYIpMl0jS6sjG9RGN/w7XdLFdebyG9twUj0wkdCiaD5lPO/w9biZ/DvA==')
+GO

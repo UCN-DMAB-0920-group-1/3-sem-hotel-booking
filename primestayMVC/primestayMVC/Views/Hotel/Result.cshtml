@@ -5,7 +5,7 @@
 @using Microsoft.AspNetCore.Http;
 @{
     var queryParams = new Dictionary<string, string>()
-{
+    {
                 {"hotelHref",string.Empty},
             };
     var query = Context.Request.Query;
@@ -26,8 +26,7 @@
 
                     <div class="col-sm-6">
                         <span class="form-label"> Location</span>
-                        <input type="text" name="location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="@queryParams["location"]" />
-
+                        <input type="text" name="location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="@queryParams["location"]">
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -98,10 +97,10 @@
 
     </div>
     <script>
-        $(document).ready(function () {
+      $(function(){
         href = "picture/hotel/" + @item.Id;
-        var url = "https://localhost:44312/api/";
-        axios.get(url + href)
+        var uri = "https://localhost:44312/api/";
+        axios.get(uri + href)
         .then(res => {
             $('#@item.Id').attr("src",res.data[0].path);
         })

@@ -8,7 +8,16 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 {
     internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<HotelEntity>
     {
+        #region SQL-Queries
+        private readonly static string SELECTALLHOTELS = $"SELECT * FROM Hotel WHERE " +
+                                                                 $"id=ISNULL(@id,id)" +
+                                                                 $"AND name LIKE ISNULL(@name,name)" +
+                                                                 $"AND description LIKE ISNULL(@description,description)" +
+                                                                 $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
+                                                                 $"AND stars = ISNULL(@stars,stars)";
+        private readonly static string SELECTHOTELBYID = $@"Select * FROM Hotel WHERE ID = @id";
 
+        #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
@@ -31,13 +40,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<HotelEntity>($"SELECT * FROM Hotel WHERE " +
-                                                                 $"id=ISNULL(@id,id)" +
-                                                                 $"AND name LIKE ISNULL(@name,name)" +
-                                                                 $"AND description LIKE ISNULL(@description,description)" +
-                                                                 $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
-                                                                 $"AND stars = ISNULL(@stars,stars)",
-                                                                 new { model.Id, model.Name, model.Description, model.Staffed_hours, model.Stars });
+                return connection.Query<HotelEntity>(SELECTALLHOTELS, model);
 
             };
         }
@@ -47,7 +50,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<HotelEntity>($@"Select * FROM Hotel WHERE ID = @id", new { id });
+                return connection.QueryFirst<HotelEntity>(SELECTHOTELBYID, new { id });
 
             };
         }
