@@ -22,6 +22,8 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id) " +
                                                     @"OUTPUT INSERTED.id " +
                                                      "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id)";
+        private readonly static string UPDATEHOTEL = "";
+        private readonly static string DELETEHOTEL = "";
 
         #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -49,7 +51,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Delete(HotelEntity model)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.QueryFirst<int>(DELETEHOTEL, model);
+
+            };
         }
 
         public IEnumerable<HotelEntity> ReadAll(HotelEntity model)
@@ -77,7 +83,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Update(HotelEntity model)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                return connection.QueryFirst<int>(UPDATEHOTEL, model);
+
+            };
         }
     }
 }
