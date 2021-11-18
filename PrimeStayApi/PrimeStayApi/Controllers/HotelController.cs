@@ -61,13 +61,16 @@ namespace PrimeStayApi.Controllers
 
         [HttpPost]
         //[Route("create")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Create([FromBody] HotelDto hotel)
         {
-            var tesmp = hotel.Map();
-            tesmp.Id = 100;
-            hotel = tesmp.Map();
-            return Created(hotel.Href, hotel);
+            int id = _dao.Create(hotel.Map());
+            if (id != -1)
+            {
+                hotel.Href = $"api/hotel/{id}";
+                return Created(hotel.Href, hotel);
+            }
+            else return BadRequest("Bad Request: Could not create Hotel, check attributes");
         }
 
         [HttpPut]

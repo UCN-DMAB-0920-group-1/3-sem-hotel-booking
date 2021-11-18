@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Dapper.Transaction;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
 using System.Collections.Generic;
@@ -15,7 +16,12 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                  $"AND description LIKE ISNULL(@description,description)" +
                                                                  $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
                                                                  $"AND stars = ISNULL(@stars,stars)";
+
         private readonly static string SELECTHOTELBYID = $@"Select * FROM Hotel WHERE ID = @id";
+
+        private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id) " +
+                                                    @"OUTPUT INSERTED.id " +
+                                                     "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id)";
 
         #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -24,7 +30,21 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Create(HotelEntity model)
         {
-            throw new System.NotImplementedException();
+            int res = -1;
+            using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
+            {
+                try
+                {
+                    res = transaction.ExecuteScalar<int>(INSERTHOTEL, model);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return res;
+                }
+            }
+            return res;
         }
 
         public int Delete(HotelEntity model)
