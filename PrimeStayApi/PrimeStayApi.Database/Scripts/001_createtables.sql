@@ -117,12 +117,9 @@ CREATE TABLE [User] (
   [username]  VARCHAR(250) NOT NULL,
   [password] VARCHAR(250) NOT NULL,
   [role] VARCHAR(250) NOT NULL,
-  [salt] VARCHAR(250) NOT NULL,
+  [salt] VARCHAR(512) NOT NULL,
   PRIMARY KEY ([id])
 )
-GO
-
-CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
 GO
 
 CREATE UNIQUE INDEX [UK_Hotel_name] ON [Hotel] ("name")
@@ -152,6 +149,8 @@ GO
 CREATE UNIQUE INDEX [UK_Staff_password] ON [Staff] ("password")
 GO
 
+CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
+GO
 
 ALTER TABLE [Hotel] WITH CHECK ADD CONSTRAINT [FK_Hotel_location_id] FOREIGN KEY([location_id])
 REFERENCES [Location] ([id])
