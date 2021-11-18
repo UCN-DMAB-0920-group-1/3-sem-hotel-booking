@@ -1,7 +1,5 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
-using primestayWpf.HotelCRUD;
-using PrimestayWpf.Model;
 using System.Windows;
 
 namespace primestayWpf.Forms
@@ -19,7 +17,7 @@ namespace primestayWpf.Forms
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password))
+            if (string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password))
             {
                 MessageBox.Show("Both username and password must be set!", "Invalid inputs");
                 return;
