@@ -37,14 +37,14 @@ namespace primestayWpf
                     StaffedHours = form.StaffedHours.Text,
                     Stars = (int)form.Stars.Value,
                 };
-                Create(hotel);
+                dao.Update(hotel);
             }
 
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
             var oldHotel = DataGrid1.SelectedItem as HotelDto;
-            string text = $"Are you sure you would like to delete {oldHotel.Name ?? "this hotel"}?";
+            string text = $"Are you sure you would like to delete {oldHotel.Name}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 dao.Delete(oldHotel);
