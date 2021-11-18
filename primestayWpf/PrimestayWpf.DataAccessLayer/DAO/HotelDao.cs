@@ -1,40 +1,42 @@
-﻿using PrimestayWpf.Model;
+﻿using PrimeStay.WPF.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
-using System.Data;
 
-namespace PrimestayWpf.DataAccessLayer.DAO
+namespace PrimeStay.WPF.DataAccessLayer.DAO
+
 {
-    internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<Hotel>
+    internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<HotelDto>
     {
         public HotelDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(Hotel model)
+        public string Create(HotelDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Delete(Hotel model)
+        public int Delete(HotelDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Hotel> ReadAll(Hotel model)
+        public IEnumerable<HotelDto> ReadAll(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/hotel", Method.GET, DataFormat.Json);
-            IRestResponse<IEnumerable<Hotel>> restResponse = restClient.Get<IEnumerable<Hotel>>(restRequest);
+            IRestResponse<IEnumerable<HotelDto>> restResponse = restClient.Get<IEnumerable<HotelDto>>(restRequest);
             return restResponse.Data;
         }
 
-        public Hotel ReadById(int id)
+        public HotelDto ReadByHref(string href)
         {
-            throw new System.NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest(href, Method.GET, DataFormat.Json);
+            return restClient.Get<HotelDto>(restRequest).Data;
         }
 
-        public int Update(Hotel model)
+        public int Update(HotelDto model)
         {
             throw new System.NotImplementedException();
         }

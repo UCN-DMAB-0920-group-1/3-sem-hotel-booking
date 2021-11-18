@@ -4,10 +4,11 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Staffed_hours { get; set; }
+        public string StaffedHours { get; set; }
         public int? Stars { get; set; }
-        public int? Location_Id { get; set; }
+        public string LocationHref { get; set; }
+        public string href { get; set; }
+
 
     }
-
 }

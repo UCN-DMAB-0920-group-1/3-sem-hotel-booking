@@ -1,31 +1,24 @@
-﻿using PrimeStay.DataAccessLayer;
+﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace primestayWpf
 {
     internal class RestDataContext : IDataContext<IRestClient>
     {
-        private const string _baseUrl = @"https://localhost:44312";
+        private const string _baseUrl = "https://localhost:44312";
 
         #region Singleton
-        public static RestDataContext Instance
+        private RestDataContext() { }
+        private static RestDataContext? _instance;
+        public static RestDataContext GetInstance()
         {
-            get
+            if (_instance == null)
             {
-                if (Instance == null) Instance = new RestDataContext();
-                return Instance;
+                _instance = new RestDataContext();
             }
-            private set
-            {
-            }
+            return _instance;
         }
 
-        private RestDataContext() { }
         #endregion
 
         public IRestClient Open()

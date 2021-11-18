@@ -5,15 +5,15 @@
 @using Microsoft.AspNetCore.Http;
 @{
     var queryParams = new Dictionary<string, string>()
-            {
+{
                 {"hotelHref",string.Empty},
             };
-    var query = Context.Request.Query; 
+    var query = Context.Request.Query;
     query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
 
 };
 
-@model  List<Hotel> 
+@model List<Hotel>
 
 <div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="form-group col-sm-3">
                         <span class="form-label">Guests:</span>
-                        <input class="form-control" name="guests" type="number" value="@queryParams["guests"]" required="" >
+                        <input class="form-control" name="guests" type="number" value="@queryParams["guests"]" required="">
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -88,8 +88,8 @@
 
                         <div class="form-group float-right">
                             <br />
-                            <a asp-action="Details" 
-                            asp-all-route-data=@queryParams ><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
+                            <a asp-action="Details"
+                               asp-all-route-data=@queryParams><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
                         </div>
                     </div>
                 </div>
@@ -98,10 +98,10 @@
 
     </div>
     <script>
-      $(function(){
+        $(document).ready(function () {
         href = "picture/hotel/" + @item.Id;
-        var uri = "https://localhost:44312/api/";
-        axios.get(uri + href)
+        var url = "https://localhost:44312/api/";
+        axios.get(url + href)
         .then(res => {
             $('#@item.Id').attr("src",res.data[0].path);
         })

@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PrimeStayWpf.DataAccessLayer\PrimestayWPF.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PrimestayWpf.Model\PrimestayWpf.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="PrimeStay.DataAccessLayer">
       <HintPath>..\..\PrimeStay.DataAccessLayer\PrimeStay.DataAccessLayer\obj\Debug\net5.0\ref\PrimeStay.DataAccessLayer.dll</HintPath>
     </Reference>
