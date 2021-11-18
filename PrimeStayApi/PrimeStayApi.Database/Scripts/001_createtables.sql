@@ -114,12 +114,15 @@ GO
 
 CREATE TABLE [User] (
   [id] int NOT NULL IDENTITY(1, 1),
-  [username]  VARCHAR(250) NOT NULL,
-  [password] VARCHAR(250) NOT NULL,
-  [role] VARCHAR(250) NOT NULL,
+  [username]  VARCHAR(256) NOT NULL,
+  [password] VARCHAR(256) NOT NULL,
+  [role] VARCHAR(256),
   [salt] VARCHAR(512) NOT NULL,
   PRIMARY KEY ([id])
 )
+GO
+
+CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
 GO
 
 CREATE UNIQUE INDEX [UK_Hotel_name] ON [Hotel] ("name")
