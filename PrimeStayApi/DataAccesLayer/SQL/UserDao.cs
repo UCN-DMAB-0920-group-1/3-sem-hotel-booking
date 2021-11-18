@@ -13,6 +13,9 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         #region SQL-Queries
         private readonly static string INSERTUSER = @"INSERT INTO User (username, password, role, salt)" +
                                                     @"VALUES(@username, @password, @role, @salt)";
+
+        private readonly static string SELECTUSER = @"SELECT * FROM User WHERE User.username = @username";
+
         #endregion
         public UserDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
@@ -41,7 +44,17 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public IEnumerable<UserEntity> ReadAll(UserEntity model)
         {
-            throw new System.NotImplementedException();
+            using IDbConnection connection = DataContext.Open();
+
+            try
+            {
+                return connection.Query<UserEntity>(SELECTUSER, model);
+                
+            }
+            catch(SqlException e)
+            {
+                return null;
+            }
         }
 
         public UserEntity ReadById(int id)
