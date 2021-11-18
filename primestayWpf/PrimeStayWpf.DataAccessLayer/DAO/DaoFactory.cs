@@ -19,6 +19,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
                     var dao when dao == typeof(RoomTypeDto) => new RoomTypeDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
                     var dao when dao == typeof(LocationDto) => new LocationDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
                     var dao when dao == typeof(BookingDto) => new BookingDao(dataContext as IDataContext<IRestClient>) as IDao<T>,
+                    var dao when dao == typeof(UserDto) => new UserDao  (dataContext as IDataContext<IRestClient>) as IDao<T>,
 
                     _ => null,
                 };
