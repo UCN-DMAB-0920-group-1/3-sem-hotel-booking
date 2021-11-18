@@ -11,7 +11,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class UserDao : BaseDao<IDataContext<IDbConnection>>, IDao<UserEntity>
     {
         #region SQL-Queries
-        private readonly static string INSERTUSER = @"INSERT INTO User (username, password, role, salt)" +
+        private readonly static string INSERTUSER = @"INSERT INTO [User] (username, password, role, salt)" +
                                                     @"VALUES(@username, @password, @role, @salt)";
 
         private readonly static string SELECTUSER = @"SELECT * FROM User WHERE User.username = @username";
