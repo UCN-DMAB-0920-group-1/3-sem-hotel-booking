@@ -47,7 +47,7 @@ namespace PrimeStayApi.Services
                 _dao.Create(new UserEntity()
                 {
                     Username = username,
-                    PasswordHash = passwordHash,
+                    Password = passwordHash,
                     Salt = salt,
                 });
 
@@ -72,11 +72,17 @@ namespace PrimeStayApi.Services
                 Username = username,
             }).SingleOrDefault();
 
-            if (user is null) return null;
-
-            string passwordHash = HashPassword(password, user.Salt);
-            if (!user.PasswordHash.Equals(passwordHash)) throw new Exception("Error, incorrect password");
-            return CreateAuthenticatedUser(username);
+            if (user is null)
+            {
+                string passwordHash = HashPassword(password, user.Salt);
+                return null;
+            }
+            else
+            {
+                string passwordHash = HashPassword(password, user.Salt);
+                if (!user.Password.Equals(passwordHash)) throw new Exception("Error, incorrect password");
+                return CreateAuthenticatedUser(username);
+            }
         }
 
         private Userinfo CreateAuthenticatedUser(string username)

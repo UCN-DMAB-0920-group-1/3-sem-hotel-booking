@@ -56,11 +56,11 @@ namespace PrimeStayApi.Controllers
                     return Ok(response);
                 }
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed1");
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed2");
             }
         }
     }

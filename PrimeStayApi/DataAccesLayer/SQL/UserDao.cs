@@ -11,10 +11,10 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class UserDao : BaseDao<IDataContext<IDbConnection>>, IDao<UserEntity>
     {
         #region SQL-Queries
-        private readonly static string INSERTUSER = @"INSERT INTO User (username, password, role, salt)" +
+        private readonly static string INSERTUSER = @"INSERT INTO [User] ([username], [password], [role], [salt])" +
                                                     @"VALUES(@username, @password, @role, @salt)";
 
-        private readonly static string SELECTUSER = @"SELECT * FROM User WHERE User.username = @username";
+        private readonly static string SELECTUSER = @"SELECT * FROM [User] WHERE [User].username = @Username";
 
         #endregion
         public UserDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -53,7 +53,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             }
             catch(SqlException e)
             {
-                return null;
+                return new List<UserEntity>();
             }
         }
 
