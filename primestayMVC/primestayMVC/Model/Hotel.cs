@@ -11,6 +11,7 @@ namespace PrimeStay.MVC.Model
         public string Staffed_hours { get; set; }
         public int? Stars { get; set; }
         public int? Location_Id { get; set; }
+        public bool? Active { get; set; }
         public Location Location { get; set; }
         public IEnumerable<Room> rooms { get; set; }
 

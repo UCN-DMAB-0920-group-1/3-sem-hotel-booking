@@ -23,7 +23,7 @@ namespace PrimeStay.MVC.DataAccessLayer.DAO
         public IEnumerable<HotelDto> ReadAll(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest("/api/hotel", Method.GET, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest("/api/hotel?active=true", Method.GET, DataFormat.Json);
             IRestResponse<IEnumerable<HotelDto>> restResponse = restClient.Get<IEnumerable<HotelDto>>(restRequest);
             return restResponse.Data;
         }

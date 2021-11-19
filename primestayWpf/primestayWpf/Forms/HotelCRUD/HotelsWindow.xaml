@@ -5,26 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:primestayWpf"
         mc:Ignorable="d"
-        Title="HotelsWindow" Height="450" Width="826">
-    <Grid>
-        <DataGrid Name="DataGrid1" Margin="15,15,149,139">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="Edit">Edit</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="Delete">Delete</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Create" HorizontalAlignment="Left" Margin="697,15,0,388" Width="94"/>
+        Title="HotelsWindow" Height="593" Width="1122">
+    <Grid HorizontalAlignment="Left" Width="822" Height="434" VerticalAlignment="Top" Margin="2,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="106*"/>
+            <RowDefinition Height="111*"/>
+        </Grid.RowDefinitions>
+        <ListView  x:Name="HotelListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.2"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListView.RenderTransform>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Description"  DisplayMemberBinding="{Binding Description}"/>
+                        <GridViewColumn Header="StaffedHours" DisplayMemberBinding="{Binding StaffedHours}"/>
+                        <GridViewColumn Header="Stars" DisplayMemberBinding="{Binding Stars}"/>
+                        <GridViewColumn Header="LocationHref" DisplayMemberBinding="{Binding LocationHref}"/>
+                        <GridViewColumn Header="href" DisplayMemberBinding="{Binding href}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Create" Margin="0,0,-177,155" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Edit" Margin="0,0,-177,112" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Delete" Margin="0,0,-177,69" VerticalAlignment="Bottom" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>

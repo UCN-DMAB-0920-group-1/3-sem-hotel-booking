@@ -4,14 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="HotelForm" Height="400" Width="350">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="150,25,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Name"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="150,75,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="150,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="StaffedHours"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="150,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="LocationHref"/>
-        <Slider HorizontalAlignment="Left" Height="37" Margin="150,169,0,0" VerticalAlignment="Top" Width="140" Maximum="5" Minimum="0" Name="Stars"/>
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="250,307,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="200,307,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        ResizeMode="NoResize"
+        Title="HotelForm" Height="320" Width="250">
+    <Grid Margin="0,0,0,0">
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Name" TextChanged="Name_TextChanged" />
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="StaffedHours"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="LocationHref"/>
+        <Slider Margin="88,160,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Stars" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="209,258,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="159,258,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label Content="Name: " HorizontalAlignment="Left" Margin="24,16,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description: " HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
+        <Label Content="StaffedHours: " HorizontalAlignment="Left" Margin="3,116,0,0" VerticalAlignment="Top"/>
+        <Label Content="Stars: " HorizontalAlignment="Left" Margin="24,166,0,0" VerticalAlignment="Top"/>
+        <Label Content="LocationHref: " HorizontalAlignment="Left" Margin="3,216,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

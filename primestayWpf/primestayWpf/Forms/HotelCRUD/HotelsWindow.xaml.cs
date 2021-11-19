@@ -2,6 +2,9 @@
 using PrimeStay.WPF.DataAccessLayer.DTO;
 using primestayWpf.HotelCRUD;
 using PrimestayWpf.Model;
+using PrimestayWPF.DataAccessLayer.DTO;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace primestayWpf
@@ -12,32 +15,41 @@ namespace primestayWpf
     public partial class HotelsWindow : Window
     {
         private readonly IDao<HotelDto> dao;
+        private ObservableCollection<Hotel> hotelList { get; set; } = new ObservableCollection<Hotel>();
 
         public HotelsWindow(IDao<HotelDto> _dao)
         {
             InitializeComponent();
             dao = _dao;
-            var hotels = dao.ReadAll(new HotelDto());
-            DataGrid1.ItemsSource = hotels;
+            HotelListView.ItemsSource = hotelList;
+            UpdateList();
         }
 
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            var oldHotel = DataGrid1.SelectedItem as HotelDto;
-            var form = oldHotel is null ? new HotelForm() : new HotelForm(oldHotel);
-            var yesNo = form.ShowDialog();
-            if (yesNo ?? false)
+            var oldHotel = HotelListView.SelectedItem as Hotel;
+            if (oldHotel is null) MessageBox.Show("Please select a Hotel to edit", "ERROR");
+            else
             {
-                Hotel hotel = new()
+                var form = oldHotel is null ? new HotelForm() : new HotelForm(oldHotel);
+                var yesNo = form.ShowDialog();
+                if (yesNo ?? false)
                 {
-                    Name = form.Name.Text,
-                    Description = form.Description.Text,
-                    LocationHref = form.LocationHref.Text,
-                    StaffedHours = form.StaffedHours.Text,
-                    Stars = (int)form.Stars.Value,
-                };
-                Create(hotel);
+                    Hotel hotel = new()
+                    {
+                        href = form.HotelHref,
+                        Name = form.Name.Text,
+                        Description = form.Description.Text,
+                        LocationHref = form.LocationHref.Text,
+                        StaffedHours = form.StaffedHours.Text,
+                        Stars = (int)form.Stars.Value,
+                    };
+                    var res = dao.Update(hotel.Map());
+                    UpdateList();
+                    if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was updated");
+                    else MessageBox.Show($"Could not update {hotel.Name}, contact admin");
+                }
             }
 
         }
@@ -47,7 +59,15 @@ namespace primestayWpf
             string text = $"Are you sure you would like to delete {oldHotel?.Name ?? "this hotel"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                dao.Delete(oldHotel);
+                string text = $"Are you sure you would like to delete {hotel.Name}?";
+                if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var res = dao.Delete(hotel.Map());
+                    UpdateList();
+                    if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was deleted");
+                    else MessageBox.Show($"Could not delete {hotel.Name}, contact admin");
+                }
+
             }
         }
 
@@ -65,15 +85,23 @@ namespace primestayWpf
                     StaffedHours = form.StaffedHours.Text,
                     Stars = (int)form.Stars.Value,
                 };
-                Create(hotel);
+                var newHotelHref = dao.Create(hotel.Map());
+                if (newHotelHref is null) MessageBox.Show("could not create Hotel");
+                else
+                {
+                    MessageBox.Show($"Hotel: {hotel.Name} was succesfully created");
+                    UpdateList();
+                }
             }
 
         }
 
-        public string Create(Hotel hotel)
+        private void UpdateList()
         {
-            return dao.Create(hotel);
-
+            var hotels = dao.ReadAll(new HotelDto()).Select(x => x.Map());
+            hotelList.Clear();
+            hotels.ToList().ForEach(x => hotelList.Add(x));
         }
+
     }
 }

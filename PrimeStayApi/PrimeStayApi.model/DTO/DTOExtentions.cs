@@ -14,7 +14,8 @@ namespace PrimeStayApi.Model.DTO
                 Description = hotel.Description,
                 StaffedHours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = @$"api/Location/{hotel.Location_Id}" // TODO use helper method GetHrefFromId()
+                LocationHref = @$"api/Location/{hotel.Location_Id}", // TODO use helper method GetHrefFromId()
+                Active = hotel.Active,
             };
         }
 
@@ -29,6 +30,7 @@ namespace PrimeStayApi.Model.DTO
                 Staffed_hours = hotel.StaffedHours,
                 Stars = hotel.Stars,
                 Location_Id = GetIdFromHref(hotel.LocationHref),
+                Active = hotel.Active,
             };
         }
         public static BookingEntity Map(this BookingDto booking)
