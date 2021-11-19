@@ -26,9 +26,13 @@ namespace PrimeStayApi.Controllers
         [Route("login")]
         public IActionResult Login([FromBody] LoginRequest login)
         {
-            var user = _accountService.Authenticate(login.Username, login.Password);
-            if (user.IsAuthenticated)
+            try
             {
+                var user = _accountService.Authenticate(login.Username, login.Password);
+
+                if (user is null) return StatusCode(StatusCodes.Status500InternalServerError, "Incorrect username/password");
+                if (!user.IsAuthenticated) return Unauthorized();
+
                 var response = new LoginResponse
                 {
                     Token = user.Token,
@@ -36,7 +40,11 @@ namespace PrimeStayApi.Controllers
                 };
                 return Ok(response);
             }
-            return Unauthorized();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Something bad happended");
+            }
         }
 
         [HttpPost]
@@ -46,7 +54,7 @@ namespace PrimeStayApi.Controllers
             try
             {
                 Userinfo user = _accountService.Save(login.Username, login.Password, "user");
-                if (user.IsAuthenticated)
+                if (user is not null && user.IsAuthenticated)
                 {
                     var response = new LoginResponse
                     {
@@ -56,11 +64,11 @@ namespace PrimeStayApi.Controllers
                     return Ok(response);
                 }
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed1");
+                return StatusCode(StatusCodes.Status500InternalServerError, "User not authenticated");
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed2");
+                return StatusCode(StatusCodes.Status500InternalServerError, "User could not be registered");
             }
         }
 
@@ -71,7 +79,7 @@ namespace PrimeStayApi.Controllers
             try
             {
                 Userinfo user = _accountService.Save(login.Username, login.Password, "admin");
-                if (user.IsAuthenticated)
+                if (user is not null && user.IsAuthenticated)
                 {
                     var response = new LoginResponse
                     {
@@ -81,11 +89,11 @@ namespace PrimeStayApi.Controllers
                     return Ok(response);
                 }
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed1");
+                return StatusCode(StatusCodes.Status500InternalServerError, "User not authenticated");
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed2");
+                return StatusCode(StatusCodes.Status500InternalServerError, "User could not be registered");
             }
         }
     }
