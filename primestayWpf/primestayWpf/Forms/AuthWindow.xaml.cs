@@ -16,8 +16,9 @@ namespace primestayWpf.Forms
             this.dao = _dao;
         }
 
-        private void loginBtn_Click(object sender, RoutedEventArgs e)
+        public void loginBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             if (string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password))
             {
                 errorLabel.Content = "Both username and password must be set!";
@@ -37,7 +38,7 @@ namespace primestayWpf.Forms
                 Auth.username = res.name;
             }
         }
-
-
     }
+
+
 }

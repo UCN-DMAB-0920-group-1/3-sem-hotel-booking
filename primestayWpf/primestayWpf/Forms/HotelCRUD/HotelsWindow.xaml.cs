@@ -44,7 +44,7 @@ namespace primestayWpf
         private void Delete(object sender, RoutedEventArgs e)
         {
             var oldHotel = DataGrid1.SelectedItem as HotelDto;
-            string text = $"Are you sure you would like to delete {oldHotel.Name ?? "this hotel"}?";
+            string text = $"Are you sure you would like to delete {oldHotel?.Name ?? "this hotel"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 dao.Delete(oldHotel);

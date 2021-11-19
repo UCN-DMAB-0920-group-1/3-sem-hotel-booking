@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using primestayWpf.Forms;
+using primestayWpf.HotelCRUD;
 
 namespace primestayWpf.Test
 {
@@ -20,27 +22,52 @@ namespace primestayWpf.Test
         public void TestDaoLogin()
         {
             //arrange
-            IDataContext _context = RestDataContext.GetInstance();
             IDao<UserDto> dao = new MockUserDao();
+            
+            //Act
+            var invalidLogin = (dao as IDaoAuthExtension<UserDto>).login("invalid_username", "invalid_password");
+            var validLogin = (dao as IDaoAuthExtension<UserDto>).login("1234", "qwerty");
 
-            var res = (dao as IDaoAuthExtension<UserDto>).login("invalid_username", "invalid_password");
-            Assert.Fail();
+            //Assert
+            Assert.IsNull(invalidLogin);
+            Assert.IsNotNull(validLogin);
+            Assert.AreEqual(validLogin.Expires, DateTime.Now.AddMonths(12));
+            Assert.AreEqual(validLogin.name, "1234");
+            Assert.AreEqual(validLogin.Token, "valid_token");
         }
 
 
         [TestMethod()]
-        public void TestLoginButtonAuthScreenWrongInfo()
+        public void TestLoginButtonAuthWindow()
         {
+            //arrange
+            IDao<UserDto> dao = new MockUserDao();
+            var window = new AuthWindow(dao);
+
+
+
+            string username = "1234";
+            string validPassword = "qwerty";
+            string invalidPassword = "ytrewq";
+
+
+
+            //Act
+            window.loginBtn_Click(this, null); //Mock user input
+            window.usernameField.Text = username;
+            window.passwordField.Password = invalidPassword;
+            
+
+            //Assert
+            Assert.IsNull(invalidLogin);
+            Assert.IsNotNull(validLogin);
+            Assert.AreEqual(validLogin.Expires, DateTime.Now.AddMonths(12));
+            Assert.AreEqual(validLogin.name, "1234");
+            Assert.AreEqual(validLogin.Token, "valid_token");
 
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void TestLoginButtonAuthScreenCorrectInfo()
-        {
-
-            Assert.Fail();
-        }
     }
 
 
