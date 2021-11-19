@@ -11,10 +11,12 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class UserDao : BaseDao<IDataContext<IDbConnection>>, IDao<UserEntity>
     {
         #region SQL-Queries
-        private readonly static string INSERTUSER = @"INSERT INTO [User] ([username], [password], [role], [salt])" +
-                                                    @"VALUES(@username, @password, @role, @salt)";
+        private readonly static string INSERTUSER = @"INSERT INTO [User] ([username], [password], [salt], [role_id]) " +
+                                                    @"VALUES(@username, @password, @salt, (SELECT [id] FROM [Role] WHERE [Role].[name] = @Role))";
 
-        private readonly static string SELECTUSER = @"SELECT * FROM [User] WHERE [User].username = @Username";
+        private readonly static string SELECTUSER = @"SELECT [User].[id], [username], [password], [salt], [Role].[name] AS [role] FROM [User] " +
+                                                    @"JOIN [Role] ON [User].[role_id] = [Role].[id] " +
+                                                    @"WHERE [User].[username] = @Username";
 
         #endregion
         public UserDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -31,7 +33,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             }
             catch (SqlException e)
             {
-                throw new Exception("User alreade exists"); //TODO custom exception
+                throw new DaoException("Could not create new user");
             }
 
             return -1;

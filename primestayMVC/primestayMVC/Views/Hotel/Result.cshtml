@@ -8,7 +8,7 @@
     {
                 {"hotelHref",string.Empty},
             };
-    var query = Context.Request.Query;
+    var query = Context.Request.Query; 
     query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
 
 };
