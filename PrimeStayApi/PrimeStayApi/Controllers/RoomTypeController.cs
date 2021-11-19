@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.DataAccessLayer.SQL;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
 using System;
@@ -53,10 +52,10 @@ namespace PrimeStayApi.Controllers
             return _dao.Delete(room) == 1 ? Ok() : NotFound();
         }
 
-        // GET: RoomController/?hotel={id}&startDate={startDate}&endDate={endDate}
+        // GET: api/roomType/available?roomTypeId={id}&startDate={startDate}&endDate={endDate}
         [HttpGet]
         [Route("available")]
-        public ActionResult<RoomDto> roomAvailibility([FromQuery] int roomTypeId, DateTime startDate, DateTime endDate)
+        public ActionResult<RoomDto> roomAvailibility(int roomTypeId, DateTime startDate, DateTime endDate)
         {
             try
             {

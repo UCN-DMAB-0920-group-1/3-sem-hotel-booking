@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace PrimeStay.MVC.DataAccessLayer.DAO
 {
-    internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomTypeDto>
+    internal class RoomTypeDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomTypeDto>
     {
-        public RoomDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+        public RoomTypeDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
