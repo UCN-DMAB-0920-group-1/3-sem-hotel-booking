@@ -1,5 +1,6 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
+using primestayWpf.src.auth;
 using System.Windows;
 
 namespace primestayWpf.Forms
@@ -19,13 +20,24 @@ namespace primestayWpf.Forms
         {
             if (string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password))
             {
-                MessageBox.Show("Both username and password must be set!", "Invalid inputs");
+                errorLabel.Content = "Both username and password must be set!";
                 return;
             }
 
-
+            errorLabel.Content = "";
             var res = (dao as IDaoAuthExtension<UserDto>).login(usernameField.Text, passwordField.Password);
 
+            if (res == null || string.IsNullOrEmpty(res.Token))
+            {
+                errorLabel.Content = "Username or password is invalid!";
+            }
+            else
+            {
+                Auth.AccessToken = res.Token;
+                Auth.username = res.name;
+            }
         }
+
+
     }
 }

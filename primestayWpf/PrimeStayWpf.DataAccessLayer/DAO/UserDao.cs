@@ -24,8 +24,18 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         public UserDto login(string username, string password)
         {
+            Dictionary<string, string> body = new Dictionary<string, string>()
+            {
+                {"username",username },
+                {"password", password },
+            };
 
-            return new UserDto();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest("/api/account/login", Method.POST, DataFormat.Json);
+            restRequest.AddJsonBody(body);
+
+            var res = restClient.Post<UserDto>(restRequest).Data;
+            return res;
         }
 
         public IEnumerable<UserDto> ReadAll(UserDto model)

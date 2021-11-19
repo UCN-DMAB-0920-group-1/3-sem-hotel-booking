@@ -26,16 +26,26 @@ namespace PrimeStayApi.Controllers
         [Route("login")]
         public IActionResult Login([FromBody] LoginRequest login)
         {
-            var user = _accountService.Authenticate(login.Username, login.Password);
-            if (user.IsAuthenticated)
+
+            try
             {
-                var response = new LoginResponse
+                var user = _accountService.Authenticate(login.Username, login.Password);
+                if (user != null && user.IsAuthenticated)
                 {
-                    Token = user.Token,
-                    Expires = user.Expires,
-                };
-                return Ok(response);
+                    var response = new LoginResponse
+                    {
+                        Token = user.Token,
+                        Expires = user.Expires,
+                    };
+                    return Ok(response);
+                }
             }
+            catch
+            {
+                return Unauthorized();
+            }
+
+            
             return Unauthorized();
         }
 

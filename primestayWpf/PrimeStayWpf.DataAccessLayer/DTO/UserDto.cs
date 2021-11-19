@@ -6,6 +6,8 @@ namespace PrimeStay.WPF.DataAccessLayer.DTO
     public class UserDto : BaseDto
     {
         public string name{ get; set; }
-        public string accessToken { get; set; }
+        public string Token { get; set; }
+
+        public DateTime Expires { get; internal set; }
     }
 }

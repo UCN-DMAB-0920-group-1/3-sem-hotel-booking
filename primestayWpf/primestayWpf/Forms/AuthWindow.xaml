@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AuthWindow" Height="450" Width="800">
     <Grid Margin="0,48,0,-48">
-        <Button x:Name="loginBtn" Content="Login" HorizontalAlignment="Center" Margin="0,289,0,0" VerticalAlignment="Top" Height="38" Width="208" Click="loginBtn_Click" RenderTransformOrigin="0.5,0.5" Opacity="0.8">
+        <Button x:Name="loginBtn" Content="Login" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top" Height="38" Width="208" Click="loginBtn_Click" RenderTransformOrigin="0.5,0.5" Opacity="0.8">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,7 +27,7 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <PasswordBox x:Name="passwordField" HorizontalAlignment="Center" VerticalAlignment="Top" Width="208" Height="30" Margin="0,217,0,0" RenderTransformOrigin="0.5,0.5">
+        <PasswordBox x:Name="passwordField" HorizontalAlignment="Center" VerticalAlignment="Top" Width="208" Height="30" Margin="0,201,0,0" RenderTransformOrigin="0.5,0.5">
             <PasswordBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -39,7 +39,7 @@
         </PasswordBox>
         <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" Width="208" Height="30
                "/>
-        <Label x:Name="passwordLabel" Content="Password&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,191,0,0" VerticalAlignment="Top" Width="208"/>
+        <Label x:Name="passwordLabel" Content="Password&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="208"/>
         <Label x:Name="titleLabel" Content="PrimeStay" HorizontalAlignment="Left" Margin="298,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="74" Width="209" FontSize="44">
             <Label.Effect>
                 <DropShadowEffect/>
@@ -56,6 +56,8 @@
             </Label.RenderTransform>
         </Label>
         <Image HorizontalAlignment="Left" Height="78" Margin="446,20,0,0" VerticalAlignment="Top" Width="78" Source="/res/group_logo.png"/>
+        <Label x:Name="errorLabel" Content="" HorizontalAlignment="Center" Margin="0,291,0,0" VerticalAlignment="Top" Width="208" HorizontalContentAlignment="Center" Height="29" Foreground="#FFFF2727"/>
+        <ProgressBar x:Name="loadingBar" Minimum="0" Maximum="100" HorizontalAlignment="Center" Height="20" Margin="0,334,0,0" VerticalAlignment="Top" Width="800"/>
 
     </Grid>
 </Window>
