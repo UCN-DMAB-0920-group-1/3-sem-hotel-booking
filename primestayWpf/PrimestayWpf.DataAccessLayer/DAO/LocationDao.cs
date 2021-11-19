@@ -1,38 +1,40 @@
-﻿using PrimestayWpf.Model;
+﻿using PrimeStay.WPF.DataAccessLayer.DTO;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
-namespace PrimestayWpf.DataAccessLayer.DAO
+namespace PrimeStay.WPF.DataAccessLayer.DAO
+
 {
-    internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<Location>
+    internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<LocationDto>
     {
         public LocationDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
-        public int Create(Location model)
+        public string Create(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(Location model)
+        public int Delete(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Location> ReadAll(Location model)
+        public IEnumerable<LocationDto> ReadAll(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public Location ReadById(int id)
+        public LocationDto ReadByHref(string href)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest(href, Method.GET, DataFormat.Json);
+            return restClient.Execute<LocationDto>(restRequest).Data;
         }
 
-        public int Update(Location model)
+        public int Update(LocationDto model)
         {
             throw new NotImplementedException();
         }

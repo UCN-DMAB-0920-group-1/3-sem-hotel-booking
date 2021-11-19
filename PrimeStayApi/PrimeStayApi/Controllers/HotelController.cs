@@ -1,11 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
-using PrimeStayApi.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +30,8 @@ namespace PrimeStayApi.Controllers
                     Name = hotel.Name,
                     Description = hotel.Description,
                     Staffed_hours = hotel.StaffedHours,
-                    Stars = hotel.Stars
+                    Stars = hotel.Stars,
+                    Active = hotel.Active
                 }).Select(h => h.Map()));
 
             }
@@ -61,44 +58,31 @@ namespace PrimeStayApi.Controllers
 
         [HttpPost]
         //[Route("create")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Create([FromBody] HotelDto hotel)
         {
-            var temp = hotel.Map();
-            temp.Id = 100;
-            hotel = temp.Map();
-            return Created(hotel.Href, hotel);
+            int id = _dao.Create(hotel.Map());
+            if (id != -1)
+            {
+                hotel.Href = $"api/hotel/{id}";
+                return Created(hotel.Href, hotel);
+            }
+            else return BadRequest("Bad Request: Could not create Hotel, check attributes");
         }
 
         [HttpPut]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromBody] HotelDto hotel)
+
         {
-            int stars = new IntParser().parseInt(collection["star"]);
-
-            HotelEntity hotel = new()
-            {
-                Name = collection["name"],
-                Description = collection["description"],
-                Staffed_hours = collection["staffedHours"],
-                Stars = stars,
-                Id = id,
-            };
-
-            return _dao.Update(hotel) == 1 ? Ok() : NotFound();
-
-
+            int res = _dao.Update(hotel.Map());
+            return res != -1 ? Ok("Number of rows affected: " + res) : NotFound("Bad data, could not update hotel, check attributes");
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete([FromBody] HotelDto hotel)
         {
-            HotelEntity hotel = new()
-            {
-                Id = id,
-            };
-
-            return _dao.Delete(hotel) == 1 ? Ok() : NotFound();
+            int res = _dao.Delete(hotel.Map());
+            return res == 1 ? Ok("Hotel successfully deleted") : NotFound("Bad data: Hotel could not be deleted, check attributes");
         }
 
 

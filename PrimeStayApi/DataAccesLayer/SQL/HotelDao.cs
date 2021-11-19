@@ -1,8 +1,10 @@
 ﻿using Dapper;
+using Dapper.Transaction;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
@@ -14,8 +16,17 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                  $"AND name LIKE ISNULL(@name,name)" +
                                                                  $"AND description LIKE ISNULL(@description,description)" +
                                                                  $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
-                                                                 $"AND stars = ISNULL(@stars,stars)";
+                                                                 $"AND stars = ISNULL(@stars,stars)" +
+                                                                 $"AND active = ISNULL(@active,active)";
+
         private readonly static string SELECTHOTELBYID = $@"Select * FROM Hotel WHERE ID = @id";
+
+        private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id, active) " +
+                                                    @"OUTPUT INSERTED.id " +
+                                                     "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id,@active)";
+        private readonly static string UPDATEHOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=@active WHERE id=@id;";
+        private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
+        private readonly static string SOFTDELETE = "UPDATE Hotel SET active=0 WHERE id=@id";
 
         #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -24,12 +35,38 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Create(HotelEntity model)
         {
-            throw new System.NotImplementedException();
+            int res = -1;
+            using (IDbConnection connection = DataContext.Open())
+            {
+                try
+                {
+                    res = connection.ExecuteScalar<int>(INSERTHOTEL, model);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return res;
+                }
+            }
+            return res;
         }
 
         public int Delete(HotelEntity model)
         {
-            throw new System.NotImplementedException();
+            int res = -1;
+            using (IDbConnection connection = DataContext.Open())
+            {
+                try
+                {
+                    res = connection.Execute(SOFTDELETE, model);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return res;
+                }
+            }
+            return res;
         }
 
         public IEnumerable<HotelEntity> ReadAll(HotelEntity model)
@@ -41,7 +78,6 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<HotelEntity>(SELECTALLHOTELS, model);
-
             };
         }
 
@@ -57,7 +93,20 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Update(HotelEntity model)
         {
-            throw new System.NotImplementedException();
+            int res = -1;
+            using (IDbConnection connection = DataContext.Open())
+            {
+                try
+                {
+                    res = connection.Execute(UPDATEHOTEL, model);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return res;
+                }
+                return res;
+            };
         }
     }
 }
