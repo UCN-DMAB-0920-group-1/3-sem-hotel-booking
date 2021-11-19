@@ -34,15 +34,11 @@ namespace PrimeStayApi.Controllers
                 if (!user.IsAuthenticated) return Unauthorized();
 
                 var response = new LoginResponse
-
                 {
-                    var response = new LoginResponse
-                    {
-                        Token = user.Token,
-                        Expires = user.Expires,
-                    };
-                    return Ok(response);
-                }
+                    Token = user.Token,
+                    Expires = user.Expires,
+                };
+                return Ok(response);
             }
 
             catch (Exception ex)
