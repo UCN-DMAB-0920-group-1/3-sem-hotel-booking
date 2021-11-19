@@ -34,6 +34,7 @@ namespace PrimeStayApi
             services.AddScoped<IDao<BookingEntity>>(s => DaoFactory.Create<BookingEntity>(dataContext));
             services.AddScoped<IDao<PictureEntity>>(s => DaoFactory.Create<PictureEntity>(dataContext));
             services.AddScoped<IDao<RoomEntity>>(s => DaoFactory.Create<RoomEntity>(dataContext));
+            services.AddScoped<IDao<UserEntity>>(s => DaoFactory.Create<UserEntity>(dataContext));
 
             services.AddCors(options =>
             {

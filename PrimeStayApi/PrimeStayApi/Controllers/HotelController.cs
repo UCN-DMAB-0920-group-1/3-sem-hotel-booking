@@ -72,6 +72,7 @@ namespace PrimeStayApi.Controllers
 
         [HttpPut]
         public ActionResult Edit([FromBody] HotelDto hotel)
+
         {
             int res = _dao.Update(hotel.Map());
             return res != -1 ? Ok("Number of rows affected: " + res) : NotFound("Bad data, could not update hotel, check attributes");
