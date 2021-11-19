@@ -21,12 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="PrimeStay.DataAccessLayer">
-      <HintPath>..\..\PrimeStay.DataAccessLayer\PrimeStay.DataAccessLayer\obj\Debug\net5.0\ref\PrimeStay.DataAccessLayer.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="res\group_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
