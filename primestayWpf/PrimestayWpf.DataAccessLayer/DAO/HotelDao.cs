@@ -2,6 +2,7 @@
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace PrimeStay.WPF.DataAccessLayer.DAO
 
@@ -19,7 +20,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);
             var response = restClient.Post(restRequest);
-            return response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as string;
+            return response.StatusCode switch
+            {
+                HttpStatusCode.Created => response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as string,
+                _ => null
+            };
+
 
         }
 
@@ -28,8 +34,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
             restRequest.AddJsonBody(model);
-            var response = restClient.Post(restRequest);
-            return response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as int? ?? -1; //TODO find header name for response
+            var response = restClient.Delete(restRequest);
+            return response.StatusCode switch
+            {
+                HttpStatusCode.OK => 1,
+                _ => -1
+            };
         }
 
         public IEnumerable<HotelDto> ReadAll(HotelDto model)
@@ -52,8 +62,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
             restRequest.AddJsonBody(model);
-            var response = restClient.Post(restRequest);
-            return response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as int? ?? -1; //TODO find header name for response
+            var response = restClient.Put(restRequest);
+            return response.StatusCode switch
+            {
+                HttpStatusCode.OK => 1,
+                _ => -1
+            };
         }
     }
 }

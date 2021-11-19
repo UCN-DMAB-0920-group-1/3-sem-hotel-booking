@@ -9,6 +9,7 @@ namespace primestayWpf.HotelCRUD
     /// </summary>
     public partial class HotelForm : Window
     {
+        public readonly string HotelHref = string.Empty;
         public HotelForm()
         {
             InitializeComponent();
@@ -22,6 +23,8 @@ namespace primestayWpf.HotelCRUD
             StaffedHours.Text = hotel.StaffedHours;
             Stars.Value = hotel.Stars ?? 0d;
             LocationHref.Text = hotel.LocationHref;
+            HotelHref = hotel.href;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
