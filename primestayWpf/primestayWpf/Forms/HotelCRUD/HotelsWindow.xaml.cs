@@ -55,9 +55,9 @@ namespace primestayWpf
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            var hotel = HotelListView.SelectedItem as Hotel;
-            if (hotel is null) MessageBox.Show("Please select a Hotel to delete", "ERROR");
-            else
+            var oldHotel = DataGrid1.SelectedItem as HotelDto;
+            string text = $"Are you sure you would like to delete {oldHotel?.Name ?? "this hotel"}?";
+            if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 string text = $"Are you sure you would like to delete {hotel.Name}?";
                 if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)

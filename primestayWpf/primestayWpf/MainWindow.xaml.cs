@@ -1,6 +1,7 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
 using System.Windows;
+using primestayWpf.Forms;
 
 namespace primestayWpf
 {
@@ -18,9 +19,14 @@ namespace primestayWpf
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void hotelCrudBtn_Click(object sender, RoutedEventArgs e)
         {
             new HotelsWindow(DaoFactory.Create<HotelDto>(_context)).ShowDialog();
+        }
+
+        private void authScreenbtn_Click(object sender, RoutedEventArgs e)
+        {
+            new AuthWindow(DaoFactory.Create<UserDto>(_context)).ShowDialog();
         }
     }
 }

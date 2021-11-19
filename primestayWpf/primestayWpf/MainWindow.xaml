@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:primestayWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Button Content="Button" HorizontalAlignment="Left" Margin="264,198,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+    <Grid>
+        <Button x:Name="hotelCrudBtn" Content="Hotels CRUD" HorizontalAlignment="Left" Margin="186,148,0,0" VerticalAlignment="Top" Height="53" Width="92" Click="hotelCrudBtn_Click"/>
+        <Button x:Name="authScreenbtn" Content="Auth screen" HorizontalAlignment="Left" Margin="450,132,0,0" VerticalAlignment="Top" Height="51" Width="96" Click="authScreenbtn_Click"/>
+    </Grid>
 
 </Window>

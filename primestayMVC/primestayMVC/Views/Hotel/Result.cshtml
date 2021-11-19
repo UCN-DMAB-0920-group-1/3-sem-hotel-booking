@@ -5,10 +5,10 @@
 @using Microsoft.AspNetCore.Http;
 @{
     var queryParams = new Dictionary<string, string>()
-{
+    {
                 {"hotelHref",string.Empty},
             };
-    var query = Context.Request.Query;
+    var query = Context.Request.Query; 
     query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
 
 };
@@ -97,10 +97,10 @@
 
     </div>
     <script>
-        $(document).ready(function () {
+      $(function(){
         href = "picture/hotel/" + @item.Id;
-        var url = "https://localhost:44312/api/";
-        axios.get(url + href)
+        var uri = "https://localhost:44312/api/";
+        axios.get(uri + href)
         .then(res => {
             $('#@item.Id').attr("src",res.data[0].path);
         })
