@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace primestayWpf
 {
-    internal class RestDataContext : IDataContext<IRestClient>
+    public class RestDataContext : IDataContext<IRestClient>
     {
         private const string _baseUrl = "https://localhost:44312";
 

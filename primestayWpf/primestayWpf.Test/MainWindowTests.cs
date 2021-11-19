@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace primestayWpf.Tests
+namespace primestayWpf.Test
 {
     [TestClass()]
     public class MainWindowTests

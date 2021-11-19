@@ -8,6 +8,6 @@ namespace PrimeStay.WPF.DataAccessLayer.DTO
         public string name{ get; set; }
         public string Token { get; set; }
 
-        public DateTime Expires { get; internal set; }
+        public DateTime Expires { get; set; }
     }
 }
