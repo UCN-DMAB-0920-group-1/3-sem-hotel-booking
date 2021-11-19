@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace primestayWpf.src.auth
 {
-    static class Auth
+    public static class Auth
     {
         public static string AccessToken = "";
         public static string username = "";
