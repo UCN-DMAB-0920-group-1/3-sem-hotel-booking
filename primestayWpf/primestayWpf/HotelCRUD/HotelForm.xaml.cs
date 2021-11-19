@@ -1,5 +1,6 @@
 ﻿using PrimestayWpf.Model;
 using System.Windows;
+using System.Windows.Media;
 
 namespace primestayWpf.HotelCRUD
 {
@@ -33,6 +34,19 @@ namespace primestayWpf.HotelCRUD
         {
             DialogResult = true;
             Close();
+        }
+
+        private void Name_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+            if (Name.Text.Length > 5)
+            {
+                Name.Background = Brushes.Green;
+            }
+            else
+            {
+                Name.Background = Brushes.White;
+            }
         }
     }
 }

@@ -11,12 +11,12 @@
             <RowDefinition Height="106*"/>
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
-        <ListView  x:Name="HotelListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5">
+        <ListView  x:Name="HotelListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="0.5"/>
+                    <RotateTransform Angle="0.2"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </ListView.RenderTransform>
