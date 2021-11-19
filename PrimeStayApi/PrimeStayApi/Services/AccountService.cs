@@ -81,7 +81,7 @@ namespace PrimeStayApi.Services
             else
             {
                 string passwordHash = HashPassword(password, user.Salt);
-                if (!user.Password.Equals(passwordHash)) throw new Exception("Error, incorrect password");
+                if (!user.Password.Equals(passwordHash)) return null;
 
                 return user switch
                 {
