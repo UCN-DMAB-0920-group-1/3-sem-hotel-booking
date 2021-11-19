@@ -13,11 +13,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         #region SQL-Queries
         private readonly static string SELECTALLHOTELS = $"SELECT * FROM Hotel WHERE " +
                                                                  $"id=ISNULL(@id,id)" +
-                                                                 $"AND name LIKE ISNULL(@name,name)" +
-                                                                 $"AND description LIKE ISNULL(@description,description)" +
-                                                                 $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
-                                                                 $"AND stars = ISNULL(@stars,stars)" +
-                                                                 $"AND active = ISNULL(@active,active)";
+                                                                 $"AND name LIKE ISNULL(@name,name) " +
+                                                                 $"AND description LIKE ISNULL(@description,description) " +
+                                                                 $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours) " +
+                                                                 $"AND stars = ISNULL(@stars,stars) " +
+                                                                 $"AND active = ISNULL(@active,active) ";
 
         private readonly static string SELECTHOTELBYID = $@"Select * FROM Hotel WHERE ID = @id";
 
@@ -93,6 +93,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Update(HotelEntity model)
         {
+            model.Active ??= false;
             int res = -1;
             using (IDbConnection connection = DataContext.Open())
             {
