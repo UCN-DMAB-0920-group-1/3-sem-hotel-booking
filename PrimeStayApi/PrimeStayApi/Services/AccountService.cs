@@ -54,9 +54,10 @@ namespace PrimeStayApi.Services
 
                 return CreateAuthenticatedUser(username, role);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
@@ -75,7 +76,7 @@ namespace PrimeStayApi.Services
 
             if (user is null)
             {
-                string passwordHash = HashPassword(password, user.Salt);
+                string passwordHash = HashPassword(password, "salt");
                 return null;
             }
             else
