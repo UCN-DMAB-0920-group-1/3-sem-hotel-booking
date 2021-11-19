@@ -17,7 +17,7 @@ namespace PrimeStayApi.Services
 {
     public interface IAccountService
     {
-        Userinfo Save(string username, string password);
+        Userinfo Save(string username, string password, string role);
         Userinfo Authenticate(string username, string password);
     }
 
@@ -32,7 +32,7 @@ namespace PrimeStayApi.Services
             _dao = dao;
         }
 
-        public Userinfo Save(string username, string password)
+        public Userinfo Save(string username, string password, string role)
         {
             var rngCSP = RNGCryptoServiceProvider.Create();
 
@@ -48,10 +48,11 @@ namespace PrimeStayApi.Services
                 {
                     Username = username,
                     Password = passwordHash,
+                    Role = role,
                     Salt = salt,
                 });
 
-                return CreateAuthenticatedUser(username);
+                return CreateAuthenticatedUser(username, role);
             }
             catch (Exception)
             {
@@ -80,12 +81,18 @@ namespace PrimeStayApi.Services
             else
             {
                 string passwordHash = HashPassword(password, user.Salt);
-                if (!user.Password.Equals(passwordHash)) throw new Exception("Error, incorrect password");
-                return CreateAuthenticatedUser(username);
+                if (!user.Password.Equals(passwordHash)) return null;
+
+                return user switch
+                {
+                    _ when user.Role.Equals("admin") => CreateAuthenticatedUser(username, "admin"),
+                    _ when user.Role.Equals("user") => CreateAuthenticatedUser(username, "user"),
+                    _ => throw new Exception("Unkown role type")
+                };
             }
         }
 
-        private Userinfo CreateAuthenticatedUser(string username)
+        private Userinfo CreateAuthenticatedUser(string username, string role)
         {
             var expires = DateTime.Now.AddDays(1);
 
@@ -95,11 +102,11 @@ namespace PrimeStayApi.Services
                 Username = username,
                 Expires = expires,
             };
-            userInfo.Token = GenerateJwt(userInfo, expires);
+            userInfo.Token = GenerateJwt(userInfo, expires, role);
             return userInfo;
         }
 
-        private string GenerateJwt(Userinfo userinfo, DateTime expires)
+        private string GenerateJwt(Userinfo userinfo, DateTime expires, string role)
         {
             var claims = new[]
             {
@@ -109,7 +116,7 @@ namespace PrimeStayApi.Services
             };
 
             var identity = new ClaimsIdentity(claims, "Token");
-            identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+            identity.AddClaim(new Claim(ClaimTypes.Role, role));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
             var handler = new JwtSecurityTokenHandler();

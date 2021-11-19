@@ -40,12 +40,37 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
+        public IActionResult Register([FromBody] LoginRequest login)
+        {
+            try
+            {
+                Userinfo user = _accountService.Save(login.Username, login.Password, "user");
+                if (user.IsAuthenticated)
+                {
+                    var response = new LoginResponse
+                    {
+                        Token = user.Token,
+                        Expires = user.Expires,
+                    };
+                    return Ok(response);
+                }
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed1");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Register failed2");
+            }
+        }
+
+        [HttpPost]
         [Route("register-admin")]
         public IActionResult RegisterAdmin([FromBody] LoginRequest login)
         {
             try
             {
-                Userinfo user = _accountService.Save(login.Username, login.Password);
+                Userinfo user = _accountService.Save(login.Username, login.Password, "admin");
                 if (user.IsAuthenticated)
                 {
                     var response = new LoginResponse
