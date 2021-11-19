@@ -24,8 +24,8 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id, active) " +
                                                     @"OUTPUT INSERTED.id " +
                                                      "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id,@active)";
-        private readonly static string UPDATEHOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=@active WHERE id=@id;";
-        private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
+        private readonly static string UPDATEHOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=ISNULL(@active,active) WHERE id=@id;";
+        //private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
         private readonly static string SOFTDELETE = "UPDATE Hotel SET active=0 WHERE id=@id";
 
         #endregion
