@@ -29,7 +29,7 @@ namespace PrimeStay.MVC.Controllers
         public IActionResult Result(string location)
         {
 
-            if (location is null) location = "";
+            if (location is null) location = " ";
             IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
