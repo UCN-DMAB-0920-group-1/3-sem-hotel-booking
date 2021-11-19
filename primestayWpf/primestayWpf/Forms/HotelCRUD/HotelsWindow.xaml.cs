@@ -56,11 +56,10 @@ namespace primestayWpf
         private void Delete(object sender, RoutedEventArgs e)
         {
             var hotel = HotelListView.SelectedItem as Hotel;
-            if (hotel is null) MessageBox.Show("Please select a Hotel to delete", "ERROR");
-            else
+            string text = $"Are you sure you would like to delete {hotel?.Name ?? "this hotel"}?";
+            if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                string text = $"Are you sure you would like to delete {hotel.Name}?";
-                if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"Are you sure you would like to delete {hotel.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     var res = dao.Delete(hotel.Map());
                     UpdateList();

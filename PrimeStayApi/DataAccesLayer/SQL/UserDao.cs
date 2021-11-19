@@ -33,6 +33,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             }
             catch (SqlException e)
             {
+                Console.WriteLine(e.Message);
                 throw new DaoException("Could not create new user");
             }
 
@@ -55,6 +56,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             }
             catch(SqlException e)
             {
+                Console.WriteLine(e.Message);
                 return new List<UserEntity>();
             }
         }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.Models;
 using PrimeStayApi.Services;
@@ -39,7 +38,11 @@ namespace PrimeStayApi.Controllers
                     Expires = user.Expires,
                 };
                 return Ok(response);
+
+
+
             }
+
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -70,6 +73,7 @@ namespace PrimeStayApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "User could not be registered");
             }
+
         }
 
         [HttpPost]

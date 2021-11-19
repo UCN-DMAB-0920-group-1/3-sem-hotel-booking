@@ -76,7 +76,9 @@ namespace PrimeStayApi.Services
 
             if (user is null)
             {
+
                 string passwordHash = HashPassword(password, "salt");
+
                 return null;
             }
             else
