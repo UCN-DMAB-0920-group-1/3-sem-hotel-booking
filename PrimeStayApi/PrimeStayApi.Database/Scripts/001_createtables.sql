@@ -6,6 +6,7 @@ CREATE TABLE [Hotel] (
   [stars] int NOT NULL,
   [staffed_hours] VARCHAR(1000) NOT NULL,
   [location_id] int NOT NULL,
+  [active] bit,
   PRIMARY KEY ([id])
 )
 GO

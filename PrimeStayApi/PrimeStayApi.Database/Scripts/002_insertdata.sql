@@ -4,10 +4,10 @@
 GO
 
 
-INSERT INTO [dbo].[Hotel] ([name],[description],[stars],[staffed_hours],[location_id])
+INSERT INTO [dbo].[Hotel] ([name],[description],[stars],[staffed_hours],[location_id],[active])
      VALUES
-     ('Hotel Petrús','Classic old fashioned hotel with a river of red wine.',3,'24/7',1),
-     ('Hotel Grøtten','An nice hotel inside a cave, there is no lights at all',1,'24/7',2)
+     ('Hotel Petrús','Classic old fashioned hotel with a river of red wine.',3,'24/7',1,1),
+     ('Hotel Grøtten','An nice hotel inside a cave, there is no lights at all',1,'24/7',2,1)
 GO
 
 INSERT INTO [dbo].[RoomType] ([type],[beds],[description],[rating],[hotel_id])

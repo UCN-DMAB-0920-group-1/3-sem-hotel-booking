@@ -16,15 +16,17 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                  $"AND name LIKE ISNULL(@name,name)" +
                                                                  $"AND description LIKE ISNULL(@description,description)" +
                                                                  $"AND staffed_hours LIKE ISNULL(@staffed_hours,staffed_hours)" +
-                                                                 $"AND stars = ISNULL(@stars,stars)";
+                                                                 $"AND stars = ISNULL(@stars,stars)" +
+                                                                 $"AND active = ISNULL(@active,active)";
 
         private readonly static string SELECTHOTELBYID = $@"Select * FROM Hotel WHERE ID = @id";
 
-        private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id) " +
+        private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id, active) " +
                                                     @"OUTPUT INSERTED.id " +
-                                                     "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id)";
-        private readonly static string UPDATEHOTEL = "UPDATE HOTEL SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id WHERE id=@id;";
+                                                     "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id,@active)";
+        private readonly static string UPDATEHOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=@active WHERE id=@id;";
         private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
+        private readonly static string SOFTDELETE = "UPDATE Hotel SET active=0 WHERE id=@id";
 
         #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -56,7 +58,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             {
                 try
                 {
-                    res = connection.Execute(DELETEHOTEL, model);
+                    res = connection.Execute(SOFTDELETE, model);
                 }
                 catch (System.Exception e)
                 {
