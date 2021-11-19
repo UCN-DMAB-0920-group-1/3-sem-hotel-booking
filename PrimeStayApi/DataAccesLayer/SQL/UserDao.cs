@@ -33,7 +33,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             }
             catch (SqlException e)
             {
-                throw new Exception("User alreade exists"); //TODO custom exception
+                throw new DaoException("Could not create new user");
             }
 
             return -1;
