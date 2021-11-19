@@ -16,7 +16,7 @@ using Version = PrimeStayApi.Database.Version;
 namespace PrimeStayApi.Test
 {
     [TestClass]
-    public class AccountAuthenticationTest
+    public class AccountServiceTest
     {
         #region setup
         private string connectionString = new ENV().ConnectionStringTest;
