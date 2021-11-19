@@ -116,13 +116,17 @@ CREATE TABLE [User] (
   [id] int NOT NULL IDENTITY(1, 1),
   [username]  VARCHAR(256) NOT NULL,
   [password] VARCHAR(256) NOT NULL,
-  [role] VARCHAR(256),
+  [role_id] int NOT NULL,
   [salt] VARCHAR(512) NOT NULL,
   PRIMARY KEY ([id])
 )
 GO
 
-CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
+CREATE TABLE [Role] (
+  [id] int NOT NULL IDENTITY(1, 1),
+  [name]  VARCHAR(250) NOT NULL,
+  PRIMARY KEY ([id])
+)
 GO
 
 CREATE UNIQUE INDEX [UK_Hotel_name] ON [Hotel] ("name")
@@ -153,6 +157,9 @@ CREATE UNIQUE INDEX [UK_Staff_password] ON [Staff] ("password")
 GO
 
 CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
+GO
+
+CREATE UNIQUE INDEX [UK_Role_name] ON [Role] ("name")
 GO
 
 ALTER TABLE [Hotel] WITH CHECK ADD CONSTRAINT [FK_Hotel_location_id] FOREIGN KEY([location_id])
@@ -205,3 +212,6 @@ ALTER TABLE [TablePictures] WITH CHECK ADD CONSTRAINT [FK_TablePictures_picture_
 REFERENCES [Picture] ([id])
 
 ALTER TABLE [TablePictures] CHECK CONSTRAINT [FK_TablePictures_picture_id]
+
+ALTER TABLE [User] WITH CHECK ADD CONSTRAINT [FK_User_Role_id] FOREIGN KEY([role_id])
+REFERENCES [Role] ([id])

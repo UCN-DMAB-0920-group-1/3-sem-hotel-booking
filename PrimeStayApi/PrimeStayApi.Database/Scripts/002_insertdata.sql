@@ -146,8 +146,15 @@ INSERT INTO [dbo].[TablePictures] ([hotel_id],[room_type_id],[type],[picture_id]
     (null,8,'room',10)
 GO
 
-INSERT INTO [dbo].[User] ([username], [password], [role], [salt])
+INSERT INTO [dbo].[Role] ([name])
     VALUES
-    ('Michael', 'Ujm4jtwLY9/yLNBKIonnw85QmQ77UQDPEn0K0Cor2/k=', 'admin', '/9tABheeC6iXYRopgpe1bIe/xBM3jK41vYjfkPvbo0bVYAWyhhcYLZzh/xBcMalElw5n/eTiz55fB3XCdLWKaD79w5jyvS4rUeBRFzT/wqamWvvWAt0rv0MWRBAd18SYUGLdUluSzpo+znAGcov5jB6wKo0eVZ25vBBu14ZFkP7ltN6DZIc35YshNgVYIvheQlsEG7gZ8VAJhAn1dsaqJrTPcZBFLykJ9Das6kk8+enWNd/QpfqundOSoq0OHzeLPYBuiPJB1Q8CVCll05TKBiytShFpxeZJa72AFpHfQX5eHxhshJzy0eCxRCBu9UV67vbi2BC1WqObM1gN2BxP9g=='),
-    ('Mike', 'kyp0iPlRSWkgex3AWXfAV4/8mEi4EynEyjMAY4JB9ek=', 'admin', '364zVZ1Z2n5DOp6G20kLE1cmenpaZ4FlcftJpe8UZO2ErCsPOrcCgMPRqF86ZFbq6x/NMmNOVVLpr7dxJ8Ik8ZDLoaWHI5ewc1XOXGZAsjLRSW7NZnfvMMN1a9BwiBEoPuS7RuLcEiWwUoi+8oK9tR2S3JKPfcwoW5tpTnCIxYg/jOvupv6QsNlzD+FMBMWDZWuf0uW5IpPA2Y2Ilvxc1U0Pxegd2qgx/fK9xYO+8ZtB9do7WmD0vHLWb9cChv8PNtsQxXwQYGs96hbGl6M2GX5K83sLk8hYIpMl0jS6sjG9RGN/w7XdLFdebyG9twUj0wkdCiaD5lPO/w9biZ/DvA==')
+    ('admin'),
+    ('user')
+GO
+
+INSERT INTO [dbo].[User] ([username], [password], [role_id], [salt])
+    VALUES
+    ('Michael', 'Ujm4jtwLY9/yLNBKIonnw85QmQ77UQDPEn0K0Cor2/k=', 1, '/9tABheeC6iXYRopgpe1bIe/xBM3jK41vYjfkPvbo0bVYAWyhhcYLZzh/xBcMalElw5n/eTiz55fB3XCdLWKaD79w5jyvS4rUeBRFzT/wqamWvvWAt0rv0MWRBAd18SYUGLdUluSzpo+znAGcov5jB6wKo0eVZ25vBBu14ZFkP7ltN6DZIc35YshNgVYIvheQlsEG7gZ8VAJhAn1dsaqJrTPcZBFLykJ9Das6kk8+enWNd/QpfqundOSoq0OHzeLPYBuiPJB1Q8CVCll05TKBiytShFpxeZJa72AFpHfQX5eHxhshJzy0eCxRCBu9UV67vbi2BC1WqObM1gN2BxP9g=='),
+    ('Mike', 'kyp0iPlRSWkgex3AWXfAV4/8mEi4EynEyjMAY4JB9ek=', 2, '364zVZ1Z2n5DOp6G20kLE1cmenpaZ4FlcftJpe8UZO2ErCsPOrcCgMPRqF86ZFbq6x/NMmNOVVLpr7dxJ8Ik8ZDLoaWHI5ewc1XOXGZAsjLRSW7NZnfvMMN1a9BwiBEoPuS7RuLcEiWwUoi+8oK9tR2S3JKPfcwoW5tpTnCIxYg/jOvupv6QsNlzD+FMBMWDZWuf0uW5IpPA2Y2Ilvxc1U0Pxegd2qgx/fK9xYO+8ZtB9do7WmD0vHLWb9cChv8PNtsQxXwQYGs96hbGl6M2GX5K83sLk8hYIpMl0jS6sjG9RGN/w7XdLFdebyG9twUj0wkdCiaD5lPO/w9biZ/DvA=='),
+    ('admin', '+vkKwhs55Ablp5+oVPQZ0dUdHKy3XF/xgQ9Hk4FF9r0=',1, 'ULT//gIJRbU3YoPW0eHxTR+6/rwmZ26RCJM+6kgw+sIW1EncFDvJ98qUZ4ovKf71Z/eaBVwLDW37X0qPqJO5p3Pk/dH7Ne4g8oNRZBEoApWVxbjXTcKpvPYBMfmd0cI65aTSv162ITgWJFtZw40CTlSYXXPRdWLZWVT2pjcL852TISCgifMBw2A0L9ckZzJK6F+XpjmKiZla6FdAhvxr27M1zdfV9fN6TCdeZP+BgYPUsoWmJqBckopa2URzqFoFylr6bwYk3Q+ptBpkKHgKDh3r5FGKfDcNpyoswpnBIua5Ovso23L4diFVRK0U8QHAd/3ob2A+A9Aj5i+8PtAPFw==')
 GO
