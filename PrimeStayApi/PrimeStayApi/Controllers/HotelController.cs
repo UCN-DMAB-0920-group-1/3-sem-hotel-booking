@@ -74,15 +74,15 @@ namespace PrimeStayApi.Controllers
         [HttpPut]
         public ActionResult Edit([FromBody] HotelDto hotel)
         {
-            return _dao.Update(hotel.Map()) == 1 ? Ok() : NotFound();
-
-
+            int res = _dao.Update(hotel.Map());
+            return res != -1 ? Ok("Number of rows affected: " + res) : NotFound("Bad data, could not update hotel, check attributes");
         }
 
         [HttpDelete]
         public ActionResult Delete([FromBody] HotelDto hotel)
         {
-            return _dao.Delete(hotel.Map()) == 1 ? Ok() : NotFound();
+            int res = _dao.Delete(hotel.Map());
+            return res == 1 ? Ok("Hotel successfully deleted") : NotFound("Bad data: Hotel could not be deleted, check attributes");
         }
 
 

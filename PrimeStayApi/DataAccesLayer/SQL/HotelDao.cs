@@ -4,6 +4,7 @@ using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 
 namespace PrimeStayApi.DataAccessLayer.SQL
 {
@@ -22,8 +23,8 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id) " +
                                                     @"OUTPUT INSERTED.id " +
                                                      "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id)";
-        private readonly static string UPDATEHOTEL = "";
-        private readonly static string DELETEHOTEL = "";
+        private readonly static string UPDATEHOTEL = "UPDATE HOTEL SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id WHERE id=@id;";
+        private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
 
         #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -33,16 +34,15 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         public int Create(HotelEntity model)
         {
             int res = -1;
-            using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
+            using (IDbConnection connection = DataContext.Open())
             {
                 try
                 {
-                    res = transaction.ExecuteScalar<int>(INSERTHOTEL, model);
-                    transaction.Commit();
+                    res = connection.ExecuteScalar<int>(INSERTHOTEL, model);
                 }
-                catch
+                catch (System.Exception e)
                 {
-                    transaction.Rollback();
+                    Debug.WriteLine(e);
                     return res;
                 }
             }
@@ -51,11 +51,20 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Delete(HotelEntity model)
         {
+            int res = -1;
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<int>(DELETEHOTEL, model);
-
-            };
+                try
+                {
+                    res = connection.Execute(DELETEHOTEL, model);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return res;
+                }
+            }
+            return res;
         }
 
         public IEnumerable<HotelEntity> ReadAll(HotelEntity model)
@@ -67,7 +76,6 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<HotelEntity>(SELECTALLHOTELS, model);
-
             };
         }
 
@@ -83,10 +91,19 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Update(HotelEntity model)
         {
+            int res = -1;
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<int>(UPDATEHOTEL, model);
-
+                try
+                {
+                    res = connection.Execute(UPDATEHOTEL, model);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.WriteLine(e);
+                    return res;
+                }
+                return res;
             };
         }
     }
