@@ -1,4 +1,5 @@
-﻿using PrimestayWpf.Model;
+﻿using primestayWpf.Forms;
+using PrimestayWpf.Model;
 using System.Windows;
 using System.Windows.Media;
 
@@ -23,7 +24,8 @@ namespace primestayWpf.HotelCRUD
             StaffedHours.Text = hotel.StaffedHours;
             Stars.Value = hotel.Stars ?? 0d;
             LocationHref.Text = hotel.LocationHref;
-            HotelHref = hotel.href;
+            HotelHref = hotel.Href;
+            Active.IsChecked = hotel.Active;
 
         }
 

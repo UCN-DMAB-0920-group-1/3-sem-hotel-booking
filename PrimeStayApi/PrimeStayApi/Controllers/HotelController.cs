@@ -31,7 +31,7 @@ namespace PrimeStayApi.Controllers
                     Description = hotel.Description,
                     Staffed_hours = hotel.StaffedHours,
                     Stars = hotel.Stars,
-                    Active = hotel.Active
+                    Active = hotel.Active,
                 }).Select(h => h.Map()));
 
             }

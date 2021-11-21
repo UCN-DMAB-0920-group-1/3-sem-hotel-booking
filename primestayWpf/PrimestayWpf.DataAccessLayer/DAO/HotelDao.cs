@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
+
 namespace PrimeStay.WPF.DataAccessLayer.DAO
 
 {
@@ -14,11 +15,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(HotelDto model)
+        public string Create(HotelDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);
+            restRequest.AddHeader("Authorization", token); //TOTO find ud af hvad den der header hedder
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
             {
@@ -29,7 +31,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         }
 
-        public int Delete(HotelDto model)
+        public int Delete(HotelDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
@@ -57,7 +59,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return restClient.Get<HotelDto>(restRequest).Data;
         }
 
-        public int Update(HotelDto model)
+        public int Update(HotelDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
