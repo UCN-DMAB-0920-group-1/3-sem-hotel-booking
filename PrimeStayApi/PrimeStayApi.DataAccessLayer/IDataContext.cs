@@ -1,9 +1,11 @@
-﻿using System.Data;
-
-namespace PrimeStayApi.DataAccessLayer
+﻿namespace PrimeStayApi.DataAccessLayer
 {
     public interface IDataContext
     {
-        IDbConnection OpenConnection();
+    }
+
+    public interface IDataContext<T> : IDataContext
+    {
+        T Open();
     }
 }

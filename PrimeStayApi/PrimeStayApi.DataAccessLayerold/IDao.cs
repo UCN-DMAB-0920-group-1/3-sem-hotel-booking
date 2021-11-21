@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PrimeStayApi.Model;
+using System.Collections.Generic;
 
 namespace PrimeStayApi.DataAccessLayer
 {
