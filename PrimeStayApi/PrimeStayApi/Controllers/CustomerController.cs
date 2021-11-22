@@ -5,50 +5,38 @@ using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PrimeStayApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BookingController : Controller
+    public class CustomerController : Controller
     {
-        private readonly IDao<BookingEntity> _dao;
-        public BookingController(IDao<BookingEntity> dao)
+        private readonly IDao<CustomerEntity> _dao;
+        public CustomerController(IDao<CustomerEntity> dao)
         {
             _dao = dao;
         }
         // GET: BookingController
         [HttpGet]
-        public IEnumerable<BookingDto> Index([FromQuery] BookingDto booking)
+        public IEnumerable<CustomerEntity> Index([FromQuery] CustomerDto customer)
         {
-            return _dao.ReadAll(new BookingEntity()
-            {
-                Id = booking.ExtractId(),
-                Start_date = booking.StartDate,
-                End_date = booking.EndDate,
-                Guests = booking.Guests,
-                Room_id = DtoExtentions.GetIdFromHref(booking.RoomHref),
-                Customer_id = DtoExtentions.GetIdFromHref(booking.CustomerHref)
-
-            }).Select(h => h.Map());
+            throw new NotImplementedException();
         }
 
         // GET: api/Booking/5
         [HttpGet]
         [Route("{id}")]
-        public BookingDto Details(int id)
+        public CustomerDto Details(int id)
         {
             return _dao.ReadById(id).Map();
         }
 
         // POST: BookingController/
         [HttpPost]
-        public ActionResult Create([FromBody] BookingDto booking)
+        public ActionResult Create([FromBody] CustomerDto customer)
         {
-            int id = _dao.Create(booking.Map());
-            booking.Href = $"api/booking/{id}";
-            return Created(booking.Href, booking);
+            throw new NotImplementedException();
         }
 
         // PUT: BookingController/Edit/5
