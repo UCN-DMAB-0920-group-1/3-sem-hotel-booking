@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
@@ -79,7 +78,7 @@ namespace PrimeStayApi.Controllers
         // PUT: BookingController/Edit/5
         [HttpPut]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(BookingDto booking)
         {
             throw new NotImplementedException();
         }
@@ -87,7 +86,7 @@ namespace PrimeStayApi.Controllers
         // DELETE: BookingController/Delete/5
         [HttpDelete]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(BookingDto booking)
         {
             throw new NotImplementedException();
         }
