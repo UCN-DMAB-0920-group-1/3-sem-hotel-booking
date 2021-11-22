@@ -1,9 +1,14 @@
-﻿namespace PrimeStay.WPF.DataAccessLayer.DTO
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrimestayWpf.Model
 {
-    public class RoomTypeDto : BaseDto
+    public class RoomType : BaseModel
     {
         public string Type { get; set; }
-        public int? Avaliable { get; set; }
         public int? Beds { get; set; }
         public string Description { get; set; }
         public int? Rating { get; set; }
