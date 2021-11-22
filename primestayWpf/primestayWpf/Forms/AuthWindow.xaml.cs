@@ -16,6 +16,7 @@ namespace primestayWpf.Forms
             InitializeComponent();
             this.dao = _dao;
             this.parrent = parrent;
+            usernameField.Focus();
         }
 
         public void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -41,6 +42,11 @@ namespace primestayWpf.Forms
                 parrent.Login();
                 Close();
             }
+        }
+
+        private void passwordField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key is System.Windows.Input.Key.Enter) loginBtn_Click(sender, e);
         }
     }
 
