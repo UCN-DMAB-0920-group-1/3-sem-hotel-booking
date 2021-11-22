@@ -33,7 +33,7 @@ namespace PrimeStay.MVC.Controllers
                 End_date = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
                 Room_type_href = Request.Query["roomType"],
-                Customer_href = "api/cutomer/1", //TODO find actual customer ;-) 
+                Customer = customer,
 
 
             };
