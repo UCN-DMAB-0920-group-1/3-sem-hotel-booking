@@ -34,5 +34,27 @@ namespace PrimestayWPF.DataAccessLayer.DTO
             };
         }
 
+
+
+        public static Customer Map(this CustomerDto customer)
+        {
+            return new Customer()
+            {
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                BirthDay = customer.BirthDay,
+            };
+        }
+        public static CustomerDto Map(this Customer customer)
+        {
+            return new CustomerDto ()
+            {
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                BirthDay = customer.BirthDay,
+            };
+        }
     }
 }

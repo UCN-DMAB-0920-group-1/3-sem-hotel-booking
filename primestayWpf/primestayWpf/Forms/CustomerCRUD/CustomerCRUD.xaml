@@ -1,0 +1,27 @@
+﻿<Window x:Class="primestayWpf.Forms.CustomerCRUD.CustomerCRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:primestayWpf.Forms.CustomerCRUD"
+        mc:Ignorable="d"
+        Title="CustomerCRUD" Height="450" Width="829">
+    <Grid>
+        <ListView x:Name="CustomerListView" Margin="0,0,319,0" SelectionChanged="CustomerListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Email"  DisplayMemberBinding="{Binding Description}"/>
+                        <GridViewColumn Header="Bithday" DisplayMemberBinding="{Binding StaffedHours}"/>
+                        <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Stars}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Click="Edit" Content="Edit" HorizontalAlignment="Left" Margin="718,132,0,0" VerticalAlignment="Top"/>
+        <Button Click="Create" Content="Edit" HorizontalAlignment="Left" Margin="657,88,0,0" VerticalAlignment="Top"/>
+        <Button Click="Delete" Content="Edit" HorizontalAlignment="Left" Margin="695,217,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

@@ -11,21 +11,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
-namespace primestayWpf.
+namespace primestayWpf.Forms.CustomerCRUD
 {
-    /// <summary>
-    /// Interaction logic for CustomerMenu.xaml
-    /// </summary>
-    public partial class CustomerMenu : Window
+    public partial class CustomerCRUD : Window
     {
         private readonly IDao<CustomerDto> dao;
-        private ObservableCollection<Customer> CustomerList  { get; set; } = new ObservableCollection<Customer>();
-        public CustomerMenu(IDao<CustomerDto> _dao)
+        private ObservableCollection<Customer> CustomerList { get; set; } = new ObservableCollection<Customer>();
+
+        public CustomerCRUD(IDao<CustomerDto> _dao)
         {
             InitializeComponent();
             dao = _dao;
             CustomerListView.ItemsSource = CustomerList;
             UpdateList();
         }
+
+
+
+
+        private void UpdateList()
+        {
+            var customers = dao.ReadAll(new CustomerDto()).Select(x => x.Map());
+            CustomerList.Clear();
+            customers.ToList().ForEach(x => CustomerList.Add(x));
+        }
+
     }
 }
