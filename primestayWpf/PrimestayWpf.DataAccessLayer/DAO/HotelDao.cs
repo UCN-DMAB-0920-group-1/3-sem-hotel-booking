@@ -27,8 +27,6 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
                 HttpStatusCode.Created => response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as string,
                 _ => null
             };
-
-
         }
 
         public int Delete(HotelDto model, string token)

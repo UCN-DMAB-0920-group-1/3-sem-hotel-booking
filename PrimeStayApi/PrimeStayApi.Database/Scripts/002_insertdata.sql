@@ -10,16 +10,16 @@ INSERT INTO [dbo].[Hotel] ([name],[description],[stars],[staffed_hours],[locatio
      ('Hotel Grøtten','An nice hotel inside a cave, there is no lights at all',1,'24/7',2,1)
 GO
 
-INSERT INTO [dbo].[RoomType] ([type],[beds],[description],[rating],[hotel_id])
+INSERT INTO [dbo].[RoomType] ([type],[beds],[description],[rating],[hotel_id], [active])
      VALUES 
-     ('Junior Suite',4,'Junior suite smaller room but space for 4',2,1),
-     ('Economy Suite',2,'Economy suite with 2 bunk beds',3,1),
-     ('Standard Suite',2,'Standard suite with twin beds',4,1),
-     ('Premium Suite',2,'Premium suite with champagne',5,1),
-     ('Economy Suite',2,'Economy suite with 2 bunk beds',2,2),
-     ('Standard Suite',2,'Standard suite with twin beds',4,2),
-     ('Premium Suite',2,'Premium suite with champagne',5,2),
-     ('Penthouse Suite',1,'Penthouse suite with queen-size bed',5,2)
+     ('Junior Suite',4,'Junior suite smaller room but space for 4',2,1,1),
+     ('Economy Suite',2,'Economy suite with 2 bunk beds',3,1,1),
+     ('Standard Suite',2,'Standard suite with twin beds',4,1,1),
+     ('Premium Suite',2,'Premium suite with champagne',5,1,1),
+     ('Economy Suite',2,'Economy suite with 2 bunk beds',2,2,1),
+     ('Standard Suite',2,'Standard suite with twin beds',4,2,1),
+     ('Premium Suite',2,'Premium suite with champagne',5,2,1),
+     ('Penthouse Suite',1,'Penthouse suite with queen-size bed',5,2,1)
 GO
 
 INSERT INTO [dbo].[Room] ([Room_number], [Room_Type_id], [notes], [active])

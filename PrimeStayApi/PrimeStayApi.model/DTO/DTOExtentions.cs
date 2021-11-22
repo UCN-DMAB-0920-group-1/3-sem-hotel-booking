@@ -74,7 +74,8 @@ namespace PrimeStayApi.Model.DTO
                 Beds = room.beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                hotelHref = GetHrefFromId(typeof(HotelEntity), room.Hotel_Id)
+                hotelHref = GetHrefFromId(typeof(HotelEntity), room.Hotel_Id),
+                Active = room.Active ?? false,
             };
         }
 
@@ -90,6 +91,7 @@ namespace PrimeStayApi.Model.DTO
                 Description = room.Description,
                 Rating = room.Rating,
                 Hotel_Id = GetIdFromHref(room.hotelHref),
+                Active = room.Active,
             };
         }
 

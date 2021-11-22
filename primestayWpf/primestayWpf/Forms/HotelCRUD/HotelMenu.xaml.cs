@@ -73,14 +73,10 @@ namespace primestayWpf
             string text = $"Are you sure you would like to delete {hotel?.Name ?? "this hotel"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show($"Are you sure you would like to delete {hotel.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    var res = dao.Delete(hotel.Map(), Auth.AccessToken);
-                    UpdateList();
-                    if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was deleted");
-                    else MessageBox.Show($"Could not delete {hotel.Name}, contact admin");
-                }
-
+                var res = dao.Delete(hotel.Map(), Auth.AccessToken);
+                UpdateList();
+                if (res > 0) MessageBox.Show($"Hotel {hotel!.Name} was deleted");
+                else MessageBox.Show($"Could not delete {hotel!.Name}, contact admin");
             }
         }
 

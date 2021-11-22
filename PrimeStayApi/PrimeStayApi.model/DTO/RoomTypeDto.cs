@@ -8,5 +8,7 @@
         public string Description { get; set; }
         public int? Rating { get; set; }
         public string hotelHref { get; set; }
+
+        public bool Active { get; set; }
     }
 }
