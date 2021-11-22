@@ -123,10 +123,10 @@ namespace PrimeStayApi.Test
 
             //Act
             var res = controller.Index(hotel.Map());
+            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             //Assert
             Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
-            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             Assert.IsNotNull(hotels);
             Assert.IsTrue(hotels.Any());

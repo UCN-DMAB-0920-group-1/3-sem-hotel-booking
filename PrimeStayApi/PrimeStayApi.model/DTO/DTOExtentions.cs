@@ -146,6 +146,8 @@ namespace PrimeStayApi.Model.DTO
                 Name = customer.Name,
                 Email = customer.Email,
                 Phone = customer.Phone,
+                Birthday = customer.Birthday,
+
             };
         }
         public static CustomerDto Map(this CustomerEntity customer)
@@ -156,6 +158,7 @@ namespace PrimeStayApi.Model.DTO
                 Name = customer.Name,
                 Email = customer.Email,
                 Phone = customer.Phone,
+                Birthday = customer.Birthday,
             };
         }
         #region helperMethods

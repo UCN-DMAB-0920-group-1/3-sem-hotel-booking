@@ -2,7 +2,6 @@
 using Dapper.Transaction;
 using PrimeStayApi.DataAccessLayer.DAO;
 using PrimeStayApi.Model;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -13,17 +12,16 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         #region SQL-Queries
         private static readonly string SELECTCUSTOMERBYID = @"SELECT * FROM Customer WHERE id = @id";
 
-        private static readonly string SELECTALLCUSTOMER = @"SELECT * FROM Booking WHERE " +
+        private static readonly string SELECTALLCUSTOMER = @"SELECT * FROM Customer WHERE " +
                                                             "id = ISNULL(@id,id)" +
-                                                            "AND start_date >= ISNULL(@Start_date, Start_date)" +
-                                                            "AND end_date <= ISNULL(@End_date, End_date)" +
-                                                            "AND guests LIKE ISNULL(@guests, guests)" +
-                                                            "AND room_id = ISNULL(@Room_id, Room_id)" +
-                                                            "AND customer_id = ISNULL(@Customer_id, Customer_id)";
+                                                            "AND Name = ISNULL(@Name, Name)" +
+                                                            "AND Email = ISNULL(@Email, Email)" +
+                                                            "AND Birthday = ISNULL(@Birthday, Birthday)" +
+                                                            "AND Phone = ISNULL(@Phone, Phone)";
 
-        private static readonly string INSERTCUSTOMERRETURNID = @"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
+        private static readonly string INSERTCUSTOMERRETURNID = @"INSERT INTO Customer (Name, Email, Phone,Birthday) " +
                                                                 @"OUTPUT INSERTED.id " +
-                                                                @"VALUES (@Start_date, @End_date, @Guests,@Room_id,@Customer_id)";
+                                                                @"VALUES (@Name, @Email, @Phone,@Birthday)";
 
 
         #endregion
@@ -34,7 +32,18 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Create(CustomerEntity model)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = DataContext.Open())
+            {
+                try
+                {
+                    return connection.ExecuteScalar<int>(INSERTCUSTOMERRETURNID, model);
+                }
+                catch (System.Exception)
+                {
+
+                    return -1;
+                }
+            }
         }
 
         public int Delete(CustomerEntity model)
