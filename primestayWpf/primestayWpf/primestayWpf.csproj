@@ -26,4 +26,13 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Forms\RoomTypeCRUD\RoomTypeForm.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Forms\RoomTypeCRUD\RoomTypeWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -133,6 +133,33 @@ namespace PrimeStayApi.Test
             Assert.IsFalse(hotels.Where(h => h is null).Any());
             Assert.AreEqual(2, hotels.Count());
         }
+
+        [TestMethod]
+        public void CreataeHotel()
+        {
+            //Arrange
+            HotelController controller = new HotelController(new MockHotelDao());
+            var hotel = new HotelEntity()
+            {
+                Name = "Test Create",
+                Description = "Test Create",
+                Staffed_hours = "Test Create",
+                Stars = 1,
+                Active = true,
+            };
+
+            //Act
+            var res = controller.Create(hotel.Map());
+
+            //Assert
+            Assert.AreEqual(res.GetType(), typeof(CreatedResult));
+            var hotels = (res as OkObjectResult).Value as IEnumerable<HotelDto>;
+
+            Assert.IsNotNull(hotels);
+            Assert.IsTrue(hotels.Any());
+            Assert.IsFalse(hotels.Where(h => h is null).Any());
+            Assert.AreEqual(2, hotels.Count());
+        }
     }
 
     #region mock implementations
