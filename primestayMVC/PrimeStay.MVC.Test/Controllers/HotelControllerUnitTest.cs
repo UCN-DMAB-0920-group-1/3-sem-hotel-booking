@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using System.Collections.Generic;
@@ -44,17 +42,7 @@ namespace PrimeStay.MVC.Controllers.Tests
         {
             //Arrange
             _controller = new HotelController(_hotelDao, _locationDao, _roomDao);
-            var collection = new FormCollection(new Dictionary<string, StringValues>()
-            {
-                {"Location", "" },
-                {"checkIn", "10/10/2021" },
-                {"checkOut", "10/10/2021" },
-                {"guests", "1" },
-                {"minPrice", "1" },
-                {"maxPrice", "1" },
-
-            }
-            );
+            var collection = "api/hotel/1";
             //Act 
             var testView = _controller.Result(collection);
             //Assert 
@@ -77,29 +65,84 @@ namespace PrimeStay.MVC.Controllers.Tests
 
         internal class mockHotelDao : IDao<HotelDto>
         {
-            public string Create(HotelDto model) => "test";
-            public int Delete(HotelDto model) => -1;
-            public IEnumerable<HotelDto> ReadAll(HotelDto model) => new List<HotelDto>() { new HotelDto() { Name = "test1" }, new HotelDto() { Name = "test2" } };
-            public HotelDto ReadByHref(string href) => new HotelDto() { Name = "test" };
-            public int Update(HotelDto model) => -1;
+            public string Create(HotelDto model)
+            {
+                return "test";
+            }
+
+            public int Delete(HotelDto model)
+            {
+                return -1;
+            }
+
+            public IEnumerable<HotelDto> ReadAll(HotelDto model)
+            {
+                return new List<HotelDto>() { new HotelDto() { Name = "test1" }, new HotelDto() { Name = "test2" } };
+            }
+
+            public HotelDto ReadByHref(string href)
+            {
+                return new HotelDto() { Name = "test" };
+            }
+
+            public int Update(HotelDto model)
+            {
+                return -1;
+            }
         }
         internal class mockLocationDao : IDao<LocationDto>
         {
-            public string Create(LocationDto model) => "test";
-            public int Delete(LocationDto model) => -1;
-            public IEnumerable<LocationDto> ReadAll(LocationDto model) => new List<LocationDto>() { new LocationDto() { City = "test1" }, new LocationDto() { City = "test2" } };
-            public LocationDto ReadByHref(string href) => new LocationDto() { City = "test" };
-            public int Update(LocationDto model) => -1;
+            public string Create(LocationDto model)
+            {
+                return "test";
+            }
+
+            public int Delete(LocationDto model)
+            {
+                return -1;
+            }
+
+            public IEnumerable<LocationDto> ReadAll(LocationDto model)
+            {
+                return new List<LocationDto>() { new LocationDto() { City = "test1" }, new LocationDto() { City = "test2" } };
+            }
+
+            public LocationDto ReadByHref(string href)
+            {
+                return new LocationDto() { City = "test" };
+            }
+
+            public int Update(LocationDto model)
+            {
+                return -1;
+            }
         }
         internal class mockRoomDao : IDao<RoomTypeDto>
         {
-            public string Create(RoomTypeDto model) => "test";
-            public int Delete(RoomTypeDto model) => -1;
+            public string Create(RoomTypeDto model)
+            {
+                return "test";
+            }
 
-            public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model) => new List<RoomTypeDto>() { new RoomTypeDto() { Type = "test1" }, new RoomTypeDto() { Type = "test2" } };
-            public RoomTypeDto ReadByHref(string href) => new RoomTypeDto() { Type = "test" };
+            public int Delete(RoomTypeDto model)
+            {
+                return -1;
+            }
 
-            public int Update(RoomTypeDto model) => -1;
+            public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model)
+            {
+                return new List<RoomTypeDto>() { new RoomTypeDto() { Type = "test1" }, new RoomTypeDto() { Type = "test2" } };
+            }
+
+            public RoomTypeDto ReadByHref(string href)
+            {
+                return new RoomTypeDto() { Type = "test" };
+            }
+
+            public int Update(RoomTypeDto model)
+            {
+                return -1;
+            }
         }
 
     }
