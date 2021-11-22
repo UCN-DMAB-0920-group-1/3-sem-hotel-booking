@@ -11,5 +11,6 @@ namespace PrimeStay.MVC.DataAccessLayer.DTO
         public string RoomTypeHref { get; set; }
         public string RoomHref { get; set; }
         public string CustomerHref { get; set; }
+        public CustomerDto Customer { get; set; }
     }
 }

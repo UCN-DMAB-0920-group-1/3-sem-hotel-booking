@@ -26,6 +26,7 @@ namespace PrimeStay.MVC.Controllers
                 Name = Request.Form["name"],
                 Email = Request.Form["email"],
                 Phone = Request.Form["phone"],
+                Birthday = DateTime.Parse(Request.Form["Birthday"] + "Z"),
             };
             Booking booking = new()
             {

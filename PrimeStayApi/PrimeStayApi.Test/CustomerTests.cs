@@ -70,5 +70,43 @@ namespace PrimeStayApi.Test
             Assert.IsInstanceOfType(res, typeof(CreatedResult));
 
         }
+        [TestMethod]
+        public void DeleteCustomer()
+        {
+            //Arrange
+            var customer = new CustomerEntity()
+            {
+                Id = 2,
+                Name = "Delete test",
+                Email = "Delete test",
+                Phone = "Delete test",
+                Birthday = DateTime.Parse("1990-01-01"),
+            };
+            CustomerController customerCtrl = new CustomerController(DaoFactory.Create<CustomerEntity>(_dataContext));
+            //Act
+            var res = customerCtrl.Delete(customer.Map());
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+        }
+        [TestMethod]
+        public void UpdateCustomer()
+        {
+            //Arrange
+            var customer = new CustomerEntity()
+            {
+                Id = 1,
+                Name = "Update test",
+                Email = "Update test",
+                Phone = "Update test",
+                Birthday = DateTime.Parse("1990-01-01"),
+            };
+            CustomerController customerCtrl = new CustomerController(DaoFactory.Create<CustomerEntity>(_dataContext));
+            //Act
+            var res = customerCtrl.Edit(customer.Map());
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+        }
     }
 }

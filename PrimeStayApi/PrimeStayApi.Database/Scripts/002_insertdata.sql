@@ -72,7 +72,9 @@ GO
 
 INSERT INTO [dbo].[Customer] ([name],[email],[phone],[birthday])
     VALUES 
-    ('Mia Afilahk','MiaAfilahk@watersports.com','64623510','1990-01-01')
+    ('Mia Afilahk','MiaAfilahk@watersports.com','64623510','1990-01-01'),
+        ('Delete Test','Delete test','Delete Test','1990-01-01')
+
 GO
 
 INSERT INTO [dbo].[Credit_Information] ([customer_id],[card_holder_name],[card_number],[expiration_date],[CVC_number])
