@@ -5,6 +5,9 @@ using primestayWpf.HotelCRUD;
 using primestayWpf.src.auth;
 using PrimestayWpf.Model;
 using PrimestayWPF.DataAccessLayer.DTO;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -35,22 +38,31 @@ namespace primestayWpf
             {
                 var form = oldHotel is null ? new HotelForm() : new HotelForm(oldHotel);
                 var yesNo = form.ShowDialog();
+
+                string errors = validateForm(form.Name.Text, form.Description.Text, form.StaffedHours.Text, form.LocationHref.Text, (int)form.Stars.Value);
+
                 if (yesNo ?? false)
                 {
-                    Hotel hotel = new()
+                    if (!string.IsNullOrEmpty(errors))
                     {
-                        Href = form.HotelHref,
-                        Name = form.Name.Text,
-                        Description = form.Description.Text,
-                        LocationHref = form.LocationHref.Text,
-                        StaffedHours = form.StaffedHours.Text,
-                        Stars = (int)form.Stars.Value,
-                        Active = form.Active.IsChecked,
-                    };
-                    var res = dao.Update(hotel.Map(), Auth.AccessToken);
-                    UpdateList();
-                    if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was updated");
-                    else MessageBox.Show($"Could not update {hotel.Name}, contact admin");
+                        MessageBox.Show(errors, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        Hotel hotel = new()
+                        {
+                            Href = form.HotelHref,
+                            Name = form.Name.Text,
+                            Description = form.Description.Text,
+                            LocationHref = form.LocationHref.Text,
+                            StaffedHours = form.StaffedHours.Text,
+                            Stars = (int)form.Stars.Value,
+                        };
+                        var res = dao.Update(hotel.Map(), Auth.AccessToken);
+                        UpdateList();
+                        if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was updated");
+                        else MessageBox.Show($"Could not update {hotel.Name}, contact admin");
+                    }
                 }
             }
 
@@ -78,21 +90,30 @@ namespace primestayWpf
             var yesNo = form.ShowDialog();
             if (yesNo ?? false)
             {
-                Hotel hotel = new()
+
+                string errors = validateForm(form.Name.Text, form.Description.Text, form.StaffedHours.Text, form.LocationHref.Text, (int)form.Stars.Value);
+
+                if (!string.IsNullOrEmpty(errors))
                 {
-                    Name = form.Name.Text,
-                    Description = form.Description.Text,
-                    LocationHref = form.LocationHref.Text,
-                    StaffedHours = form.StaffedHours.Text,
-                    Stars = (int)form.Stars.Value,
-                    Active = form.Active.IsChecked,
-                };
-                var newHotelHref = dao.Create(hotel.Map(), Auth.AccessToken);
-                if (newHotelHref is null) MessageBox.Show("could not create Hotel");
+                    MessageBox.Show(errors, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 else
                 {
-                    MessageBox.Show($"Hotel: {hotel.Name} was succesfully created");
-                    UpdateList();
+                    Hotel hotel = new()
+                    {
+                        Name = form.Name.Text,
+                        Description = form.Description.Text,
+                        LocationHref = form.LocationHref.Text,
+                        StaffedHours = form.StaffedHours.Text,
+                        Stars = (int)form.Stars.Value,
+                    };
+                    var newHotelHref = dao.Create(hotel.Map(), Auth.AccessToken);
+                    if (newHotelHref is null) MessageBox.Show("could not create Hotel");
+                    else
+                    {
+                        MessageBox.Show($"Hotel: {hotel.Name} was succesfully created");
+                        UpdateList();
+                    }
                 }
             }
 
@@ -105,5 +126,43 @@ namespace primestayWpf
             hotels.ToList().ForEach(x => HotelList.Add(x));
         }
 
+        private string validateForm(string? name, string? Description, string? staffedHours, string? location, int? stars)
+        {
+            List<string> errors = new List<string>();
+
+
+            if (string.IsNullOrEmpty(name))
+            {
+                errors.Add("Please enter a name");
+            }
+
+            if (string.IsNullOrEmpty(Description))
+            {
+                errors.Add("Please enter a description");
+            }
+
+            if (string.IsNullOrEmpty(staffedHours))
+            {
+                errors.Add("Please a time when the hotel is staffed");
+            }
+
+            if (string.IsNullOrEmpty(location))
+            {
+                errors.Add("Please a valid location");
+            }
+
+            if (stars == null)
+            {
+                errors.Add("Please some stars");
+            }
+            else if (stars < 1)
+            {
+                errors.Add("Please enter more than 0 stars");
+            }
+
+            string error = string.Join(",\n", errors);
+
+            return error;
+        }
     }
 }
