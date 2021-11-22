@@ -28,8 +28,8 @@
                         <GridViewColumn Header="StaffedHours" DisplayMemberBinding="{Binding StaffedHours}"/>
                         <GridViewColumn Header="Stars" DisplayMemberBinding="{Binding Stars}"/>
                         <GridViewColumn Header="LocationHref" DisplayMemberBinding="{Binding LocationHref}"/>
-                        <GridViewColumn Header="href" DisplayMemberBinding="{Binding Href}"/>
-                        <GridViewColumn Header="href" DisplayMemberBinding="{Binding Active}"/>
+                        <GridViewColumn Header="Href" DisplayMemberBinding="{Binding Href}"/>
+                        <GridViewColumn Header="Active" DisplayMemberBinding="{Binding Active}"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>

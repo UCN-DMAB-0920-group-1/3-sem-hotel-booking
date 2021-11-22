@@ -28,6 +28,7 @@ CREATE TABLE [Room] (
   [room_type_id] int NOT NULL,
   [room_number] VARCHAR(250),
   [notes] VARCHAR(1000),
+  [active] bit NOT NULL DEFAULT 1,
   PRIMARY KEY ([id])
 )
 GO

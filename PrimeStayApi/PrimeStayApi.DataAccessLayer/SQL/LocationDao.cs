@@ -10,13 +10,13 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<LocationEntity>
     {
         #region SQL-Queries
-        private readonly static string SELECTALLLOCATIONS = $@"SELECT * FROM Location WHERE " +
+        private readonly static string SELECT_ALL_LOCATIONS = $@"SELECT * FROM Location WHERE " +
                                                                $"id=ISNULL(@id,id) " +
                                                                $"AND Street_Address=ISNULL(@Street_Address,Street_Address)" +
                                                                $"AND Zip_code=ISNULL(@Zip_code,Zip_code)" +
                                                                $"AND City=ISNULL(@City,City)" +
                                                                $"AND Country=ISNULL(@Country,Country)";
-        private readonly static string SELECTLOCATIONBYID = @$"SELECT * FROM Location WHERE id = @id";
+        private readonly static string SELECT_LOCATION_BY_ID = @$"SELECT * FROM Location WHERE id = @id";
 
         #endregion
         public LocationDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -41,7 +41,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             model.Country = model.Country != null ? "%" + model.Country + "%" : null;
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<LocationEntity>(SELECTALLLOCATIONS, model);
+                return connection.Query<LocationEntity>(SELECT_ALL_LOCATIONS, model);
             }
         }
 
@@ -49,7 +49,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<LocationEntity>(SELECTLOCATIONBYID, new { id });
+                return connection.QueryFirst<LocationEntity>(SELECT_LOCATION_BY_ID, new { id });
 
             };
 
