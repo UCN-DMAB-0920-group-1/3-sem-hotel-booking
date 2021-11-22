@@ -36,6 +36,7 @@ namespace primestayWpf.Forms
             {
                 Auth.AccessToken = res.Token;
                 Auth.username = res.name;
+                Close();
             }
         }
     }
