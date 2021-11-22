@@ -14,9 +14,11 @@ namespace PrimeStayApi.Controllers
     public class BookingController : Controller
     {
         private readonly IDao<BookingEntity> _dao;
-        public BookingController(IDao<BookingEntity> dao)
+        private readonly IDao<CustomerEntity> _customerDao;
+        public BookingController(IDao<BookingEntity> bookingDao, IDao<CustomerEntity> customerDao)
         {
-            _dao = dao;
+            _dao = bookingDao;
+            _customerDao = customerDao;
         }
         // GET: BookingController
         [HttpGet]
@@ -44,11 +46,32 @@ namespace PrimeStayApi.Controllers
 
         // POST: BookingController/
         [HttpPost]
-        public ActionResult Create([FromBody] BookingDto booking)
+        public ActionResult Create(BookingDto booking)
         {
+            int newCustomerId = 0;
+            var matches = _customerDao.ReadAll(new CustomerEntity() { Email = booking.Customer.Email });
+            bool isNewCustomer = !matches.Any();
+
+            if (isNewCustomer)
+            {
+                newCustomerId = _customerDao.Create(booking.Customer.Map());
+                booking.CustomerHref = "api/Customer/" + newCustomerId;
+            }
+            else
+            {
+                booking.CustomerHref = matches.First().ExtractHref();
+            }
             int id = _dao.Create(booking.Map());
-            booking.Href = $"api/booking/{id}";
-            return Created(booking.Href, booking);
+            if (id > 0)
+            {
+                booking.Href = $"api/booking/{id}";
+                return Created(booking.Href, booking);
+            }
+            else
+            {
+                if (isNewCustomer) _customerDao.Delete(new CustomerEntity() { Id = newCustomerId });
+                return BadRequest();
+            }
         }
 
         // PUT: BookingController/Edit/5
