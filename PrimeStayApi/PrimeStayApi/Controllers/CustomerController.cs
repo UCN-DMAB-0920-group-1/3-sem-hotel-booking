@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
@@ -11,48 +12,44 @@ namespace PrimeStayApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BookingController : Controller
+    public class CustomerController : Controller
     {
-        private readonly IDao<BookingEntity> _dao;
-        public BookingController(IDao<BookingEntity> dao)
+        private readonly IDao<CustomerEntity> _dao;
+        public CustomerController(IDao<CustomerEntity> dao)
         {
             _dao = dao;
         }
         // GET: BookingController
-        [HttpGet]
-        public IEnumerable<BookingDto> Index([FromQuery] BookingDto booking)
-        {
-            return _dao.ReadAll(new BookingEntity()
-            {
-                Id = booking.ExtractId(),
-                Start_date = booking.StartDate,
-                End_date = booking.EndDate,
-                Guests = booking.Guests,
-                Room_id = DtoExtentions.GetIdFromHref(booking.RoomHref),
-                Customer_id = DtoExtentions.GetIdFromHref(booking.CustomerHref)
 
-            }).Select(h => h.Map());
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public IEnumerable<CustomerDto> Index([FromQuery] CustomerDto customer)
+        {
+            return _dao.ReadAll(customer.Map()).Select(x => x.Map());
         }
 
         // GET: api/Booking/5
         [HttpGet]
+        [Authorize(Roles = "admin")]
         [Route("{id}")]
-        public BookingDto Details(int id)
+        public CustomerDto Details(int id)
         {
             return _dao.ReadById(id).Map();
         }
 
         // POST: BookingController/
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Create([FromBody] BookingDto booking)
+        public ActionResult Create([FromBody] CustomerDto customer)
         {
-            int id = _dao.Create(booking.Map());
-            booking.Href = $"api/booking/{id}";
-            return Created(booking.Href, booking);
+            var res = _dao.Create(customer.Map());
+            if (res > 0) return Created("api/customer/" + res, customer);
+            else return BadRequest(res);
         }
 
         // PUT: BookingController/Edit/5
         [HttpPut]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
@@ -61,6 +58,7 @@ namespace PrimeStayApi.Controllers
 
         // DELETE: BookingController/Delete/5
         [HttpDelete]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {

@@ -16,7 +16,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(RoomTypeDto model)
+        public string Create(RoomTypeDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
@@ -29,7 +29,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             };
         }
 
-        public int Delete(RoomTypeDto model)
+        public int Delete(RoomTypeDto model, string token)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(RoomTypeDto model)
+        public int Update(RoomTypeDto model, string token)
         {
             throw new NotImplementedException();
         }

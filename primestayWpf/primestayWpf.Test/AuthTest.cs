@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
+using primestayWpf.Forms;
 using primestayWpf.src.auth;
 using System;
 using System.Collections.Generic;
-using primestayWpf.Forms;
 using System.Windows;
 
 namespace primestayWpf.Test
@@ -25,12 +25,12 @@ namespace primestayWpf.Test
             //Assert
             Assert.IsNull(invalidLogin);
             Assert.IsNotNull(validLogin);
-            Assert.IsTrue(validLogin.Expires.ToString() ==  DateTime.Now.AddMonths(12).ToString());
+            Assert.IsTrue(validLogin.Expires.ToString() == DateTime.Now.AddMonths(12).ToString());
             Assert.AreEqual(validLogin.name, "1234");
             Assert.AreEqual(validLogin.Token, "valid_token");
         }
 
-        /*
+
         [TestMethod()]
         public void TestInvalidLoginButtonAuthWindow()
         {
@@ -45,7 +45,8 @@ namespace primestayWpf.Test
             //Act
 
 
-            Application.Current.Dispatcher.Invoke((Action)delegate {
+            Application.Current.Dispatcher.Invoke(delegate
+            {
                 window.usernameField.Text = username;
                 window.passwordField.Password = password;
                 window.loginBtn_Click(this, null); //Mock user input
@@ -94,7 +95,7 @@ namespace primestayWpf.Test
             Assert.AreEqual("", window.errorLabel.Content);
             Assert.AreEqual("valid_token", Auth.AccessToken);
             Assert.AreEqual("1234", Auth.username);
-        } */
+        }
     }
 
 

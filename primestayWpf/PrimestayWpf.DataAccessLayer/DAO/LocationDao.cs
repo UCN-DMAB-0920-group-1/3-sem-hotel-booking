@@ -12,12 +12,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(LocationDto model)
+        public string Create(LocationDto model, string token)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(LocationDto model)
+        public int Delete(LocationDto model, string token)
         {
             throw new NotImplementedException();
         }
@@ -27,16 +27,15 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
+        public int Update(LocationDto model, string token)
+        {
+            throw new NotImplementedException();
+        }
         public LocationDto ReadByHref(string href)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(href, Method.GET, DataFormat.Json);
             return restClient.Execute<LocationDto>(restRequest).Data;
-        }
-
-        public int Update(LocationDto model)
-        {
-            throw new NotImplementedException();
         }
     }
 }

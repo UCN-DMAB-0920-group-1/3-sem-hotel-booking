@@ -123,43 +123,82 @@ namespace PrimeStayApi.Test
 
             //Act
             var res = controller.Index(hotel.Map());
+            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             //Assert
             Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
-            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             Assert.IsNotNull(hotels);
             Assert.IsTrue(hotels.Any());
             Assert.IsFalse(hotels.Where(h => h is null).Any());
             Assert.AreEqual(2, hotels.Count());
         }
-
         [TestMethod]
-        public void CreataeHotel()
+        public void UpdateHotelFakeDao()
         {
-            //Arrange
             HotelController controller = new HotelController(new MockHotelDao());
-            var hotel = new HotelEntity()
+            var hotel = new HotelDto()
             {
-                Name = "Test Create",
-                Description = "Test Create",
-                Staffed_hours = "Test Create",
+                Href = "api/Hotel/1",
+                Name = "Test",
+                Description = "Test",
+                StaffedHours = "Test",
+                Stars = 1,
+            };
+
+            //Act
+            var res = controller.Edit(hotel);
+
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+
+        }
+        [TestMethod]
+        public void CreateHotelFakeDao()
+        {
+            HotelController controller = new HotelController(new MockHotelDao());
+            var hotel = new HotelDto()
+            {
+                Href = "api/Hotel/1",
+                Name = "Test",
+                Description = "Test",
+                StaffedHours = "Test",
                 Stars = 1,
                 Active = true,
             };
 
             //Act
-            var res = controller.Create(hotel.Map());
+            var res = controller.Create(hotel);
 
             //Assert
-            Assert.AreEqual(res.GetType(), typeof(CreatedResult));
-            var hotels = (res as OkObjectResult).Value as IEnumerable<HotelDto>;
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(CreatedResult));
 
-            Assert.IsNotNull(hotels);
-            Assert.IsTrue(hotels.Any());
-            Assert.IsFalse(hotels.Where(h => h is null).Any());
-            Assert.AreEqual(2, hotels.Count());
         }
+        [TestMethod]
+        public void DeleteHotelFakeDao()
+        {
+            HotelController controller = new HotelController(new MockHotelDao());
+            var hotel = new HotelDto()
+            {
+                Href = "api/Hotel/1",
+                Name = "Test",
+                Description = "Test",
+                StaffedHours = "Test",
+                Stars = 1,
+            };
+
+            //Act
+            var res = controller.Delete(hotel);
+
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+
+        }
+
+
     }
 
     #region mock implementations

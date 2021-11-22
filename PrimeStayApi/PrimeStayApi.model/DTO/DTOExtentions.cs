@@ -140,6 +140,29 @@ namespace PrimeStayApi.Model.DTO
                 Notes = room.Notes,
             };
         }
+        public static CustomerEntity Map(this CustomerDto customer)
+        {
+            return new CustomerEntity()
+            {
+                Id = customer.ExtractId(),
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Birthday = customer.Birthday,
+
+            };
+        }
+        public static CustomerDto Map(this CustomerEntity customer)
+        {
+            return new CustomerDto()
+            {
+                Href = customer.ExtractHref(),
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Birthday = customer.Birthday,
+            };
+        }
         #region helperMethods
         public static int? ExtractId(this BaseModelDto dto)
         {

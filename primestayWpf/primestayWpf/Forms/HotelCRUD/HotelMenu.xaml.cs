@@ -1,6 +1,8 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
+using primestayWpf.Forms;
 using primestayWpf.HotelCRUD;
+using primestayWpf.src.auth;
 using PrimestayWpf.Model;
 using PrimestayWPF.DataAccessLayer.DTO;
 using System;
@@ -15,24 +17,23 @@ namespace primestayWpf
     /// <summary>
     /// Interaction logic for HotelsWindow.xaml
     /// </summary>
-    public partial class HotelsWindow : Window
+    public partial class HotelMenu : Window
     {
         private readonly IDao<HotelDto> dao;
-        private ObservableCollection<Hotel> hotelList { get; set; } = new ObservableCollection<Hotel>();
+        private ObservableCollection<Hotel> HotelList { get; set; } = new ObservableCollection<Hotel>();
 
-        public HotelsWindow(IDao<HotelDto> _dao)
+        public HotelMenu(IDao<HotelDto> _dao)
         {
             InitializeComponent();
             dao = _dao;
-            HotelListView.ItemsSource = hotelList;
+            HotelListView.ItemsSource = HotelList;
             UpdateList();
         }
 
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            var oldHotel = HotelListView.SelectedItem as Hotel;
-            if (oldHotel is null) MessageBox.Show("Please select a Hotel to edit", "ERROR");
+            if (HotelListView.SelectedItem is not Hotel oldHotel) MessageBox.Show("Please select a Hotel to edit", "ERROR");
             else
             {
                 var form = oldHotel is null ? new HotelForm() : new HotelForm(oldHotel);
@@ -50,14 +51,14 @@ namespace primestayWpf
                     {
                         Hotel hotel = new()
                         {
-                            href = form.HotelHref,
+                            Href = form.HotelHref,
                             Name = form.Name.Text,
                             Description = form.Description.Text,
                             LocationHref = form.LocationHref.Text,
                             StaffedHours = form.StaffedHours.Text,
                             Stars = (int)form.Stars.Value,
                         };
-                        var res = dao.Update(hotel.Map());
+                        var res = dao.Update(hotel.Map(), Auth.AccessToken);
                         UpdateList();
                         if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was updated");
                         else MessageBox.Show($"Could not update {hotel.Name}, contact admin");
@@ -74,7 +75,7 @@ namespace primestayWpf
             {
                 if (MessageBox.Show($"Are you sure you would like to delete {hotel.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    var res = dao.Delete(hotel.Map());
+                    var res = dao.Delete(hotel.Map(), Auth.AccessToken);
                     UpdateList();
                     if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was deleted");
                     else MessageBox.Show($"Could not delete {hotel.Name}, contact admin");
@@ -106,7 +107,7 @@ namespace primestayWpf
                         StaffedHours = form.StaffedHours.Text,
                         Stars = (int)form.Stars.Value,
                     };
-                    var newHotelHref = dao.Create(hotel.Map());
+                    var newHotelHref = dao.Create(hotel.Map(), Auth.AccessToken);
                     if (newHotelHref is null) MessageBox.Show("could not create Hotel");
                     else
                     {
@@ -121,8 +122,8 @@ namespace primestayWpf
         private void UpdateList()
         {
             var hotels = dao.ReadAll(new HotelDto()).Select(x => x.Map());
-            hotelList.Clear();
-            hotels.ToList().ForEach(x => hotelList.Add(x));
+            HotelList.Clear();
+            hotels.ToList().ForEach(x => HotelList.Add(x));
         }
 
         private string validateForm(string? name, string? Description, string? staffedHours, string? location, int? stars)

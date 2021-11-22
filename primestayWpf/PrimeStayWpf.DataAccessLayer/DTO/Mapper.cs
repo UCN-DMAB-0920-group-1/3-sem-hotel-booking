@@ -14,7 +14,9 @@ namespace PrimestayWPF.DataAccessLayer.DTO
                 StaffedHours = hotel.StaffedHours,
                 LocationHref = hotel.LocationHref,
                 Stars = hotel.Stars,
-                href = hotel.Href,
+                Href = hotel.Href,
+                Active = hotel.Active,
+
             };
         }
         public static HotelDto Map(this Hotel hotel)
@@ -26,7 +28,8 @@ namespace PrimestayWPF.DataAccessLayer.DTO
                 StaffedHours = hotel.StaffedHours,
                 LocationHref = hotel.LocationHref,
                 Stars = hotel.Stars,
-                Href = hotel.href,
+                Href = hotel.Href,
+                Active = hotel.Active,
 
             };
         }

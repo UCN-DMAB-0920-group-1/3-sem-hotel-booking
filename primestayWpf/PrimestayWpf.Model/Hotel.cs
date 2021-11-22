@@ -7,6 +7,9 @@
         public string StaffedHours { get; set; }
         public int? Stars { get; set; }
         public string LocationHref { get; set; }
-        public string href { get; set; }
+        public string Href { get; set; }
+        public bool? Active { get; set; }
+
+
     }
 }
