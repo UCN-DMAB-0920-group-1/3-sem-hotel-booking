@@ -133,7 +133,7 @@ namespace PrimeStayApi.Test
             };
 
             //Act
-            var res = controller.Edit(1, room);
+            var res = controller.Edit(room);
 
             //Assert
             Assert.IsNotNull(res);

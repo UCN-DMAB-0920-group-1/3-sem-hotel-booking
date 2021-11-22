@@ -48,7 +48,7 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(RoomDto room)
+        public ActionResult Create([FromBody] RoomDto room)
         {
             int id = _dao.Create(room.Map());
             return Created(id.ToString(), room);
@@ -56,7 +56,7 @@ namespace PrimeStayApi.Controllers
 
 
         [HttpPut]
-        public ActionResult Edit(int id, RoomDto room)
+        public ActionResult Edit([FromBody] RoomDto room)
         {
             return _dao.Update(room.Map()) == 1 ? Ok() : NotFound();
         }

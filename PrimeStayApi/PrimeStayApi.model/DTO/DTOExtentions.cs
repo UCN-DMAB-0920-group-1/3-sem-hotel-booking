@@ -125,7 +125,7 @@ namespace PrimeStayApi.Model.DTO
                 RoomTypeHref = $"api/roomType/{room.Room_type_id}",
                 Room_number = room.Room_number,
                 Notes = room.Notes,
-                Active = room.Active,
+                Active = room.Active ?? false,
             };
         }
 

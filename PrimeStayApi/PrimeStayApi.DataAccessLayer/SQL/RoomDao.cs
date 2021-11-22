@@ -97,6 +97,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             {
                 try
                 {
+                    model.Active ??= false;
                     res = connection.Execute(UPDATE_QUERY, model);
                 }
                 catch (System.Exception e)

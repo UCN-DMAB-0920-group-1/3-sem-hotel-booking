@@ -6,6 +6,6 @@
         public string Room_number { get; set; }
         public string Notes { get; set; }
 
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
     }
 }
