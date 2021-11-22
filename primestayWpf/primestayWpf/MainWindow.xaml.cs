@@ -21,7 +21,7 @@ namespace primestayWpf
 
         private void hotelCrudBtn_Click(object sender, RoutedEventArgs e)
         {
-            new HotelsWindow(DaoFactory.Create<HotelDto>(_context)).ShowDialog();
+            new HotelMenu(DaoFactory.Create<HotelDto>(_context)).ShowDialog();
         }
 
         private void authScreenbtn_Click(object sender, RoutedEventArgs e)

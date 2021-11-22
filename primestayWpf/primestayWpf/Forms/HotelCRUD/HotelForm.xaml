@@ -19,5 +19,6 @@
         <Label Content="StaffedHours: " HorizontalAlignment="Left" Margin="3,116,0,0" VerticalAlignment="Top"/>
         <Label Content="Stars: " HorizontalAlignment="Left" Margin="24,166,0,0" VerticalAlignment="Top"/>
         <Label Content="LocationHref: " HorizontalAlignment="Left" Margin="3,216,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Active" Content="Active" HorizontalAlignment="Left" Margin="89,260,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

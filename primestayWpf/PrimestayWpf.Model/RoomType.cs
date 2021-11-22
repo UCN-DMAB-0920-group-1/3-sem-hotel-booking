@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimestayWpf.Model
 {
-    public class Room : BaseModel
+    public class RoomType : BaseModel
     {
         public string Type { get; set; }
         public int? Num_of_avaliable { get; set; }

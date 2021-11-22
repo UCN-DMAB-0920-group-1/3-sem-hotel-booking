@@ -133,6 +133,72 @@ namespace PrimeStayApi.Test
             Assert.IsFalse(hotels.Where(h => h is null).Any());
             Assert.AreEqual(2, hotels.Count());
         }
+        [TestMethod]
+        public void UpdateHotelFakeDao()
+        {
+            HotelController controller = new HotelController(new MockHotelDao());
+            var hotel = new HotelDto()
+            {
+                Href = "api/Hotel/1",
+                Name = "Test",
+                Description = "Test",
+                StaffedHours = "Test",
+                Stars = 1,
+            };
+
+            //Act
+            var res = controller.Edit(hotel);
+
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+
+        }
+        [TestMethod]
+        public void CreateHotelFakeDao()
+        {
+            HotelController controller = new HotelController(new MockHotelDao());
+            var hotel = new HotelDto()
+            {
+                Href = "api/Hotel/1",
+                Name = "Test",
+                Description = "Test",
+                StaffedHours = "Test",
+                Stars = 1,
+                Active = true,
+            };
+
+            //Act
+            var res = controller.Create(hotel);
+
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(CreatedResult));
+
+        }
+        [TestMethod]
+        public void DeleteHotelFakeDao()
+        {
+            HotelController controller = new HotelController(new MockHotelDao());
+            var hotel = new HotelDto()
+            {
+                Href = "api/Hotel/1",
+                Name = "Test",
+                Description = "Test",
+                StaffedHours = "Test",
+                Stars = 1,
+            };
+
+            //Act
+            var res = controller.Delete(hotel);
+
+            //Assert
+            Assert.IsNotNull(res);
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+
+        }
+
+
     }
 
     #region mock implementations

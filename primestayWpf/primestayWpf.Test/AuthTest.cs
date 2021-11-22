@@ -1,29 +1,23 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
-using PrimeStay.WPF;
-using primestayWpf;
+using primestayWpf.Forms;
+using primestayWpf.src.auth;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using primestayWpf.Forms;
-using primestayWpf.HotelCRUD;
+using System.Windows;
 
 namespace primestayWpf.Test
 {
     [TestClass()]
     public class AuthTest
     {
-
-
         [TestMethod()]
         public void TestDaoLogin()
         {
             //arrange
             IDao<UserDto> dao = new MockUserDao();
-            
+
             //Act
             var invalidLogin = (dao as IDaoAuthExtension<UserDto>).login("invalid_username", "invalid_password");
             var validLogin = (dao as IDaoAuthExtension<UserDto>).login("1234", "qwerty");
@@ -31,7 +25,7 @@ namespace primestayWpf.Test
             //Assert
             Assert.IsNull(invalidLogin);
             Assert.IsNotNull(validLogin);
-            Assert.AreEqual(validLogin.Expires, DateTime.Now.AddMonths(12));
+            Assert.IsTrue(validLogin.Expires.ToString() == DateTime.Now.AddMonths(12).ToString());
             Assert.AreEqual(validLogin.name, "1234");
             Assert.AreEqual(validLogin.Token, "valid_token");
         }
@@ -54,7 +48,7 @@ namespace primestayWpf.Test
 
         public UserDto login(string username, string password)
         {
-            if(username == "1234" && password == "qwerty")
+            if (username == "1234" && password == "qwerty")
             {
                 return new UserDto()
                 {

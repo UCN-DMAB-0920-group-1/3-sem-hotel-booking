@@ -1,7 +1,6 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PrimeStay.WPF.DataAccessLayer.DAO
 
@@ -12,12 +11,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(UserDto model)
+        public string Create(UserDto model, string token)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Delete(UserDto model)
+        public int Delete(UserDto model, string token)
         {
             throw new System.NotImplementedException();
         }
@@ -48,7 +47,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new System.NotImplementedException();
         }
 
-        public int Update(UserDto model)
+        public int Update(UserDto model, string token)
         {
             throw new System.NotImplementedException();
         }
