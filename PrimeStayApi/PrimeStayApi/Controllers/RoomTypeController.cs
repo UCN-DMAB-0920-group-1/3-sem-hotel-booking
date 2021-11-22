@@ -31,7 +31,15 @@ namespace PrimeStayApi.Controllers
         public ActionResult Create(RoomTypeDto room)
         {
             int id = _dao.Create(room.Map());
-            return Created(id.ToString(), room);
+
+            if(id != -1)
+            {
+                return Created(id.ToString(), room);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -42,14 +50,9 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromBody] RoomTypeDto room)
         {
-            RoomTypeEntity room = new()
-            {
-                Id = id,
-            };
-
-            return _dao.Delete(room) == 1 ? Ok() : NotFound();
+            return _dao.Delete(room.Map()) == 1 ? Ok() : NotFound();
         }
 
         // GET: api/roomType/available?roomTypeId={id}&startDate={startDate}&endDate={endDate}
