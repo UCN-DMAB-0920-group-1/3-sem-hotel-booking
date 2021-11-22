@@ -1,33 +1,25 @@
-﻿using PrimeStayApi.DataAccessLayer.DAO;
+﻿using PrimeStayApi.DataAccessLayer.SQL;
 using PrimeStayApi.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
-namespace PrimeStayApi.DataAccessLayer
+namespace PrimeStayApi.DataAccessLayer.DAO
 {
     public static class DaoFactory
     {
         public static IDao<T> Create<T>(IDataContext dataContext)
         {
-            Type DataContextType = dataContext.GetType(); // throws exeption if datacontext is null
-
-            if (typeof(IDataContext<IDbConnection>).IsAssignableFrom(DataContextType))
+            return typeof(T) switch
             {
-                return typeof(T) switch
-                {
-                    var dao when dao == typeof(Hotel) => new HotelDao(dataContext) as IDao<T>,
-                    var dao when dao == typeof(Room) => new RoomDao(dataContext) as IDao<T>,
-                    var dao when dao == typeof(Location) => new LocationDao(dataContext) as IDao<T>,
-                    _ => null,
 
-                };
-
-            }
-
-            throw new DaoFactoryException("DataContext type not known");
+                var dao when dao == typeof(HotelEntity) => new HotelDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(LocationEntity) => new LocationDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(RoomTypeEntity) => new RoomTypeDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(BookingEntity) => new BookingDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(PictureEntity) => new PictureDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(RoomEntity) => new RoomDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(UserEntity) => new UserDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                _ => null,
+            };
         }
     }
 }

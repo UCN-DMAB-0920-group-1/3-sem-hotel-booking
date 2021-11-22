@@ -1,19 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace PrimeStayApi.DataAccessLayer
+﻿namespace PrimeStayApi.DataAccessLayer.DAO
 {
-    internal abstract class BaseDao<T> : IDao<T>
+    internal abstract class BaseDao<T>
     {
-        public IDataContext DataContext { get; }
-        public BaseDao(IDataContext dataContext)
+        public T DataContext { get; }
+        public BaseDao(T dataContext)
         {
             DataContext = dataContext;
         }
-
-        public abstract T ReadById(int id);
-        public abstract int Create(T model);
-        public abstract int Update(T model);
-        public abstract int Delete(T model);
-        public abstract IEnumerable<T> ReadAll(T model);
     }
 }
