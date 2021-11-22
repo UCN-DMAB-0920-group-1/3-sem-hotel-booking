@@ -61,7 +61,9 @@ namespace PrimeStayApi.Controllers
             {
                 booking.CustomerHref = matches.First().ExtractHref();
             }
+
             int id = _dao.Create(booking.Map());
+
             if (id > 0)
             {
                 booking.Href = $"api/booking/{id}";

@@ -123,6 +123,7 @@ namespace PrimeStay.MVC.Model
         }
         public static Customer Map(this CustomerDto customer)
         {
+            if (customer == null) return null;
             return new Customer()
             {
                 Id = customer.ExtractId(),
@@ -131,10 +132,12 @@ namespace PrimeStay.MVC.Model
                 Name = customer.Name,
                 Phone = customer.Phone,
 
+
             };
         }
         public static CustomerDto Map(this Customer customer)
         {
+            if (customer == null) return null;
             return new CustomerDto()
             {
                 Href = customer.Href,
