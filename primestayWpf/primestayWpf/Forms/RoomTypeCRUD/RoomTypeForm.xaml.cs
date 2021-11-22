@@ -17,11 +17,13 @@ namespace primestayWpf.RoomTypeCRUD
         public RoomTypeForm(RoomType roomType)
         {
             InitializeComponent();
+            Id.Text = roomType.Id.ToString();
             Type.Text = roomType.Type;
             Description.Text = roomType.Description;
             Beds.Text = roomType.Beds.ToString();
             Rating.Value = roomType.Rating ?? 0d;
             HotelHref.Text = roomType.HotelHref;
+            Active.IsChecked = roomType.Active;
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

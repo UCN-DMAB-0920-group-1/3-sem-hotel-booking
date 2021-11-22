@@ -5,19 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="RoomTypeForm" Height="320" Width="250">
+        Title="RoomTypeForm" Height="414" Width="250">
     <Grid Margin="0,0,0,0">
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Type" TextChanged="Name_TextChanged" />
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Beds"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="HotelHref"/>
-        <Slider Margin="88,160,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Rating" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="209,258,0,0" VerticalAlignment="Top" Click="Button_Click_Ok"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="159,258,0,0" VerticalAlignment="Top" Click="Button_Click_Cancel"/>
-        <Label Content="Type: " HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top"/>
-        <Label Content="Description: " HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
-        <Label Content="beds: " HorizontalAlignment="Left" Margin="27,119,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rating: " HorizontalAlignment="Left" Margin="24,166,0,0" VerticalAlignment="Top"/>
-        <Label Content="HotelHref: " HorizontalAlignment="Left" Margin="3,216,0,0" VerticalAlignment="Top"/>
+
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,26,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Id" IsReadOnly="True"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,74,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Type" TextChanged="Name_TextChanged" />
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,124,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Beds"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="HotelHref"/>
+        <Slider Margin="87,218,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Rating" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="208,340,0,0" VerticalAlignment="Top" Click="Button_Click_Ok"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="158,340,0,0" VerticalAlignment="Top" Click="Button_Click_Cancel"/>
+        <Label Content="ID: " HorizontalAlignment="Left" Margin="26,29,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type: " HorizontalAlignment="Left" Margin="28,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description: " HorizontalAlignment="Left" Margin="9,124,0,0" VerticalAlignment="Top"/>
+        <Label Content="beds: " HorizontalAlignment="Left" Margin="26,177,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rating: " HorizontalAlignment="Left" Margin="23,224,0,0" VerticalAlignment="Top"/>
+        <Label Content="HotelHref: " HorizontalAlignment="Left" Margin="2,274,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Active" Content="Active" HorizontalAlignment="Left" Margin="88,342,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

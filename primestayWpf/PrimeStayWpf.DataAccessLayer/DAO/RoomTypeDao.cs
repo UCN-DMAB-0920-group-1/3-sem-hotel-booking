@@ -20,6 +20,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
+            restRequest.AddHeader("Authorization", "bearer " + token);
             restRequest.AddJsonBody(model);
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
@@ -31,7 +32,16 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         public int Delete(RoomTypeDto model, string token)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
+            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddJsonBody(model);
+            var response = restClient.Delete(restRequest);
+            return response.StatusCode switch
+            {
+                HttpStatusCode.OK => 1,
+                _ => -1
+            };
         }
 
         public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model)
@@ -56,7 +66,16 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         public int Update(RoomTypeDto model, string token)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
+            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddJsonBody(model);
+            var response = restClient.Put(restRequest);
+            return response.StatusCode switch
+            {
+                HttpStatusCode.OK => 1,
+                _ => -1
+            };
         }
     }
 }

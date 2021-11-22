@@ -1,6 +1,7 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
 using primestayWpf.RoomTypeCRUD;
+using primestayWpf.src.auth;
 using PrimestayWpf.Model;
 using PrimestayWPF.DataAccessLayer.DTO;
 using System;
@@ -51,13 +52,15 @@ namespace primestayWpf
                     {
                         RoomType roomType = new()
                         {
+                            Id = Int32.Parse(form.Id.Text),
                             Type = form.Type.Text,
                             Description = form.Description.Text,
                             Rating = (int)form.Rating.Value,
                             Beds = Int32.Parse(form.Beds.Text),
-                            HotelHref = form.HotelHref.Text
+                            HotelHref = form.HotelHref.Text,
+                            Active = form.Active.IsChecked,
                         };
-                        var res = dao.Update(roomType.Map());
+                        var res = dao.Update(roomType.Map(), Auth.AccessToken);
                         UpdateList();
                         if (res > 0) MessageBox.Show($"RoomType: {roomType.Type} was updated");
                         else MessageBox.Show($"Could not update {roomType.Type}, contact admin");
@@ -72,14 +75,10 @@ namespace primestayWpf
             string text = $"Are you sure you would like to delete {roomType?.Type ?? "this RoomType"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show($"Are you sure you would like to delete {roomType.Type}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    var res = dao.Delete(roomType.Map());
-                    UpdateList();
-                    if (res > 0) MessageBox.Show($"RoomType: {roomType.Type} was deleted");
-                    else MessageBox.Show($"Could not delete {roomType.Type}, contact admin");
-                }
-
+                var res = dao.Delete(roomType.Map(), Auth.AccessToken);
+                UpdateList();
+                if (res > 0) MessageBox.Show($"RoomType: {roomType!.Type} was deleted");
+                else MessageBox.Show($"Could not delete {roomType!.Type}, contact admin");
             }
         }
 
@@ -100,13 +99,15 @@ namespace primestayWpf
                 {
                     RoomType roomType = new()
                     {
+                        Id = Int32.Parse(form.Id.Text),
                         Type = form.Type.Text,
                         Description = form.Description.Text,
                         Rating = (int)form.Rating.Value,
                         Beds = Int32.Parse(form.Beds.Text),
                         HotelHref = form.HotelHref.Text,
+                        Active = form.Active.IsChecked,
                     };
-                    var newHotelHref = dao.Create(roomType.Map());
+                    var newHotelHref = dao.Create(roomType.Map(), Auth.AccessToken);
                     if (newHotelHref is null) MessageBox.Show("could not create RoomType");
                     else
                     {
