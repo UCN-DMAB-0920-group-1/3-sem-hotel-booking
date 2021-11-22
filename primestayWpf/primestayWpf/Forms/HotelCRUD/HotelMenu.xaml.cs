@@ -51,14 +51,14 @@ namespace primestayWpf
                     {
                         Hotel hotel = new()
                         {
-                            href = form.HotelHref,
+                            Href = form.HotelHref,
                             Name = form.Name.Text,
                             Description = form.Description.Text,
                             LocationHref = form.LocationHref.Text,
                             StaffedHours = form.StaffedHours.Text,
                             Stars = (int)form.Stars.Value,
                         };
-                        var res = dao.Update(hotel.Map());
+                        var res = dao.Update(hotel.Map(), Auth.AccessToken);
                         UpdateList();
                         if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was updated");
                         else MessageBox.Show($"Could not update {hotel.Name}, contact admin");
@@ -107,7 +107,7 @@ namespace primestayWpf
                         StaffedHours = form.StaffedHours.Text,
                         Stars = (int)form.Stars.Value,
                     };
-                    var newHotelHref = dao.Create(hotel.Map());
+                    var newHotelHref = dao.Create(hotel.Map(), Auth.AccessToken);
                     if (newHotelHref is null) MessageBox.Show("could not create Hotel");
                     else
                     {
