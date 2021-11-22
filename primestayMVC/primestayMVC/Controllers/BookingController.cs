@@ -40,7 +40,7 @@ namespace PrimeStay.MVC.Controllers
 
             string href = _bookingDao.Create(booking.Map());
 
-            if (href.EndsWith("-1")) return View("BookingError");
+            if (href is null || href.EndsWith("-1")) return View("BookingError");
 
             return View("confirm", _bookingDao.ReadByHref(href).Map());
 
