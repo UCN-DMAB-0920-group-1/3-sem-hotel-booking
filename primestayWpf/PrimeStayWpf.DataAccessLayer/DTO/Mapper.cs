@@ -15,7 +15,6 @@ namespace PrimestayWPF.DataAccessLayer.DTO
                 LocationHref = hotel.LocationHref,
                 Stars = hotel.Stars,
                 href = hotel.Href,
-
             };
         }
         public static HotelDto Map(this Hotel hotel)

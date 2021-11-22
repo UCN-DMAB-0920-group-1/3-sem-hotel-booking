@@ -8,7 +8,5 @@
         public int? Stars { get; set; }
         public string LocationHref { get; set; }
         public string href { get; set; }
-
-
     }
 }

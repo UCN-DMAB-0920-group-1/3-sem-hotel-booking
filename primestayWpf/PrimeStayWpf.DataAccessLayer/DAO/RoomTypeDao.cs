@@ -2,19 +2,31 @@
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 
 namespace PrimeStay.WPF.DataAccessLayer.DAO
 
 {
+
     internal class RoomTypeDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomTypeDto>
     {
+        private readonly string baseEndPoint = "/api/roomType";
         public RoomTypeDao(IDataContext<IRestClient> dataContext) : base(dataContext)
         {
         }
 
         public string Create(RoomTypeDto model)
         {
-            throw new NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
+            restRequest.AddJsonBody(model);
+            var response = restClient.Post(restRequest);
+            return response.StatusCode switch
+            {
+                HttpStatusCode.Created => response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as string,
+                _ => null
+            };
         }
 
         public int Delete(RoomTypeDto model)
