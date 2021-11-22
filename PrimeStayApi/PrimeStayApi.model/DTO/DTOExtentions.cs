@@ -125,6 +125,7 @@ namespace PrimeStayApi.Model.DTO
                 RoomTypeHref = $"api/roomType/{room.Room_type_id}",
                 Room_number = room.Room_number,
                 Notes = room.Notes,
+                Active = room.Active ?? false,
             };
         }
 
@@ -136,6 +137,7 @@ namespace PrimeStayApi.Model.DTO
                 Room_type_id = GetIdFromHref(room.RoomTypeHref),
                 Room_number = room.Room_number,
                 Notes = room.Notes,
+                Active = room.Active,
             };
         }
         public static CustomerEntity Map(this CustomerDto customer)

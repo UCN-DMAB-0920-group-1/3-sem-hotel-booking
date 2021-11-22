@@ -2,6 +2,7 @@
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,15 +20,35 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<RoomDto> Index([FromQuery] RoomDto room)
-            => _dao.ReadAll(room.Map()).Select(r => r.Map());
+        public ActionResult<IEnumerable<RoomDto>> Index([FromQuery] RoomDto room)
+        {
+            try
+            {
+                return Ok(_dao.ReadAll(room.Map()).Select(h => h.Map()));
+
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
 
         [HttpGet]
         [Route("{id}")]
-        public RoomDto Details(int id) => _dao.ReadById(id).Map();
+        public ActionResult<RoomDto> Details(int id)
+        {
+            try
+            {
+                return Ok(_dao.ReadById(id).Map());
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
 
         [HttpPost]
-        public ActionResult Create(RoomDto room)
+        public ActionResult Create([FromBody] RoomDto room)
         {
             int id = _dao.Create(room.Map());
             return Created(id.ToString(), room);
@@ -35,20 +56,15 @@ namespace PrimeStayApi.Controllers
 
 
         [HttpPut]
-        public ActionResult Edit(int id, RoomDto room)
+        public ActionResult Edit([FromBody] RoomDto room)
         {
             return _dao.Update(room.Map()) == 1 ? Ok() : NotFound();
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromBody] RoomDto room)
         {
-            RoomEntity room = new()
-            {
-                Id = id,
-            };
-
-            return _dao.Delete(room) == 1 ? Ok() : NotFound();
+            return _dao.Delete(room.Map()) == 1 ? Ok() : NotFound();
         }
     }
 

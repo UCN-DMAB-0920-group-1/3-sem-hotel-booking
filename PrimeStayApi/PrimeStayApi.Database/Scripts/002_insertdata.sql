@@ -22,47 +22,47 @@ INSERT INTO [dbo].[RoomType] ([type],[beds],[description],[rating],[hotel_id])
      ('Penthouse Suite',1,'Penthouse suite with queen-size bed',5,2)
 GO
 
-INSERT INTO [dbo].[Room] ([Room_number], [Room_Type_id], [notes])
+INSERT INTO [dbo].[Room] ([Room_number], [Room_Type_id], [notes], [active])
      VALUES 
-    (1, 1, 'Lugter af nutella'),
-    (2, 1, 'Lugter ïkke af nutella'),
-    (3, 1, ''),
-    (4, 1, ''),
+    (1, 1, 'Lugter af nutella',1),
+    (2, 1, 'Lugter ïkke af nutella',1),
+    (3, 1, '',1),
+    (4, 1, '',1),
 
-    (1, 2, 'Lugter af slik'),
-    (2, 2, 'Lugter ïkke af slik'),
-    (3, 2, ''),
-    (4, 2, ''),
+    (1, 2, 'Lugter af slik',1),
+    (2, 2, 'Lugter ïkke af slik',1),
+    (3, 2, '',1),
+    (4, 2, '',1),
     
-    (1, 3, 'Lugter af monster'),
-    (2, 3, 'Lugter ïkke af monster'),
-    (3, 3, ''),
-    (4, 3, ''),
+    (1, 3, 'Lugter af monster',1),
+    (2, 3, 'Lugter ïkke af monster',1),
+    (3, 3, '',1),
+    (4, 3, '',1),
     
-    (1, 4, 'Lugter af crispy-chicken'),
-    (2, 4, 'Lugter ïkke af crispy-chicken'),
-    (3, 4, ''),
-    (4, 4, ''),
+    (1, 4, 'Lugter af crispy-chicken',1),
+    (2, 4, 'Lugter ïkke af crispy-chicken',1),
+    (3, 4, '',1),
+    (4, 4, '',1),
     
-    (1, 5, 'Lugter af coca cola'),
-    (2, 5, 'Lugter ïkke af coca cola'),
-    (3, 5, ''),
-    (4, 5, ''),
+    (1, 5, 'Lugter af coca cola',1),
+    (2, 5, 'Lugter ïkke af coca cola',1),
+    (3, 5, '',1),
+    (4, 5, '',1),
     
-    (1, 6, 'Lugter af pepsi'),
-    (2, 6, 'Lugter ïkke af pepsi'),
-    (3, 6, ''),
-    (4, 6, ''),
+    (1, 6, 'Lugter af pepsi',1),
+    (2, 6, 'Lugter ïkke af pepsi',1),
+    (3, 6, '',1),
+    (4, 6, '',1),
     
-    (1, 7, 'Lugter af kaffe'),
-    (2, 7, 'Lugter ïkke af kaffe'),
-    (3, 7, ''),
-    (4, 7, ''),
+    (1, 7, 'Lugter af kaffe',1),
+    (2, 7, 'Lugter ïkke af kaffe',1),
+    (3, 7, '',1),
+    (4, 7, '',1),
     
-    (1, 8, 'Lugter af ild'),
-    (2, 8, 'Lugter ïkke af ild'),
-    (3, 8, ''),
-    (4, 8, '')
+    (1, 8, 'Lugter af ild',1),
+    (2, 8, 'Lugter ïkke af ild',1),
+    (3, 8, '',1),
+    (4, 8, '',1)
 GO
 
 INSERT INTO [dbo].[Price] ([start_date],[end_date],[amount],[room_type_id])
