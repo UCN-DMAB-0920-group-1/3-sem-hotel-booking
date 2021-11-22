@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
 using PrimeStayApi.Model.DTO;
@@ -31,7 +32,7 @@ namespace PrimeStayApi.Controllers
                     Description = hotel.Description,
                     Staffed_hours = hotel.StaffedHours,
                     Stars = hotel.Stars,
-                    Active = hotel.Active
+                    Active = hotel.Active,
                 }).Select(h => h.Map()));
 
             }
@@ -58,7 +59,7 @@ namespace PrimeStayApi.Controllers
 
         [HttpPost]
         //[Route("create")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([FromBody] HotelDto hotel)
         {
             int id = _dao.Create(hotel.Map());
