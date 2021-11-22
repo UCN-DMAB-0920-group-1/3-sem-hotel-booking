@@ -20,7 +20,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);
-            restRequest.AddHeader("Authorization", token); //TOTO find ud af hvad den der header hedder
+            restRequest.AddHeader("Authorization", "bearer " + token);
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
             {
@@ -35,6 +35,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
+            restRequest.AddHeader("Authorization", "bearer " + token);
             restRequest.AddJsonBody(model);
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
@@ -63,6 +64,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
+            restRequest.AddHeader("Authorization", "bearer " + token);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch
