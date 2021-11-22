@@ -35,39 +35,6 @@ namespace primestayWpf.Test
             Assert.AreEqual(validLogin.name, "1234");
             Assert.AreEqual(validLogin.Token, "valid_token");
         }
-
-
-        [TestMethod()]
-        public void TestLoginButtonAuthWindow()
-        {
-            //arrange
-            IDao<UserDto> dao = new MockUserDao();
-            var window = new AuthWindow(dao);
-
-
-
-            string username = "1234";
-            string validPassword = "qwerty";
-            string invalidPassword = "ytrewq";
-
-
-
-            //Act
-            window.loginBtn_Click(this, null); //Mock user input
-            window.usernameField.Text = username;
-            window.passwordField.Password = invalidPassword;
-            
-
-            //Assert
-            Assert.IsNull(invalidLogin);
-            Assert.IsNotNull(validLogin);
-            Assert.AreEqual(validLogin.Expires, DateTime.Now.AddMonths(12));
-            Assert.AreEqual(validLogin.name, "1234");
-            Assert.AreEqual(validLogin.Token, "valid_token");
-
-            Assert.Fail();
-        }
-
     }
 
 
