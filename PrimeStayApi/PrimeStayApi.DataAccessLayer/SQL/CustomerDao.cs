@@ -10,16 +10,16 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class CustomerDao : BaseDao<IDataContext<IDbConnection>>, IDao<CustomerEntity>
     {
         #region SQL-Queries
-        private static readonly string SELECTCUSTOMERBYID = @"SELECT * FROM Customer WHERE id = @id";
+        private static readonly string SELECT_CUSTOMER_BY_ID = @"SELECT * FROM Customer WHERE id = @id";
 
-        private static readonly string SELECTALLCUSTOMER = @"SELECT * FROM Customer WHERE " +
+        private static readonly string SELECT_ALL_CUSTOMER = @"SELECT * FROM Customer WHERE " +
                                                             "id = ISNULL(@id,id)" +
                                                             "AND Name = ISNULL(@Name, Name)" +
                                                             "AND Email = ISNULL(@Email, Email)" +
                                                             "AND Birthday = ISNULL(@Birthday, Birthday)" +
                                                             "AND Phone = ISNULL(@Phone, Phone)";
 
-        private static readonly string INSERTCUSTOMERRETURNID = @"INSERT INTO Customer (Name, Email, Phone,Birthday) " +
+        private static readonly string INSERT_CUSTOMER_RETURN_ID = @"INSERT INTO Customer (Name, Email, Phone,Birthday) " +
                                                                 @"OUTPUT INSERTED.id " +
                                                                 @"VALUES (@Name, @Email, @Phone,@Birthday)";
 
@@ -36,7 +36,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             {
                 try
                 {
-                    return connection.ExecuteScalar<int>(INSERTCUSTOMERRETURNID, model);
+                    return connection.ExecuteScalar<int>(INSERT_CUSTOMER_RETURN_ID, model);
                 }
                 catch (System.Exception)
                 {
@@ -55,7 +55,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<CustomerEntity>(SELECTALLCUSTOMER, model);
+                return connection.Query<CustomerEntity>(SELECT_ALL_CUSTOMER, model);
 
             };
         }
@@ -64,7 +64,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<CustomerEntity>(SELECTCUSTOMERBYID, new { id });
+                return connection.QueryFirst<CustomerEntity>(SELECT_ALL_CUSTOMER, new { id });
             }
         }
 

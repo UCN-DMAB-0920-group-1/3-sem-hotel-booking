@@ -9,7 +9,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class PictureDao : BaseDao<IDataContext<IDbConnection>>, IDao<PictureEntity>
     {
         #region SQL-Queries
-        private readonly static string SELECTALLPICTURES = $"SELECT * FROM TablePictures " +
+        private readonly static string SELECT_ALL_PICTURES = $"SELECT * FROM TablePictures " +
                                                     $"INNER JOIN picture ON picture.id = TablePictures.picture_id ";
         #endregion
         public PictureDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -32,7 +32,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<PictureEntity>(SELECTALLPICTURES + whereStatement, model);
+                return connection.Query<PictureEntity>(SELECT_ALL_PICTURES + whereStatement, model);
 
             };
         }

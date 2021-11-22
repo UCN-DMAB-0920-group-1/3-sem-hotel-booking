@@ -11,7 +11,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<HotelEntity>
     {
         #region SQL-Queries
-        private readonly static string SELECTALLHOTELS = $"SELECT * FROM Hotel WHERE " +
+        private readonly static string SELECT_ALL_HOTELS = $"SELECT * FROM Hotel WHERE " +
                                                                  $"id=ISNULL(@id,id)" +
                                                                  $"AND name LIKE ISNULL(@name,name) " +
                                                                  $"AND description LIKE ISNULL(@description,description) " +
@@ -19,14 +19,14 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                                  $"AND stars = ISNULL(@stars,stars) " +
                                                                  $"AND active = ISNULL(@active,active) ";
 
-        private readonly static string SELECTHOTELBYID = $@"Select * FROM Hotel WHERE ID = @id";
+        private readonly static string SELECT_HOTEL_BY_ID = $@"Select * FROM Hotel WHERE ID = @id";
 
-        private readonly static string INSERTHOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id, active) " +
+        private readonly static string INSERT_HOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id, active) " +
                                                     @"OUTPUT INSERTED.id " +
                                                      "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id,@active)";
-        private readonly static string UPDATEHOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=ISNULL(@active,active) WHERE id=@id;";
+        private readonly static string UPDATE_HOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=ISNULL(@active,active) WHERE id=@id;";
         //private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
-        private readonly static string SOFTDELETE = "UPDATE Hotel SET active=0 WHERE id=@id";
+        private readonly static string SOFT_DELETE = "UPDATE Hotel SET active=0 WHERE id=@id";
 
         #endregion
         public HotelDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
@@ -40,7 +40,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             {
                 try
                 {
-                    res = connection.ExecuteScalar<int>(INSERTHOTEL, model);
+                    res = connection.ExecuteScalar<int>(INSERT_HOTEL, model);
                 }
                 catch (System.Exception e)
                 {
@@ -58,7 +58,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             {
                 try
                 {
-                    res = connection.Execute(SOFTDELETE, model);
+                    res = connection.Execute(SOFT_DELETE, model);
                 }
                 catch (System.Exception e)
                 {
@@ -77,7 +77,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<HotelEntity>(SELECTALLHOTELS, model);
+                return connection.Query<HotelEntity>(SELECT_ALL_HOTELS, model);
             };
         }
 
@@ -86,7 +86,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<HotelEntity>(SELECTHOTELBYID, new { id });
+                return connection.QueryFirst<HotelEntity>(SELECT_HOTEL_BY_ID, new { id });
 
             };
         }
@@ -99,7 +99,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             {
                 try
                 {
-                    res = connection.Execute(UPDATEHOTEL, model);
+                    res = connection.Execute(UPDATE_HOTEL, model);
                 }
                 catch (System.Exception e)
                 {
