@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace primestayWpf.RoomTypeCRUD
+namespace WinApp.Components.RoomTypeCRUD
 {
     /// <summary>
     /// Interaction logic for RoomTypeForm.xaml

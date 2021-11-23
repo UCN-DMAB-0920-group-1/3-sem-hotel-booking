@@ -1,7 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
 using Model;
-using primestayWpf.RoomTypeCRUD;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace primestayWpf
+namespace WinApp.Components.RoomTypeCRUD
 {
     /// <summary>
     /// Interaction logic for RoomTypeWindow.xaml
