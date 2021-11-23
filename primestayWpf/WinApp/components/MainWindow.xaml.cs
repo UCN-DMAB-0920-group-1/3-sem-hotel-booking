@@ -21,6 +21,7 @@ namespace WinApp.Components
         {
             InitializeComponent();
             _context = RestDataContext.GetInstance();
+            usernameLabel.Content = string.Format("Welcome, {0}", Auth.Username ?? "unknown");
         }
 
 
@@ -30,9 +31,11 @@ namespace WinApp.Components
             else MessageBox.Show("Login to acces Hotels", "Error", MessageBoxButton.OK);
         }
 
-        private void authScreenbtn_Click(object sender, RoutedEventArgs e)
+        private void logOutbtn_click(object sender, RoutedEventArgs e)
         {
-            new AuthWindow(DaoFactory.Create<UserDto>(_context, Auth.AccessToken)).ShowDialog();
+            Auth.Logout();
+            new AuthWindow().Show();
+            Close();
         }
 
         private void roomTypeBtn_Click(object sender, RoutedEventArgs e)
@@ -47,5 +50,6 @@ namespace WinApp.Components
             else MessageBox.Show("Login to access Customers", "Error", MessageBoxButton.OK);
 
         }
+
     }
 }

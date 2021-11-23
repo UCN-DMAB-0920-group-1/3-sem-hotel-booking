@@ -1,5 +1,7 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
+using System.Threading.Tasks;
 using System.Windows;
 using WinApp.src.auth;
 
@@ -10,14 +12,17 @@ namespace WinApp.Components.Authentication
 
         private readonly IDao<UserDto> dao;
 
-        public AuthWindow(IDao<UserDto> _dao)
+        public AuthWindow()
         {
             InitializeComponent();
-            this.dao = _dao;
+
+            var _context = RestDataContext.GetInstance();
+            dao = DaoFactory.Create<UserDto>(_context, Auth.AccessToken);
+
             usernameField.Focus();
         }
 
-        public void loginBtn_Click(object sender, RoutedEventArgs e)
+        public async void loginBtn_Click(object sender, RoutedEventArgs e)
         {
 
             if (string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password))
@@ -26,9 +31,21 @@ namespace WinApp.Components.Authentication
                 return;
             }
 
-            errorLabel.Content = "";
-            var res = (dao as IDaoAuthExtension<UserDto> ?? throw new System.Exception()).login(usernameField.Text, passwordField.Password);
+            loadingBar.Visibility = Visibility.Visible;
+            await callLogin(usernameField.Text, passwordField.Password);
+            loadingBar.Visibility = Visibility.Hidden;
 
+            errorLabel.Content = "";
+            
+        }
+
+        private async Task callLogin(string username, string password)
+        {
+            //Start a new thread, in order to not block STA (UI thread)
+            var res =  await Task<UserDto>.Factory.StartNew(() => 
+            ((IDaoAuthExtension<UserDto>)dao)
+            .login(username, password));
+            
             if (res == null || string.IsNullOrEmpty(res.Token))
             {
                 errorLabel.Content = "Username or password is invalid!";
@@ -36,9 +53,11 @@ namespace WinApp.Components.Authentication
             else
             {
                 Auth.AccessToken = res.Token;
-                Auth.username = res.name;
+                Auth.Username = res.name ?? "admin";
+                new MainWindow().Show();
                 Close();
-            }
+            } 
+            
         }
 
         private void passwordField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
