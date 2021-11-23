@@ -14,7 +14,11 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         public string Create(CustomerDto model, string token)
         {
-            throw new System.NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest("/api/customer/", Method.POST, DataFormat.Json);
+
+            var res = restClient.Post<CustomerDto>(restRequest).Data;
+            return res.Href;
         }
 
         public int Delete(CustomerDto model, string token)
@@ -34,7 +38,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         public CustomerDto ReadByHref(string href)
         {
-            throw new System.NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
+            restRequest.AddAuthorization(token);
+
+            var res = restClient.Get<IEnumerable<CustomerDto>>(restRequest).Data;
+            return res;
         }
 
         public int Update(CustomerDto model, string token)

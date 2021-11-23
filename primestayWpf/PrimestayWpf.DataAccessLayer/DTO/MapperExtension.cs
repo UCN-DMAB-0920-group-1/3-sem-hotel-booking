@@ -4,7 +4,7 @@ using System;
 
 namespace PrimestayWPF.DataAccessLayer.DTO
 {
-    public static class Mapper
+    public static class MapperExtension
     {
         public static Hotel Map(this HotelDto hotel)
         {
