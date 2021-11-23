@@ -1,9 +1,9 @@
-﻿<Window x:Class="WinApp.Components.RoomViews.RoomMenu"
+﻿<Window x:Class="WinApp.Components.RoomView.RoomMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WinApp.Components.RoomViews"
+        xmlns:local="clr-namespace:WinApp.Components.RoomView"
         mc:Ignorable="d"
         Title="RoomTypeMenu" Height="593" Width="1122">
     <Grid HorizontalAlignment="Left" Width="822" Height="434" VerticalAlignment="Top" Margin="2,0,0,0">

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
-namespace WinApp.Components.HotelViews
+namespace WinApp.Components.HotelView
 {
     /// <summary>
     /// Interaction logic for HotelsWindow.xaml

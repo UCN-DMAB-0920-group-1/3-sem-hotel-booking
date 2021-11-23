@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace WinApp.Components.RoomViews
+namespace WinApp.Components.RoomView
 {
     /// <summary>
     /// Interaction logic for RoomForm.xaml

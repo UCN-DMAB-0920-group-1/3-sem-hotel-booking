@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WinApp.Components.RoomTypeViews
+namespace WinApp.Components.RoomTypeView
 {
     /// <summary>
     /// Interaction logic for RoomTypeForm.xaml

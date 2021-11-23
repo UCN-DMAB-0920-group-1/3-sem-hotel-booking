@@ -3,9 +3,9 @@ using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
 using System.Windows;
 using WinApp.Components.Authentication;
-using WinApp.Components.CustomerViews;
-using WinApp.Components.HotelViews;
-using WinApp.Components.RoomTypeViews;
+using WinApp.Components.CustomerView;
+using WinApp.Components.HotelView;
+using WinApp.Components.RoomTypeView;
 using WinApp.src.auth;
 
 namespace WinApp.Components

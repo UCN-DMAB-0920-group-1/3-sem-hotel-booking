@@ -7,10 +7,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
-using WinApp.Components.RoomViews;
+using WinApp.Components.RoomView;
 using WinApp.src.auth;
 
-namespace WinApp.Components.RoomTypeViews
+namespace WinApp.Components.RoomTypeView
 {
     /// <summary>
     /// Interaction logic for RoomTypeWindow.xaml
