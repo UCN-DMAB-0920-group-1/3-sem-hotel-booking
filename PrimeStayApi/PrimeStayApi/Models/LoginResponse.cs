@@ -3,7 +3,7 @@
 /**
  * Author: Lars Nysom
  */
-namespace PrimeStayApi.Models
+namespace API.Models
 {
     public class LoginResponse
     {

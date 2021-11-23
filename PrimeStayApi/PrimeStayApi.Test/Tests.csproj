@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccesLayer\PrimeStayApi.DataAccesLayer.csproj" />
-    <ProjectReference Include="..\PrimeStayApi.Database\PrimeStayApi.Database.csproj" />
-    <ProjectReference Include="..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj" />
-    <ProjectReference Include="..\PrimeStayApi\PrimeStayApi.csproj" />
+    <ProjectReference Include="..\PrimeStayApi.DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PrimeStayApi.Database\Database.csproj" />
+    <ProjectReference Include="..\PrimeStayApi.Enviroment\Enviroment.csproj" />
+    <ProjectReference Include="..\PrimeStayApi\API.csproj" />
   </ItemGroup>
 
 </Project>

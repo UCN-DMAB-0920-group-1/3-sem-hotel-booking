@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi", "PrimeStayApi.csproj", "{E253E4CA-D3B7-4786-8B1A-C3940C9F6DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API.csproj", "{E253E4CA-D3B7-4786-8B1A-C3940C9F6DC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Model", "..\PrimeStayApi.model\PrimeStayApi.Model.csproj", "{ECD479CA-0801-44B5-8A45-81FD76668370}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "..\PrimeStayApi.model\Models.csproj", "{ECD479CA-0801-44B5-8A45-81FD76668370}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Database", "..\PrimeStayApi.Database\PrimeStayApi.Database.csproj", "{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "..\PrimeStayApi.Database\Database.csproj", "{DD7010C3-EA8A-4122-82FE-1BEA9378FAD4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Test", "..\PrimeStayApi.Test\PrimeStayApi.Test.csproj", "{12DB843A-93C0-4C82-98BA-AC89502A3701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "..\PrimeStayApi.Test\Tests.csproj", "{12DB843A-93C0-4C82-98BA-AC89502A3701}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.Enviroment", "..\PrimeStayApi.Enviroment\PrimeStayApi.Enviroment.csproj", "{FBD215F4-6D2A-4A19-AE90-B6347641D666}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enviroment", "..\PrimeStayApi.Enviroment\Enviroment.csproj", "{FBD215F4-6D2A-4A19-AE90-B6347641D666}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeStayApi.DataAccessLayer", "..\PrimeStayApi.DataAccessLayer\PrimeStayApi.DataAccessLayer.csproj", "{765D20A6-0937-48DA-B3DA-D922F131B01B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "..\PrimeStayApi.DataAccessLayer\DataAccessLayer.csproj", "{765D20A6-0937-48DA-B3DA-D922F131B01B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

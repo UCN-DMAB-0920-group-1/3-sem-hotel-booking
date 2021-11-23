@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using Dapper.Transaction;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Model;
+using DataAccessLayer;
+using Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     internal class HotelDao : BaseDao<IDataContext<IDbConnection>>, IDao<HotelEntity>
     {

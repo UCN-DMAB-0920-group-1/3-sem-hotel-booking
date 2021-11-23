@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimeStayApi.Model
+namespace Models
 {
     public class CustomerEntity : BaseEntity
     {

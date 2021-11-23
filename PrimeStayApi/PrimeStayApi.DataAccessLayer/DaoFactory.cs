@@ -1,8 +1,8 @@
-﻿using PrimeStayApi.DataAccessLayer.SQL;
-using PrimeStayApi.Model;
+﻿using Models;
+using DataAccessLayer.SQL;
 using System.Data;
 
-namespace PrimeStayApi.DataAccessLayer.DAO
+namespace DataAccessLayer
 {
     public static class DaoFactory
     {

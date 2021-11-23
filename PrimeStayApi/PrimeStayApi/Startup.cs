@@ -5,14 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
-using PrimeStayApi.Services;
+using DataAccessLayer;
+using Enviroment;
 using System.Text;
+using Models;
+using API.Services;
 
-namespace PrimeStayApi
+namespace API
 {
     public class Startup
     {
@@ -28,14 +27,14 @@ namespace PrimeStayApi
         public void ConfigureServices(IServiceCollection services)
         {
             IDataContext dataContext = new SqlDataContext(ENV.ConnectionString);
-            services.AddScoped<IDao<HotelEntity>>(s => DaoFactory.Create<HotelEntity>(dataContext));
-            services.AddScoped<IDao<RoomTypeEntity>>(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
-            services.AddScoped<IDao<LocationEntity>>(s => DaoFactory.Create<LocationEntity>(dataContext));
-            services.AddScoped<IDao<BookingEntity>>(s => DaoFactory.Create<BookingEntity>(dataContext));
-            services.AddScoped<IDao<PictureEntity>>(s => DaoFactory.Create<PictureEntity>(dataContext));
-            services.AddScoped<IDao<RoomEntity>>(s => DaoFactory.Create<RoomEntity>(dataContext));
-            services.AddScoped<IDao<UserEntity>>(s => DaoFactory.Create<UserEntity>(dataContext));
-            services.AddScoped<IDao<CustomerEntity>>(s => DaoFactory.Create<CustomerEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<HotelEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<LocationEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<BookingEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<PictureEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<RoomEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<UserEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<CustomerEntity>(dataContext));
 
             services.AddCors(options =>
             {

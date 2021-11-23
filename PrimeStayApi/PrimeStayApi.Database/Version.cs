@@ -1,7 +1,7 @@
 ﻿using DbUp;
 using System.Reflection;
 
-namespace PrimeStayApi.Database
+namespace Database
 {
     public static class Version
     {

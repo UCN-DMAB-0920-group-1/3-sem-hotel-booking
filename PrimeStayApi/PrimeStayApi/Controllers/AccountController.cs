@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Models;
+using API.Services;
+using API.Services.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStayApi.Models;
-using PrimeStayApi.Services;
-using PrimeStayApi.Services.Models;
 using System;
 
 /**
  * Author: Lars Nysom
  */
-namespace PrimeStayApi.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

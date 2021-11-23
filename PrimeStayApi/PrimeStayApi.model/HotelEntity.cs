@@ -1,4 +1,4 @@
-﻿namespace PrimeStayApi.Model
+﻿namespace Models
 {
     public class HotelEntity : BaseEntity
     {

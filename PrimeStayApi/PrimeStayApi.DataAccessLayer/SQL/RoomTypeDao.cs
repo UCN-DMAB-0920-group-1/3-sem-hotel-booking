@@ -1,12 +1,11 @@
 ﻿using Dapper;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Model;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     internal class RoomTypeDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomTypeEntity>, IDaoDateExtension<RoomTypeEntity>
     {
@@ -71,7 +70,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 {
                     res = connection.Execute(SOFT_DELETE_ROOM_TYPE, model);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     Debug.WriteLine(e);
                     return res;
@@ -110,7 +109,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 {
                     res = connection.Execute(UPDATE_ROOM_TYPE, model);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     Debug.WriteLine(e);
                     return res;

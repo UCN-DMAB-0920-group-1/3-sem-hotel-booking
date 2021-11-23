@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API;
+using API.Controllers;
+using DataAccessLayer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStayApi.Controllers;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
-using PrimeStayApi.Model.DTO;
+using Models;
+using Models.DTO;
+using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Version = PrimeStayApi.Database.Version;
+using Version = Database.Version;
 
-namespace PrimeStayApi.Test
+namespace Tests
 {
     [TestClass]
     public class CustomerTest

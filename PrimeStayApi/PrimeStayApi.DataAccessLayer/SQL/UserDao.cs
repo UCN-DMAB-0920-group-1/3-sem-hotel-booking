@@ -1,12 +1,12 @@
 ﻿using Dapper;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Model;
+using Models;
+using DataAccessLayer.SQL;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     internal class UserDao : BaseDao<IDataContext<IDbConnection>>, IDao<UserEntity>
     {
@@ -42,7 +42,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Delete(UserEntity model)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<UserEntity> ReadAll(UserEntity model)
@@ -52,9 +52,9 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             try
             {
                 return connection.Query<UserEntity>(SELECT_USER, model);
-                
+
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
                 return new List<UserEntity>();
@@ -63,12 +63,12 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public UserEntity ReadById(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int Update(UserEntity model)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
