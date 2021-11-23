@@ -1,8 +1,8 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

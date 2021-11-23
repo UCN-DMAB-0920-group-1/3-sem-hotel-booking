@@ -4,13 +4,13 @@ using DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Models.DTO;
 using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Version = Database.Version;
+using DataAccessLayer.DTO;
 
 namespace Tests
 {
