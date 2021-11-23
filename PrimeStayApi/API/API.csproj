@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeStayApi.DataAccessLayer\DataAccessLayer.csproj" />
-    <ProjectReference Include="..\PrimeStayApi.Enviroment\Enviroment.csproj" />
-    <ProjectReference Include="..\PrimeStayApi.model\Models.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Enviroment\Enviroment.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
 </Project>

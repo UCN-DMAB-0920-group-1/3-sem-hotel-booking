@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeStayApi.DataAccessLayer\DataAccessLayer.csproj" />
-    <ProjectReference Include="..\PrimeStayApi.Database\Database.csproj" />
-    <ProjectReference Include="..\PrimeStayApi.Enviroment\Enviroment.csproj" />
-    <ProjectReference Include="..\PrimeStayApi\API.csproj" />
+    <ProjectReference Include="..\API\API.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Enviroment\Enviroment.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
 </Project>

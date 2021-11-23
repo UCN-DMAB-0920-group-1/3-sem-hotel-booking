@@ -25,10 +25,8 @@ namespace DataAccessLayer.SQL
                                                                 @"VALUES (@Name, @Email, @Phone,@Birthday)";
         private static readonly string DELETECUSTOMER = "DELETE FROM Customer WHERE id=@id AND Name=@Name AND Phone=@phone AND Email=@Email";
         private readonly static string UPDATECUSTOMER = "UPDATE Customer SET Name=@name ,Phone=@Phone, Email=@Email WHERE id=@id";
-
-
-
         #endregion
+
         public CustomerDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
         }
