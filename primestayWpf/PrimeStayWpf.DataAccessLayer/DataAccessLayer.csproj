@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimestayWpf.Model\PrimestayWpf.Model.csproj" />
+    <ProjectReference Include="..\PrimestayWpf.Model\Model.csproj" />
   </ItemGroup>
 
 </Project>

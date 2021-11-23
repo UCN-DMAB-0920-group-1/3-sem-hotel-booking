@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace PrimestayWPF.DataAccessLayer
+namespace DataAccessLayer
 {
     internal static class AuthenticationExtension
     {

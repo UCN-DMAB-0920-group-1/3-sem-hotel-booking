@@ -1,4 +1,4 @@
-﻿namespace PrimestayWPF.DataAccessLayer.DTO
+﻿namespace DataAccessLayer.DTO
 {
     public class HotelDto : BaseDto
     {

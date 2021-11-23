@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeStayWpf.DataAccessLayer\PrimestayWPF.DataAccessLayer.csproj" />
-    <ProjectReference Include="..\PrimestayWpf.Model\PrimestayWpf.Model.csproj" />
+    <ProjectReference Include="..\PrimeStayWpf.DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PrimestayWpf.Model\Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>

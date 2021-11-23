@@ -1,7 +1,7 @@
-﻿using PrimestayWPF.DataAccessLayer;
+﻿using DataAccessLayer;
 using RestSharp;
 
-namespace primestayWpf
+namespace WinApp
 {
     public class RestDataContext : IDataContext<IRestClient>
     {

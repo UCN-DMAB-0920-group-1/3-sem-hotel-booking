@@ -1,7 +1,7 @@
-﻿using PrimestayWpf.Model;
+﻿using Model;
 using System;
 
-namespace PrimestayWPF.DataAccessLayer.DTO
+namespace DataAccessLayer.DTO
 {
     public static class MapperExtension
     {

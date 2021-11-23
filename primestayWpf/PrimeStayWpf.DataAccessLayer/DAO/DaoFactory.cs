@@ -1,8 +1,8 @@
-﻿using PrimestayWPF.DataAccessLayer.DTO;
+﻿using DataAccessLayer.DTO;
 using RestSharp;
 using System;
 
-namespace PrimestayWPF.DataAccessLayer.DAO
+namespace DataAccessLayer.DAO
 
 {
     public static class DaoFactory

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PrimestayWPF.DataAccessLayer.DTO
+namespace DataAccessLayer.DTO
 {
     public class CustomerDto : BaseDto
     {

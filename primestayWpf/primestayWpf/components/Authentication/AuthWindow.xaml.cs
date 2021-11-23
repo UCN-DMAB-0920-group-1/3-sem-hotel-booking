@@ -1,7 +1,7 @@
-﻿using primestayWpf.src.auth;
-using PrimestayWPF.DataAccessLayer;
-using PrimestayWPF.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
 using System.Windows;
+using WinApp.src.auth;
 
 namespace primestayWpf.components
 {

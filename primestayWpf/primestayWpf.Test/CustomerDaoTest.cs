@@ -1,17 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using primestayWpf;
-using primestayWpf.src.auth;
-using PrimestayWPF.DataAccessLayer;
-using PrimestayWPF.DataAccessLayer.DAO;
-using PrimestayWPF.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DAO;
+using DataAccessLayer.DTO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WinApp;
+using WinApp.src.auth;
 
-namespace primestayWpf.Test
+namespace Test
 {
     [TestClass()]
     public class CustomerDaoTest

@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "primestayWpf", "primestayWpf\primestayWpf.csproj", "{412780CD-31B5-46B0-A351-B958AB94BC7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinApp", "primestayWpf\WinApp.csproj", "{412780CD-31B5-46B0-A351-B958AB94BC7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimestayWpf.Model", "PrimestayWpf.Model\PrimestayWpf.Model.csproj", "{190657F6-659E-4E90-92FA-0EB567711498}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "PrimestayWpf.Model\Model.csproj", "{190657F6-659E-4E90-92FA-0EB567711498}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimestayWPF.DataAccessLayer", "PrimeStayWpf.DataAccessLayer\PrimestayWPF.DataAccessLayer.csproj", "{C5E421C5-EC6C-48EB-A5AE-EC47A5E022B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "PrimeStayWpf.DataAccessLayer\DataAccessLayer.csproj", "{C5E421C5-EC6C-48EB-A5AE-EC47A5E022B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimestayWpf.Test", "primestayWpf.Test\PrimestayWpf.Test.csproj", "{CFEF7F75-B904-4905-82A9-ADCAFD5B774F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "primestayWpf.Test\Test.csproj", "{CFEF7F75-B904-4905-82A9-ADCAFD5B774F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A5E78A2-A187-4415-8801-8FCDC7647542}"
 	ProjectSection(SolutionItems) = preProject

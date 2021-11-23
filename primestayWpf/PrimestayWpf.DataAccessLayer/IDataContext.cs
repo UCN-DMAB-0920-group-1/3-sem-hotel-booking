@@ -1,4 +1,4 @@
-﻿namespace PrimestayWPF.DataAccessLayer
+﻿namespace DataAccessLayer
 
 {
     public interface IDataContext
