@@ -29,8 +29,8 @@ namespace PrimeStayApi.Controllers
                 Start_date = booking.StartDate,
                 End_date = booking.EndDate,
                 Guests = booking.Guests,
-                Room_id = DtoExtentions.GetIdFromHref(booking.RoomHref),
-                Customer_id = DtoExtentions.GetIdFromHref(booking.CustomerHref)
+                Room_id = MapperExtension.GetIdFromHref(booking.RoomHref),
+                Customer_id = MapperExtension.GetIdFromHref(booking.CustomerHref)
 
             }).Select(h => h.Map());
         }
