@@ -3,9 +3,9 @@ using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
 using System.Windows;
 using WinApp.Components.Authentication;
-using WinApp.Components.CustomerCRUD;
-using WinApp.Components.HotelCRUD;
-using WinApp.Components.RoomTypeCRUD;
+using WinApp.Components.Customer;
+using WinApp.Components.Hotel;
+using WinApp.Components.RoomType;
 using WinApp.src.auth;
 
 namespace WinApp.Components
@@ -43,7 +43,9 @@ namespace WinApp.Components
 
         private void customerCrudBtn_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerMenu(DaoFactory.Create<CustomerDto>(_context, Auth.AccessToken)).ShowDialog();
+            if (Auth.IsLoggedIn) new CustomerMenu(DaoFactory.Create<CustomerDto>(_context, Auth.AccessToken)).ShowDialog();
+            else MessageBox.Show("Login to access Customers", "Error", MessageBoxButton.OK);
+
         }
     }
 }

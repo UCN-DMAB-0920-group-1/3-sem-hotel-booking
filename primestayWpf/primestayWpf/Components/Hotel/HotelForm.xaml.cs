@@ -1,10 +1,9 @@
-﻿using Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WinApp.Components.HotelCRUD
+namespace WinApp.Components.Hotel
 
 {
     /// <summary>
@@ -18,7 +17,7 @@ namespace WinApp.Components.HotelCRUD
             InitializeComponent();
 
         }
-        public HotelForm(Hotel hotel)
+        public HotelForm(Model.Hotel hotel)
         {
             InitializeComponent();
             Name.Text = hotel.Name;

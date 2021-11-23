@@ -1,12 +1,11 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace WinApp.Components.HotelCRUD
+namespace WinApp.Components.Hotel
 {
     /// <summary>
     /// Interaction logic for HotelsWindow.xaml
@@ -14,7 +13,7 @@ namespace WinApp.Components.HotelCRUD
     public partial class HotelMenu : Window
     {
         private readonly IDao<HotelDto> dao;
-        private ObservableCollection<Hotel> HotelList { get; set; } = new ObservableCollection<Hotel>();
+        private ObservableCollection<Model.Hotel> HotelList { get; set; } = new ObservableCollection<Model.Hotel>();
 
         public HotelMenu(IDao<HotelDto> _dao)
         {
@@ -27,7 +26,7 @@ namespace WinApp.Components.HotelCRUD
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            if (HotelListView.SelectedItem is not Hotel oldHotel)
+            if (HotelListView.SelectedItem is not Model.Hotel oldHotel)
             {
                 MessageBox.Show("Please select a Hotel to edit", "ERROR");
             }
@@ -40,7 +39,7 @@ namespace WinApp.Components.HotelCRUD
                 if (yesNo ?? false)
                 {
 
-                    Hotel hotel = new()
+                    Model.Hotel hotel = new()
                     {
                         Href = form.HotelHref,
                         Name = form.Name.Text,
@@ -60,7 +59,7 @@ namespace WinApp.Components.HotelCRUD
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if (HotelListView.SelectedItem is not Hotel hotel)
+            if (HotelListView.SelectedItem is not Model.Hotel hotel)
             {
                 MessageBox.Show("Please select a Hotel to delete", "ERROR");
             }
@@ -85,7 +84,7 @@ namespace WinApp.Components.HotelCRUD
             if (yesNo ?? false)
             {
 
-                Hotel hotel = new()
+                Model.Hotel hotel = new()
                 {
                     Name = form.Name.Text,
                     Description = form.Description.Text,

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace WinApp.Components.RoomTypeCRUD
+namespace WinApp.Components.RoomType
 {
     /// <summary>
     /// Interaction logic for RoomTypeWindow.xaml
@@ -16,7 +16,7 @@ namespace WinApp.Components.RoomTypeCRUD
     public partial class RoomTypeMenu : Window
     {
         private readonly IDao<RoomTypeDto> dao;
-        private ObservableCollection<RoomType> roomTypeList { get; set; } = new ObservableCollection<RoomType>();
+        private ObservableCollection<Model.RoomType> roomTypeList { get; set; } = new ObservableCollection<Model.RoomType>();
 
         public RoomTypeMenu(IDao<RoomTypeDto> _dao)
         {
@@ -29,7 +29,7 @@ namespace WinApp.Components.RoomTypeCRUD
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            var oldRoomType = RoomTypeListView.SelectedItem as RoomType;
+            var oldRoomType = RoomTypeListView.SelectedItem as Model.RoomType;
             if (oldRoomType is null) MessageBox.Show("Please select a RoomType to edit", "ERROR");
             else
             {
@@ -39,7 +39,7 @@ namespace WinApp.Components.RoomTypeCRUD
                 if (yesNo ?? false)
                 {
 
-                    RoomType roomType = new()
+                    Model.RoomType roomType = new()
                     {
                         Id = int.Parse(form.Id.Text),
                         Type = form.Type.Text,
@@ -60,7 +60,7 @@ namespace WinApp.Components.RoomTypeCRUD
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            var roomType = RoomTypeListView.SelectedItem as RoomType;
+            var roomType = RoomTypeListView.SelectedItem as Model.RoomType;
             string text = $"Are you sure you would like to delete {roomType?.Type ?? "this RoomType"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -79,7 +79,7 @@ namespace WinApp.Components.RoomTypeCRUD
             {
 
 
-                RoomType roomType = new()
+                Model.RoomType roomType = new()
                 {
                     Id = int.Parse(form.Id.Text),
                     Type = form.Type.Text,

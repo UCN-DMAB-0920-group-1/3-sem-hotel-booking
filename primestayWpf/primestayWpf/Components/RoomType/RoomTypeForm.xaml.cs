@@ -1,10 +1,9 @@
-﻿using Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WinApp.Components.RoomTypeCRUD
+namespace WinApp.Components.RoomType
 {
     /// <summary>
     /// Interaction logic for RoomTypeForm.xaml
@@ -16,7 +15,7 @@ namespace WinApp.Components.RoomTypeCRUD
             InitializeComponent();
 
         }
-        public RoomTypeForm(RoomType roomType)
+        public RoomTypeForm(Model.RoomType roomType)
         {
             InitializeComponent();
             Id.Text = roomType.Id.ToString();
