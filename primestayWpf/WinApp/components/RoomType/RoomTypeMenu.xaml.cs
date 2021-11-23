@@ -1,7 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
-using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -51,7 +50,7 @@ namespace WinApp.Components.RoomTypeViews
                         HotelHref = form.HotelHref.Text,
                         Active = form.Active.IsChecked,
                     };
-                    var res = dao.Update(roomType.Map(), Auth.AccessToken);
+                    var res = dao.Update(roomType.Map());
                     UpdateList();
                     if (res > 0) MessageBox.Show($"RoomType: {roomType.Type} was updated");
                     else MessageBox.Show($"Could not update {roomType.Type}, contact admin");
@@ -66,7 +65,7 @@ namespace WinApp.Components.RoomTypeViews
             string text = $"Are you sure you would like to delete {roomType?.Type ?? "this RoomType"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                var res = dao.Delete(roomType.Map(), Auth.AccessToken);
+                var res = dao.Delete(roomType.Map());
                 UpdateList();
                 if (res > 0) MessageBox.Show($"RoomType: {roomType!.Type} was deleted");
                 else MessageBox.Show($"Could not delete {roomType!.Type}, contact admin");
@@ -91,7 +90,7 @@ namespace WinApp.Components.RoomTypeViews
                     HotelHref = form.HotelHref.Text,
                     Active = form.Active.IsChecked,
                 };
-                var newHotelHref = dao.Create(roomType.Map(), Auth.AccessToken);
+                var newHotelHref = dao.Create(roomType.Map());
                 if (newHotelHref is null) MessageBox.Show("could not create RoomType");
                 else
                 {
@@ -107,7 +106,7 @@ namespace WinApp.Components.RoomTypeViews
         {
             try
             {
-                var RoomTypes = dao.ReadAll(new RoomTypeDto(), Auth.AccessToken).Select(x => x.Map());
+                var RoomTypes = dao.ReadAll(new RoomTypeDto()).Select(x => x.Map());
                 roomTypeList.Clear();
                 RoomTypes.ToList().ForEach(x => roomTypeList.Add(x));
             }

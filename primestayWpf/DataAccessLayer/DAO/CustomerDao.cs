@@ -13,7 +13,7 @@ namespace DataAccessLayer.DAO
         {
         }
 
-        public string Create(CustomerDto model, string token)
+        public string Create(CustomerDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/customer/", Method.POST, DataFormat.Json);
@@ -22,7 +22,7 @@ namespace DataAccessLayer.DAO
             return res.Href;
         }
 
-        public int Delete(CustomerDto model, string token)
+        public int Delete(CustomerDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
@@ -37,11 +37,11 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public IEnumerable<CustomerDto> ReadAll(CustomerDto model, string token)
+        public IEnumerable<CustomerDto> ReadAll(CustomerDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
-            restRequest.AddAuthorization(token);
+            restRequest.AddAuthorization(AccessToken);
 
             var res = restClient.Get<IEnumerable<CustomerDto>>(restRequest).Data;
             return res;
@@ -57,7 +57,7 @@ namespace DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(CustomerDto model, string token)
+        public int Update(CustomerDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
