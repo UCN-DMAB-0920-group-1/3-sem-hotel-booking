@@ -60,6 +60,31 @@ namespace PrimestayWPF.DataAccessLayer.DTO
                 Active = roomType.Active,
             };
         }
+        public static Customer Map(this CustomerDto customer)
+        {
+            if (customer is null) return null;
+            return new Customer()
+            {
+                Id = customer.ExtractId(),
+                BirthDay = customer.BirthDay,
+                Email = customer.Email,
+                Name = customer.Name,
+                Phone = customer.Phone,
+            };
+        }
+        public static CustomerDto Map(this Customer customer)
+        {
+            if (customer is null) return null;
+            return new CustomerDto()
+            {
+                Href = customer.ExtractHref(),
+                Email = customer.Email,
+                BirthDay = customer.BirthDay,
+                Name = customer.Name,
+                Phone = customer.Phone,
+            };
+
+        }
 
         #region helperMethods
         public static int? ExtractId(this BaseDto dto)

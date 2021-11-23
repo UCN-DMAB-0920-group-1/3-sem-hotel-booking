@@ -32,10 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Forms\RoomTypeCRUD\RoomTypeForm.xaml">
+    <Page Update="components\RoomTypeCRUD\RoomTypeForm.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
-    <Page Update="Forms\RoomTypeCRUD\RoomTypeMenu.xaml">
+    <Page Update="components\RoomTypeCRUD\RoomTypeMenu.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>
