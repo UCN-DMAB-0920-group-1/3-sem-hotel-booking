@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace WinApp.Components.Customer
+namespace WinApp.Components.CustomerViews
 {
     public partial class CustomerMenu : Window
     {

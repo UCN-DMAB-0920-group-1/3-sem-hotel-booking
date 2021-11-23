@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WinApp.Components.Hotel
+namespace WinApp.Components.HotelViews
 
 {
     /// <summary>

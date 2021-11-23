@@ -1,9 +1,9 @@
-﻿<Window x:Class="WinApp.Components.Hotel.HotelMenu"
+﻿<Window x:Class="WinApp.Components.HotelViews.HotelMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WinApp.Components.Hotel"
+        xmlns:local="clr-namespace:WinApp.Components.HotelViews"
         mc:Ignorable="d"
         Title="HotelsWindow" Height="593" Width="1122">
     <Grid HorizontalAlignment="Left" Width="822" Height="434" VerticalAlignment="Top" Margin="2,0,0,0">

@@ -1,6 +1,5 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace WinApp.Components.RoomType
+namespace WinApp.Components.RoomTypeViews
 {
     /// <summary>
     /// Interaction logic for RoomTypeWindow.xaml
