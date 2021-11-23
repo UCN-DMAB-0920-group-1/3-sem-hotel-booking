@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci97" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
 
