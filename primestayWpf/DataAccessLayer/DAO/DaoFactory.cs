@@ -21,6 +21,8 @@ namespace DataAccessLayer.DAO
                     var dao when dao == typeof(BookingDto) => new BookingDao(dataContext as IDataContext<IRestClient>, accessToken) as IDao<T>,
                     var dao when dao == typeof(UserDto) => new UserDao(dataContext as IDataContext<IRestClient>, accessToken) as IDao<T>,
                     var dao when dao == typeof(CustomerDto) => new CustomerDao(dataContext as IDataContext<IRestClient>, accessToken) as IDao<T>,
+                    var dao when dao == typeof(RoomDto) => new RoomDao(dataContext as IDataContext<IRestClient>, accessToken) as IDao<T>,
+
 
                     _ => null,
                 };

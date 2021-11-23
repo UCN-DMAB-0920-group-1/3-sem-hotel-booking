@@ -84,6 +84,30 @@ namespace DataAccessLayer.DTO
             };
 
         }
+        public static RoomDto Map(this Room room)
+        {
+            if (room is null) return null;
+            return new RoomDto()
+            {
+                Href = room.ExtractHref(),
+                Notes = room.Notes,
+                Active = room.Active,
+                Room_number = room.RoomNumber,
+                RoomTypeHref = GetHrefFromId(typeof(RoomType), room.RoomTypeId),
+            };
+        }
+        public static Room Map(this RoomDto room)
+        {
+            if (room is null) return null;
+            return new Room()
+            {
+                Id = room.ExtractId(),
+                Active = room.Active,
+                Notes = room.Notes,
+                RoomNumber = room.Room_number,
+                RoomTypeId = GetIdFromHref(room.RoomTypeHref),
+            };
+        }
 
         #region helperMethods
         public static int? ExtractId(this BaseDto dto)

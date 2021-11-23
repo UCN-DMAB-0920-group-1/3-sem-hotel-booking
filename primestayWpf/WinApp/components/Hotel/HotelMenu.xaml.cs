@@ -1,10 +1,11 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
+using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
-namespace WinApp.Components.Hotel
+namespace WinApp.Components.HotelView
 {
     /// <summary>
     /// Interaction logic for HotelsWindow.xaml
@@ -12,7 +13,7 @@ namespace WinApp.Components.Hotel
     public partial class HotelMenu : Window
     {
         private readonly IDao<HotelDto> dao;
-        private ObservableCollection<Model.Hotel> HotelList { get; set; } = new ObservableCollection<Model.Hotel>();
+        private ObservableCollection<Hotel> HotelList { get; set; } = new ObservableCollection<Hotel>();
 
         public HotelMenu(IDao<HotelDto> _dao)
         {

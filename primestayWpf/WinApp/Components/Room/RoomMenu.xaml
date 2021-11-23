@@ -1,9 +1,9 @@
-﻿<Window x:Class="WinApp.Components.Room.RoomMenu"
+﻿<Window x:Class="WinApp.Components.RoomView.RoomMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WinApp.Components.Room"
+        xmlns:local="clr-namespace:WinApp.Components.RoomView"
         mc:Ignorable="d"
         Title="RoomTypeMenu" Height="593" Width="1122">
     <Grid HorizontalAlignment="Left" Width="822" Height="434" VerticalAlignment="Top" Margin="2,0,0,0">
@@ -11,7 +11,7 @@
             <RowDefinition Height="106*"/>
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
-        <ListView  x:Name="RoomTypeListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
+        <ListView MouseDoubleClick="Edit" x:Name="RoomListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -24,17 +24,15 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
-                        <GridViewColumn Header="Description"  DisplayMemberBinding="{Binding Description}"/>
-                        <GridViewColumn Header="Beds" DisplayMemberBinding="{Binding Beds}"/>
-                        <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Rating}"/>
-                        <GridViewColumn Header="HotelHref" DisplayMemberBinding="{Binding HotelHref}"/>
+                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding RoomTypeId}"/>
+                        <GridViewColumn Header="Notes"  DisplayMemberBinding="{Binding Notes}"/>
+                        <GridViewColumn Header="RoomNumber" DisplayMemberBinding="{Binding RoomNumber}"/>
                         <GridViewColumn Header="Active" DisplayMemberBinding="{Binding Active}"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Create" Margin="0,0,-185,157" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Create" Margin="0,0,-177,157" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
