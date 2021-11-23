@@ -1,0 +1,26 @@
+﻿<Window x:Class="WinApp.Components.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinApp.Components"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <Button x:Name="authScreenbtn" Content="Auth screen" HorizontalAlignment="Left" Margin="670,31,0,0" VerticalAlignment="Top" Height="51" Width="96" Click="authScreenbtn_Click"/>
+        <Button x:Name="hotelCrudBtn" Content="Hotels CRUD" HorizontalAlignment="Left" Margin="23,110,0,0" VerticalAlignment="Top" Height="53" Width="92" Click="hotelCrudBtn_Click"/>
+        <Button x:Name="customeCrudBtn" Content="Customer CRUD" HorizontalAlignment="Left" Margin="166,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.544,0.525" Height="53" Width="92" Click="customerCrudBtn_Click"/>
+        <Button x:Name="RoomTypeCrudBtn" Content="RoomType CRUD" HorizontalAlignment="Left" Margin="232,238,0,0" VerticalAlignment="Top" Height="53" Width="155" Click="roomTypeBtn_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-2.191"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+    </Grid>
+
+</Window>

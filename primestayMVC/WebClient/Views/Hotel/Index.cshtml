@@ -1,0 +1,61 @@
+﻿@using Models
+@{
+    ViewData["Title"] = "Home Page";
+    var today = DateTime.Today.ToString("yyyy-MM-dd").Substring(0, 10);
+    var tomorrow = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd").Substring(0, 10);
+}
+
+<div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
+    <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
+        <h1> Find your dream stay!</h1>
+    </div>
+    <div class="container" style=" max-height:600px; background-color:aliceblue; border-radius: 15px; padding:10px; ">
+        <div style="padding:10px;">
+            <form asp-action="Result" method="GET">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <span class="form-label"> Location</span>
+                        <input type="text" name="location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Check In</span>
+                            <input class="form-control" name="startDate" type="date" value="@today" required="">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Check out</span>
+                            <input class="form-control" type="date" required="" value="@tomorrow" name="endDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <span class="form-label">Guests:</span>
+                        <input class="form-control" name="guests" value="1" type="number" required="">
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Price from:</span>
+                            <input class="form-control" name="minPrice" type="number">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <span class="form-label">Price to:</span>
+                            <input class="form-control" name="maxPrice" type="number">
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 15px;">
+                    <center>
+                        <input class="btn btn-primary" type="submit" style="width:100%;" />
+                    </center>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
