@@ -1,12 +1,12 @@
 ﻿using Dapper;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Model;
+using DataAccessLayer;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     internal class RoomDao : BaseDao<IDataContext<IDbConnection>>, IDao<RoomEntity>
     {
@@ -41,7 +41,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 {
                     res = connection.ExecuteScalar<int>(INSERT_QUERY, model);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     Debug.WriteLine(e);
                     return res;
@@ -59,7 +59,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                 {
                     res = connection.Execute(SOFT_DELETE, model);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     Debug.WriteLine(e);
                     return res;
@@ -91,7 +91,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Update(RoomEntity model)
         {
- 
+
             int res = -1;
             using (IDbConnection connection = DataContext.Open())
             {
@@ -100,7 +100,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                     model.Active ??= false;
                     res = connection.Execute(UPDATE_QUERY, model);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     Debug.WriteLine(e);
                     return res;

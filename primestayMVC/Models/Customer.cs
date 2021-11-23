@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimeStay.MVC.Model
+namespace Models
 {
     public class Customer : BaseModel
     {

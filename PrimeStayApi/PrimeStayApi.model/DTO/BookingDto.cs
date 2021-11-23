@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace PrimeStayApi.Model.DTO
+namespace Models.DTO
 {
     public class BookingDto : BaseModelDto
     {

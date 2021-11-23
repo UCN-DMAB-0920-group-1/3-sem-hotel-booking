@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
+﻿using API;
+using DataAccessLayer;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Models;
+using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Version = PrimeStayApi.Database.Version;
+using Version = Database.Version;
 
-namespace PrimeStayApi.Test
+namespace Tests
 {
     [TestClass]
     public class BookingDaoTest

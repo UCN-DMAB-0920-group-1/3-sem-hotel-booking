@@ -1,9 +1,10 @@
-﻿using PrimeStay.MVC.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 
-namespace PrimeStay.MVC.DataAccessLayer.DAO
+namespace DataAccessLayer.DAO
 {
     internal class RoomTypeDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomTypeDto>
     {

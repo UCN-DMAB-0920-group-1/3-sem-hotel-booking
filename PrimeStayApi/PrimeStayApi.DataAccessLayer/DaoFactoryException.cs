@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimeStayApi.DataAccessLayer
+namespace DataAccessLayer
 {
     internal class DaoFactoryException : Exception
     {

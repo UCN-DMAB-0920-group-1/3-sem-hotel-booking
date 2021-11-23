@@ -1,10 +1,9 @@
 ﻿using Dapper;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Model;
+using Models;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     internal class PictureDao : BaseDao<IDataContext<IDbConnection>>, IDao<PictureEntity>
     {

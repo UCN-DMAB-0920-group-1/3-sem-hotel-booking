@@ -1,11 +1,11 @@
 ﻿using Dapper;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Model;
+using DataAccessLayer;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     internal class LocationDao : BaseDao<IDataContext<IDbConnection>>, IDao<LocationEntity>
     {

@@ -1,4 +1,4 @@
-﻿namespace PrimeStayApi.DataAccessLayer
+﻿namespace DataAccessLayer
 {
     public interface IDataContext
     {

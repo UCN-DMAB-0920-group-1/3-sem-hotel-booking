@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PrimeStayApi.DataAccessLayer.SQL
+namespace DataAccessLayer.SQL
 {
     [Serializable]
     internal class DaoException : Exception

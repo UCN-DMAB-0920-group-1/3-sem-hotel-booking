@@ -1,8 +1,7 @@
-﻿
-/**
- * Author: Lars Nysom
- */
-namespace PrimeStayApi.Models
+﻿/**
+* Author: Lars Nysom
+*/
+namespace API.Models
 {
     public class LoginRequest
     {

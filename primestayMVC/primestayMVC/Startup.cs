@@ -1,15 +1,14 @@
+using DataAccessLayer;
+using DataAccessLayer.DAO;
+using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PrimeStay.MVC.Controllers;
 using RestSharp;
-using PrimeStay.MVC.DataAccessLayer.DTO;
-using PrimeStay.MVC.DataAccessLayer.DAO;
-using PrimeStay.MVC.DataAccessLayer;
 
-namespace PrimeStay.MVC
+namespace WebClient
 {
     public class Startup
     {

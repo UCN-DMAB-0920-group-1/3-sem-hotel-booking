@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeStayApi.model\PrimeStayApi.Model.csproj" />
+    <ProjectReference Include="..\PrimeStayApi.model\Models.csproj" />
   </ItemGroup>
 
 </Project>

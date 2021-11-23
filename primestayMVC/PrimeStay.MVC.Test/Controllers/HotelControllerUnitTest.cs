@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStay.MVC.Controllers;
-using PrimeStay.MVC.DataAccessLayer;
-using PrimeStay.MVC.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WebClient.Controllers;
 using System.Collections.Generic;
 
-namespace PrimeStay.MVC.Test.Controllers
+namespace Tests.Controllers
 {
     [TestClass()]
     public class HotelControllerUnitTest

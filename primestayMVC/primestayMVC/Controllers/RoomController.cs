@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PrimeStay.MVC.DataAccessLayer;
-using PrimeStay.MVC.DataAccessLayer.DTO;
-using PrimeStay.MVC.Model;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Microsoft.AspNetCore.Mvc;
+using Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using WebClient.Models;
 
-namespace PrimeStay.MVC.Controllers
+namespace WebClient.Controllers
 {
     public class RoomController : Controller
     {

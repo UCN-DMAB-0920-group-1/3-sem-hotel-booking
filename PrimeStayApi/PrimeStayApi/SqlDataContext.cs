@@ -1,8 +1,8 @@
-﻿using PrimeStayApi.DataAccessLayer;
+﻿using DataAccessLayer;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace PrimeStayApi
+namespace API
 {
     public class SqlDataContext : IDataContext<IDbConnection>
     {

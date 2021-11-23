@@ -3,7 +3,7 @@
 /**
 * Author: Lars Nysom
 */
-namespace PrimeStayApi.Services.Models
+namespace API.Services.Models
 {
     public class Userinfo
     {
