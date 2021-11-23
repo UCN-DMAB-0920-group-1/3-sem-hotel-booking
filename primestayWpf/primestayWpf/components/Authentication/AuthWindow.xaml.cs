@@ -3,7 +3,7 @@ using PrimestayWPF.DataAccessLayer;
 using PrimestayWPF.DataAccessLayer.DTO;
 using System.Windows;
 
-namespace primestayWpf.Forms
+namespace primestayWpf.components
 {
     public partial class AuthWindow : Window
     {

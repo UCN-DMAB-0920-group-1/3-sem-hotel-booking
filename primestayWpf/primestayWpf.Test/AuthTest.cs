@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using primestayWpf.Forms;
+using primestayWpf.components;
 using primestayWpf.src.auth;
 using PrimestayWPF.DataAccessLayer;
 using PrimestayWPF.DataAccessLayer.DTO;
