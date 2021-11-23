@@ -1,6 +1,8 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
 using primestayWpf.Forms;
+using primestayWpf.Forms.CustomerCRUD;
+using primestayWpf.Forms.CustomerCRUD;
 using primestayWpf.src.auth;
 using System.Windows;
 
@@ -39,7 +41,7 @@ namespace primestayWpf
 
         private void customerCrudBtn_Click(object sender, RoutedEventArgs e)
         {
-            new AuthWindow(DaoFactory.Create<UserDto>(_context, Auth.AccessToken)).ShowDialog();
+            new CustomerMenu(DaoFactory.Create<CustomerDto>(_context, Auth.AccessToken)).ShowDialog();
         }
     }
 }

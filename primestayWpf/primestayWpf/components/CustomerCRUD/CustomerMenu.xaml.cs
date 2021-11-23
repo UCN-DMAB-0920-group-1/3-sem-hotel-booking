@@ -44,6 +44,7 @@ namespace primestayWpf.Forms.CustomerCRUD
         
         private void Add(object sender, RoutedEventArgs e)
         {
+            throw new NotImplementedException();
 
         }
 
@@ -55,5 +56,15 @@ namespace primestayWpf.Forms.CustomerCRUD
             customers.ToList().ForEach(x => CustomerList.Add(x));
         }
 
+        private void Edit(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        private void Create(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
