@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace PrimeStay.WPF.DataAccessLayer.DTO
+namespace PrimestayWPF.DataAccessLayer.DTO
 {
     public class BookingDto : BaseDto
     {

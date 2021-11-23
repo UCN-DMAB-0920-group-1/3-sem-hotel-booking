@@ -1,6 +1,6 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DAO;
-using PrimeStay.WPF.DataAccessLayer.DTO;
-using primestayWpf.src.auth;
+﻿using primestayWpf.src.auth;
+using PrimestayWPF.DataAccessLayer;
+using PrimestayWPF.DataAccessLayer.DTO;
 using System.Windows;
 
 namespace primestayWpf.Forms

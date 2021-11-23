@@ -1,12 +1,11 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DTO;
-using PrimestayWPF.DataAccessLayer;
+﻿using PrimestayWPF.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
 
-namespace PrimeStay.WPF.DataAccessLayer.DAO
+namespace PrimestayWPF.DataAccessLayer.DAO
 
 {
     internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<HotelDto>
@@ -18,7 +17,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 
         public string Create(HotelDto model, string token)
         {
-            
+
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);

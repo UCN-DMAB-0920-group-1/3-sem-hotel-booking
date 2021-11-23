@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PrimeStay.WPF.DataAccessLayer.DAO
+namespace PrimestayWPF.DataAccessLayer
 
 {
     public interface IDao<T>

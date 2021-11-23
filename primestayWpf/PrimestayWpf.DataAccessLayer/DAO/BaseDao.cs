@@ -1,4 +1,4 @@
-﻿namespace PrimeStay.WPF.DataAccessLayer.DAO
+﻿namespace PrimestayWPF.DataAccessLayer.DAO
 {
     internal abstract class BaseDao<T>
     {

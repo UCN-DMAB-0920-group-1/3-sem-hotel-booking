@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStay.WPF.DataAccessLayer.DAO;
-using PrimeStay.WPF.DataAccessLayer.DTO;
 using primestayWpf.Forms;
 using primestayWpf.src.auth;
+using PrimestayWPF.DataAccessLayer;
+using PrimestayWPF.DataAccessLayer.DTO;
 using System;
 using System.Collections.Generic;
 using System.Windows;

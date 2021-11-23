@@ -1,9 +1,9 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DTO;
+﻿using PrimestayWPF.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PrimeStay.WPF.DataAccessLayer.DAO
+namespace PrimestayWPF.DataAccessLayer.DAO
 
 {
     internal class BookingDao : BaseDao<IDataContext<IRestClient>>, IDao<BookingDto>
