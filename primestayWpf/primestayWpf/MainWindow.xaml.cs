@@ -28,5 +28,10 @@ namespace primestayWpf
         {
             new AuthWindow(DaoFactory.Create<UserDto>(_context)).ShowDialog();
         }
+
+        private void customerCrudBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new AuthWindow(DaoFactory.Create<UserDto>(_context)).ShowDialog();
+        }
     }
 }
