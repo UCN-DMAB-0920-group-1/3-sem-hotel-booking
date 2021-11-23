@@ -27,8 +27,9 @@ namespace DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
+
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
             {
@@ -59,7 +60,16 @@ namespace DataAccessLayer.DAO
 
         public int Update(CustomerDto model, string token)
         {
-            throw new System.NotImplementedException();
+            IRestClient restClient = DataContext.Open();
+            IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
+            restRequest.AddAuthorization(AccessToken);
+
+            var res = restClient.Get<CustomerDto>(restRequest);
+            return res.StatusCode switch
+            {
+                HttpStatusCode.OK => 1,
+                _ => -1
+            };
         }
     }
 }
