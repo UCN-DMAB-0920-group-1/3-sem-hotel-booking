@@ -9,13 +9,11 @@ namespace primestayWpf.Forms
     {
 
         private readonly IDao<UserDto> dao;
-        private readonly MainWindow parrent;
 
-        public AuthWindow(IDao<UserDto> _dao, MainWindow parrent)
+        public AuthWindow(IDao<UserDto> _dao)
         {
             InitializeComponent();
             this.dao = _dao;
-            this.parrent = parrent;
             usernameField.Focus();
         }
 
@@ -39,7 +37,6 @@ namespace primestayWpf.Forms
             {
                 Auth.AccessToken = res.Token;
                 Auth.username = res.name;
-                parrent.Login();
                 Close();
             }
         }
