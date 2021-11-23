@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStay.MVC.DataAccessLayer;
-using PrimeStay.MVC.DataAccessLayer.DTO;
-using PrimeStay.MVC.Model;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using PrimeStay.MVC.Model;
+using PrimeStay.MVC.DataAccessLayer.DTO;
 
 namespace PrimeStay.MVC.Controllers
 {

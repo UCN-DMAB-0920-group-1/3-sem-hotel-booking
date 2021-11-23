@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MVC.DataAccessLayer\MVC.DataAccessLayer.csproj" />
-    <ProjectReference Include="..\primestayMVC\primestayMVC.csproj" />
+    <ProjectReference Include="..\MVC.DataAccessLayer\PrimeStay.MVC.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\primestayMVC\PrimeStay.MVC.csproj" />
   </ItemGroup>
 
 </Project>

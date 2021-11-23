@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PrimeStay.MVC.Controllers;
 using PrimeStay.MVC.DataAccessLayer;
 using PrimeStay.MVC.DataAccessLayer.DTO;
 using System.Collections.Generic;
 
-namespace PrimeStay.MVC.Controllers.Tests
+namespace PrimeStay.MVC.Test.Controllers
 {
     [TestClass()]
     public class HotelControllerUnitTest
@@ -16,9 +17,9 @@ namespace PrimeStay.MVC.Controllers.Tests
         [TestInitialize]
         public void SetUp()
         {
-            _hotelDao = new mockHotelDao();
-            _locationDao = new mockLocationDao();
-            _roomDao = new mockRoomDao();
+            _hotelDao = new MockHotelDao();
+            _locationDao = new MockLocationDao();
+            _roomDao = new MockRoomDao();
         }
 
         [TestCleanup]
@@ -63,7 +64,7 @@ namespace PrimeStay.MVC.Controllers.Tests
 
 
 
-        internal class mockHotelDao : IDao<HotelDto>
+        internal class MockHotelDao : IDao<HotelDto>
         {
             public string Create(HotelDto model)
             {
@@ -90,7 +91,7 @@ namespace PrimeStay.MVC.Controllers.Tests
                 return -1;
             }
         }
-        internal class mockLocationDao : IDao<LocationDto>
+        internal class MockLocationDao : IDao<LocationDto>
         {
             public string Create(LocationDto model)
             {
@@ -117,7 +118,7 @@ namespace PrimeStay.MVC.Controllers.Tests
                 return -1;
             }
         }
-        internal class mockRoomDao : IDao<RoomTypeDto>
+        internal class MockRoomDao : IDao<RoomTypeDto>
         {
             public string Create(RoomTypeDto model)
             {
