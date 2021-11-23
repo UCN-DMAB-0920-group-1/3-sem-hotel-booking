@@ -29,7 +29,10 @@ namespace primestayWpf
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            if (HotelListView.SelectedItem is not Hotel oldHotel) MessageBox.Show("Please select a Hotel to edit", "ERROR");
+            if (HotelListView.SelectedItem is not Hotel oldHotel)
+            {
+                MessageBox.Show("Please select a Hotel to edit", "ERROR");
+            }
             else
             {
                 var form = oldHotel is null ? new HotelForm() : new HotelForm(oldHotel);
@@ -47,6 +50,7 @@ namespace primestayWpf
                         LocationHref = form.LocationHref.Text,
                         StaffedHours = form.StaffedHours.Text,
                         Stars = (int)form.Stars.Value,
+                        Active = form.Active.IsChecked,
                     };
                     var res = dao.Update(hotel.Map(), Auth.AccessToken);
                     UpdateList();
@@ -58,14 +62,21 @@ namespace primestayWpf
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            var hotel = HotelListView.SelectedItem as Hotel;
-            string text = $"Are you sure you would like to delete {hotel?.Name ?? "this hotel"}?";
-            if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (HotelListView.SelectedItem is not Hotel hotel)
             {
-                var res = dao.Delete(hotel.Map(), Auth.AccessToken);
-                UpdateList();
-                if (res > 0) MessageBox.Show($"Hotel {hotel!.Name} was deleted");
-                else MessageBox.Show($"Could not delete {hotel!.Name}, contact admin");
+                MessageBox.Show("Please select a Hotel to delete", "ERROR");
+            }
+            else
+            {
+
+                string text = $"Are you sure you would like to delete {hotel?.Name ?? "this hotel"}?";
+                if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var res = dao.Delete(hotel.Map(), Auth.AccessToken);
+                    UpdateList();
+                    if (res > 0) MessageBox.Show($"Hotel {hotel!.Name} was deleted");
+                    else MessageBox.Show($"Could not delete {hotel!.Name}, contact admin");
+                }
             }
         }
 

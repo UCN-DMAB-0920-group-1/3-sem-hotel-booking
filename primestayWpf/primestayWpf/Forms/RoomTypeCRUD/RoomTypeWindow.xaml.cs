@@ -5,8 +5,6 @@ using primestayWpf.src.auth;
 using PrimestayWpf.Model;
 using PrimestayWPF.DataAccessLayer.DTO;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -40,31 +38,24 @@ namespace primestayWpf
                 var form = oldRoomType is null ? new RoomTypeForm() : new RoomTypeForm(oldRoomType);
                 var yesNo = form.ShowDialog();
 
-                string errors = validateForm(form.Type.Text, form.Description.Text, form.Beds.Text, form.HotelHref.Text, (int)form.Rating.Value);
-
                 if (yesNo ?? false)
                 {
-                    if (!string.IsNullOrEmpty(errors))
+
+                    RoomType roomType = new()
                     {
-                        MessageBox.Show(errors, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    else
-                    {
-                        RoomType roomType = new()
-                        {
-                            Id = Int32.Parse(form.Id.Text),
-                            Type = form.Type.Text,
-                            Description = form.Description.Text,
-                            Rating = (int)form.Rating.Value,
-                            Beds = Int32.Parse(form.Beds.Text),
-                            HotelHref = form.HotelHref.Text,
-                            Active = form.Active.IsChecked,
-                        };
-                        var res = dao.Update(roomType.Map(), Auth.AccessToken);
-                        UpdateList();
-                        if (res > 0) MessageBox.Show($"RoomType: {roomType.Type} was updated");
-                        else MessageBox.Show($"Could not update {roomType.Type}, contact admin");
-                    }
+                        Id = int.Parse(form.Id.Text),
+                        Type = form.Type.Text,
+                        Description = form.Description.Text,
+                        Rating = (int)form.Rating.Value,
+                        Beds = int.Parse(form.Beds.Text),
+                        HotelHref = form.HotelHref.Text,
+                        Active = form.Active.IsChecked,
+                    };
+                    var res = dao.Update(roomType.Map(), Auth.AccessToken);
+                    UpdateList();
+                    if (res > 0) MessageBox.Show($"RoomType: {roomType.Type} was updated");
+                    else MessageBox.Show($"Could not update {roomType.Type}, contact admin");
+
                 }
             }
 
@@ -89,32 +80,25 @@ namespace primestayWpf
             if (yesNo ?? false)
             {
 
-                string errors = validateForm(form.Type.Text, form.Description.Text, form.Beds.Text, form.HotelHref.Text, (int)form.Rating.Value);
 
-                if (!string.IsNullOrEmpty(errors))
+                RoomType roomType = new()
                 {
-                    MessageBox.Show(errors, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                    Id = int.Parse(form.Id.Text),
+                    Type = form.Type.Text,
+                    Description = form.Description.Text,
+                    Rating = (int)form.Rating.Value,
+                    Beds = int.Parse(form.Beds.Text),
+                    HotelHref = form.HotelHref.Text,
+                    Active = form.Active.IsChecked,
+                };
+                var newHotelHref = dao.Create(roomType.Map(), Auth.AccessToken);
+                if (newHotelHref is null) MessageBox.Show("could not create RoomType");
                 else
                 {
-                    RoomType roomType = new()
-                    {
-                        Id = Int32.Parse(form.Id.Text),
-                        Type = form.Type.Text,
-                        Description = form.Description.Text,
-                        Rating = (int)form.Rating.Value,
-                        Beds = Int32.Parse(form.Beds.Text),
-                        HotelHref = form.HotelHref.Text,
-                        Active = form.Active.IsChecked,
-                    };
-                    var newHotelHref = dao.Create(roomType.Map(), Auth.AccessToken);
-                    if (newHotelHref is null) MessageBox.Show("could not create RoomType");
-                    else
-                    {
-                        MessageBox.Show($"RoomType: {roomType.Type} was succesfully created");
-                        UpdateList();
-                    }
+                    MessageBox.Show($"RoomType: {roomType.Type} was succesfully created");
+                    UpdateList();
                 }
+
             }
 
         }
@@ -134,43 +118,5 @@ namespace primestayWpf
             }
         }
 
-        private string validateForm(string? type, string? description, string? beds, string? hotel, int? rating)
-        {
-            List<string> errors = new List<string>();
-
-
-            if (string.IsNullOrEmpty(type))
-            {
-                errors.Add("Please enter a name");
-            }
-
-            if (string.IsNullOrEmpty(description))
-            {
-                errors.Add("Please enter a description");
-            }
-
-            if (string.IsNullOrEmpty(hotel))
-            {
-                errors.Add("Please add a valid hotel");
-            }
-
-            if (string.IsNullOrEmpty(beds))
-            {
-                errors.Add("Please add how many beds");
-            }
-
-            if (rating == null)
-            {
-                errors.Add("Please add some ratings");
-            }
-            else if (rating < 1)
-            {
-                errors.Add("Please enter more than 0 ratings");
-            }
-
-            string error = string.Join(",\n", errors);
-
-            return error;
-        }
     }
 }

@@ -62,22 +62,22 @@ namespace primestayWpf.HotelCRUD
             var errors = new List<string>();
 
 
-            if (string.IsNullOrEmpty(Name.Text))
+            if (string.IsNullOrWhiteSpace(Name.Text))
             {
                 errors.Add("Please enter a name");
             }
 
-            if (string.IsNullOrEmpty(Description.Text))
+            if (string.IsNullOrWhiteSpace(Description.Text))
             {
                 errors.Add("Please enter a description");
             }
 
-            if (string.IsNullOrEmpty(StaffedHours.Text))
+            if (string.IsNullOrWhiteSpace(StaffedHours.Text))
             {
                 errors.Add("Please a time when the hotel is staffed");
             }
 
-            if (string.IsNullOrEmpty(LocationHref.Text))
+            if (string.IsNullOrWhiteSpace(LocationHref.Text))
             {
                 errors.Add("Please a valid location");
             }
