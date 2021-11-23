@@ -11,12 +11,12 @@ namespace DataAccessLayer.DAO
         {
         }
 
-        public string Create(UserDto model, string token)
+        public string Create(UserDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Delete(UserDto model, string token)
+        public int Delete(UserDto model)
         {
             throw new System.NotImplementedException();
         }
@@ -37,7 +37,7 @@ namespace DataAccessLayer.DAO
             return res;
         }
 
-        public IEnumerable<UserDto> ReadAll(UserDto model, string token)
+        public IEnumerable<UserDto> ReadAll(UserDto model)
         {
             throw new System.NotImplementedException();
         }
@@ -47,7 +47,7 @@ namespace DataAccessLayer.DAO
             throw new System.NotImplementedException();
         }
 
-        public int Update(UserDto model, string token)
+        public int Update(UserDto model)
         {
             throw new System.NotImplementedException();
         }

@@ -15,7 +15,7 @@ namespace DataAccessLayer.DAO
         {
         }
 
-        public string Create(HotelDto model, string token)
+        public string Create(HotelDto model)
         {
 
             IRestClient restClient = DataContext.Open();
@@ -30,7 +30,7 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public int Delete(HotelDto model, string token)
+        public int Delete(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
@@ -44,7 +44,7 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public IEnumerable<HotelDto> ReadAll(HotelDto model, string token)
+        public IEnumerable<HotelDto> ReadAll(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.GET, DataFormat.Json);
@@ -59,7 +59,7 @@ namespace DataAccessLayer.DAO
             return restClient.Get<HotelDto>(restRequest).Data;
         }
 
-        public int Update(HotelDto model, string token)
+        public int Update(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
