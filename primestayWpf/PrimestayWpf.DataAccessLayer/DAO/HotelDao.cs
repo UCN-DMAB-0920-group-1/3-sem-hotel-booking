@@ -12,12 +12,13 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
     internal class HotelDao : BaseDao<IDataContext<IRestClient>>, IDao<HotelDto>
     {
         private readonly string baseEndPoint = "/api/hotel";
-        public HotelDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+        public HotelDao(IDataContext<IRestClient> dataContext, string accessToken) : base(dataContext, accessToken)
         {
         }
 
-        public string Create(HotelDto model, string token)
+        public string Create(HotelDto model)
         {
+            
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);
@@ -30,11 +31,11 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             };
         }
 
-        public int Delete(HotelDto model, string token)
+        public int Delete(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
@@ -59,11 +60,11 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return restClient.Get<HotelDto>(restRequest).Data;
         }
 
-        public int Update(HotelDto model, string token)
+        public int Update(HotelDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch
