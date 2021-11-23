@@ -21,7 +21,7 @@ namespace DataAccessLayer.DAO
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);
-            restRequest.AddAuthorization(token);
+            restRequest.AddAuthorization(AccessToken);
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
             {
@@ -34,7 +34,7 @@ namespace DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
@@ -63,7 +63,7 @@ namespace DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch

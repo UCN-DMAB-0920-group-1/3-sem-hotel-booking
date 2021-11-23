@@ -1,5 +1,4 @@
-﻿using DataAccessLayer;
-using DataAccessLayer.DTO;
+﻿using DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
 using System.Net;
@@ -42,7 +41,7 @@ namespace DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
-            restRequest.AddAuthorization(token);
+            restRequest.AddAuthorization(AccessToken);
 
             var res = restClient.Get<IEnumerable<CustomerDto>>(restRequest).Data;
             return res;
