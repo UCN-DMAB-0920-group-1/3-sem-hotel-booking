@@ -1,4 +1,4 @@
-﻿using primestayWpf.Forms;
+﻿using primestayWpf.components;
 using primestayWpf.src.auth;
 using PrimestayWpf.Model;
 using PrimestayWPF.DataAccessLayer;
@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
-namespace primestayWpf.Forms.CustomerCRUD
+namespace primestayWpf.components.CustomerCRUD
 {
     public partial class CustomerMenu : Window
     {
