@@ -13,12 +13,12 @@ using System.Windows;
 
 namespace primestayWpf.Forms.CustomerCRUD
 {
-    public partial class CustomerCRUD : Window
+    public partial class CustomerMenu : Window
     {
         private readonly IDao<CustomerDto> dao;
         private ObservableCollection<Customer> CustomerList { get; set; } = new ObservableCollection<Customer>();
 
-        public CustomerCRUD(IDao<CustomerDto> _dao)
+        public CustomerMenu(IDao<CustomerDto> _dao)
         {
             InitializeComponent();
             dao = _dao;
@@ -32,10 +32,20 @@ namespace primestayWpf.Forms.CustomerCRUD
             string text = $"Are you sure that you would like to delete{customer?.Phone ?? "this customer"}?";
             if(MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                var res = dao.Delete(customer.Map(), Auth.AccessToken);
+                if (MessageBox.Show($"Are you sure you would like to delete {customer.Phone}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var res = dao.Delete(customer.Map(), Auth.AccessToken);
+                    UpdateList();
+                    if (res > 0) MessageBox.Show($"Customer{customer.Phone} was deleted");
+                    else MessageBox.Show($"Could not delete {customer.Phone}, contact admin");
+                }
             }
         }
+        
+        private void Add(object sender, RoutedEventArgs e)
+        {
 
+        }
 
 
         private void UpdateList()

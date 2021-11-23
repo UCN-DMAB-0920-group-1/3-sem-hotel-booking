@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="hotelCrudBtn" Content="Hotels CRUD" HorizontalAlignment="Left" Margin="23,110,0,0" VerticalAlignment="Top" Height="53" Width="92" Click="hotelCrudBtn_Click"/>
         <Button x:Name="authScreenbtn" Content="Auth screen" HorizontalAlignment="Left" Margin="670,31,0,0" VerticalAlignment="Top" Height="51" Width="96" Click="authScreenbtn_Click"/>
-        <Button x:Name="customeCrudBtn" Content="Customer CRUD" HorizontalAlignment="Left" Margin="162,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.544,0.525" Height="53" Width="92" Click="customerCrudBtn_Click"/>
+        <Button x:Name="customeCrudBtn" Content="Customer CRUD" HorizontalAlignment="Left" Margin="166,110,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.544,0.525" Height="53" Width="92" Click="customerCrudBtn_Click"/>
     </Grid>
 
 </Window>
