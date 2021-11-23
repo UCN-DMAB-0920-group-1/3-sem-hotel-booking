@@ -1,7 +1,5 @@
-﻿using DataAccessLayer;
-using DataAccessLayer.DTO;
+﻿using DataAccessLayer.DTO;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,11 +15,11 @@ namespace DataAccessLayer.DAO
         {
         }
 
-        public string Create(RoomTypeDto model, string token)
+        public string Create(RoomTypeDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
@@ -31,11 +29,11 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public int Delete(RoomTypeDto model, string token)
+        public int Delete(RoomTypeDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
@@ -45,7 +43,7 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model, string token)
+        public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model)
         {
             var query_hotelId = $"hotelHref={model.HotelHref}";
 
@@ -65,11 +63,11 @@ namespace DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(RoomTypeDto model, string token)
+        public int Update(RoomTypeDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch

@@ -12,7 +12,7 @@ namespace DataAccessLayer.DAO
         {
         }
 
-        public string Create(BookingDto model, string token)
+        public string Create(BookingDto model)
         {
             IRestClient client = DataContext.Open();
             IRestRequest request = new RestRequest("/api/booking", Method.POST, DataFormat.Json).AddJsonBody(model);
@@ -20,12 +20,12 @@ namespace DataAccessLayer.DAO
             return res;
         }
 
-        public int Delete(BookingDto model, string token)
+        public int Delete(BookingDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<BookingDto> ReadAll(BookingDto model, string token)
+        public IEnumerable<BookingDto> ReadAll(BookingDto model)
         {
             throw new System.NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(BookingDto model, string token)
+        public int Update(BookingDto model)
         {
             throw new System.NotImplementedException();
         }
