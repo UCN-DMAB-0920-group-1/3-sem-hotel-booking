@@ -4,6 +4,7 @@ using PrimestayWPF.DataAccessLayer;
 using PrimestayWPF.DataAccessLayer.DAO;
 using PrimestayWPF.DataAccessLayer.DTO;
 using System.Windows;
+using primestayWpf.Forms.CustomerCRUD;
 
 namespace primestayWpf
 {

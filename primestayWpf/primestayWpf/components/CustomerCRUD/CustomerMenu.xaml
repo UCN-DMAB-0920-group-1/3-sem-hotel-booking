@@ -12,9 +12,9 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Email"  DisplayMemberBinding="{Binding Description}"/>
-                        <GridViewColumn Header="Bithday" DisplayMemberBinding="{Binding StaffedHours}"/>
-                        <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Stars}"/>
+                        <GridViewColumn Header="Email"  DisplayMemberBinding="{Binding Email}"/>
+                        <GridViewColumn Header="Bithday" DisplayMemberBinding="{Binding Birthday}"/>
+                        <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
