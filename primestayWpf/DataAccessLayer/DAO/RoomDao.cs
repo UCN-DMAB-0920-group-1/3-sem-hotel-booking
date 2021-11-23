@@ -13,7 +13,7 @@ namespace DataAccessLayer.DAO
         {
         }
 
-        public string Create(RoomDto model, string token)
+        public string Create(RoomDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
@@ -22,7 +22,7 @@ namespace DataAccessLayer.DAO
             return res.Href;
         }
 
-        public int Delete(RoomDto model, string token)
+        public int Delete(RoomDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
@@ -36,12 +36,12 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public IEnumerable<RoomDto> ReadAll(RoomDto model, string token)
+        public IEnumerable<RoomDto> ReadAll(RoomDto model)
         {
             IRestClient restClient = DataContext.Open();
             var test = baseEndPoint + "?roomTypeHref=" + model.RoomTypeHref;
             IRestRequest restRequest = new RestRequest(test, Method.GET, DataFormat.Json);
-            restRequest.AddAuthorization(token);
+            restRequest.AddAuthorization(AccessToken);
 
             var res = restClient.Get<IEnumerable<RoomDto>>(restRequest).Data;
             return res;
@@ -57,11 +57,11 @@ namespace DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(RoomDto model, string token)
+        public int Update(RoomDto model)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
+            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch

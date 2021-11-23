@@ -61,7 +61,7 @@ namespace DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddAuthorization(token);
+            restRequest.AddAuthorization(AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch

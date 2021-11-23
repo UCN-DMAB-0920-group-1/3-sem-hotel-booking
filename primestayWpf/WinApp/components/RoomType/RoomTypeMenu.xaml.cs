@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
+using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
