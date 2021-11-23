@@ -20,18 +20,45 @@ namespace PrimeStayApi.Controllers
 
         // GET: RoomController
         [HttpGet]
-        public IEnumerable<RoomTypeDto> Index([FromQuery] RoomTypeDto room)
-            => _dao.ReadAll(room.Map()).Select(r => r.Map());
+        public ActionResult<IEnumerable<RoomTypeDto>> Index([FromQuery] RoomTypeDto room)
+        {
+            try
+            {
+                return Ok(_dao.ReadAll(room.Map()).Select(h => h.Map()));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
 
         [HttpGet]
         [Route("{id}")]
-        public RoomTypeDto Details(int id) => _dao.ReadById(id).Map();
+        public ActionResult<RoomTypeDto> Details(int id)
+        {
+            try
+            {
+                return Ok(_dao.ReadById(id).Map());
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
 
         [HttpPost]
         public ActionResult Create(RoomTypeDto room)
         {
             int id = _dao.Create(room.Map());
-            return Created(id.ToString(), room);
+
+            if (id != -1)
+            {
+                return Created(id.ToString(), room);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -42,14 +69,9 @@ namespace PrimeStayApi.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromBody] RoomTypeDto room)
         {
-            RoomTypeEntity room = new()
-            {
-                Id = id,
-            };
-
-            return _dao.Delete(room) == 1 ? Ok() : NotFound();
+            return _dao.Delete(room.Map()) == 1 ? Ok() : NotFound();
         }
 
         // GET: api/roomType/available?roomTypeId={id}&startDate={startDate}&endDate={endDate}

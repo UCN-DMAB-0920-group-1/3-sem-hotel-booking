@@ -36,12 +36,12 @@ namespace primestayWpf.Test
     //IDao<UserDto> left out, due to the test not needing it
     internal class MockUserDao : IDao<UserDto>, IDaoAuthExtension<UserDto>
     {
-        public string Create(UserDto model, string token)
+        public string Create(UserDto model, string token = null)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(UserDto model, string token)
+        public int Delete(UserDto model, string token = null)
         {
             throw new NotImplementedException();
         }
@@ -74,7 +74,7 @@ namespace primestayWpf.Test
             throw new NotImplementedException();
         }
 
-        public int Update(UserDto model, string token)
+        public int Update(UserDto model, string token = null)
         {
             throw new NotImplementedException();
         }

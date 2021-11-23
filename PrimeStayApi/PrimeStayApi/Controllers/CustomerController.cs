@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeStayApi.DataAccessLayer;
 using PrimeStayApi.Model;
@@ -51,18 +50,28 @@ namespace PrimeStayApi.Controllers
         [HttpPut]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(CustomerDto customer)
         {
-            throw new NotImplementedException();
+            return _dao.Update(customer.Map()) switch
+            {
+                > 0 => Ok(customer),
+                -1 => BadRequest(),
+                _ => throw new Exception("something went wrong")
+            };
         }
 
         // DELETE: BookingController/Delete/5
         [HttpDelete]
         [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(CustomerDto customer)
         {
-            throw new NotImplementedException();
+            return _dao.Delete(customer.Map()) switch
+            {
+                > 0 => Ok(customer),
+                -1 => BadRequest(),
+                _ => throw new Exception("something went wrong")
+            };
         }
     }
 }

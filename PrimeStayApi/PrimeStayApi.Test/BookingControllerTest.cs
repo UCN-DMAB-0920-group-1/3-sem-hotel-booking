@@ -68,7 +68,9 @@ namespace PrimeStayApi.Test
         {
             //Arrange
             IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
-            BookingController controller = new BookingController(dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+
+            BookingController controller = new BookingController(dao, customerDao);
 
 
             BookingDto booking = new BookingDto()
@@ -92,7 +94,8 @@ namespace PrimeStayApi.Test
         {
             //Arrange
             IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
-            BookingController controller = new BookingController(dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            BookingController controller = new BookingController(dao, customerDao);
 
             BookingDto booking = new BookingDto()
             {
@@ -120,8 +123,9 @@ namespace PrimeStayApi.Test
         [TestMethod]
         public void TestReadById()
         {
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
             IDao<BookingEntity> dao = DaoFactory.Create<BookingEntity>(_dataContext);
-            BookingController controller = new BookingController(dao);
+            BookingController controller = new BookingController(dao, customerDao);
             int id = 1;
 
             var booking = controller.Details(id);

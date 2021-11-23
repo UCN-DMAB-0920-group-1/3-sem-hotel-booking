@@ -10,9 +10,9 @@ namespace PrimeStayApi.DataAccessLayer.SQL
     internal class BookingDao : BaseDao<IDataContext<IDbConnection>>, IDao<BookingEntity>
     {
         #region SQL-Queries
-        private static readonly string SELECTBOOKINGBYID = @"SELECT * FROM Booking WHERE id = @id";
+        private static readonly string SELECT_BOOKING_BY_ID = @"SELECT * FROM Booking WHERE id = @id";
 
-        private static readonly string SELECTALLBOOKINGS = @"SELECT * FROM Booking WHERE " +
+        private static readonly string SELECT_ALL_BOOKINGS = @"SELECT * FROM Booking WHERE " +
                                                             "id = ISNULL(@id,id)" +
                                                             "AND start_date >= ISNULL(@Start_date, Start_date)" +
                                                             "AND end_date <= ISNULL(@End_date, End_date)" +
@@ -20,11 +20,11 @@ namespace PrimeStayApi.DataAccessLayer.SQL
                                                             "AND room_id = ISNULL(@Room_id, Room_id)" +
                                                             "AND customer_id = ISNULL(@Customer_id, Customer_id)";
 
-        private static readonly string INSERTBOOKINGRETURNID = @"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
+        private static readonly string INSERT_BOOKING_RETURN_ID = @"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
                                                                 @"OUTPUT INSERTED.id " +
                                                                 @"VALUES (@Start_date, @End_date, @Guests,@Room_id,@Customer_id)";
 
-        private static readonly string GETAVAILABLEROOMRANDOM = "SELECT TOP 1 Room.id FROM Room " +
+        private static readonly string GET_AVAILABLE_ROOM_RANDOM = "SELECT TOP 1 Room.id FROM Room " +
                                                                 "WHERE room.room_type_id = @Room_type_id AND Room.id NOT IN " +
                                                                 "( " +
                                                                     "SELECT R.id " +
@@ -51,13 +51,13 @@ namespace PrimeStayApi.DataAccessLayer.SQL
             var res = -1;
             using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
             {
-                model.Room_id = transaction.ExecuteScalar<int>(GETAVAILABLEROOMRANDOM,
+                model.Room_id = transaction.ExecuteScalar<int>(GET_AVAILABLE_ROOM_RANDOM,
                     new { model.Room_type_id, model.Start_date, model.End_date });
 
                 if (model.Room_id is not null && model.Room_id > 0)
                 {
 
-                    res = transaction.ExecuteScalar<int>(INSERTBOOKINGRETURNID,
+                    res = transaction.ExecuteScalar<int>(INSERT_BOOKING_RETURN_ID,
                         new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
                     transaction.Commit();
                 }
@@ -75,7 +75,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.Query<BookingEntity>(SELECTALLBOOKINGS,
+                return connection.Query<BookingEntity>(SELECT_ALL_BOOKINGS,
                     new { model.Id, model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
 
             };
@@ -85,7 +85,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<BookingEntity>(SELECTBOOKINGBYID, new { id });
+                return connection.QueryFirst<BookingEntity>(SELECT_BOOKING_BY_ID, new { id });
             }
         }
 

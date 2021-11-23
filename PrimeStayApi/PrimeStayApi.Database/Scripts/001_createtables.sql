@@ -18,6 +18,7 @@ CREATE TABLE [RoomType] (
   [description] VARCHAR(250),
   [rating] int NOT NULL,
   [hotel_id] int NOT NULL,
+  [active] bit NOT NULL DEFAULT 0,
   PRIMARY KEY ([id])
 )
 GO
@@ -27,6 +28,7 @@ CREATE TABLE [Room] (
   [room_type_id] int NOT NULL,
   [room_number] VARCHAR(250),
   [notes] VARCHAR(1000),
+  [active] bit NOT NULL DEFAULT 1,
   PRIMARY KEY ([id])
 )
 GO

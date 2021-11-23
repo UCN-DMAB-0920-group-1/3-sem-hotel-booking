@@ -14,11 +14,12 @@ namespace primestayWpf.Forms
         {
             InitializeComponent();
             this.dao = _dao;
+            usernameField.Focus();
         }
 
         public void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password))
             {
                 errorLabel.Content = "Both username and password must be set!";
@@ -26,7 +27,7 @@ namespace primestayWpf.Forms
             }
 
             errorLabel.Content = "";
-            var res = (dao as IDaoAuthExtension<UserDto>).login(usernameField.Text, passwordField.Password);
+            var res = (dao as IDaoAuthExtension<UserDto> ?? throw new System.Exception()).login(usernameField.Text, passwordField.Password);
 
             if (res == null || string.IsNullOrEmpty(res.Token))
             {
@@ -38,6 +39,11 @@ namespace primestayWpf.Forms
                 Auth.username = res.name;
                 Close();
             }
+        }
+
+        private void passwordField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key is System.Windows.Input.Key.Enter) loginBtn_Click(sender, e);
         }
     }
 

@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="HotelForm" Height="320" Width="250">
-    <Grid Margin="0,0,0,0">
+        Title="HotelForm" Height="359" Width="307">
+    <Grid Margin="-8,-11,8,11">
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Name" TextChanged="Name_TextChanged" />
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="StaffedHours"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="LocationHref"/>
-        <Slider Margin="88,160,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Stars" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="209,258,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="159,258,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Label Content="Name: " HorizontalAlignment="Left" Margin="24,16,0,0" VerticalAlignment="Top"/>
-        <Label Content="Description: " HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
-        <Label Content="StaffedHours: " HorizontalAlignment="Left" Margin="3,116,0,0" VerticalAlignment="Top"/>
-        <Label Content="Stars: " HorizontalAlignment="Left" Margin="24,166,0,0" VerticalAlignment="Top"/>
-        <Label Content="LocationHref: " HorizontalAlignment="Left" Margin="3,216,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Active" Content="Active" HorizontalAlignment="Left" Margin="89,260,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="LocationHref"/>
+        <Slider Margin="87,215,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Stars" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
+        <Button Content="Ok" HorizontalAlignment="Right" Margin="0,281,20,0" VerticalAlignment="Top" Click="Button_Click_1" Width="71"/>
+        <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label Content="Name: " HorizontalAlignment="Left" Margin="44,31,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description: " HorizontalAlignment="Left" Margin="16,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="StaffedHours: " HorizontalAlignment="Left" Margin="8,127,0,0" VerticalAlignment="Top"/>
+        <Label Content="Stars: " HorizontalAlignment="Left" Margin="31,211,0,0" VerticalAlignment="Top"/>
+        <Label Content="LocationHref: " HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Active" Content="Active" HorizontalAlignment="Left" Margin="171,248,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

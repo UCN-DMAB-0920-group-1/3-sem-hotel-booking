@@ -3,7 +3,7 @@ using System;
 
 namespace PrimeStay.MVC.Model
 {
-    public static class ModelMapper
+    public static class MapperExtension
     {
         public static Hotel Map(this HotelDto hotel)
         {
@@ -100,6 +100,7 @@ namespace PrimeStay.MVC.Model
                 CustomerHref = booking.Customer_href,
                 Guests = booking.Guests,
                 RoomTypeHref = booking.Room_type_href,
+                Customer = booking.Customer.Map(),
             };
         }
 
@@ -115,10 +116,37 @@ namespace PrimeStay.MVC.Model
                 Start_date = booking.StartDate,
                 Guests = booking.Guests,
                 Room_type_href = booking.RoomTypeHref,
+                Customer = booking.Customer.Map(),
+
 
             };
         }
+        public static Customer Map(this CustomerDto customer)
+        {
+            if (customer == null) return null;
+            return new Customer()
+            {
+                Id = customer.ExtractId(),
+                Email = customer.Email,
+                Birthday = customer.Birthday,
+                Name = customer.Name,
+                Phone = customer.Phone,
 
+
+            };
+        }
+        public static CustomerDto Map(this Customer customer)
+        {
+            if (customer == null) return null;
+            return new CustomerDto()
+            {
+                Href = customer.Href,
+                Email = customer.Email,
+                Birthday = customer.Birthday,
+                Name = customer.Name,
+                Phone = customer.Phone,
+            };
+        }
 
 
 
