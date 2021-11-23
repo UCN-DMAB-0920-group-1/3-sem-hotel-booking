@@ -9,6 +9,6 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         public string Create(T model, string token);
         public int Update(T model, string token);
         public int Delete(T model, string token);
-        IEnumerable<T> ReadAll(T model);
+        IEnumerable<T> ReadAll(T model, string token);
     }
 }

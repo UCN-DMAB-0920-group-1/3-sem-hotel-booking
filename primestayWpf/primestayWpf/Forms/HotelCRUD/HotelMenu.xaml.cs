@@ -121,7 +121,7 @@ namespace primestayWpf
 
         private void UpdateList()
         {
-            var hotels = dao.ReadAll(new HotelDto()).Select(x => x.Map());
+            var hotels = dao.ReadAll(new HotelDto(), Auth.AccessToken).Select(x => x.Map());
             HotelList.Clear();
             hotels.ToList().ForEach(x => HotelList.Add(x));
         }

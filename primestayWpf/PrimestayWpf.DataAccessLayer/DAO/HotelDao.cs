@@ -45,7 +45,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             };
         }
 
-        public IEnumerable<HotelDto> ReadAll(HotelDto model)
+        public IEnumerable<HotelDto> ReadAll(HotelDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.GET, DataFormat.Json);

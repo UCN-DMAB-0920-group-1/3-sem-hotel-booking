@@ -1,4 +1,6 @@
-﻿using RestSharp;
+﻿using PrimeStay.WPF.DataAccessLayer.DAO;
+using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,9 @@ namespace PrimestayWPF.DataAccessLayer
 {
     internal static class AuthenticationExtension
     {
-        public static IRestRequest AddAuthentication(this IRestRequest request, string token)
+        public static IRestRequest AddAuthorization(this IRestRequest request, string token)
         {
-            request.AddHeader("Authentication", $"Bearer {token}");
+            request.AddHeader("Authorization", $"Bearer {token}");
             return request;
         }
     }

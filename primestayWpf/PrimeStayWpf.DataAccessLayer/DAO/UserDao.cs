@@ -37,7 +37,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return res;
         }
 
-        public IEnumerable<UserDto> ReadAll(UserDto model)
+        public IEnumerable<UserDto> ReadAll(UserDto model, string token)
         {
             throw new System.NotImplementedException();
         }

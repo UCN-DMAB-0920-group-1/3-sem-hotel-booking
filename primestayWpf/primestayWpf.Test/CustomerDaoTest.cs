@@ -20,11 +20,13 @@ namespace primestayWpf.Test
         public void ReadAllTest()
         {
             //assign
+            IDao<UserDto> userDao = DaoFactory.Create<UserDto>(_dataContext);
+            var token = (userDao as IDaoAuthExtension<UserDto>).login("admin", "admin").Token;
+
             IDao<CustomerDto> dao = DaoFactory.Create<CustomerDto>(_dataContext);
-            (dao as IDaoAuth).SetToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6ImV4YW1wbGUuY29tIiwiZXhwIjoxNjM3NTc2NTQ5LCJyb2xlIjoiYWRtaW4iLCJuYmYiOjE2Mzc1NzI5NDksImlhdCI6MTYzNzU3Mjk0OX0.sRN2UPPBdrcuqD_nOXa3pzaoQclmEWLagaWO4CFcI8U");
 
             //act
-            var customers = dao.ReadAll(null);
+            var customers = dao.ReadAll(null, token);
 
             //assert
             Assert.IsNotNull(customers);
