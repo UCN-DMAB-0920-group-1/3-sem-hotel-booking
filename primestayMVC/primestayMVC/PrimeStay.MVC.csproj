@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MVC.DataAccessLayer\MVC.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\MVC.DataAccessLayer\PrimeStay.MVC.DataAccessLayer.csproj" />
   </ItemGroup>
 
 </Project>

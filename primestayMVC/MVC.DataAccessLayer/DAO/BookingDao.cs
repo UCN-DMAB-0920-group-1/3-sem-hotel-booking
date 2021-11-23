@@ -1,4 +1,5 @@
-﻿using PrimeStay.MVC.DataAccessLayer.DTO;
+﻿using PrimeStay.MVC.DataAccessLayer;
+using PrimeStay.MVC.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;

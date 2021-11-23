@@ -1,5 +1,4 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DTO;
-using PrimestayWpf.Model;
+﻿using PrimestayWpf.Model;
 using System;
 
 namespace PrimestayWPF.DataAccessLayer.DTO

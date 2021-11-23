@@ -1,4 +1,4 @@
-﻿namespace PrimeStay.WPF.DataAccessLayer.DTO
+﻿namespace PrimestayWPF.DataAccessLayer.DTO
 {
     public class RoomTypeDto : BaseDto
     {

@@ -1,8 +1,7 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DAO;
-using PrimeStay.WPF.DataAccessLayer.DTO;
-using primestayWpf.HotelCRUD;
+﻿using primestayWpf.HotelCRUD;
 using primestayWpf.src.auth;
 using PrimestayWpf.Model;
+using PrimestayWPF.DataAccessLayer;
 using PrimestayWPF.DataAccessLayer.DTO;
 using System.Collections.ObjectModel;
 using System.Linq;

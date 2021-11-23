@@ -1,4 +1,4 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DAO;
+﻿using PrimestayWPF.DataAccessLayer;
 using RestSharp;
 
 namespace primestayWpf

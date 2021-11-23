@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PrimeStay.WPF.DataAccessLayer.DTO
+namespace PrimestayWPF.DataAccessLayer.DTO
 {
     public class CustomerDto : BaseDto
     {
-        public string Name{ get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
 

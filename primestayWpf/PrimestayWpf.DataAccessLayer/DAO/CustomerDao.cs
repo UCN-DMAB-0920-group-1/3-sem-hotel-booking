@@ -1,9 +1,9 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DTO;
-using PrimestayWPF.DataAccessLayer;
+﻿using PrimestayWPF.DataAccessLayer;
+using PrimestayWPF.DataAccessLayer.DTO;
 using RestSharp;
 using System.Collections.Generic;
 
-namespace PrimeStay.WPF.DataAccessLayer.DAO
+namespace PrimestayWPF.DataAccessLayer.DAO
 
 {
     internal class CustomerDao : BaseDao<IDataContext<IRestClient>>, IDao<CustomerDto>

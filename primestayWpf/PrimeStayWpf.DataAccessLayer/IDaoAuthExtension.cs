@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimeStay.WPF.DataAccessLayer.DAO
+namespace PrimestayWPF.DataAccessLayer
 {
     public interface IDaoAuthExtension<T>
     {

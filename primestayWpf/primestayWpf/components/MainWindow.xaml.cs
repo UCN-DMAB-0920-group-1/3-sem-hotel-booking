@@ -1,9 +1,8 @@
-﻿using PrimeStay.WPF.DataAccessLayer.DAO;
-using PrimeStay.WPF.DataAccessLayer.DTO;
-using primestayWpf.Forms;
-using primestayWpf.Forms.CustomerCRUD;
-using primestayWpf.Forms.CustomerCRUD;
+﻿using primestayWpf.Forms;
 using primestayWpf.src.auth;
+using PrimestayWPF.DataAccessLayer;
+using PrimestayWPF.DataAccessLayer.DAO;
+using PrimestayWPF.DataAccessLayer.DTO;
 using System.Windows;
 
 namespace primestayWpf
