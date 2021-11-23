@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Models.DTO
+namespace DataAccessLayer.DTO
 {
     public class UserDto : BaseModelDto
     {
