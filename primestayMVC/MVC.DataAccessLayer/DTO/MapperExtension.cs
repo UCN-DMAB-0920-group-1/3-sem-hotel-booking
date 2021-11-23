@@ -1,7 +1,7 @@
-using PrimeStay.MVC.DataAccessLayer.DTO;
+using PrimeStay.MVC.Model;
 using System;
 
-namespace PrimeStay.MVC.Model
+namespace PrimeStay.MVC.DataAccessLayer.DTO
 {
     public static class MapperExtension
     {

@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PrimeStay.MVC.DataAccessLayer;
-using PrimeStay.MVC.DataAccessLayer.DAO;
-using PrimeStay.MVC.DataAccessLayer.DTO;
 using PrimeStay.MVC.Controllers;
 using RestSharp;
+using PrimeStay.MVC.DataAccessLayer.DTO;
+using PrimeStay.MVC.DataAccessLayer.DAO;
+using PrimeStay.MVC.DataAccessLayer;
 
 namespace PrimeStay.MVC
 {
@@ -24,10 +24,10 @@ namespace PrimeStay.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             IDataContext<IRestClient> dataContext = new RestDataContext();
-            services.AddScoped<IDao<RoomTypeDto>>(s => DaoFactory.Create<RoomTypeDto>(dataContext));
-            services.AddScoped<IDao<HotelDto>>(s => DaoFactory.Create<HotelDto>(dataContext));
-            services.AddScoped<IDao<LocationDto>>(s => DaoFactory.Create<LocationDto>(dataContext));
-            services.AddScoped<IDao<BookingDto>>(s => DaoFactory.Create<BookingDto>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<RoomTypeDto>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<HotelDto>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<LocationDto>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<BookingDto>(dataContext));
 
             services.AddControllersWithViews();
             services.AddSession(options =>
