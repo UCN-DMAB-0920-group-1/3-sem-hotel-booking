@@ -1,5 +1,6 @@
-﻿using primestayWpf.Forms;
-using PrimestayWpf.Model;
+﻿using PrimestayWpf.Model;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -37,8 +38,11 @@ namespace primestayWpf.HotelCRUD
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
+            if (validateForm())
+            {
+                DialogResult = true;
+                Close();
+            }
         }
 
         private void Name_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -52,6 +56,45 @@ namespace primestayWpf.HotelCRUD
             {
                 Name.Background = Brushes.White;
             }
+        }
+        private bool validateForm()
+        {
+            var errors = new List<string>();
+
+
+            if (string.IsNullOrEmpty(Name.Text))
+            {
+                errors.Add("Please enter a name");
+            }
+
+            if (string.IsNullOrEmpty(Description.Text))
+            {
+                errors.Add("Please enter a description");
+            }
+
+            if (string.IsNullOrEmpty(StaffedHours.Text))
+            {
+                errors.Add("Please a time when the hotel is staffed");
+            }
+
+            if (string.IsNullOrEmpty(LocationHref.Text))
+            {
+                errors.Add("Please a valid location");
+            }
+
+            if (Stars.Value < 1)
+            {
+                errors.Add("Please enter more than 0 stars");
+            }
+
+            var any = errors.Any();
+            if (any)
+            {
+                string error = string.Join(",\n", errors);
+                MessageBox.Show(error, "Empty Fields");
+            }
+
+            return !any;
         }
     }
 }
