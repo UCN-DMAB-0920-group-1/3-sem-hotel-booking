@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PrimeStay.MVC.Model
+namespace Models
 {
     public class Hotel : BaseModel
     {

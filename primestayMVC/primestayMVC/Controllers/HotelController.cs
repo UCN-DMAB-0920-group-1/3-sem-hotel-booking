@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStay.MVC.DataAccessLayer;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using PrimeStay.MVC.Model;
-using PrimeStay.MVC.DataAccessLayer.DTO;
+using WebClient.Models;
+using DataAccessLayer.DTO;
+using DataAccessLayer;
+using Models;
 
-namespace PrimeStay.MVC.Controllers
+namespace WebClient.Controllers
 {
     public class HotelController : Controller
     {
