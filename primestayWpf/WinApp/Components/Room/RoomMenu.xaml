@@ -24,11 +24,9 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
-                        <GridViewColumn Header="Description"  DisplayMemberBinding="{Binding Description}"/>
-                        <GridViewColumn Header="Beds" DisplayMemberBinding="{Binding Beds}"/>
-                        <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Rating}"/>
-                        <GridViewColumn Header="HotelHref" DisplayMemberBinding="{Binding HotelHref}"/>
+                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding RoomTypeId}"/>
+                        <GridViewColumn Header="Notes"  DisplayMemberBinding="{Binding Notes}"/>
+                        <GridViewColumn Header="RoomNumber" DisplayMemberBinding="{Binding RoomNumber}"/>
                         <GridViewColumn Header="Active" DisplayMemberBinding="{Binding Active}"/>
                     </GridView.Columns>
                 </GridView>

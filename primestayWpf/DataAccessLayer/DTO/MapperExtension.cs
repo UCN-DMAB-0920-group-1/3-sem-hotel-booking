@@ -93,7 +93,7 @@ namespace DataAccessLayer.DTO
                 Notes = room.Notes,
                 Active = room.Active,
                 Room_number = room.RoomNumber,
-                RoomTypeHref = GetHrefFromId(typeof(Room), room.RoomTypeId),
+                RoomTypeHref = GetHrefFromId(typeof(RoomType), room.RoomTypeId),
             };
         }
         public static Room Map(this RoomDto room)

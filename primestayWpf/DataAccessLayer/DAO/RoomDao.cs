@@ -6,29 +6,28 @@ using System.Net;
 namespace DataAccessLayer.DAO
 
 {
-    internal class CustomerDao : BaseDao<IDataContext<IRestClient>>, IDao<CustomerDto>
+    internal class RoomDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomDto>
     {
-        private readonly string baseEndPoint = "/api/customer";
-        public CustomerDao(IDataContext<IRestClient> dataContext, string token) : base(dataContext, token)
+        private readonly string baseEndPoint = "/api/Room/";
+        public RoomDao(IDataContext<IRestClient> dataContext, string token) : base(dataContext, token)
         {
         }
 
-        public string Create(CustomerDto model, string token)
+        public string Create(RoomDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest("/api/customer/", Method.POST, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
 
-            var res = restClient.Post<CustomerDto>(restRequest).Data;
+            var res = restClient.Post<RoomDto>(restRequest).Data;
             return res.Href;
         }
 
-        public int Delete(CustomerDto model, string token)
+        public int Delete(RoomDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddAuthorization(AccessToken);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
-
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
             {
@@ -37,31 +36,32 @@ namespace DataAccessLayer.DAO
             };
         }
 
-        public IEnumerable<CustomerDto> ReadAll(CustomerDto model, string token)
+        public IEnumerable<RoomDto> ReadAll(RoomDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
+            var test = baseEndPoint + "?roomTypeHref=" + model.RoomTypeHref;
+            IRestRequest restRequest = new RestRequest(test, Method.GET, DataFormat.Json);
             restRequest.AddAuthorization(token);
 
-            var res = restClient.Get<IEnumerable<CustomerDto>>(restRequest).Data;
+            var res = restClient.Get<IEnumerable<RoomDto>>(restRequest).Data;
             return res;
         }
 
-        public CustomerDto ReadByHref(string href)
+        public RoomDto ReadByHref(string href)
         {
             IRestClient restClient = DataContext.Open();
-            IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
+            IRestRequest restRequest = new RestRequest(baseEndPoint, Method.GET, DataFormat.Json);
             restRequest.AddAuthorization(AccessToken);
 
-            var res = restClient.Get<CustomerDto>(restRequest).Data;
+            var res = restClient.Get<RoomDto>(restRequest).Data;
             return res;
         }
 
-        public int Update(CustomerDto model, string token)
+        public int Update(RoomDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddAuthorization(token);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch

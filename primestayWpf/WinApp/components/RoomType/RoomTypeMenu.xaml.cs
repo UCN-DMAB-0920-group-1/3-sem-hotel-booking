@@ -1,10 +1,13 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
+using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using WinApp.Components.RoomViews;
 using WinApp.src.auth;
 
 namespace WinApp.Components.RoomTypeViews
@@ -15,7 +18,7 @@ namespace WinApp.Components.RoomTypeViews
     public partial class RoomTypeMenu : Window
     {
         private readonly IDao<RoomTypeDto> dao;
-        private ObservableCollection<Model.RoomType> roomTypeList { get; set; } = new ObservableCollection<Model.RoomType>();
+        private ObservableCollection<RoomType> roomTypeList { get; set; } = new ObservableCollection<RoomType>();
 
         public RoomTypeMenu(IDao<RoomTypeDto> _dao)
         {
@@ -28,7 +31,7 @@ namespace WinApp.Components.RoomTypeViews
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            var oldRoomType = RoomTypeListView.SelectedItem as Model.RoomType;
+            var oldRoomType = RoomTypeListView.SelectedItem as RoomType;
             if (oldRoomType is null) MessageBox.Show("Please select a RoomType to edit", "ERROR");
             else
             {
@@ -38,7 +41,7 @@ namespace WinApp.Components.RoomTypeViews
                 if (yesNo ?? false)
                 {
 
-                    Model.RoomType roomType = new()
+                    RoomType roomType = new()
                     {
                         Id = int.Parse(form.Id.Text),
                         Type = form.Type.Text,
@@ -59,7 +62,7 @@ namespace WinApp.Components.RoomTypeViews
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
-            var roomType = RoomTypeListView.SelectedItem as Model.RoomType;
+            var roomType = RoomTypeListView.SelectedItem as RoomType;
             string text = $"Are you sure you would like to delete {roomType?.Type ?? "this RoomType"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -78,7 +81,7 @@ namespace WinApp.Components.RoomTypeViews
             {
 
 
-                Model.RoomType roomType = new()
+                RoomType roomType = new()
                 {
                     Id = int.Parse(form.Id.Text),
                     Type = form.Type.Text,
@@ -116,5 +119,17 @@ namespace WinApp.Components.RoomTypeViews
             }
         }
 
+        private void Rooms(object sender, RoutedEventArgs e)
+        {
+            if (RoomTypeListView.SelectedItem is not RoomType roomType)
+            {
+                MessageBox.Show("Please select a HotelType to view its rooms", "ERROR");
+            }
+            else
+            {
+                var dao = DaoFactory.Create<RoomDto>(RestDataContext.GetInstance(), Auth.AccessToken);
+                new RoomMenu(dao, roomType).ShowDialog();
+            }
+        }
     }
 }
