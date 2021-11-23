@@ -26,6 +26,15 @@ namespace primestayWpf.Forms.CustomerCRUD
             UpdateList();
         }
 
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            var customer = CustomerListView.SelectedItem as Customer;
+            string text = $"Are you sure that you would like to delete{customer?.Phone ?? "this customer"}?";
+            if(MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                var res = dao.Delete(customer.Map(), Auth.AccessToken);
+            }
+        }
 
 
 
