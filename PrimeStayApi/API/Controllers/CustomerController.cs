@@ -11,6 +11,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "admin")]
     public class CustomerController : Controller
     {
         private readonly IDao<CustomerEntity> _dao;
@@ -18,10 +19,9 @@ namespace API.Controllers
         {
             _dao = dao;
         }
-        // GET: BookingController
 
+        // GET: BookingController
         [HttpGet]
-        [Authorize(Roles = "admin")]
         public IEnumerable<CustomerDto> Index([FromQuery] CustomerDto customer)
         {
             return _dao.ReadAll(customer.Map()).Select(x => x.Map());
@@ -29,7 +29,6 @@ namespace API.Controllers
 
         // GET: api/Booking/5
         [HttpGet]
-        [Authorize(Roles = "admin")]
         [Route("{id}")]
         public CustomerDto Details(int id)
         {
@@ -37,7 +36,6 @@ namespace API.Controllers
         }
 
         // POST: BookingController/
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create([FromBody] CustomerDto customer)
         {
@@ -48,8 +46,6 @@ namespace API.Controllers
 
         // PUT: BookingController/Edit/5
         [HttpPut]
-        [Authorize(Roles = "admin")]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(CustomerDto customer)
         {
             return _dao.Update(customer.Map()) switch
@@ -62,8 +58,6 @@ namespace API.Controllers
 
         // DELETE: BookingController/Delete/5
         [HttpDelete]
-        [Authorize(Roles = "admin")]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch

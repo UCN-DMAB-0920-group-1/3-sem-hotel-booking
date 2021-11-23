@@ -17,19 +17,19 @@ namespace API.Controllers
             _dao = dao;
         }
         // GET: LocationController
+        [HttpGet]
         public ActionResult Index()
         {
             throw new NotImplementedException();
         }
-        // GET: LocationController/Details/5
-        [Route("{id}")]
-        [HttpGet]
-        public LocationDto Details(int id) => _dao.ReadById(id).Map();
 
+        // GET: LocationController/Details/5
+        [HttpGet]
+        [Route("{id}")]
+        public LocationDto Details(int id) => _dao.ReadById(id).Map();
 
         // POST: LocationController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -43,8 +43,7 @@ namespace API.Controllers
         }
 
         // POST: LocationController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPut]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             try
@@ -58,8 +57,7 @@ namespace API.Controllers
         }
 
         // POST: LocationController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpDelete]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
