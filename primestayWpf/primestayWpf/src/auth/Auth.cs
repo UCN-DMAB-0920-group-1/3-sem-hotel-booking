@@ -4,6 +4,6 @@
     {
         public static string AccessToken = "";
         public static string username = "";
-        static public bool IsLoggedIn => AccessToken != null;
+        static public bool IsLoggedIn => !string.IsNullOrWhiteSpace(AccessToken);
     }
 }

@@ -3,7 +3,7 @@ using DataAccessLayer.DTO;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace primestayWpf.components
+namespace WinApp.Components.Authentication
 {
     public partial class AuthWindow : Window
     {

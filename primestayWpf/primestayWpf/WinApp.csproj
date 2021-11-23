@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="res\group_logo.png" />
+    <None Remove="Res\group_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,16 +26,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="res\group_logo.png">
+    <Resource Include="Res\group_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="components\RoomTypeCRUD\RoomTypeForm.xaml">
+    <Page Update="Components\RoomTypeCRUD\RoomTypeForm.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
-    <Page Update="components\RoomTypeCRUD\RoomTypeMenu.xaml">
+    <Page Update="Components\RoomTypeCRUD\RoomTypeMenu.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

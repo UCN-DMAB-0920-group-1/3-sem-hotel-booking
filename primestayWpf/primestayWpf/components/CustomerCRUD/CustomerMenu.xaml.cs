@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace primestayWpf.components.CustomerCRUD
+namespace WinApp.Components.CustomerCRUD
 {
     public partial class CustomerMenu : Window
     {
@@ -28,7 +28,7 @@ namespace primestayWpf.components.CustomerCRUD
             string text = $"Are you sure that you would like to delete{customer?.Phone ?? "this customer"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show($"Are you sure you would like to delete {customer.Phone}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"Are you sure you would like to delete {customer.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     var res = dao.Delete(customer.Map(), Auth.AccessToken);
                     UpdateList();

@@ -1,13 +1,14 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DAO;
 using DataAccessLayer.DTO;
-using primestayWpf.components;
-using primestayWpf.components.CustomerCRUD;
 using System.Windows;
-using WinApp;
+using WinApp.Components.Authentication;
+using WinApp.Components.CustomerCRUD;
+using WinApp.Components.HotelCRUD;
+using WinApp.Components.RoomTypeCRUD;
 using WinApp.src.auth;
 
-namespace primestayWpf
+namespace WinApp.Components
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace primestayWpf
+namespace WinApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace primestayWpf.HotelCRUD
+namespace WinApp.Components.HotelCRUD
+
 {
     /// <summary>
     /// Interaction logic for HotelForm.xaml

@@ -1,13 +1,12 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
 using Model;
-using primestayWpf.HotelCRUD;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace primestayWpf
+namespace WinApp.Components.HotelCRUD
 {
     /// <summary>
     /// Interaction logic for HotelsWindow.xaml
