@@ -40,7 +40,7 @@ namespace primestayWpf
 
         private void customerCrudBtn_Click(object sender, RoutedEventArgs e)
         {
-            new AuthWindow(DaoFactory.Create<UserDto>(_context, Auth.AccessToken)).ShowDialog();
+            new CustomerMenu(DaoFactory.Create<CustomerDto>(_context, Auth.AccessToken)).ShowDialog();
         }
     }
 }

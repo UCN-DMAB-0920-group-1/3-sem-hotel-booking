@@ -19,9 +19,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button  Content="Edit" HorizontalAlignment="Left" Margin="718,132,0,0" VerticalAlignment="Top"/>
-        <Button  Content="Edit" HorizontalAlignment="Left" Margin="657,88,0,0" VerticalAlignment="Top"/>
-        <Button Click="Delete" Content="Edit" HorizontalAlignment="Left" Margin="695,217,0,0" VerticalAlignment="Top"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="718,132,0,0" VerticalAlignment="Top" Click="Edit"/>
+        <Button  Content="Create" HorizontalAlignment="Left" Margin="657,88,0,0" VerticalAlignment="Top" Click="Create"/>
+        <Button  Content="Edit" HorizontalAlignment="Left" Margin="695,217,0,0" VerticalAlignment="Top" Click="Delete"/>
 
     </Grid>
 </Window>
