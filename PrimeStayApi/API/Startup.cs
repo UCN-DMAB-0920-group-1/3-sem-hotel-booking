@@ -1,3 +1,6 @@
+using API.Services;
+using DataAccessLayer;
+using Enviroment;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,11 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using DataAccessLayer;
-using Enviroment;
-using System.Text;
 using Models;
-using API.Services;
+using System.Text;
 
 namespace API
 {

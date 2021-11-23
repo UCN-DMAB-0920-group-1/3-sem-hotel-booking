@@ -1,18 +1,17 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using WinApp.src.auth;
 
-namespace WinApp.Components.CustomerCRUD
+namespace WinApp.Components.Customer
 {
     public partial class CustomerMenu : Window
     {
         private readonly IDao<CustomerDto> dao;
-        private ObservableCollection<Customer> CustomerList { get; set; } = new ObservableCollection<Customer>();
+        private ObservableCollection<Model.Customer> CustomerList { get; set; } = new ObservableCollection<Model.Customer>();
 
         public CustomerMenu(IDao<CustomerDto> _dao)
         {
@@ -24,7 +23,7 @@ namespace WinApp.Components.CustomerCRUD
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            var customer = CustomerListView.SelectedItem as Customer;
+            var customer = CustomerListView.SelectedItem as Model.Customer;
             string text = $"Are you sure that you would like to delete{customer?.Phone ?? "this customer"}?";
             if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
