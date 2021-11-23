@@ -22,7 +22,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model)
+        public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model, string token)
         {
             var query_hotelId = $"hotelHref=api/hotel/{model.HotelId}";
 

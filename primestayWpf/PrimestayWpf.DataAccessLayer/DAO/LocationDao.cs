@@ -22,7 +22,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public IEnumerable<LocationDto> ReadAll(LocationDto model)
+        public IEnumerable<LocationDto> ReadAll(LocationDto model, string token)
         {
             throw new NotImplementedException();
         }

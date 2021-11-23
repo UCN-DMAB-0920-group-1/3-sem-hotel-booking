@@ -50,7 +50,7 @@ namespace primestayWpf.Forms.CustomerCRUD
 
         private void UpdateList()
         {
-            var customers = dao.ReadAll(new CustomerDto()).Select(x => x.Map());
+            var customers = dao.ReadAll(new CustomerDto(), Auth.AccessToken).Select(x => x.Map());
             CustomerList.Clear();
             customers.ToList().ForEach(x => CustomerList.Add(x));
         }

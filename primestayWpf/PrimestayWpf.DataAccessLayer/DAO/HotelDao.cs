@@ -1,4 +1,5 @@
 ﻿using PrimeStay.WPF.DataAccessLayer.DTO;
+using PrimestayWPF.DataAccessLayer;
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +21,13 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
             restRequest.AddJsonBody(model);
-            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddAuthorization(token);
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
             {
                 HttpStatusCode.Created => response.Headers.Where(res => res.Name == "Location").Select(res => res.Value).FirstOrDefault() as string,
                 _ => null
             };
-
-
         }
 
         public int Delete(HotelDto model, string token)

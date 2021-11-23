@@ -25,7 +25,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<BookingDto> ReadAll(BookingDto model)
+        public IEnumerable<BookingDto> ReadAll(BookingDto model, string token)
         {
             throw new System.NotImplementedException();
         }
