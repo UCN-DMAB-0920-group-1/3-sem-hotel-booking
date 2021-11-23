@@ -8,7 +8,7 @@ namespace DataAccessLayer.DAO
 {
     internal class CustomerDao : BaseDao<IDataContext<IRestClient>>, IDao<CustomerDto>
     {
-        private readonly string baseEndPoint = "/api/customer";
+        private readonly string baseEndPoint = "/api/customer/";
         public CustomerDao(IDataContext<IRestClient> dataContext, string token) : base(dataContext, token)
         {
         }
