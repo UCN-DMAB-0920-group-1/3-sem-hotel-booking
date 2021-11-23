@@ -35,7 +35,7 @@
     <Page Update="Forms\RoomTypeCRUD\RoomTypeForm.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
-    <Page Update="Forms\RoomTypeCRUD\RoomTypeWindow.xaml">
+    <Page Update="Forms\RoomTypeCRUD\RoomTypeMenu.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

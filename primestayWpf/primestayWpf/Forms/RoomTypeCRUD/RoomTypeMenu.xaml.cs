@@ -15,12 +15,12 @@ namespace primestayWpf
     /// <summary>
     /// Interaction logic for RoomTypeWindow.xaml
     /// </summary>
-    public partial class RoomTypeWindow : Window
+    public partial class RoomTypeMenu : Window
     {
         private readonly IDao<RoomTypeDto> dao;
         private ObservableCollection<RoomType> roomTypeList { get; set; } = new ObservableCollection<RoomType>();
 
-        public RoomTypeWindow(IDao<RoomTypeDto> _dao)
+        public RoomTypeMenu(IDao<RoomTypeDto> _dao)
         {
             InitializeComponent();
             dao = _dao;
@@ -114,7 +114,8 @@ namespace primestayWpf
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                Debug.WriteLine("No resource returned from API");
+                Debug.WriteLine("No resources returned from API");
+                MessageBox.Show("No resources returned from API, check connection", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
