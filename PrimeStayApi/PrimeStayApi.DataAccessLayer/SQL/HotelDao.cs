@@ -24,7 +24,7 @@ namespace PrimeStayApi.DataAccessLayer.SQL
         private readonly static string INSERT_HOTEL = "INSERT INTO Hotel (name,description,stars,staffed_hours,location_id, active) " +
                                                     @"OUTPUT INSERTED.id " +
                                                      "VALUES (@Name,@Description,@Stars,@Staffed_hours,@Location_id,@active)";
-        private readonly static string UPDATE_HOTEL = "UPDATE Hotel SET name=@name , description=@description, stars=@stars, staffed_hours=@staffed_hours, location_id=@location_id, active=ISNULL(@active,active) WHERE id=@id;";
+        private readonly static string UPDATE_HOTEL = "UPDATE Hotel SET name=ISNULL(@name,name), description=ISNULL(@description,description), stars=ISNULL(@stars,stars), staffed_hours=ISNULL(@staffed_hours,staffed_hours), location_id=ISNULL(@location_id,location_id), active=ISNULL(@active,active) WHERE id=@id;";
         //private readonly static string DELETEHOTEL = "DELETE FROM Hotel WHERE id=@id";
         private readonly static string SOFT_DELETE = "UPDATE Hotel SET active=0 WHERE id=@id";
 
@@ -93,7 +93,6 @@ namespace PrimeStayApi.DataAccessLayer.SQL
 
         public int Update(HotelEntity model)
         {
-            model.Active ??= false;
             int res = -1;
             using (IDbConnection connection = DataContext.Open())
             {

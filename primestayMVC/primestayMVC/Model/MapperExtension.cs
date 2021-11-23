@@ -3,7 +3,7 @@ using System;
 
 namespace PrimeStay.MVC.Model
 {
-    public static class ModelMapper
+    public static class MapperExtension
     {
         public static Hotel Map(this HotelDto hotel)
         {

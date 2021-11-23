@@ -12,15 +12,15 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
     internal class RoomTypeDao : BaseDao<IDataContext<IRestClient>>, IDao<RoomTypeDto>
     {
         private readonly string baseEndPoint = "/api/roomType";
-        public RoomTypeDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+        public RoomTypeDao(IDataContext<IRestClient> dataContext, string accessToken) : base(dataContext, accessToken)
         {
         }
 
-        public string Create(RoomTypeDto model, string token)
+        public string Create(RoomTypeDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.POST, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Post(restRequest);
             return response.StatusCode switch
@@ -30,11 +30,11 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             };
         }
 
-        public int Delete(RoomTypeDto model, string token)
+        public int Delete(RoomTypeDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Delete(restRequest);
             return response.StatusCode switch
@@ -64,11 +64,11 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(RoomTypeDto model, string token)
+        public int Update(RoomTypeDto model)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);
-            restRequest.AddHeader("Authorization", "bearer " + token);
+            restRequest.AddHeader("Authorization", "bearer " + AccessToken);
             restRequest.AddJsonBody(model);
             var response = restClient.Put(restRequest);
             return response.StatusCode switch

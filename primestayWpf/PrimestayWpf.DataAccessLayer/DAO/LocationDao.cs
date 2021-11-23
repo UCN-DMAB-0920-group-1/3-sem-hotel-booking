@@ -8,16 +8,16 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 {
     internal class LocationDao : BaseDao<IDataContext<IRestClient>>, IDao<LocationDto>
     {
-        public LocationDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+        public LocationDao(IDataContext<IRestClient> dataContext, string accessToken) : base(dataContext, accessToken)
         {
         }
 
-        public string Create(LocationDto model, string token)
+        public string Create(LocationDto model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(LocationDto model, string token)
+        public int Delete(LocationDto model)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public int Update(LocationDto model, string token)
+        public int Update(LocationDto model)
         {
             throw new NotImplementedException();
         }

@@ -7,16 +7,16 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 {
     internal class UserDao : BaseDao<IDataContext<IRestClient>>, IDao<UserDto>, IDaoAuthExtension<UserDto>
     {
-        public UserDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+        public UserDao(IDataContext<IRestClient> dataContext, string accessToken) : base(dataContext, accessToken)
         {
         }
 
-        public string Create(UserDto model, string token)
+        public string Create(UserDto model)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Delete(UserDto model, string token)
+        public int Delete(UserDto model)
         {
             throw new System.NotImplementedException();
         }
@@ -47,7 +47,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new System.NotImplementedException();
         }
 
-        public int Update(UserDto model, string token)
+        public int Update(UserDto model)
         {
             throw new System.NotImplementedException();
         }

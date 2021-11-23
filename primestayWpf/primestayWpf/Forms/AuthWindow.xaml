@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:primestayWpf.Forms"
         mc:Ignorable="d"
         Title="AuthWindow" Height="450" Width="800">
-    <Grid Margin="0,48,0,-48">
+    <Grid Margin="0,48,0,0" Height="392" VerticalAlignment="Stretch">
         <Button x:Name="loginBtn" Content="Login" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top" Height="38" Width="208" Click="loginBtn_Click" RenderTransformOrigin="0.5,0.5" Opacity="0.8">
             <Button.RenderTransform>
                 <TransformGroup>
@@ -17,12 +17,12 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <TextBox Name="usernameField" x:FieldModifier="public" HorizontalAlignment="Center" Margin="0,141,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Height="29" RenderTransformOrigin="0.5,0.5" >
+        <TextBox Name="usernameField" x:FieldModifier="public" HorizontalAlignment="Center" Margin="0,131,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" Height="29" RenderTransformOrigin="0.5,0.5" >
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="0.467"/>
+                    <RotateTransform Angle="-0.562"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBox.RenderTransform>
@@ -32,15 +32,15 @@
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="0.542"/>
+                    <RotateTransform Angle="-0.637"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </PasswordBox.RenderTransform>
         </PasswordBox>
-        <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" Width="208" Height="30
+        <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top" Width="208" Height="30
                "/>
         <Label x:Name="passwordLabel" Content="Password&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="208"/>
-        <Label x:Name="titleLabel" Content="PrimeStay" HorizontalAlignment="Left" Margin="298,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="74" Width="209" FontSize="44">
+        <Label x:Name="titleLabel" Content="PrimeStay" HorizontalAlignment="Center" Margin="0,-6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="74" Width="209" FontSize="44">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
@@ -50,13 +50,14 @@
                             ScaleY="1"/>
                     <SkewTransform AngleX="10"
                            AngleY="10"/>
-                    <RotateTransform Angle="45"/>
+                    <RotateTransform Angle="-9.226"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Image HorizontalAlignment="Left" Height="78" Margin="446,20,0,0" VerticalAlignment="Top" Width="78" Source="/res/group_logo.png"/>
+        <Image HorizontalAlignment="Left" Height="78" Margin="673,20,0,0" VerticalAlignment="Top" Width="78" Source="/res/group_logo.png"/>
         <Label Name="errorLabel" Content="" x:FieldModifier="public" HorizontalAlignment="Center" Margin="0,291,0,0" VerticalAlignment="Top" Width="208" HorizontalContentAlignment="Center" Height="29" Foreground="#FFFF2727"/>
+        <ProgressBar x:Name="loadingBar" Visibility="Hidden" IsEnabled="False" IsIndeterminate="True" Height="20" Margin="0,348,0,24"/>
 
     </Grid>
 </Window>
