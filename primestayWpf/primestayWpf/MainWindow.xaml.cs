@@ -33,8 +33,8 @@ namespace primestayWpf
 
         private void roomTypeBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Auth.IsLoggedIn) new RoomTypeWindow(DaoFactory.Create<RoomTypeDto>(_context)).ShowDialog();
-            else MessageBox.Show("Login to acces Room types", "Error", MessageBoxButton.OK);
+            if (Auth.IsLoggedIn) new RoomTypeMenu(DaoFactory.Create<RoomTypeDto>(_context)).ShowDialog();
+            else MessageBox.Show("Login to access Room types", "Error", MessageBoxButton.OK);
         }
     }
 }
