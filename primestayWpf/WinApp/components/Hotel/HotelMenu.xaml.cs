@@ -3,7 +3,6 @@ using DataAccessLayer.DTO;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using WinApp.src.auth;
 
 namespace WinApp.Components.Hotel
 {
@@ -49,7 +48,7 @@ namespace WinApp.Components.Hotel
                         Stars = (int)form.Stars.Value,
                         Active = form.Active.IsChecked,
                     };
-                    var res = dao.Update(hotel.Map(), Auth.AccessToken);
+                    var res = dao.Update(hotel.Map());
                     UpdateList();
                     if (res > 0) MessageBox.Show($"Hotel {hotel.Name} was updated");
                     else MessageBox.Show($"Could not update {hotel.Name}, contact admin");
@@ -69,7 +68,7 @@ namespace WinApp.Components.Hotel
                 string text = $"Are you sure you would like to delete {hotel?.Name ?? "this hotel"}?";
                 if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    var res = dao.Delete(hotel.Map(), Auth.AccessToken);
+                    var res = dao.Delete(hotel.Map());
                     UpdateList();
                     if (res > 0) MessageBox.Show($"Hotel {hotel!.Name} was deleted");
                     else MessageBox.Show($"Could not delete {hotel!.Name}, contact admin");
@@ -92,7 +91,7 @@ namespace WinApp.Components.Hotel
                     StaffedHours = form.StaffedHours.Text,
                     Stars = (int)form.Stars.Value,
                 };
-                var newHotelHref = dao.Create(hotel.Map(), Auth.AccessToken);
+                var newHotelHref = dao.Create(hotel.Map());
                 if (newHotelHref is null) MessageBox.Show("could not create Hotel");
                 else
                 {
@@ -106,7 +105,7 @@ namespace WinApp.Components.Hotel
 
         private void UpdateList()
         {
-            var hotels = dao.ReadAll(new HotelDto(), Auth.AccessToken).Select(x => x.Map());
+            var hotels = dao.ReadAll(new HotelDto()).Select(x => x.Map());
             HotelList.Clear();
             hotels.ToList().ForEach(x => HotelList.Add(x));
         }

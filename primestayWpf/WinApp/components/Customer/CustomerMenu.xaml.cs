@@ -4,8 +4,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using WinApp.components.Customer;
-using WinApp.src.auth;
 
 namespace WinApp.Components.Customer
 {
@@ -30,7 +28,7 @@ namespace WinApp.Components.Customer
             {
                 if (MessageBox.Show($"Are you sure you would like to delete {customer.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    var res = dao.Delete(customer.Map(), Auth.AccessToken);
+                    var res = dao.Delete(customer.Map());
                     UpdateList();
                     if (res > 0) MessageBox.Show($"Customer{customer.Phone} was deleted");
                     else MessageBox.Show($"Could not delete {customer.Phone}, contact admin");
@@ -47,7 +45,7 @@ namespace WinApp.Components.Customer
 
         private void UpdateList()
         {
-            var customers = dao.ReadAll(new CustomerDto(), Auth.AccessToken).Select(x => x.Map());
+            var customers = dao.ReadAll(new CustomerDto()).Select(x => x.Map());
             CustomerList.Clear();
             customers.ToList().ForEach(x => CustomerList.Add(x));
         }
