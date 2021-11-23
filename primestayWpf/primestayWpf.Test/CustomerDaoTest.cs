@@ -2,6 +2,7 @@
 using PrimeStay.WPF.DataAccessLayer.DAO;
 using PrimeStay.WPF.DataAccessLayer.DTO;
 using primestayWpf;
+using primestayWpf.src.auth;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ namespace primestayWpf.Test
         public void ReadAllTest()
         {
             //assign
-            IDao<UserDto> userDao = DaoFactory.Create<UserDto>(_dataContext);
+            IDao<UserDto> userDao = DaoFactory.Create<UserDto>(_dataContext, Auth.AccessToken);
             var token = (userDao as IDaoAuthExtension<UserDto>).login("admin", "admin").Token;
 
-            IDao<CustomerDto> dao = DaoFactory.Create<CustomerDto>(_dataContext);
+            IDao<CustomerDto> dao = DaoFactory.Create<CustomerDto>(_dataContext, Auth.AccessToken);
 
             //act
             var customers = dao.ReadAll(null, token);

@@ -12,7 +12,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(BookingDto model)
+        public string Create(BookingDto model, string token)
         {
             IRestClient client = DataContext.Open();
             IRestRequest request = new RestRequest("/api/booking", Method.POST, DataFormat.Json).AddJsonBody(model);
@@ -20,7 +20,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return res;
         }
 
-        public int Delete(BookingDto model)
+        public int Delete(BookingDto model, string token)
         {
             throw new System.NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return res;
         }
 
-        public int Update(BookingDto model)
+        public int Update(BookingDto model, string token)
         {
             throw new System.NotImplementedException();
         }

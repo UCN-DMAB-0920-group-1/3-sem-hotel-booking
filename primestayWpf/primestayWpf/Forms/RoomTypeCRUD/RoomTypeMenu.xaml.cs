@@ -107,7 +107,7 @@ namespace primestayWpf
         {
             try
             {
-                var RoomTypes = dao.ReadAll(new RoomTypeDto()).Select(x => x.Map());
+                var RoomTypes = dao.ReadAll(new RoomTypeDto(), Auth.AccessToken).Select(x => x.Map());
                 roomTypeList.Clear();
                 RoomTypes.ToList().ForEach(x => roomTypeList.Add(x));
             }

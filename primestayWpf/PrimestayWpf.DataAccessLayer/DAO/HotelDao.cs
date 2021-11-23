@@ -16,7 +16,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(HotelDto model)
+        public string Create(HotelDto model, string token)
         {
             
             IRestClient restClient = DataContext.Open();
@@ -31,7 +31,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             };
         }
 
-        public int Delete(HotelDto model)
+        public int Delete(HotelDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.DELETE, DataFormat.Json);
@@ -60,7 +60,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             return restClient.Get<HotelDto>(restRequest).Data;
         }
 
-        public int Update(HotelDto model)
+        public int Update(HotelDto model, string token)
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest(baseEndPoint, Method.PUT, DataFormat.Json);

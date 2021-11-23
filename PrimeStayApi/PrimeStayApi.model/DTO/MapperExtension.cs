@@ -2,7 +2,7 @@
 
 namespace PrimeStayApi.Model.DTO
 {
-    public static class DtoExtentions
+    public static class MapperExtension
     {
         public static HotelDto Map(this HotelEntity hotel)
         {

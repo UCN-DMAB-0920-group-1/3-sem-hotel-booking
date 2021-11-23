@@ -8,7 +8,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
 {
     internal class CustomerDao : BaseDao<IDataContext<IRestClient>>, IDao<CustomerDto>
     {
-        public CustomerDao(IDataContext<IRestClient> dataContext) : base(dataContext)
+        public CustomerDao(IDataContext<IRestClient> dataContext, string token) : base(dataContext, token)
         {
         }
 
@@ -40,9 +40,9 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/customer/", Method.GET, DataFormat.Json);
-            restRequest.AddAuthorization(token);
+            restRequest.AddAuthorization(AccessToken);
 
-            var res = restClient.Get<IEnumerable<CustomerDto>>(restRequest).Data;
+            var res = restClient.Get<CustomerDto>(restRequest).Data;
             return res;
         }
 

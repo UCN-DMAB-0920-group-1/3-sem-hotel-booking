@@ -12,12 +12,12 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
         {
         }
 
-        public string Create(LocationDto model)
+        public string Create(LocationDto model, string token)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(LocationDto model)
+        public int Delete(LocationDto model, string token)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace PrimeStay.WPF.DataAccessLayer.DAO
             throw new NotImplementedException();
         }
 
-        public int Update(LocationDto model)
+        public int Update(LocationDto model, string token)
         {
             throw new NotImplementedException();
         }
