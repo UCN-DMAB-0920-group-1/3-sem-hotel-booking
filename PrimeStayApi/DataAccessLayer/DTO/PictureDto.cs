@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.DTO
+namespace DataAccessLayer.DTO
 {
     public class PictureDto : BaseModelDto
     {
