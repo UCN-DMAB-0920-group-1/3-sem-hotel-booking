@@ -1,20 +1,18 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using API;
+using API.Controllers;
+using DataAccessLayer;
+using Enviroment;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStayApi.Model.DTO;
-using System.Linq;
-using PrimeStayApi.Controllers;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Models;
+using Models.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Version = PrimeStayApi.Database.Version;
+using Version = Database.Version;
 
-
-
-namespace PrimeStayApi.Test
+namespace Tests
 {
     [TestClass]
     public class RoomTypeTest
@@ -75,7 +73,7 @@ namespace PrimeStayApi.Test
 
             Assert.IsNotNull(roomType);
             Assert.AreEqual(roomTypeId, roomType.ExtractId());
-            Assert.AreEqual("Junior Suite",roomType.Type);
+            Assert.AreEqual("Junior Suite", roomType.Type);
             Assert.AreEqual("Junior suite smaller room but space for 4", roomType.Description);
             Assert.AreEqual(4, roomType.Beds);
             Assert.AreEqual(2, roomType.Rating);

@@ -1,4 +1,4 @@
-﻿namespace PrimestayWpf.Model
+﻿namespace Model
 {
     class User
     {

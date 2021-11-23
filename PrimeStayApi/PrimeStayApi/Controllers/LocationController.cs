@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataAccessLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.Model;
-using PrimeStayApi.Model.DTO;
+using Models;
+using Models.DTO;
 using System;
 
-namespace PrimeStayApi.Controllers
+namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using API.Services.Models;
+using DataAccessLayer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.Model;
-using PrimeStayApi.Services.Models;
+using Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Text;
 /**
 * Author: Lars Nysom
 */
-namespace PrimeStayApi.Services
+namespace API.Services
 {
     public interface IAccountService
     {
@@ -34,7 +34,7 @@ namespace PrimeStayApi.Services
 
         public Userinfo Save(string username, string password, string role)
         {
-            var rngCSP = RNGCryptoServiceProvider.Create();
+            var rngCSP = RandomNumberGenerator.Create();
 
             byte[] randomSeq = new byte[256];
             rngCSP.GetNonZeroBytes(randomSeq);

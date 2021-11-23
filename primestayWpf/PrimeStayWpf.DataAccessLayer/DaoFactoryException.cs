@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimestayWPF.DataAccessLayer
+namespace DataAccessLayer
 
 {
     internal class DaoFactoryException : Exception

@@ -1,4 +1,4 @@
-﻿namespace PrimeStayApi.Model.DTO
+﻿namespace Models.DTO
 {
     public class LocationDto : BaseModelDto
     {

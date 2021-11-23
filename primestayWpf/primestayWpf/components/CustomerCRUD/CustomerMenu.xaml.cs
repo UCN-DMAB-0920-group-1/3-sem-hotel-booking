@@ -1,16 +1,13 @@
-﻿using primestayWpf.Forms;
-using primestayWpf.src.auth;
-using PrimestayWpf.Model;
-using PrimestayWPF.DataAccessLayer;
-using PrimestayWPF.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Model;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using WinApp.src.auth;
 
-namespace primestayWpf.Forms.CustomerCRUD
+namespace primestayWpf.components.CustomerCRUD
 {
     public partial class CustomerMenu : Window
     {
@@ -29,7 +26,7 @@ namespace primestayWpf.Forms.CustomerCRUD
         {
             var customer = CustomerListView.SelectedItem as Customer;
             string text = $"Are you sure that you would like to delete{customer?.Phone ?? "this customer"}?";
-            if(MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 if (MessageBox.Show($"Are you sure you would like to delete {customer.Phone}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
@@ -40,7 +37,7 @@ namespace primestayWpf.Forms.CustomerCRUD
                 }
             }
         }
-        
+
         private void Add(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();

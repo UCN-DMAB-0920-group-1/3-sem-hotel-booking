@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimestayWpf.Model
+namespace Model
 {
     public class Location : BaseModel
     {

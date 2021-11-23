@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrimeStayApi.Services
+namespace API.Services
 {
     public class IntParser
-    {   
+    {
         /// <summary>
         /// Returns an int string can be parsed, otherwise returns a 400 statuscode http exception
         /// </summary>

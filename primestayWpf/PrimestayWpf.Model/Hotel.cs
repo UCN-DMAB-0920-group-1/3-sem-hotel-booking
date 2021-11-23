@@ -1,4 +1,4 @@
-﻿namespace PrimestayWpf.Model
+﻿namespace Model
 {
     public class Hotel : BaseModel
     {

@@ -1,4 +1,4 @@
-﻿namespace PrimeStay.MVC.Model
+﻿namespace WebClient.Models
 {
     public class HotelSearchForm
     {

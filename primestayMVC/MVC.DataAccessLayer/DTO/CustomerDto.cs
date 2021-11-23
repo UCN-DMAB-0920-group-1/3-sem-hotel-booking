@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimeStay.MVC.DataAccessLayer.DTO
+namespace DataAccessLayer.DTO
 {
     public class CustomerDto : BaseDto
     {

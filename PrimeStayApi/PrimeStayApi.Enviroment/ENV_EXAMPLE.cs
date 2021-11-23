@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimeStayApi.Enviroment
+namespace Enviroment
 {
 
     public class ENV_EXAMPLE

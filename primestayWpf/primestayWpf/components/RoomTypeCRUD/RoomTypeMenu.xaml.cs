@@ -1,13 +1,13 @@
-﻿using primestayWpf.RoomTypeCRUD;
-using primestayWpf.src.auth;
-using PrimestayWpf.Model;
-using PrimestayWPF.DataAccessLayer;
-using PrimestayWPF.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Model;
+using primestayWpf.RoomTypeCRUD;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using WinApp.src.auth;
 
 namespace primestayWpf
 {

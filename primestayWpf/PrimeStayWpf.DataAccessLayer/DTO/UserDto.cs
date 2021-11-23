@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace PrimestayWPF.DataAccessLayer.DTO
+namespace DataAccessLayer.DTO
 {
     public class UserDto : BaseDto
     {

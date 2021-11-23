@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimestayWpf.Model
+namespace Model
 {
     public class Customer : BaseModel
     {

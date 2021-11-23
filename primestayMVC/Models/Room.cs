@@ -1,4 +1,4 @@
-﻿namespace PrimeStay.MVC.Model
+﻿namespace Models
 {
     public class Room : BaseModel
     {

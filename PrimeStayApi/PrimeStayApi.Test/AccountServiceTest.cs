@@ -1,19 +1,19 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using API;
+using API.Models;
+using API.Services;
+using API.Services.Models;
+using DataAccessLayer;
+using Enviroment;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
-using PrimeStayApi.Models;
-using PrimeStayApi.Services;
-using PrimeStayApi.Services.Models;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Version = PrimeStayApi.Database.Version;
+using Version = Database.Version;
 
-namespace PrimeStayApi.Test
+namespace Tests
 {
     [TestClass]
     public class AccountServiceTest

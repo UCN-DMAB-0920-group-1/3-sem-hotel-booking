@@ -1,4 +1,4 @@
-﻿namespace PrimeStayApi.DataAccessLayer.DAO
+﻿namespace DataAccessLayer
 {
     internal abstract class BaseDao<T>
     {

@@ -1,13 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using primestayWpf.Forms;
-using primestayWpf.src.auth;
-using PrimestayWPF.DataAccessLayer;
-using PrimestayWPF.DataAccessLayer.DTO;
+﻿using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 
-namespace primestayWpf.Test
+namespace Test
 {
     [TestClass()]
     public class AuthTest

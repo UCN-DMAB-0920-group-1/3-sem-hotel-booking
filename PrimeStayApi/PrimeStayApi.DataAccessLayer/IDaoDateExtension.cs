@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrimeStayApi.DataAccessLayer
+namespace DataAccessLayer
 {
     public interface IDaoDateExtension<T>
     {

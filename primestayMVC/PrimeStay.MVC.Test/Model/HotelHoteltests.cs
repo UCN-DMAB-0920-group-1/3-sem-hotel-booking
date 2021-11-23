@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStay.MVC.Model;
+using Models;
 
-namespace PrimeStay.MVC.Test.Model
+namespace Tests.Model
 {
     [TestClass()]
     public class HotelHoteltests

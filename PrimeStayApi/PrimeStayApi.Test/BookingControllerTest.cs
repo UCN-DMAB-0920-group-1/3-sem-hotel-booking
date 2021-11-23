@@ -1,18 +1,18 @@
+using API;
+using API.Controllers;
+using DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimeStayApi.Controllers;
-using PrimeStayApi.DataAccessLayer;
-using PrimeStayApi.DataAccessLayer.DAO;
-using PrimeStayApi.Enviroment;
-using PrimeStayApi.Model;
-using PrimeStayApi.Model.DTO;
+using Models;
+using Models.DTO;
+using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Version = PrimeStayApi.Database.Version;
+using Version = Database.Version;
 
-namespace PrimeStayApi.Test
+namespace Tests
 {
     [TestClass]
     public class BookingControllerTest
@@ -48,8 +48,8 @@ namespace PrimeStayApi.Test
             var booking = new BookingEntity()
             {
                 Customer_id = 1,
-                End_date = System.DateTime.Parse("2010-11-01"),
-                Start_date = System.DateTime.Parse("2010-11-02"),
+                End_date = DateTime.Parse("2010-11-01"),
+                Start_date = DateTime.Parse("2010-11-02"),
                 Guests = 10,
                 Room_type_id = 1,
             };
@@ -76,8 +76,8 @@ namespace PrimeStayApi.Test
             BookingDto booking = new BookingDto()
             {
                 CustomerHref = "api/customer/1",
-                EndDate = System.DateTime.Now,
-                StartDate = System.DateTime.Now,
+                EndDate = DateTime.Now,
+                StartDate = DateTime.Now,
                 Guests = 1,
                 RoomHref = "api/room/1"
             };

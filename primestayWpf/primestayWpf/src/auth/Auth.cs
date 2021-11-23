@@ -1,4 +1,4 @@
-﻿namespace primestayWpf.src.auth
+﻿namespace WinApp.src.auth
 {
     public static class Auth
     {
