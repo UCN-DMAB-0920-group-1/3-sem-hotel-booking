@@ -54,6 +54,8 @@ namespace WinApp.Components.Customer
 
         private void Edit(object sender, RoutedEventArgs e)
         {
+            throw new NotImplementedException();
+            /**
             if (CustomerListView.SelectedItem is not Model.Customer oldCustomer)
             {
                 MessageBox.Show("Please select a Customer", "Error");
@@ -75,7 +77,7 @@ namespace WinApp.Components.Customer
 
                  // mangler noget
                 }
-            }
+            }**/
         }
 
         private void Create(object sender, RoutedEventArgs e)
