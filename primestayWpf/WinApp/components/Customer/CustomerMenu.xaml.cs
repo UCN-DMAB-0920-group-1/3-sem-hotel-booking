@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using WinApp.components.Customer;
 using WinApp.src.auth;
 
 namespace WinApp.Components.Customer
@@ -54,7 +55,29 @@ namespace WinApp.Components.Customer
         private void Edit(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+            /**
+            if (CustomerListView.SelectedItem is not Model.Customer oldCustomer)
+            {
+                MessageBox.Show("Please select a Customer", "Error");
+            }
+            else
+            {
+                var form = oldCustomer is null ? new CustomerForm() : new CustomerForm();
+                var yesNo = form.ShowDialog();
+                if(yesNo ?? false)
+               {
+                    Model.Customer customer = new()
+                    {
+                     //  Name = form.Name,
+                        //Email = form.Email,
+                       // Phone = form.Phone,
+                       // BirthDay = form.BirthDay,
 
+                    };
+
+                 // mangler noget
+                }
+            }**/
         }
 
         private void Create(object sender, RoutedEventArgs e)
