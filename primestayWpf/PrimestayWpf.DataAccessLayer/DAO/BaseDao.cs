@@ -3,9 +3,12 @@
     internal abstract class BaseDao<T>
     {
         public T DataContext { get; }
-        public BaseDao(T dataContext)
+        public string AccessToken { get; private set; }
+
+        public BaseDao(T dataContext, string accessToken)
         {
             DataContext = dataContext;
+            AccessToken = accessToken;
         }
     }
 }
