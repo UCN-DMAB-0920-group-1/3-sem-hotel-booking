@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Model;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -17,15 +18,14 @@ namespace WinApp.Components.HotelView
             InitializeComponent();
 
         }
-        public HotelForm(Model.Hotel hotel)
+        public HotelForm(Hotel hotel)
         {
             InitializeComponent();
             Name.Text = hotel.Name;
             Description.Text = hotel.Description;
             StaffedHours.Text = hotel.StaffedHours;
             Stars.Value = hotel.Stars ?? 0d;
-            LocationHref.Text = hotel.LocationHref;
-            HotelHref = hotel.Href;
+            LocationId.Text = hotel.LocationId.ToString();
             Active.IsChecked = hotel.Active;
 
         }
@@ -77,7 +77,7 @@ namespace WinApp.Components.HotelView
                 errors.Add("Please a time when the hotel is staffed");
             }
 
-            if (string.IsNullOrWhiteSpace(LocationHref.Text))
+            if (string.IsNullOrWhiteSpace(LocationId.Text) || !int.TryParse(LocationId.Text, out _))
             {
                 errors.Add("Please a valid location");
             }

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinApp.Components.CustomerView"
         mc:Ignorable="d"
-        Title="CustomerMenu" Height="450" Width="829">
+        Title="CustomerMenu" Height="477" Width="865">
     <Grid>
-        <ListView MouseDoubleClick="Edit" x:Name="CustomerListView" Margin="0,0,319,0">
+        <ListView MouseDoubleClick="Bookings" x:Name="CustomerListView" Margin="0,0,217,0">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -22,6 +22,16 @@
         <Button Content="Edit" HorizontalAlignment="Left" Margin="718,132,0,0" VerticalAlignment="Top" Click="Edit"/>
         <Button  Content="Create" HorizontalAlignment="Left" Margin="657,88,0,0" VerticalAlignment="Top" Click="Create"/>
         <Button  Content="Delete" HorizontalAlignment="Left" Margin="695,217,0,0" VerticalAlignment="Top" Click="Delete"/>
+        <Button Content="View Bookings" Margin="0,0,54,100" VerticalAlignment="Bottom" Height="38" Click="Bookings"  HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
     </Grid>
 </Window>

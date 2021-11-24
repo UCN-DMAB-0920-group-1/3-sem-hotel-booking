@@ -27,7 +27,9 @@ namespace WinApp.Components
 
         private void hotelCrudBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Auth.IsLoggedIn) new HotelMenu(DaoFactory.Create<HotelDto>(_context, Auth.AccessToken)).ShowDialog();
+            if (Auth.IsLoggedIn) new HotelMenu(DaoFactory.Create<HotelDto>(_context, Auth.AccessToken)
+                , DaoFactory.Create<RoomTypeDto>(_context, Auth.AccessToken)
+                , DaoFactory.Create<BookingDto>(_context, Auth.AccessToken)).ShowDialog();
             else MessageBox.Show("Login to acces Hotels", "Error", MessageBoxButton.OK);
         }
 
@@ -40,13 +42,15 @@ namespace WinApp.Components
 
         private void roomTypeBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Auth.IsLoggedIn) new RoomTypeMenu(DaoFactory.Create<RoomTypeDto>(_context, Auth.AccessToken)).ShowDialog();
+            if (Auth.IsLoggedIn) new RoomTypeMenu(DaoFactory.Create<RoomTypeDto>(_context, Auth.AccessToken)
+                , DaoFactory.Create<BookingDto>(_context, Auth.AccessToken)).ShowDialog();
             else MessageBox.Show("Login to access Room types", "Error", MessageBoxButton.OK);
         }
 
         private void customerCrudBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Auth.IsLoggedIn) new CustomerMenu(DaoFactory.Create<CustomerDto>(_context, Auth.AccessToken)).ShowDialog();
+            if (Auth.IsLoggedIn) new CustomerMenu(DaoFactory.Create<CustomerDto>(_context, Auth.AccessToken),
+                DaoFactory.Create<BookingDto>(_context, Auth.AccessToken)).ShowDialog();
             else MessageBox.Show("Login to access Customers", "Error", MessageBoxButton.OK);
 
         }

@@ -23,7 +23,7 @@ namespace WinApp.Components.RoomTypeView
             Description.Text = roomType.Description;
             Beds.Text = roomType.Beds.ToString();
             Rating.Value = roomType.Rating ?? 0d;
-            HotelHref.Text = roomType.HotelHref;
+            HotelID.Text = roomType.HotelId.ToString();
             Active.IsChecked = roomType.Active;
         }
 
@@ -78,9 +78,9 @@ namespace WinApp.Components.RoomTypeView
             {
                 errors.Add("Please enter more than 0 stars");
             }
-            if (string.IsNullOrWhiteSpace(HotelHref.Text))
+            if (string.IsNullOrWhiteSpace(HotelID.Text) || !int.TryParse(HotelID.Text, out _))
             {
-                errors.Add("Please enter a hotelHref");
+                errors.Add("Please enter a hotelId");
             }
 
             var any = errors.Any();

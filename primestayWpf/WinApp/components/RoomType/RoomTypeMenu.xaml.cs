@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using WinApp.Components.BookingView;
 using WinApp.Components.RoomView;
 using WinApp.src.auth;
 
@@ -18,12 +19,14 @@ namespace WinApp.Components.RoomTypeView
     public partial class RoomTypeMenu : Window
     {
         private readonly IDao<RoomTypeDto> dao;
+        private readonly IDao<BookingDto> bookingDao;
         private ObservableCollection<RoomType> roomTypeList { get; set; } = new ObservableCollection<RoomType>();
 
-        public RoomTypeMenu(IDao<RoomTypeDto> _dao)
+        public RoomTypeMenu(IDao<RoomTypeDto> _dao, IDao<BookingDto> _bookingDao)
         {
             InitializeComponent();
             dao = _dao;
+            bookingDao = _bookingDao;
             RoomTypeListView.ItemsSource = roomTypeList;
             UpdateList();
         }
@@ -48,7 +51,7 @@ namespace WinApp.Components.RoomTypeView
                         Description = form.Description.Text,
                         Rating = (int)form.Rating.Value,
                         Beds = int.Parse(form.Beds.Text),
-                        HotelHref = form.HotelHref.Text,
+                        HotelId = int.Parse(form.HotelID.Text),
                         Active = form.Active.IsChecked,
                     };
                     var res = dao.Update(roomType.Map());
@@ -88,7 +91,7 @@ namespace WinApp.Components.RoomTypeView
                     Description = form.Description.Text,
                     Rating = (int)form.Rating.Value,
                     Beds = int.Parse(form.Beds.Text),
-                    HotelHref = form.HotelHref.Text,
+                    HotelId = int.Parse(form.HotelID.Text),
                     Active = form.Active.IsChecked,
                 };
                 var newHotelHref = dao.Create(roomType.Map());
@@ -130,6 +133,18 @@ namespace WinApp.Components.RoomTypeView
                 var dao = DaoFactory.Create<RoomDto>(RestDataContext.GetInstance(), Auth.AccessToken);
                 new RoomMenu(dao, roomType).ShowDialog();
             }
+        }
+        private void RoomBookings(object sender, RoutedEventArgs e)
+        {
+            if (RoomTypeListView.SelectedItem is not RoomType roomType)
+            {
+                MessageBox.Show("Please select a Hotel to view bookings", "ERROR");
+            }
+            else
+            {
+                new BookingMenu(bookingDao, roomType: roomType).ShowDialog();
+            }
+
         }
     }
 }

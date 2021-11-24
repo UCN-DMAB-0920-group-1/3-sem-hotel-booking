@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace API.Controllers
@@ -21,18 +22,18 @@ namespace API.Controllers
         }
         // GET: BookingController
         [HttpGet]
-        public IEnumerable<BookingDto> Index([FromQuery] BookingDto booking)
+        public ActionResult<IEnumerable<BookingDto>> Index([FromQuery] BookingDto booking)
         {
-            return _dao.ReadAll(new BookingEntity()
+            try
             {
-                Id = booking.ExtractId(),
-                Start_date = booking.StartDate,
-                End_date = booking.EndDate,
-                Guests = booking.Guests,
-                Room_id = MapperExtension.GetIdFromHref(booking.RoomHref),
-                Customer_id = MapperExtension.GetIdFromHref(booking.CustomerHref)
-
-            }).Select(h => h.Map());
+                var res = _dao.ReadAll(booking.Map()).Select(h => h.Map());
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return BadRequest(e.Message);
+            }
         }
 
         // GET: api/Booking/5
