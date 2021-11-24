@@ -31,17 +31,16 @@ namespace WebClient.Controllers
             };
             Booking booking = new()
             {
-                Start_date = DateTime.Parse(Request.Query["startDate"] + "Z"),
-                End_date = DateTime.Parse(Request.Query["endDate"] + "Z"),
+                StartDate = DateTime.Parse(Request.Query["startDate"] + "Z"),
+                EndDate = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
-                Room_type_href = Request.Query["roomType"],
+                RoomTypeHref = Request.Query["roomType"],
                 Customer = customer,
 
 
             };
 
             string href = _bookingDao.Create(booking.Map());
-
             if (href is null || href.EndsWith("-1")) return View("BookingError");
 
             return View("confirm", _bookingDao.ReadByHref(href).Map());

@@ -7,10 +7,10 @@ namespace Models
 {
     public class Location : BaseModel
     {
-        public string Street_Address { get; set; }
+        public string StreetAddress { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public string Zip_code { get; set; }
+        public string ZipCode { get; set; }
 
     }
 }
