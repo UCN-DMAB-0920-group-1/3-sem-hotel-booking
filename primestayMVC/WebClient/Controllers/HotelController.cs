@@ -76,7 +76,7 @@ namespace WebClient.Controllers
         }
         private Location GetHotelLocation(Hotel h)
         {
-            return _LocationDao.ReadByHref($"/api/location/{h.Location_Id}").Map();
+            return _LocationDao.ReadByHref($"/api/location/{h.LocationId}").Map();
         }
 
         private IEnumerable<Room> GetAllHotelRoomsForHotel(string href)

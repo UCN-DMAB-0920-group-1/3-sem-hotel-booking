@@ -15,9 +15,9 @@ namespace DataAccessLayer.DTO
                 Href = hotel.Href,
                 Name = hotel.Name,
                 Description = hotel.Description,
-                Staffed_hours = hotel.StaffedHours,
+                StaffedHours = hotel.StaffedHours,
                 Stars = hotel.Stars,
-                Location_Id = GetIdFromHref(hotel.LocationHref)
+                LocationId = GetIdFromHref(hotel.LocationHref)
             };
         }
 
@@ -29,7 +29,7 @@ namespace DataAccessLayer.DTO
                 Href = GetHrefFromId(typeof(Hotel), hotel.Id),
                 Name = hotel.Name,
                 Description = hotel.Description,
-                StaffedHours = hotel.Staffed_hours,
+                StaffedHours = hotel.StaffedHours,
                 Stars = hotel.Stars,
                 LocationHref = GetHrefFromId(typeof(Hotel), hotel.Id),
             };
@@ -47,7 +47,7 @@ namespace DataAccessLayer.DTO
                 Beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                Hotel_Id = room.HotelId,
+                HotelId = room.HotelId,
             };
         }
         public static RoomTypeDto Map(this Room room)
@@ -61,7 +61,7 @@ namespace DataAccessLayer.DTO
                 Beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                HotelId = room.Hotel_Id,
+                HotelId = room.HotelId,
             };
         }
         public static Location Map(this LocationDto location)
@@ -70,10 +70,10 @@ namespace DataAccessLayer.DTO
             return new Location()
             {
                 Id = GetIdFromHref(location.Href),
-                Street_Address = location.StreetAddress,
+                StreetAddress = location.StreetAddress,
                 City = location.City,
                 Country = location.Country,
-                Zip_code = location.ZipCode,
+                ZipCode = location.ZipCode,
             };
         }
 
@@ -83,10 +83,10 @@ namespace DataAccessLayer.DTO
             return new LocationDto()
             {
                 Href = GetHrefFromId(typeof(Location), location.Id),
-                StreetAddress = location.Street_Address,
+                StreetAddress = location.StreetAddress,
                 City = location.City,
                 Country = location.Country,
-                ZipCode = location.Zip_code,
+                ZipCode = location.ZipCode,
             };
         }
 
@@ -96,11 +96,11 @@ namespace DataAccessLayer.DTO
             return new BookingDto()
             {
                 Href = booking.Href,
-                EndDate = booking.End_date,
-                StartDate = booking.Start_date,
-                CustomerHref = booking.Customer_href,
+                EndDate = booking.EndDate,
+                StartDate = booking.StartDate,
+                CustomerHref = booking.CustomerHref,
                 Guests = booking.Guests,
-                RoomTypeHref = booking.Room_type_href,
+                RoomTypeHref = booking.RoomTypeHref,
                 Customer = booking.Customer.Map(),
             };
         }
@@ -112,11 +112,11 @@ namespace DataAccessLayer.DTO
             {
                 Id = booking.ExtractId(),
                 Href = booking.Href,
-                Customer_href = booking.CustomerHref,
-                End_date = booking.EndDate,
-                Start_date = booking.StartDate,
+                CustomerHref = booking.CustomerHref,
+                EndDate = booking.EndDate,
+                StartDate = booking.StartDate,
                 Guests = booking.Guests,
-                Room_type_href = booking.RoomTypeHref,
+                RoomTypeHref = booking.RoomTypeHref,
                 Customer = booking.Customer.Map(),
 
 
