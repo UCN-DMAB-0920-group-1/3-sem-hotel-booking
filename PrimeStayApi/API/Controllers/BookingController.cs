@@ -76,7 +76,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT: BookingController/Edit/5
+        // PUT: BookingController/5
         [HttpPut]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(BookingDto booking)
@@ -84,7 +84,7 @@ namespace API.Controllers
             throw new NotImplementedException();
         }
 
-        // DELETE: BookingController/Delete/5
+        // DELETE: BookingController/5
         [HttpDelete]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(BookingDto booking)
