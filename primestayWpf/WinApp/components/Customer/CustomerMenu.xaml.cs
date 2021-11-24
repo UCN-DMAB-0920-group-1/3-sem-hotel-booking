@@ -37,6 +37,8 @@ namespace WinApp.Components.CustomerView
             }
         }
 
+
+
         private void Add(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
@@ -82,7 +84,25 @@ namespace WinApp.Components.CustomerView
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var form = new CustomerForm();
+            var yesNo = form.ShowDialog();
+            if (yesNo ?? false)
+            {
+                Model.Customer customer = new()
+                {
+                    Name = form.Name.Text,
+                    Email = form.Email.Text,
+                    Phone = form.Phone.Text,
+                    BirthDay = form.Datepicker.SelectedDate!.Value,
+                };
+                var newCustomerHref = dao.Create(customer.Map());
+                if (newCustomerHref is null) MessageBox.Show("Could not create new customer");
+                else
+                {
+                    MessageBox.Show($"Customer: {customer.Name} was created in the system");
+                    UpdateList();
+                }
+            }
         }
     }
 }

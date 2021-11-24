@@ -19,6 +19,7 @@ namespace DataAccessLayer.DAO
         {
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest("/api/customer/", Method.POST, DataFormat.Json);
+            restRequest.AddJsonBody(model);
 
             var res = restClient.Post<CustomerDto>(restRequest).Data;
             return res.Href;
