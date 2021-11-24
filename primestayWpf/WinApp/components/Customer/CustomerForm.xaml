@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="CustomerForm" Height="450" Width="800">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Margin="109,82,0,0" Name="Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="325"/>
+        <TextBox HorizontalAlignment="Left" Margin="109,135,0,0" Name="Email" TextWrapping="Wrap" VerticalAlignment="Top" Width="325"/>
+        <TextBox HorizontalAlignment="Left" Margin="109,192,0,0" Name="Phone" TextWrapping="Wrap" VerticalAlignment="Top" Width="325"/>
+        <DatePicker HorizontalAlignment="Left" Margin="109,276,0,0" Name="Datepicker" VerticalAlignment="Top" Width="325"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="501,49,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="501,94,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+
     </Grid>
 </Window>

@@ -22,6 +22,7 @@ namespace API.Controllers
 
         // GET: BookingController
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IEnumerable<CustomerDto> Index([FromQuery] CustomerDto customer)
         {
             return _dao.ReadAll(customer.Map()).Select(x => x.Map());
@@ -40,13 +41,15 @@ namespace API.Controllers
         public ActionResult Create([FromBody] CustomerDto customer)
         {
             var res = _dao.Create(customer.Map());
-            if (res > 0) return Created("api/customer/" + res, customer);
+            customer.Href = "api/customer/" + res;
+            if (res > 0) return Created(customer.Href, customer);
             else return BadRequest(res);
         }
 
         // PUT: BookingController/Edit/5
         [HttpPut]
-        public ActionResult Edit(CustomerDto customer)
+        [Authorize]
+        public ActionResult Edit([FromBody] CustomerDto customer)
         {
             return _dao.Update(customer.Map()) switch
             {
@@ -58,6 +61,7 @@ namespace API.Controllers
 
         // DELETE: BookingController/Delete/5
         [HttpDelete]
+        [Authorize]
         public ActionResult Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
