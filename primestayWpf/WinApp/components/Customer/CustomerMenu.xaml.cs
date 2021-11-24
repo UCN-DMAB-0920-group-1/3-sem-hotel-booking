@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using WinApp.Components.BookingView;
+using WinApp.components.Customer;
 
 namespace WinApp.Components.CustomerView
 {
@@ -40,6 +41,8 @@ namespace WinApp.Components.CustomerView
             }
         }
 
+
+
         private void Add(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
@@ -56,35 +59,54 @@ namespace WinApp.Components.CustomerView
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-            /**
             if (CustomerListView.SelectedItem is not Model.Customer oldCustomer)
             {
                 MessageBox.Show("Please select a Customer", "Error");
             }
             else
             {
-                var form = oldCustomer is null ? new CustomerForm() : new CustomerForm();
+                var form = oldCustomer is null ? new CustomerForm() : new CustomerForm(oldCustomer);
                 var yesNo = form.ShowDialog();
                 if(yesNo ?? false)
                {
                     Model.Customer customer = new()
                     {
-                     //  Name = form.Name,
-                        //Email = form.Email,
-                       // Phone = form.Phone,
-                       // BirthDay = form.BirthDay,
-
+                      Id = oldCustomer.Id,
+                      Name = form.Name.Text,
+                      Email = form.Email.Text,
+                      Phone = form.Phone.Text,
+                      BirthDay = form.Datepicker.SelectedDate!.Value,
                     };
-
-                 // mangler noget
+                    var res = dao.Update(customer.Map());
+                    UpdateList();
+                    if (res > 0) MessageBox.Show($"Customer {customer.Name} was updated");
+                    else MessageBox.Show($"Could not update{customer.Name}, contact admin");
+   
                 }
-            }**/
+            }
         }
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var form = new CustomerForm();
+            var yesNo = form.ShowDialog();
+            if (yesNo ?? false)
+            {
+                Model.Customer customer = new()
+                {
+                    Name = form.Name.Text,
+                    Email = form.Email.Text,
+                    Phone = form.Phone.Text,
+                    BirthDay = form.Datepicker.SelectedDate!.Value,
+                };
+                var newCustomerHref = dao.Create(customer.Map());
+                if (newCustomerHref is null) MessageBox.Show("Could not create new customer");
+                else
+                {
+                    MessageBox.Show($"Customer: {customer.Name} was created in the system");
+                    UpdateList();
+                }
+            }
         }
 
         private void Bookings(object sender, RoutedEventArgs e)
