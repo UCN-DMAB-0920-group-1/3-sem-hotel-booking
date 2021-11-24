@@ -3,6 +3,7 @@ using API.Controllers;
 using DataAccessLayer;
 using DataAccessLayer.DTO;
 using Enviroment;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
@@ -80,13 +81,17 @@ namespace Tests
             var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             //assert
-            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
+            //Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
 
-            Assert.AreEqual(hotels.Count(), 1);
-            Assert.AreEqual(hotels.First().Name, hotel.Name);
-            Assert.AreEqual(hotels.First().Description, hotel.Description);
-            Assert.AreEqual(hotels.First().StaffedHours, hotel.StaffedHours);
-            Assert.AreEqual(hotels.First().Stars, hotel.Stars);
+            //Assert.AreEqual(hotels.Count(), 1);
+            //Assert.AreEqual(hotels.First().Name, hotel.Name);
+            //Assert.AreEqual(hotels.First().Description, hotel.Description);
+            //Assert.AreEqual(hotels.First().StaffedHours, hotel.StaffedHours);
+            //Assert.AreEqual(hotels.First().Stars, hotel.Stars);
+
+            hotels.Should().BeOfType<IEnumerable<HotelDto>>()
+                .And.ContainSingle()
+                .Which.Name.Should().Be(hotel.Name, "because we should only get an exact match back in this scenario");
         }
 
         [TestMethod]
