@@ -53,32 +53,32 @@ namespace API
             services.AddControllers();
 
             // TODO chech this out? https://stackoverflow.com/questions/59154319/swagger-auth-with-username-and-password-netcore-2
-            services.AddSwaggerGen(setup =>
-            {
-                // Include 'SecurityScheme' to use JWT Authentication
-                var basicSecurityScheme = new OpenApiSecurityScheme
-                {
-                    Scheme = "basic",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Description = "Enter **_Your_** username/password in fields below!",
+            //services.AddSwaggerGen(setup =>
+            //{
+            //    // Include 'SecurityScheme' to use JWT Authentication
+            //    var basicSecurityScheme = new OpenApiSecurityScheme
+            //    {
+            //        Scheme = "basic",
+            //        Name = "Authorization",
+            //        In = ParameterLocation.Header,
+            //        Type = SecuritySchemeType.Http,
+            //        Description = "Enter **_Your_** username/password in fields below!",
 
-                    Reference = new OpenApiReference
-                    {
-                        Id = "Login", 
-                        Type = ReferenceType.SecurityScheme
-                    }
-                };
+            //        Reference = new OpenApiReference
+            //        {
+            //            Id = "Login", 
+            //            Type = ReferenceType.SecurityScheme
+            //        }
+            //    };
 
-                setup.AddSecurityDefinition(basicSecurityScheme.Reference.Id, basicSecurityScheme);
+            //    setup.AddSecurityDefinition(basicSecurityScheme.Reference.Id, basicSecurityScheme);
 
-                setup.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    { basicSecurityScheme, Array.Empty<string>() }
-                });
+            //    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+            //    {
+            //        { basicSecurityScheme, Array.Empty<string>() }
+            //    });
 
-            }); // username/password
+            //}); // username/password
             services.AddSwaggerGen(setup =>
             {
                 // Include 'SecurityScheme' to use JWT Authentication
@@ -117,8 +117,8 @@ namespace API
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:SecretKey"]))
                     };
                 });
-            services.AddAuthentication("BasicAuthentication")
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+            //services.AddAuthentication("BasicAuthentication")
+            //    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddTransient<IAccountService, AccountService>();
         }
