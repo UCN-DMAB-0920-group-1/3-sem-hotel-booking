@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -11,7 +12,6 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "admin")]
     public class CustomerController : Controller
     {
         private readonly IDao<CustomerEntity> _dao;
@@ -23,14 +23,19 @@ namespace API.Controllers
         // GET: BookingController
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public IEnumerable<CustomerDto> Index([FromQuery] CustomerDto customer)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<CustomerDto>> Index([FromQuery] CustomerDto customer)
         {
-            return _dao.ReadAll(customer.Map()).Select(x => x.Map());
+            var customers = _dao.ReadAll(customer.Map()).Select(x => x.Map());
+            return customers.Any() ? Ok(customers) : NotFound();
         }
 
         // GET: api/Booking/5
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public CustomerDto Details(int id)
         {
             return _dao.ReadById(id).Map();
@@ -38,6 +43,8 @@ namespace API.Controllers
 
         // POST: BookingController/
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Create([FromBody] CustomerDto customer)
         {
             var res = _dao.Create(customer.Map());
@@ -49,6 +56,8 @@ namespace API.Controllers
         // PUT: BookingController/Edit/5
         [HttpPut]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Edit([FromBody] CustomerDto customer)
         {
             return _dao.Update(customer.Map()) switch
@@ -62,6 +71,8 @@ namespace API.Controllers
         // DELETE: BookingController/Delete/5
         [HttpDelete]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
