@@ -118,6 +118,7 @@ namespace DataAccessLayer.DTO
                 EndDate = booking.EndDate,
                 Guests = booking.Guests,
                 CustomerId = GetIdFromHref(booking.CustomerHref),
+                RoomTypeId = GetIdFromHref(booking.RoomTypeHref),
                 RoomId = GetIdFromHref(booking.RoomHref),
             };
         }
@@ -131,6 +132,7 @@ namespace DataAccessLayer.DTO
                 EndDate = booking.EndDate,
                 Guests = booking.Guests,
                 CustomerHref = GetHrefFromId(typeof(Customer), booking.CustomerId),
+                RoomTypeHref = GetHrefFromId(typeof(RoomType), booking.RoomTypeId),
                 RoomHref = GetHrefFromId(typeof(Room), booking.RoomId),
 
             };

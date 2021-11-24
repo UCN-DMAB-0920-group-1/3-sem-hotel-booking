@@ -4,6 +4,7 @@ using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using WinApp.Components.BookingView;
 
 namespace WinApp.Components.HotelView
 {
@@ -14,13 +15,15 @@ namespace WinApp.Components.HotelView
     {
         private readonly IDao<HotelDto> dao;
         private readonly IDao<RoomTypeDto> roomTypeDao;
+        private readonly IDao<BookingDto> bookingDao;
         private ObservableCollection<Hotel> HotelList { get; set; } = new ObservableCollection<Hotel>();
 
-        public HotelMenu(IDao<HotelDto> _dao, IDao<RoomTypeDto> _roomTypeDao)
+        public HotelMenu(IDao<HotelDto> _dao, IDao<RoomTypeDto> _roomTypeDao, IDao<BookingDto> _bookingDao)
         {
             InitializeComponent();
             dao = _dao;
             roomTypeDao = _roomTypeDao;
+            bookingDao = _bookingDao;
             HotelListView.ItemsSource = HotelList;
             UpdateList();
         }
@@ -105,20 +108,20 @@ namespace WinApp.Components.HotelView
             }
 
         }
-        //private void HotelBookings(object sender, RoutedEventArgs e)
-        //{
-        //    if (HotelListView.SelectedItem is not Model.Hotel hotel)
-        //    {
-        //        MessageBox.Show("Please select a Hotel to view bookings", "ERROR");
-        //    }
-        //    else
-        //    {
-        //        RoomType search = new() { HotelId = hotel.Id };
-        //        var roomList = roomTypeDao.ReadAll(search.Map()).ToList().Select(roomType => roomType.Map());
-        //        new BookingMenu(bookingDao, hotelRooms: roomList).ShowDialog();
-        //    }
+        private void HotelBookings(object sender, RoutedEventArgs e)
+        {
+            if (HotelListView.SelectedItem is not Model.Hotel hotel)
+            {
+                MessageBox.Show("Please select a Hotel to view bookings", "ERROR");
+            }
+            else
+            {
+                RoomType search = new() { HotelId = hotel.Id };
+                var roomList = roomTypeDao.ReadAll(search.Map()).ToList().Select(roomType => roomType.Map());
+                new BookingMenu(bookingDao, hotelRooms: roomList).ShowDialog();
+            }
 
-        //}
+        }
 
         private void UpdateList()
         {

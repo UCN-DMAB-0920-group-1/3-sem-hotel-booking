@@ -29,6 +29,7 @@ namespace DataAccessLayer.DAO
         {
             string search = "api/booking/";
             search += ("?CustomerHref=" + model.CustomerHref ?? "");
+            search += ("&RoomTypeHref=" + model.RoomTypeHref ?? "");
 
             IRestClient client = DataContext.Open();
             IRestRequest request = new RestRequest(search, Method.GET, DataFormat.Json);
