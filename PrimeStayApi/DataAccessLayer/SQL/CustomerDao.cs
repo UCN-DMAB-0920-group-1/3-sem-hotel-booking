@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Dapper.Transaction;
-using DataAccessLayer;
 using Models;
 using System.Collections.Generic;
 using System.Data;
@@ -79,7 +78,7 @@ namespace DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<CustomerEntity>(SELECT_ALL_CUSTOMER, new { id });
+                return connection.QueryFirst<CustomerEntity>(SELECT_CUSTOMER_BY_ID, new { id });
             }
         }
 
