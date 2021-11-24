@@ -31,14 +31,14 @@ namespace Test
 
     #region mock implementations
     //IDao<UserDto> left out, due to the test not needing it
-    internal class MockUserDao : IDao<UserDto>, IDaoAuthExtension<UserDto>
+   internal class MockUserDao : IDao<UserDto>, IDaoAuthExtension<UserDto>
     {
-        public string Create(UserDto model, string token = null)
+        public string Create(UserDto model)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(UserDto model, string token = null)
+        public int Delete(UserDto model)
         {
             throw new NotImplementedException();
         }
@@ -61,7 +61,7 @@ namespace Test
             }
         }
 
-        public IEnumerable<UserDto> ReadAll(UserDto model, string token)
+        public IEnumerable<UserDto> ReadAll(UserDto model)
         {
             throw new NotImplementedException();
         }
@@ -71,7 +71,7 @@ namespace Test
             throw new NotImplementedException();
         }
 
-        public int Update(UserDto model, string token = null)
+        public int Update(UserDto model)
         {
             throw new NotImplementedException();
         }
