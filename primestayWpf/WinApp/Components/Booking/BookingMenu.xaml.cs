@@ -74,17 +74,17 @@ namespace WinApp.Components.BookingView
 
         }
 
-        private void Add(object sender, RoutedEventArgs e)
+        private void AddBtn_Clicked(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Edit(object sender, RoutedEventArgs e)
+        private void EditBtn_Clicked(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Delete(object sender, RoutedEventArgs e)
+        private void DeleteBtn_Clicked(object sender, RoutedEventArgs e)
         {
 
         }

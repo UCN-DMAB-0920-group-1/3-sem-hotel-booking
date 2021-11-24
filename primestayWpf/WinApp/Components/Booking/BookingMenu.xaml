@@ -10,7 +10,7 @@
             <RowDefinition Height="106*"/>
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
-        <ListView MouseDoubleClick="Edit" x:Name="BookingListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
+        <ListView MouseDoubleClick="EditBtn_Clicked" x:Name="BookingListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -33,7 +33,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Create" Margin="0,0,-177,155" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Create" Margin="0,0,-177,155" Click="AddBtn_Clicked" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -43,7 +43,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Edit" Margin="0,0,-177,112" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Edit" Margin="0,0,-177,112" Click="EditBtn_Clicked" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -53,7 +53,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Delete" Margin="0,0,-177,69" VerticalAlignment="Bottom" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Delete" Margin="0,0,-177,69" VerticalAlignment="Bottom" Height="38" Click="DeleteBtn_Clicked" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

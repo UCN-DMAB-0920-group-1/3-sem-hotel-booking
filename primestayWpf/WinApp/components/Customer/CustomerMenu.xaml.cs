@@ -5,8 +5,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using WinApp.Components.BookingView;
 using WinApp.components.Customer;
+using WinApp.Components.BookingView;
 
 namespace WinApp.Components.CustomerView
 {
@@ -67,21 +67,21 @@ namespace WinApp.Components.CustomerView
             {
                 var form = oldCustomer is null ? new CustomerForm() : new CustomerForm(oldCustomer);
                 var yesNo = form.ShowDialog();
-                if(yesNo ?? false)
-               {
+                if (yesNo ?? false)
+                {
                     Model.Customer customer = new()
                     {
-                      Id = oldCustomer.Id,
-                      Name = form.Name.Text,
-                      Email = form.Email.Text,
-                      Phone = form.Phone.Text,
-                      BirthDay = form.Datepicker.SelectedDate!.Value,
+                        Id = oldCustomer.Id,
+                        Name = form.Name.Text,
+                        Email = form.Email.Text,
+                        Phone = form.Phone.Text,
+                        BirthDay = form.Datepicker.SelectedDate!.Value,
                     };
                     var res = dao.Update(customer.Map());
                     UpdateList();
                     if (res > 0) MessageBox.Show($"Customer {customer.Name} was updated");
                     else MessageBox.Show($"Could not update{customer.Name}, contact admin");
-   
+
                 }
             }
         }

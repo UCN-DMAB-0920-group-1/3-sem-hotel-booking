@@ -64,5 +64,15 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
+        <Button Content="View Bookings" Margin="0,0,-176,27" VerticalAlignment="Bottom" Height="38" Click="HotelBookings"  HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>
