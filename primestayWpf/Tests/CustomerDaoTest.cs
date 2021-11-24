@@ -35,6 +35,27 @@ namespace Test
         }
 
         [TestMethod()]
+        public void DeleteCustomer()
+        {
+            IDao<UserDto> userDao = DaoFactory.Create<UserDto>(_dataContext, Auth.AccessToken);
+            var token = (userDao as IDaoAuthExtension<UserDto>).login("admin", "admin").Token;
+
+            IDao<CustomerDto> dao = DaoFactory.Create<CustomerDto>(_dataContext, Auth.AccessToken);
+
+            var model = new CustomerDto()
+            {
+                Name = "Test",
+                Email = "Test",
+                Phone = "12345678",
+                BirthDay = DateTime.Parse("2001-09-01"),
+            };
+            int rowsAffected = dao.Delete(model);
+
+
+            Assert.AreEqual(1, rowsAffected);
+        }
+
+        [TestMethod()]
         public void CreateCustomerTest()
         {
             IDao<UserDto> userDao = DaoFactory.Create<UserDto>(_dataContext, Auth.AccessToken);
@@ -53,12 +74,6 @@ namespace Test
 
             Assert.IsTrue(string.IsNullOrEmpty(href));
             Assert.AreEqual(href, "api/customer/13");
-        }
-
-        [TestMethod()]
-        public void DeleteCustomer()
-        {
-
         }
 
         [TestMethod()]
@@ -100,6 +115,6 @@ namespace Test
 
             //assert
             Assert.AreEqual(1, updated);
+        }
     }
-
 }
