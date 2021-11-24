@@ -49,8 +49,7 @@ namespace API.Controllers
         // PUT: BookingController/Edit/5
         [HttpPut]
         [Authorize(Roles = "admin")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(CustomerDto customer)
+        public ActionResult Edit([FromBody] CustomerDto customer)
         {
             return _dao.Update(customer.Map()) switch
             {
@@ -63,7 +62,6 @@ namespace API.Controllers
         // DELETE: BookingController/Delete/5
         [HttpDelete]
         [Authorize(Roles = "admin")]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
