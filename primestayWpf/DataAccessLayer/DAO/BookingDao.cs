@@ -27,7 +27,13 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<BookingDto> ReadAll(BookingDto model)
         {
-            throw new System.NotImplementedException();
+            string search = "api/booking/";
+            search += ("?CustomerHref=" + model.CustomerHref ?? "");
+
+            IRestClient client = DataContext.Open();
+            IRestRequest request = new RestRequest(search, Method.GET, DataFormat.Json);
+            var res = client.Execute<IEnumerable<BookingDto>>(request).Data;
+            return res;
         }
 
         public BookingDto ReadByHref(string href)

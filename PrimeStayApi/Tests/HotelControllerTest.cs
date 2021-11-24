@@ -1,16 +1,16 @@
 ﻿using API;
 using API.Controllers;
 using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Version = Database.Version;
-using DataAccessLayer.DTO;
 
 namespace Tests
 {
@@ -77,10 +77,10 @@ namespace Tests
 
             //act 
             var res = controller.Index(hotel);
+            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             //assert
             Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
-            var hotels = (res.Result as OkObjectResult).Value as IEnumerable<HotelDto>;
 
             Assert.AreEqual(hotels.Count(), 1);
             Assert.AreEqual(hotels.First().Name, hotel.Name);

@@ -9,12 +9,12 @@ namespace DataAccessLayer.DTO
         {
             return new Hotel()
             {
+                Id = hotel.ExtractId(),
                 Name = hotel.Name,
                 Description = hotel.Description,
                 StaffedHours = hotel.StaffedHours,
-                LocationHref = hotel.LocationHref,
+                LocationId = GetIdFromHref(hotel.LocationHref),
                 Stars = hotel.Stars,
-                Href = hotel.Href,
                 Active = hotel.Active,
 
             };
@@ -23,12 +23,12 @@ namespace DataAccessLayer.DTO
         {
             return new HotelDto()
             {
+                Href = hotel.ExtractHref(),
                 Name = hotel.Name,
                 Description = hotel.Description,
                 StaffedHours = hotel.StaffedHours,
-                LocationHref = hotel.LocationHref,
+                LocationHref = GetHrefFromId(typeof(Hotel), hotel.LocationId),
                 Stars = hotel.Stars,
-                Href = hotel.Href,
                 Active = hotel.Active,
 
             };
@@ -42,7 +42,7 @@ namespace DataAccessLayer.DTO
                 Description = roomType.Description,
                 Beds = roomType.Beds,
                 Rating = roomType.Rating,
-                HotelHref = roomType.HotelHref,
+                HotelId = GetIdFromHref(roomType.HotelHref),
                 Active = roomType.Active,
             };
         }
@@ -55,7 +55,7 @@ namespace DataAccessLayer.DTO
                 Description = roomType.Description,
                 Beds = roomType.Beds,
                 Rating = roomType.Rating,
-                HotelHref = roomType.HotelHref,
+                HotelHref = GetHrefFromId(typeof(RoomType), roomType.HotelId),
                 Active = roomType.Active,
             };
         }
@@ -106,6 +106,33 @@ namespace DataAccessLayer.DTO
                 Notes = room.Notes,
                 RoomNumber = room.Room_number,
                 RoomTypeId = GetIdFromHref(room.RoomTypeHref),
+            };
+        }
+        public static Booking Map(this BookingDto booking)
+        {
+            if (booking is null) return null;
+            return new Booking()
+            {
+                Id = booking.ExtractId(),
+                StartDate = booking.StartDate,
+                EndDate = booking.EndDate,
+                Guests = booking.Guests,
+                CustomerId = GetIdFromHref(booking.CustomerHref),
+                RoomId = GetIdFromHref(booking.RoomHref),
+            };
+        }
+        public static BookingDto Map(this Booking booking)
+        {
+            if (booking is null) return null;
+            return new BookingDto()
+            {
+                Href = booking.ExtractHref(),
+                StartDate = booking.StartDate,
+                EndDate = booking.EndDate,
+                Guests = booking.Guests,
+                CustomerHref = GetHrefFromId(typeof(Customer), booking.CustomerId),
+                RoomHref = GetHrefFromId(typeof(Room), booking.RoomId),
+
             };
         }
 

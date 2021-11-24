@@ -1,23 +1,27 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
+using Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using WinApp.Components.BookingView;
 
 namespace WinApp.Components.CustomerView
 {
     public partial class CustomerMenu : Window
     {
         private readonly IDao<CustomerDto> dao;
+        private readonly IDao<BookingDto> bookingDao;
         private ObservableCollection<Model.Customer> CustomerList { get; set; } = new ObservableCollection<Model.Customer>();
 
-        public CustomerMenu(IDao<CustomerDto> _dao)
+        public CustomerMenu(IDao<CustomerDto> _dao, IDao<BookingDto> bookingDao)
         {
             InitializeComponent();
             dao = _dao;
             CustomerListView.ItemsSource = CustomerList;
             UpdateList();
+            this.bookingDao = bookingDao;
         }
 
         private void Delete(object sender, RoutedEventArgs e)
@@ -82,5 +86,19 @@ namespace WinApp.Components.CustomerView
         {
             throw new NotImplementedException();
         }
+
+        private void Bookings(object sender, RoutedEventArgs e)
+        {
+            if (CustomerListView.SelectedItem is not Customer customer)
+            {
+                MessageBox.Show("Please select a Hotel to view bookings", "ERROR");
+            }
+            else
+            {
+                new BookingMenu(bookingDao, customer: customer).ShowDialog();
+            }
+
+        }
+
     }
 }

@@ -1,16 +1,16 @@
 using API;
 using API.Controllers;
 using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Version = Database.Version;
-using DataAccessLayer.DTO;
 
 namespace Tests
 {
@@ -51,7 +51,6 @@ namespace Tests
                 End_date = DateTime.Parse("2010-11-01"),
                 Start_date = DateTime.Parse("2010-11-02"),
                 Guests = 10,
-                Room_type_id = 1,
             };
 
             //Act
@@ -107,7 +106,9 @@ namespace Tests
             };
 
             //Act
-            var bookings = controller.Index(booking);
+            var res = controller.Index(booking);
+            var bookings = (res.Result as OkObjectResult).Value as IEnumerable<BookingDto>;
+
 
             //Assert
             Assert.AreEqual(17, bookings.Count());

@@ -48,7 +48,7 @@ namespace WinApp.Components.RoomTypeView
                         Description = form.Description.Text,
                         Rating = (int)form.Rating.Value,
                         Beds = int.Parse(form.Beds.Text),
-                        HotelHref = form.HotelHref.Text,
+                        HotelId = int.Parse(form.HotelID.Text),
                         Active = form.Active.IsChecked,
                     };
                     var res = dao.Update(roomType.Map());
@@ -88,7 +88,7 @@ namespace WinApp.Components.RoomTypeView
                     Description = form.Description.Text,
                     Rating = (int)form.Rating.Value,
                     Beds = int.Parse(form.Beds.Text),
-                    HotelHref = form.HotelHref.Text,
+                    HotelId = int.Parse(form.HotelID.Text),
                     Active = form.Active.IsChecked,
                 };
                 var newHotelHref = dao.Create(roomType.Map());

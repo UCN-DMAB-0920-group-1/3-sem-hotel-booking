@@ -24,7 +24,7 @@ namespace Test
             IDao<CustomerDto> dao = DaoFactory.Create<CustomerDto>(_dataContext, Auth.AccessToken);
 
             //act
-            var customers = dao.ReadAll(null, token);
+            var customers = dao.ReadAll(null);
 
             //assert
             Assert.IsNotNull(customers);

@@ -24,8 +24,7 @@ namespace WinApp.Components.HotelView
             Description.Text = hotel.Description;
             StaffedHours.Text = hotel.StaffedHours;
             Stars.Value = hotel.Stars ?? 0d;
-            LocationHref.Text = hotel.LocationHref;
-            HotelHref = hotel.Href;
+            LocationId.Text = hotel.LocationId.ToString();
             Active.IsChecked = hotel.Active;
 
         }
@@ -77,7 +76,7 @@ namespace WinApp.Components.HotelView
                 errors.Add("Please a time when the hotel is staffed");
             }
 
-            if (string.IsNullOrWhiteSpace(LocationHref.Text))
+            if (string.IsNullOrWhiteSpace(LocationId.Text) || !int.TryParse(LocationId.Text, out _))
             {
                 errors.Add("Please a valid location");
             }
