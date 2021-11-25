@@ -22,7 +22,7 @@ namespace DataAccessLayer.SQL
         private static readonly string INSERT_CUSTOMER_RETURN_ID = @"INSERT INTO Customer (Name, Email, Phone,Birthday) " +
                                                                 @"OUTPUT INSERTED.id " +
                                                                 @"VALUES (@Name, @Email, @Phone,@Birthday)";
-        private static readonly string DELETECUSTOMER = "DELETE FROM Customer WHERE id=@id AND Name=@Name AND Phone=@phone AND Email=@Email";
+        private static readonly string DELETECUSTOMER = "DELETE FROM Customer WHERE id=@id";
         private readonly static string UPDATECUSTOMER = "UPDATE Customer SET Name=@name ,Phone=@Phone, Email=@Email WHERE id=@id";
         #endregion
 
