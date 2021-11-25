@@ -85,8 +85,5 @@ namespace API.Controllers
             int res = _dao.Delete(hotel.Map());
             return res == 1 ? Ok("Hotel successfully deleted") : NotFound("Bad data: Hotel could not be deleted, check attributes");
         }
-
-
-
     }
 }

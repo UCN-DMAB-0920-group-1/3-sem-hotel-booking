@@ -1,8 +1,8 @@
 ﻿using API;
 using DataAccessLayer;
+using Enviroment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -47,7 +47,6 @@ namespace Tests
                 End_date = DateTime.Parse("2000-12-12"),
                 Customer_id = 1,
                 Guests = 1,
-                Room_type_id = 2,
             };
             //Act 
             var test = dao.Create(booking);

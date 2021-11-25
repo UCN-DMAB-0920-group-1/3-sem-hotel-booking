@@ -36,17 +36,17 @@ namespace WinApp.Components.Authentication
             loadingBar.Visibility = Visibility.Hidden;
 
             errorLabel.Content = "";
-            
+
         }
 
         private async Task callLogin(string username, string password)
         {
             //Start a new thread, in order to not block STA (UI thread)
-            var res =  await Task<UserDto>.Factory.StartNew(() => 
-            ((IDaoAuthExtension<UserDto>)dao)
-            .login(username, password));
-            
-            if (res == null || string.IsNullOrEmpty(res.Token))
+            var res = await Task<UserDto>.Factory.StartNew(() =>
+           ((IDaoAuthExtension<UserDto>)dao)
+           .login(username, password));
+
+            if (res == null || string.IsNullOrWhiteSpace(res.Token))
             {
                 errorLabel.Content = "Username or password is invalid!";
             }
@@ -56,8 +56,8 @@ namespace WinApp.Components.Authentication
                 Auth.Username = res.name ?? "admin";
                 new MainWindow().Show();
                 Close();
-            } 
-            
+            }
+
         }
 
         private void passwordField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
