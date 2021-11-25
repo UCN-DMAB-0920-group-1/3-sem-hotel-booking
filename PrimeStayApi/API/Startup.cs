@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Models;
 using System;
 using System.Text;
+using Version = Database.Version;
 
 namespace API
 {
@@ -28,7 +29,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext dataContext = new SqlDataContext(ENV.ConnectionString);
+            IDataContext dataContext = new SqlDataContext(ENV.ConnectionStringDev);
             services.AddScoped(s => DaoFactory.Create<HotelEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<LocationEntity>(dataContext));
@@ -100,6 +101,9 @@ namespace API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "PrimeStayApi v1"));
+
+                Version.Drop(ENV.ConnectionStringDev);
+                Version.Upgrade(ENV.ConnectionStringDev);
             }
 
             app.UseHttpsRedirection();
