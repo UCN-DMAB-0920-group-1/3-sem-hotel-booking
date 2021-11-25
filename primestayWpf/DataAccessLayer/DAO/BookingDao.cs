@@ -28,11 +28,12 @@ namespace DataAccessLayer.DAO
         public IEnumerable<BookingDto> ReadAll(BookingDto model)
         {
             string search = "api/booking/";
-            search += ("?CustomerHref=" + model.CustomerHref ?? "");
-            search += ("&RoomTypeHref=" + model.RoomTypeHref ?? "");
+            //search += ("?CustomerHref=" + model.CustomerHref ?? "");
+            //search += ("&RoomTypeHref=" + model.RoomTypeHref ?? "");
 
             IRestClient client = DataContext.Open();
             IRestRequest request = new RestRequest(search, Method.GET, DataFormat.Json);
+            request.AddQueryParametersFromObject(model);
             var res = client.Execute<IEnumerable<BookingDto>>(request).Data;
             return res;
         }
