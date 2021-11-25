@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="HotelsWindow" Height="593" Width="1227">
     <Grid >
-        <ListView MouseDoubleClick="Edit" x:Name="HotelListView" TextElement.FontWeight="Bold"  Margin="0,3,180,-2" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Grid.IsSharedSizeScope="True">
+        <ListView MouseDoubleClick="HotelBookings" x:Name="HotelListView" TextElement.FontWeight="Bold"  Margin="0,3,180,-2" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Grid.IsSharedSizeScope="True">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -56,6 +56,16 @@
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="1"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="View Bookings" Margin="0,0,-176,27" VerticalAlignment="Bottom" Height="38" Click="HotelBookings"  HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Button.RenderTransform>

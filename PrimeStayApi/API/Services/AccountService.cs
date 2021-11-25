@@ -86,12 +86,7 @@ namespace API.Services
                 string passwordHash = HashPassword(password, user.Salt);
                 if (!user.Password.Equals(passwordHash)) return null;
 
-                return user switch
-                {
-                    _ when user.Role.Equals("admin") => CreateAuthenticatedUser(username, "admin"),
-                    _ when user.Role.Equals("user") => CreateAuthenticatedUser(username, "user"),
-                    _ => throw new Exception("Unkown role type")
-                };
+                return CreateAuthenticatedUser(username, user.Role);
             }
         }
 

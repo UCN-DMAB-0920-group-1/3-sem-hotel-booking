@@ -4,6 +4,7 @@ using Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using WinApp.Components.BookingView;
 
 namespace WinApp.Components.HotelView
 {
@@ -13,12 +14,16 @@ namespace WinApp.Components.HotelView
     public partial class HotelMenu : Window
     {
         private readonly IDao<HotelDto> dao;
+        private readonly IDao<RoomTypeDto> roomTypeDao;
+        private readonly IDao<BookingDto> bookingDao;
         private ObservableCollection<Hotel> HotelList { get; set; } = new ObservableCollection<Hotel>();
 
-        public HotelMenu(IDao<HotelDto> _dao)
+        public HotelMenu(IDao<HotelDto> _dao, IDao<RoomTypeDto> _roomTypeDao, IDao<BookingDto> _bookingDao)
         {
             InitializeComponent();
             dao = _dao;
+            roomTypeDao = _roomTypeDao;
+            bookingDao = _bookingDao;
             HotelListView.ItemsSource = HotelList;
             UpdateList();
         }
@@ -39,12 +44,12 @@ namespace WinApp.Components.HotelView
                 if (yesNo ?? false)
                 {
 
-                    Model.Hotel hotel = new()
+                    Hotel hotel = new()
                     {
-                        Href = form.HotelHref,
+                        Id = int.Parse(form.HotelHref),
                         Name = form.Name.Text,
                         Description = form.Description.Text,
-                        LocationHref = form.LocationHref.Text,
+                        LocationId = int.Parse(form.LocationId.Text),
                         StaffedHours = form.StaffedHours.Text,
                         Stars = (int)form.Stars.Value,
                         Active = form.Active.IsChecked,
@@ -88,7 +93,7 @@ namespace WinApp.Components.HotelView
                 {
                     Name = form.Name.Text,
                     Description = form.Description.Text,
-                    LocationHref = form.LocationHref.Text,
+                    LocationId = int.Parse(form.LocationId.Text),
                     StaffedHours = form.StaffedHours.Text,
                     Stars = (int)form.Stars.Value,
                 };
@@ -103,6 +108,20 @@ namespace WinApp.Components.HotelView
             }
 
         }
+        private void HotelBookings(object sender, RoutedEventArgs e)
+        {
+            if (HotelListView.SelectedItem is not Model.Hotel hotel)
+            {
+                MessageBox.Show("Please select a Hotel to view bookings", "ERROR");
+            }
+            else
+            {
+                RoomType search = new() { HotelId = hotel.Id };
+                var roomList = roomTypeDao.ReadAll(search.Map()).ToList().Select(roomType => roomType.Map());
+                new BookingMenu(bookingDao, hotelRooms: roomList).ShowDialog();
+            }
+
+        }
 
         private void UpdateList()
         {
@@ -110,7 +129,5 @@ namespace WinApp.Components.HotelView
             HotelList.Clear();
             hotels.ToList().ForEach(x => HotelList.Add(x));
         }
-
-
     }
 }

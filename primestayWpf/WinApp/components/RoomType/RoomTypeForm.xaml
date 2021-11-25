@@ -12,7 +12,7 @@
         <TextBox HorizontalAlignment="Left" Height="32" Margin="87,62,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Type" TextChanged="Name_TextChanged" />
         <TextBox HorizontalAlignment="Left" Height="32" Margin="87,99,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
         <TextBox HorizontalAlignment="Left" Height="32" Margin="87,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Beds"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="HotelHref"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="87,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="HotelID"/>
         <Slider Margin="87,224,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Rating" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
         <Button Content="Ok" HorizontalAlignment="Left" Margin="173,285,0,0" VerticalAlignment="Top" Click="Button_Click_Ok" Width="62"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="83,285,0,0" VerticalAlignment="Top" Click="Button_Click_Cancel"/>
@@ -21,7 +21,7 @@
         <Label Content="Description: " HorizontalAlignment="Left" Margin="8,107,0,0" VerticalAlignment="Top"/>
         <Label Content="beds: " HorizontalAlignment="Left" Margin="26,144,0,0" VerticalAlignment="Top"/>
         <Label Content="Rating: " HorizontalAlignment="Left" Margin="17,224,0,0" VerticalAlignment="Top"/>
-        <Label Content="HotelHref: " HorizontalAlignment="Left" Margin="13,181,0,0" VerticalAlignment="Top"/>
+        <Label Content="HotelId: " HorizontalAlignment="Left" Margin="13,181,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Active" Content="Active" HorizontalAlignment="Left" Margin="173,253,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

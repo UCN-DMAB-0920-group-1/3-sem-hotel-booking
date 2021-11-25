@@ -11,13 +11,15 @@ namespace DataAccessLayer.SQL
         #region SQL-Queries
         private static readonly string SELECT_BOOKING_BY_ID = @"SELECT * FROM Booking WHERE id = @id";
 
-        private static readonly string SELECT_ALL_BOOKINGS = @"SELECT * FROM Booking WHERE " +
-                                                            "id = ISNULL(@id,id)" +
-                                                            "AND start_date >= ISNULL(@Start_date, Start_date)" +
-                                                            "AND end_date <= ISNULL(@End_date, End_date)" +
-                                                            "AND guests LIKE ISNULL(@guests, guests)" +
-                                                            "AND room_id = ISNULL(@Room_id, Room_id)" +
-                                                            "AND customer_id = ISNULL(@Customer_id, Customer_id)";
+        private static readonly string SELECT_ALL_BOOKINGS = "SELECT booking.id, start_date, end_date, guests, room_id, customer_id, room_type_id , room.id as roomIDDISCARD " +
+                                                             "FROM booking INNER JOIN room ON booking.room_id = room.id WHERE " +
+                                                             "booking.id = ISNULL(@id, booking.id)" +
+                                                             "AND start_date >= ISNULL(@Start_Date, Start_date) " +
+                                                             "AND end_date <= ISNULL(@End_Date, End_date) " +
+                                                             "AND guests LIKE ISNULL(@guests, guests) " +
+                                                             "AND room_id = ISNULL(@room_id, Room_id) " +
+                                                             "AND room_type_id = ISNULL(@room_type_id, Room_type_id) " +
+                                                             "AND customer_id = ISNULL(@customer_id, Customer_id) ";
 
         private static readonly string INSERT_BOOKING_RETURN_ID = @"INSERT INTO Booking (Start_date, End_date, Guests,Room_id,Customer_id) " +
                                                                 @"OUTPUT INSERTED.id " +
@@ -51,7 +53,7 @@ namespace DataAccessLayer.SQL
             using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
             {
                 model.Room_id = transaction.ExecuteScalar<int>(GET_AVAILABLE_ROOM_RANDOM,
-                    new { model.Room_type_id, model.Start_date, model.End_date });
+                    model);
 
                 if (model.Room_id is not null && model.Room_id > 0)
                 {
@@ -75,7 +77,7 @@ namespace DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<BookingEntity>(SELECT_ALL_BOOKINGS,
-                    new { model.Id, model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
+                    model);
 
             };
         }

@@ -44,8 +44,6 @@ namespace WebClient.Controllers
             if (href is null || href.EndsWith("-1")) return View("BookingError");
 
             return View("confirm", _bookingDao.ReadByHref(href).Map());
-
-
         }
 
     }

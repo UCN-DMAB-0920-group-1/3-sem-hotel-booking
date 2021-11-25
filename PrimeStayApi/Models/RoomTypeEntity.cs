@@ -8,7 +8,6 @@
         public int? Rating { get; set; }
         public int? Hotel_Id { get; set; }
         public int? Avaliable { get; set; }
-
         public bool? Active { get; set; }
     }
 }

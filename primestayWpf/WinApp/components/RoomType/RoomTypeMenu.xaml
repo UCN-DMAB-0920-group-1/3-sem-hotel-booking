@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="RoomTypeMenu" Height="593" Width="1122">
     <Grid>
-        <ListView MouseDoubleClick="Rooms" x:Name="RoomTypeListView" TextElement.FontWeight="Bold" Margin="0,3,237,-2">
+        <ListView MouseDoubleClick="RoomBookings" x:Name="RoomTypeListView" TextElement.FontWeight="Bold" Margin="0,3,237,-2">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -61,6 +61,16 @@
             </Button.RenderTransform>
         </Button>
         <Button Content="See Rooms" Margin="0,179,27,0" VerticalAlignment="Top" Height="38" Click="Rooms"  HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="View Bookings" Margin="0,0,-176,204" VerticalAlignment="Bottom" Height="38" Click="RoomBookings"  HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

@@ -10,7 +10,7 @@
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Name" TextChanged="Name_TextChanged" />
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,66,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Description"/>
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="StaffedHours"/>
-        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="LocationHref"/>
+        <TextBox HorizontalAlignment="Left" Height="32" Margin="88,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="LocationId"/>
         <Slider Margin="87,215,0,0" Maximum="5" Minimum="0" Ticks="5" Name="Stars" RenderTransformOrigin="0.5,0.5" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="140"/>
         <Button Content="Ok" HorizontalAlignment="Right" Margin="0,281,20,0" VerticalAlignment="Top" Click="Button_Click_1" Width="71"/>
         <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" Click="Button_Click"/>
@@ -18,7 +18,7 @@
         <Label Content="Description: " HorizontalAlignment="Left" Margin="16,78,0,0" VerticalAlignment="Top"/>
         <Label Content="StaffedHours: " HorizontalAlignment="Left" Margin="8,127,0,0" VerticalAlignment="Top"/>
         <Label Content="Stars: " HorizontalAlignment="Left" Margin="31,211,0,0" VerticalAlignment="Top"/>
-        <Label Content="LocationHref: " HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top"/>
+        <Label Content="LocationId: " HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="Active" Content="Active" HorizontalAlignment="Left" Margin="171,248,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
