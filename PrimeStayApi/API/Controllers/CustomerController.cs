@@ -73,11 +73,13 @@ namespace API.Controllers
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
             {
-                > 0 => Ok(customer),
+                1 => Ok(customer),
+                0 => NotFound(),
                 -1 => BadRequest(),
                 _ => throw new Exception("something went wrong")
             };
