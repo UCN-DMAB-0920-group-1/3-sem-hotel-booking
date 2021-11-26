@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinApp.Components"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="833">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="191*"/>
-            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="hotelCrudBtn" Content="Hotels CRUD" HorizontalAlignment="Left" Margin="184,168,0,0" VerticalAlignment="Top" Height="75" Width="200" Click="hotelCrudBtn_Click"/>
         <Button x:Name="customeCrudBtn" Content="Customer CRUD" HorizontalAlignment="Left" Margin="400,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.544,0.525" Height="75" Width="200" Click="customerCrudBtn_Click"/>
         <Button x:Name="RoomTypeCrudBtn" Content="RoomType CRUD" HorizontalAlignment="Left" Margin="400,270,0,0" VerticalAlignment="Top" Height="75" Width="200" Click="roomTypeBtn_Click">
         </Button>
-        <Label x:Name="usernameLabel" Content="Welcome, {0}" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Width="207"/>
-        <Button x:Name="logoutBtn" Content="Logout" HorizontalAlignment="Left" Margin="653,10,0,0" VerticalAlignment="Top" Width="110" Click="logOutbtn_click"/>
+        <Label x:Name="usernameLabel" Content="Welcome, {0}" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Width="207" Height="24"/>
+        <Button x:Name="logoutBtn" Content="Logout" HorizontalAlignment="Left" Margin="653,10,0,0" VerticalAlignment="Top" Width="110" Click="logOutbtn_click" Height="32"/>
     </Grid>
 
 </Window>

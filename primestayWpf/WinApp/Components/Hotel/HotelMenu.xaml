@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinApp.Components.HotelView"
         mc:Ignorable="d"
-        Title="HotelsWindow" Height="593" Width="1122">
-    <Grid HorizontalAlignment="Left" Width="822" Height="434" VerticalAlignment="Top" Margin="2,0,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="106*"/>
-            <RowDefinition Height="111*"/>
-        </Grid.RowDefinitions>
-        <ListView MouseDoubleClick="HotelBookings" x:Name="HotelListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
+        Title="HotelsWindow" Height="593" Width="1227">
+    <Grid >
+        <ListView MouseDoubleClick="HotelBookings" x:Name="HotelListView" TextElement.FontWeight="Bold"  Margin="0,3,180,-2" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Grid.IsSharedSizeScope="True">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -34,32 +30,32 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Create" Margin="0,0,-177,155" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Create" Margin="0,32,26,0" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-0.5"/>
+                    <RotateTransform Angle="1"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Edit" Margin="0,0,-177,112" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Edit" Margin="0,88,26,0" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Top" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-0.5"/>
+                    <RotateTransform Angle="1"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Delete" Margin="0,0,-177,69" VerticalAlignment="Bottom" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Delete" Margin="0,142,26,0" VerticalAlignment="Top" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="0.5"/>
+                    <RotateTransform Angle="1"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Button.RenderTransform>
