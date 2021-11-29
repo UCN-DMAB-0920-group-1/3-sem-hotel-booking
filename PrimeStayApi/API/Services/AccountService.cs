@@ -64,7 +64,8 @@ namespace API.Services
         private string HashPassword(string password, string salt)
         {
             HashAlgorithm hashAlgorithm = SHA256.Create();
-            return Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(salt.Insert(salt.Length / 2, password))));
+            string saltedPassword = salt.Insert(salt.Length / 2, password);
+            return Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword)));
         }
 
         public Userinfo Authenticate(string username, string password)
