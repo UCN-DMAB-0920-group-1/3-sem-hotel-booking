@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="RoomTypeForm" Height="297" Width="256">
+        Title="Room Form
+        " Height="297" Width="256">
     <Grid Margin="-1,0,1,0">
 
         <TextBox HorizontalAlignment="Left" Height="32" Margin="88,25,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Name="Id" IsReadOnly="True"/>

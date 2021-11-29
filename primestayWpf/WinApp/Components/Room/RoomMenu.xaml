@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinApp.Components.RoomView"
         mc:Ignorable="d"
-        Title="RoomTypeMenu" Height="593" Width="1122">
+        Title="Rooms" Height="593" Width="1122">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="106*"/>
