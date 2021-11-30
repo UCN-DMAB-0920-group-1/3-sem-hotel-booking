@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinApp.Components.HotelView"
         mc:Ignorable="d"
-        Title="HotelsWindow" Height="593" Width="1227">
+        Title="Hotels" Height="593" Width="1227">
     <Grid >
         <ListView MouseDoubleClick="HotelBookings" x:Name="HotelListView" TextElement.FontWeight="Bold"  Margin="0,3,180,-2" HorizontalContentAlignment="Stretch" FlowDirection="LeftToRight" Grid.IsSharedSizeScope="True">
             <ListView.RenderTransform>
