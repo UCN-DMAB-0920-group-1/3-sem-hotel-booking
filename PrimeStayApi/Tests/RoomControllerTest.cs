@@ -1,16 +1,16 @@
 ﻿using API;
 using API.Controllers;
 using DataAccessLayer;
+using DataAccessLayer.DTO;
+using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Enviroment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Version = Database.Version;
-using DataAccessLayer.DTO;
 
 namespace Tests
 {
@@ -62,10 +62,10 @@ namespace Tests
 
             //act 
             var res = controller.Details(roomId);
+            var room = (res.Result as OkObjectResult).Value as RoomDto;
 
             //assert 
-            Assert.AreEqual(res.Result.GetType(), typeof(OkResult));
-            var room = (res.Result as OkObjectResult).Value as RoomDto;
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
 
             Assert.IsNotNull(room);
             Assert.AreEqual(roomId, room.ExtractId());
@@ -109,7 +109,7 @@ namespace Tests
             var res = controller.Details(roomId);
 
             //Assert
-            Assert.AreEqual(res.Result.GetType(), typeof(OkResult));
+            Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
             var room = (res.Result as OkObjectResult).Value as RoomDto;
 
             Assert.IsNotNull(room);

@@ -45,6 +45,7 @@ namespace Tests
             {
                 Start_date = DateTime.Parse("2000-11-11"),
                 End_date = DateTime.Parse("2000-12-12"),
+                Room_type_id = 1,
                 Customer_id = 1,
                 Guests = 1,
             };

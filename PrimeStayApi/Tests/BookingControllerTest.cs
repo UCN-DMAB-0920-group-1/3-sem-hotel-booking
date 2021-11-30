@@ -48,6 +48,7 @@ namespace Tests
             var booking = new BookingEntity()
             {
                 Customer_id = 1,
+                Room_type_id = 1,
                 End_date = DateTime.Parse("2010-11-01"),
                 Start_date = DateTime.Parse("2010-11-02"),
                 Guests = 10,
@@ -74,11 +75,13 @@ namespace Tests
 
             BookingDto booking = new BookingDto()
             {
-                CustomerHref = "api/customer/1",
                 EndDate = DateTime.Now,
                 StartDate = DateTime.Now,
                 Guests = 1,
-                RoomHref = "api/room/1"
+                RoomHref = "api/room/1",
+                RoomTypeHref = "api/roomType/1",
+                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com" },
+
             };
 
             //Act
