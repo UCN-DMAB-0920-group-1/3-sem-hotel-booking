@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="CustomerMenu" Height="477" Width="865">
     <Grid>
+
         <ListView MouseDoubleClick="Bookings" x:Name="CustomerListView" Margin="0,0,217,0">
             <ListView.View>
                 <GridView>

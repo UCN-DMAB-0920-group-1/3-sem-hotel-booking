@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinApp.Components.RoomView"
         mc:Ignorable="d"
-        Title="RoomTypeMenu" Height="593" Width="1122">
-    <Grid HorizontalAlignment="Left" Width="822" Height="434" VerticalAlignment="Top" Margin="2,0,0,0">
+        Title="Rooms" Height="593" Width="1122">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="106*"/>
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
-        <ListView MouseDoubleClick="Edit" x:Name="RoomListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Center" Width="822" RenderTransformOrigin="0.5,0.5" Margin="0,2,0,-2">
+        <ListView MouseDoubleClick="Edit" x:Name="RoomListView" TextElement.FontWeight="Bold" Grid.RowSpan="2" HorizontalAlignment="Left" Width="822" RenderTransformOrigin="0.5,0.5" Margin="-1,2,0,0" VerticalAlignment="Top" Height="575" VerticalContentAlignment="Stretch">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -32,7 +32,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Create" Margin="0,0,-177,157" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Create" Margin="0,23,38,0" Click="Add" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -42,7 +42,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Edit" Margin="0,0,-177,112" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Bottom" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Edit" Margin="0,76,38,0" Click="Edit" HorizontalAlignment="Right" Width="139" Height="38" VerticalAlignment="Top" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -52,7 +52,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Delete" Margin="0,0,-177,69" VerticalAlignment="Bottom" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Delete" Margin="0,126,37,0" VerticalAlignment="Top" Height="38" Click="Delete" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
