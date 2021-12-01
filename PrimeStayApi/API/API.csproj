@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
     <ProjectReference Include="..\Enviroment\Enviroment.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
