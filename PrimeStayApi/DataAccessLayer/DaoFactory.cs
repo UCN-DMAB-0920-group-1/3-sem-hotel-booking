@@ -19,6 +19,7 @@ namespace DataAccessLayer
                 var dao when dao == typeof(RoomEntity) => new RoomDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
                 var dao when dao == typeof(UserEntity) => new UserDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
                 var dao when dao == typeof(CustomerEntity) => new CustomerDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
+                var dao when dao == typeof(PriceEntity) => new PriceDao(dataContext as IDataContext<IDbConnection>) as IDao<T>,
                 _ => null,
             };
         }
