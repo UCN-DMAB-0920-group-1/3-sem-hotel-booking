@@ -20,7 +20,7 @@ namespace API.Controllers
             _dao = dao;
         }
 
-        // GET: BookingController
+        // GET: CustomerController
         [HttpGet]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -31,7 +31,7 @@ namespace API.Controllers
             return customers.Any() ? Ok(customers) : NotFound();
         }
 
-        // GET: api/Booking/5
+        // GET: api/Customer/5
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -41,7 +41,7 @@ namespace API.Controllers
             return _dao.ReadById(id).Map();
         }
 
-        // POST: BookingController/
+        // POST: CustomerController/
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,7 +53,7 @@ namespace API.Controllers
             else return BadRequest(res);
         }
 
-        // PUT: BookingController/Edit/5
+        // PUT: CustomerController/Edit/5
         [HttpPut]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -68,7 +68,7 @@ namespace API.Controllers
             };
         }
 
-        // DELETE: BookingController/Delete/5
+        // DELETE: CustomerController/Delete/5
         [HttpDelete]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]

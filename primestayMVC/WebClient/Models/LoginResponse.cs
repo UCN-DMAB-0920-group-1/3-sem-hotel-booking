@@ -1,9 +1,6 @@
 ﻿using System;
 
-/**
- * Author: Lars Nysom
- */
-namespace API.Models
+namespace WebClient.Models
 {
     public class LoginResponse
     {
@@ -11,4 +8,5 @@ namespace API.Models
         public DateTime Expires { get; internal set; }
         public int? Userid { get; set; }
     }
+
 }

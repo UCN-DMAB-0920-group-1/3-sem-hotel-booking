@@ -8,5 +8,6 @@ namespace Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime? Birthday { get; set; }
+        public int? User_Id { get; set; }
     }
 }

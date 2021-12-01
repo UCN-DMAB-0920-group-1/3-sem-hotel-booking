@@ -25,11 +25,14 @@ namespace API.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IDao<UserEntity> _dao;
+        private readonly IDao<CustomerEntity> customerDao;
 
-        public AccountService(IConfiguration configuration, IDao<UserEntity> dao)
+
+        public AccountService(IConfiguration configuration, IDao<UserEntity> dao, IDao<CustomerEntity> _customerDao)
         {
             _configuration = configuration;
             _dao = dao;
+            customerDao = _customerDao;
         }
 
         public Userinfo Save(string username, string password, string role)
@@ -87,11 +90,11 @@ namespace API.Services
                 string passwordHash = HashPassword(password, user.Salt);
                 if (!user.Password.Equals(passwordHash)) return null;
 
-                return CreateAuthenticatedUser(username, user.Role);
+                return CreateAuthenticatedUser(username, user.Role, user.Id ?? -1);
             }
         }
 
-        private Userinfo CreateAuthenticatedUser(string username, string role)
+        private Userinfo CreateAuthenticatedUser(string username, string role, int id = -1)
         {
             var expires = DateTime.Now.AddDays(1);
 
@@ -101,6 +104,7 @@ namespace API.Services
                 Username = username,
                 Expires = expires,
             };
+            if (id != -1) userInfo.Id = customerDao.ReadAll(new CustomerEntity() { User_Id = id }).FirstOrDefault().Id;
             userInfo.Token = GenerateJwt(userInfo, expires, role);
             return userInfo;
         }

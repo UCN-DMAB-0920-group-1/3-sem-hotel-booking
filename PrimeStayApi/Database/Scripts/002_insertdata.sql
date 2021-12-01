@@ -73,7 +73,7 @@ GO
 INSERT INTO [dbo].[Customer] ([name],[email],[phone],[birthday])
     VALUES 
     ('Mia Afilahk','MiaAfilahk@watersports.com','64623510','1990-01-01'),
-        ('Delete Test','Delete test','Delete Test','1990-01-01')
+        ('Delete Test','Delete test','Delete Test','1990-01-01',3)
 
 GO
 

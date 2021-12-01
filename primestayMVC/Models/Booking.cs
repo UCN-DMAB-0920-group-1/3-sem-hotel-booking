@@ -8,7 +8,7 @@ namespace Models
         public DateTime? EndDate { get; set; }
         public int? Guests { get; set; }
         public string RoomTypeHref { get; set; }
-        public string CustomerHref { get; set; }
+        public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
     }
 }

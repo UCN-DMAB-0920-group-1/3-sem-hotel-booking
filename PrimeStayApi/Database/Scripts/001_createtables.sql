@@ -79,6 +79,7 @@ CREATE TABLE [Customer] (
   [email] VARCHAR(250) NOT NULL,
   [phone] VARCHAR(250) NOT NULL,
   [birthday] datetime NOT NULL,
+  [User] INT,
   PRIMARY KEY ([id])
 )
 GO
@@ -218,3 +219,6 @@ ALTER TABLE [TablePictures] CHECK CONSTRAINT [FK_TablePictures_picture_id]
 
 ALTER TABLE [User] WITH CHECK ADD CONSTRAINT [FK_User_Role_id] FOREIGN KEY([role_id])
 REFERENCES [Role] ([id])
+
+ALTER TABLE [Customer] WITH CHECK ADD CONSTRAINT [FK_Customer_User_id] FOREIGN KEY([user_id])
+REFERENCES [User] ([id])
