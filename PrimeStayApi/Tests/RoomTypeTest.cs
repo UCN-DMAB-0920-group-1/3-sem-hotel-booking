@@ -52,7 +52,7 @@ namespace Tests
             var testRes = dao.CheckAvailability(roomTypeId, startDate, endDate);
             //assert
             Assert.IsNotNull(testRes.Avaliable);
-            Assert.AreEqual(1, testRes.Avaliable);
+            Assert.AreEqual(4, testRes.Avaliable);
         }
 
 

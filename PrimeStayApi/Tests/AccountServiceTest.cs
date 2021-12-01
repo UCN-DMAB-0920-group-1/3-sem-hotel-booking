@@ -55,7 +55,8 @@ namespace Tests
         {
             //Arrange 
             IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, dao, customerDao);
 
             LoginRequest user = new()
             {
@@ -75,7 +76,8 @@ namespace Tests
         {
             //Arrange 
             IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, dao, customerDao);
 
             LoginRequest user = new()
             {
@@ -97,7 +99,8 @@ namespace Tests
         {
             //Arrange 
             IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, dao, customerDao);
 
             LoginRequest user = new()
             {
@@ -120,7 +123,8 @@ namespace Tests
         {
             //Arrange 
             IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, dao, customerDao);
 
             LoginRequest user = new()
             {
@@ -140,7 +144,8 @@ namespace Tests
         {
             //Arrange 
             IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, dao, customerDao);
 
             LoginRequest user = new()
             {
