@@ -65,7 +65,7 @@ INSERT INTO [dbo].[Room] ([Room_number], [Room_Type_id], [notes], [active])
     (4, 8, '',1)
 GO
 
-INSERT INTO [dbo].[Price] ([start_date],[´price],[room_type_id])
+INSERT INTO [dbo].[Price] ([start_date],[price],[room_type_id])
     VALUES 
 
     ('2016-10-10',40000,1),

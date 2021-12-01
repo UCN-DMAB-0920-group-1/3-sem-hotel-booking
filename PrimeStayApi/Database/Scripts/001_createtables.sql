@@ -186,7 +186,7 @@ REFERENCES [Customer] ([id])
 ALTER TABLE [Booking] CHECK CONSTRAINT [FK_Booking_customer_id]
 
 ALTER TABLE [Price] WITH CHECK ADD CONSTRAINT [FK_Price_room_type_id] FOREIGN KEY([room_type_id])
-REFERENCES [Room_type] ([id])
+REFERENCES [RoomType] ([id])
 
 ALTER TABLE [Price] CHECK CONSTRAINT [FK_Price_room_type_id]
 
