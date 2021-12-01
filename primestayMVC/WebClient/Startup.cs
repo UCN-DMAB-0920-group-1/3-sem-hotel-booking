@@ -27,6 +27,7 @@ namespace WebClient
             services.AddScoped(s => DaoFactory.Create<HotelDto>(dataContext));
             services.AddScoped(s => DaoFactory.Create<LocationDto>(dataContext));
             services.AddScoped(s => DaoFactory.Create<BookingDto>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<PriceDto>(dataContext));
 
             services.AddControllersWithViews();
             services.AddSession(options =>

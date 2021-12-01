@@ -12,10 +12,12 @@ namespace WebClient.Controllers
     public class RoomController : Controller
     {
         private readonly IDao<RoomTypeDto> _dao;
+        private readonly IDao<PriceDto> _priceDao;
 
-        public RoomController(IDao<RoomTypeDto> dao)
+        public RoomController(IDao<RoomTypeDto> dao, IDao<PriceDto> priceDao)
         {
             _dao = dao;
+            _priceDao = priceDao;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -26,7 +28,16 @@ namespace WebClient.Controllers
 
         public IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
         {
-            return _dao.ReadAll(new RoomTypeDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
+
+                                //Get to the last number of the href (last index of '/' + 1), then take the rest
+            string idAsString = href[(href.LastIndexOf("/") + 1)..];
+            int hotelId = int.Parse(idAsString);
+
+            var rooms = _dao.ReadAll(new RoomTypeDto() { HotelId = hotelId }).Select(r => r.Map());
+
+            var prices = _priceDao.ReadAll(new PriceDto() { roomTypeId = rooms.First().Id ?? 0});
+
+            return rooms;
         }
 
         public Room GetRoom(string href)

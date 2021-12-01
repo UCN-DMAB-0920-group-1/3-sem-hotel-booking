@@ -63,6 +63,36 @@ namespace DataAccessLayer.DTO
                 HotelId = room.HotelId,
             };
         }
+
+        /*
+         * 
+         * */
+
+        public static Price Map(this PriceDto price)
+        {
+            if (price == null) return null;
+            return new Price()
+            {
+                Id = GetIdFromHref(price.Href),
+                price = price.price,
+                roomTypeId = price.roomTypeId,
+                start_date = price.startDate,
+            };
+        }
+        public static PriceDto Map(this Price price)
+        {
+            if (price == null) return null;
+            return new PriceDto()
+            {
+                Href = GetHrefFromId(typeof(Price),price.Id),
+                price = price.price,
+                roomTypeId = price.roomTypeId,
+                startDate = price.start_date,
+            };
+        }
+        /**
+         * 
+         * */
         public static Location Map(this LocationDto location)
         {
             if (location == null) return null;
