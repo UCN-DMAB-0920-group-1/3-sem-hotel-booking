@@ -1,11 +1,14 @@
-﻿<!DOCTYPE html>
+﻿<script src="~/lib/googlemaps/markerclusterer/dist/index.min.js"></script>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PrimeStay</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head> 
 <body>
 
@@ -35,15 +38,14 @@
         </main>
 
         <footer class="container">
-
             <p>© 2017-2021 PrimeStay, Inc. <a asp-area="" asp-controller="Hotel" asp-action="Privacy">Privacy</a></p>
         </footer>
-
 
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+
         @await RenderSectionAsync("Scripts", required: false)
 
 </body>

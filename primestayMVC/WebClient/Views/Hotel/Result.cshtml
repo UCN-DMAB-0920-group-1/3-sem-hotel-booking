@@ -1,6 +1,5 @@
 ﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 @using Models
 @using Microsoft.AspNetCore.Http;
 @{
@@ -68,6 +67,52 @@
         </div>
     </div>
 </div>
+    <div id="map"></div>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4zN3I-Eg2lRrNrxH6o1EVpVhQNxG-8zI&callback=initMap&v=weekly"
+      async>
+    </script>
+
+<!-- GOOGLE API-->
+<script>
+     var clusterMap;
+     var map;
+     function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 2,
+        center: {lat: 57.0287001523496, lng: 9.995664227619658 },
+      });
+        const infoWindow = new google.maps.InfoWindow({
+            content: "Test",
+        disableAutoPan: true,
+      });
+      // Create an array of alphabetical characters used to label the markers.
+      const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      // Add some markers to the map.
+      var markers = locations.map((position, i) => {
+        const label = labels[i % labels.length];
+        const marker = new google.maps.Marker({
+            position,
+            label,
+        });
+
+        // markers can only be keyboard focusable when they have click listeners
+        // open info window when marker is clicked
+        marker.addListener("click", () => {
+            infoWindow.setContent("HOTEL HERE with label: " + label);
+        infoWindow.open(map, marker);
+        });
+        return marker;
+      });
+        // Add a marker clusterer to manage the markers.
+      clusterMap = new markerClusterer.MarkerClusterer({markers, map});
+    }
+    
+    const locations = [
+    {lat: 57.0287001523496, lng: 9.995664227619658 },
+    {lat: 57.019169952241285, lng: 9.991544354907399 }];
+</script>
 
 @foreach (Hotel item in Model)
 {
@@ -109,4 +154,25 @@
         });
     });
     </script>
+
+    <!-- GOOGLE API -->
+    <script>
+      $(function(){
+        let position = { lat: 57.049836386401445 +  @item.Id, lng: 9.984854069666888 +  @item.Id };
+        let label = "@item.Id";
+        let newMarker = new google.maps.Marker({ position, label });
+        console.log(newMarker);
+
+        // BELOW DOES NOT WORK FOR SOME REASON
+        newMarker.addListener("click", () => {
+          infoWindow.setContent("HOTEL HERE with label: " + @item.Id );
+          infoWindow.open(map, newMarker);
+        });
+        //------------------------------------
+        clusterMap.addMarker(newMarker, true);
+      });
+    </script>
 }
+
+
+
