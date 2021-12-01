@@ -37,6 +37,7 @@ namespace API
             services.AddScoped(s => DaoFactory.Create<RoomEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<UserEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<CustomerEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<PriceEntity>(dataContext));
 
             services.AddCors(options =>
             {

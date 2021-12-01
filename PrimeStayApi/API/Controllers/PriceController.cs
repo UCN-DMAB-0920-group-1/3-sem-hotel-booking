@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,10 +16,9 @@ namespace API.Controllers
     {
         private readonly IDao<PriceEntity> _dao;
 
-        public PriceController(IDao<PriceEntity> bookingDao)
+        public PriceController(IDao<PriceEntity> priceDao)
         {
-            _dao = bookingDao;
- 
+            _dao = priceDao;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace API.Controllers
         {
             try
             {
-                var res = _dao.ReadAll(price.Map()).Select(h => h.Map());
+                var res = _dao.ReadAll(price.Map()).Select(p => p.Map()).ToList();
                 return Ok(res);
 
             }
@@ -37,6 +37,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public ActionResult<PriceDto> details([FromQuery] int id)
         {
             try
@@ -50,7 +51,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> create([FromQuery] PriceDto price)
+        public ActionResult<int> create([FromBody] PriceDto price)
         {
             try
             {

@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.SQL
 {
-    // BaseDao<IDataContext<IDbConnection>>, IDao<PictureEntity>
     internal class PriceDao : BaseDao<IDataContext<IDbConnection>>, IDao<PriceEntity>
     {
         #region SQL-Queries 
-        private static readonly string SELECT_ALL_PRICES = $"SELECT * FROM Price WHERE " +
+        private static readonly string SELECT_ALL_PRICES = $"SELECT * FROM price WHERE " +
                                               $"id=ISNULL(@id,id)" +
                                               $"AND room_type_id = ISNULL(@room_type_id,room_type_id)" +
                                               $"AND price = ISNULL(@price,price)" +
@@ -23,7 +22,7 @@ namespace DataAccessLayer.SQL
         private static readonly string SELECT_PRICE_BY_ID = $"SELECT * FROM price WHERE id=@id";
 
 
-        private readonly static string INSERT_QUERY = "INSERT INTO Price (start_date, price, room_type_id) " +
+        private readonly static string INSERT_QUERY = "INSERT INTO price (start_date, price, room_type_id) " +
                                                     @"OUTPUT INSERTED.id " +
                                                      "VALUES (@start_date, @price, @room_type_id)";
         #endregion
@@ -61,9 +60,9 @@ namespace DataAccessLayer.SQL
             using (IDbConnection connection = DataContext.Open())
             {
                 return connection.Query<PriceEntity>(SELECT_ALL_PRICES, model);
-
             };
         }
+
 
         public PriceEntity ReadById(int id)
         {
