@@ -65,9 +65,23 @@ INSERT INTO [dbo].[Room] ([Room_number], [Room_Type_id], [notes], [active])
     (4, 8, '',1)
 GO
 
-INSERT INTO [dbo].[Price] ([start_date],[end_date],[amount],[room_type_id])
+INSERT INTO [dbo].[Price] ([start_date],[´price],[room_type_id])
     VALUES 
-    ('2010-10-10','2011-10-10',1,1)
+    ('2011-10-10',10000,1),
+    ('2011-10-10',50000,1),
+    ('2011-10-10',96000,1),
+    ('2011-10-10',100000,1),
+    ('2011-10-10',2500000,1),
+    ('2011-10-10',45000000,1)
+GO
+
+CREATE TABLE [Price] (
+  [id] int NOT NULL IDENTITY(1, 1),
+  [start_date] date NOT NULL,
+  [price] int NOT NULL,
+  [room_type_id] int NOT NULL,
+  PRIMARY KEY ([id])
+)
 GO
 
 INSERT INTO [dbo].[Customer] ([name],[email],[phone],[birthday])
