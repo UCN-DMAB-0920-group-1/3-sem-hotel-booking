@@ -29,7 +29,15 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext dataContext = new SqlDataContext(ENV.ConnectionStringDev);
+            var env = Configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT");
+
+            IDataContext dataContext = env switch
+            {
+                var connectionString when env.Equals("Development") => new SqlDataContext(ENV.ConnectionStringDev),
+                var connectionString when env.Equals("Release") => new SqlDataContext(ENV.ConnectionString),
+                _ => null
+            };
+
             services.AddScoped(s => DaoFactory.Create<HotelEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<LocationEntity>(dataContext));
