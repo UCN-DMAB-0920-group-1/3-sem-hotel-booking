@@ -105,6 +105,8 @@ namespace DataAccessLayer.DTO
                 City = location.City,
                 Country = location.Country,
                 ZipCode = location.Zip_code,
+                Lat = location.Lat,
+                Lng = location.Lng,
             };
         }
         public static PictureDto Map(this PictureEntity picture)

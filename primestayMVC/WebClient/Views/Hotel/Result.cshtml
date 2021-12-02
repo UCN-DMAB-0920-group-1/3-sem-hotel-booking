@@ -1,5 +1,4 @@
-﻿
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="~/js/map.js" asp-append-version="true"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @using Models
@@ -75,6 +74,7 @@
         async>
 </script>
 
+
 @foreach (Hotel item in Model)
 {
 
@@ -118,8 +118,8 @@
 
     <!-- GOOGLE API -->
     <script>
-      $(function(){
-        let position = { lat: 57.049836386401445 +  @item.Id, lng: 9.984854069666888 +  @item.Id };
+        $(function () {
+        let position = { lat: Number(@item.Location.Lat), lng: Number(@item.Location.Lng) };
         let label = "@item.Id";
         let newMarker = new google.maps.Marker({ position, label });
 
