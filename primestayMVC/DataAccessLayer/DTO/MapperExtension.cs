@@ -75,9 +75,9 @@ namespace DataAccessLayer.DTO
             return new Price()
             {
                 Id = GetIdFromHref(price.Href),
-                price = price.price,
-                roomTypeId = price.roomTypeId,
-                start_date = price.startDate,
+                Value = price.Value,
+                Room_Type_Id = price.RoomTypeId,
+                Start_Date = price.StartDate,
             };
         }
         public static PriceDto Map(this Price price)
@@ -86,9 +86,9 @@ namespace DataAccessLayer.DTO
             return new PriceDto()
             {
                 Href = GetHrefFromId(typeof(Price),price.Id),
-                price = price.price,
-                roomTypeId = price.roomTypeId,
-                startDate = price.start_date,
+                Value = price.Value,
+                RoomTypeId = price.Room_Type_Id,
+                StartDate = price.Start_Date,
             };
         }
         /**

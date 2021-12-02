@@ -29,7 +29,7 @@ namespace DataAccessLayer.DAO
             
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest($"/api/price", Method.GET, DataFormat.Json);
-            restRequest.AddQueryParameter("roomTypeId", model.roomTypeId.ToString());
+            restRequest.AddQueryParameter("roomTypeId", model.RoomTypeId.ToString());
 
             IRestResponse<IEnumerable<PriceDto>> restResponse = restClient.Get<IEnumerable<PriceDto>>(restRequest);
             var res = restResponse.Data;

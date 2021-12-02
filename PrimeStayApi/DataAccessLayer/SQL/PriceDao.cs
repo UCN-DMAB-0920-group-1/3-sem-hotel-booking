@@ -16,15 +16,15 @@ namespace DataAccessLayer.SQL
         private static readonly string SELECT_ALL_PRICES = $"SELECT * FROM price WHERE " +
                                               $"id=ISNULL(@id,id)" +
                                               $"AND room_type_id = ISNULL(@room_type_id,room_type_id)" +
-                                              $"AND price = ISNULL(@price,price)" +
+                                              $"AND value = ISNULL(@value,value)" +
                                               $"AND start_date = ISNULL(@start_date,start_date)";
 
         private static readonly string SELECT_PRICE_BY_ID = $"SELECT * FROM price WHERE id=@id";
 
 
-        private readonly static string INSERT_QUERY = "INSERT INTO price (start_date, price, room_type_id) " +
+        private readonly static string INSERT_QUERY = "INSERT INTO price (start_date, value, room_type_id) " +
                                                     @"OUTPUT INSERTED.id " +
-                                                     "VALUES (@start_date, @price, @room_type_id)";
+                                                     "VALUES (@start_date, @value, @room_type_id)";
         #endregion
 
         public PriceDao(IDataContext<IDbConnection> context) : base(context)

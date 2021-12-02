@@ -173,9 +173,9 @@ namespace DataAccessLayer.DTO
             return new PriceEntity()
             {
                 Id = price.ExtractId(),
-                price = price.price,
-                room_type_id = price.roomTypeId,
-                start_date = price.startDate,
+                Value = price.Value,
+                Room_Type_Id = price.RoomTypeId,
+                Start_Date = price.StartDate,
 
             };
         }
@@ -184,9 +184,9 @@ namespace DataAccessLayer.DTO
             return new PriceDto()
             {
                 Href = price.ExtractHref(),
-                price = price.price,
-                roomTypeId = price.room_type_id,
-                startDate = price.start_date,
+                Value = price.Value,
+                RoomTypeId = price.Room_Type_Id,
+                StartDate = price.Start_Date,
             };
         }
 

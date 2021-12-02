@@ -38,7 +38,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<PriceDto> details([FromQuery] int id)
+        public ActionResult<PriceDto> Details([FromQuery] int id)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> create([FromBody] PriceDto price)
+        public ActionResult<int> Create([FromBody] PriceDto price)
         {
             try
             {

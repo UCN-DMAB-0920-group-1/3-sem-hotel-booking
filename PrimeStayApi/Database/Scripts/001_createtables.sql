@@ -56,7 +56,7 @@ GO
 CREATE TABLE [Price] (
   [id] int NOT NULL IDENTITY(1, 1),
   [start_date] date NOT NULL,
-  [price] int NOT NULL,
+  [value] int NOT NULL,
   [room_type_id] int NOT NULL,
   PRIMARY KEY ([id])
 )
@@ -138,7 +138,7 @@ CREATE UNIQUE INDEX [UK_Picture_path] ON [Picture] ("path")
 GO
 
 
-CREATE UNIQUE INDEX [Price_start_end] ON [Price] ("start_date", "price", "room_type_id")
+CREATE UNIQUE INDEX [Price_start_end] ON [Price] ("start_date", "value", "room_type_id")
 GO
 
 CREATE UNIQUE INDEX [UK_Location_street_address] ON [Location] ("street_address")
