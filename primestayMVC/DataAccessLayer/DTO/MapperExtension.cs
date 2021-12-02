@@ -104,6 +104,8 @@ namespace DataAccessLayer.DTO
                 City = location.City,
                 Country = location.Country,
                 ZipCode = location.ZipCode,
+                Lat = location.Lat,
+                Lng = location.Lng,
             };
         }
 
@@ -117,6 +119,8 @@ namespace DataAccessLayer.DTO
                 City = location.City,
                 Country = location.Country,
                 ZipCode = location.ZipCode,
+                Lat = location.Lat,
+                Lng = location.Lng,
             };
         }
 

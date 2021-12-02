@@ -68,6 +68,8 @@ CREATE TABLE [Location] (
   [zip_code] VARCHAR(250) NOT NULL,
   [city] VARCHAR(250) NOT NULL,
   [country] VARCHAR(250) NOT NULL,
+  [lat] float,
+  [lng] float,
   PRIMARY KEY ([id])
 )
 GO
