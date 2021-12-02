@@ -35,7 +35,7 @@ namespace WebClient.Controllers
 
             var rooms = _dao.ReadAll(new RoomTypeDto() { HotelId = hotelId }).Select(r => r.Map());
 
-            var prices = _priceDao.ReadAll(new PriceDto() { roomTypeId = rooms.First().Id ?? 0});
+            var prices = _priceDao.ReadAll(new PriceDto() { RoomTypeId = rooms.First().Id ?? 0});
 
             return rooms;
         }

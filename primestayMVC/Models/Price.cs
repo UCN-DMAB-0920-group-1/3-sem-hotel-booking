@@ -8,9 +8,9 @@ namespace Models
 {
     public class Price :BaseModel
     {
-        public int price { get; set; }
-        public DateTime start_date { get; set; }
-        public int roomTypeId { get; set; }
+        public int Value { get; set; }
+        public DateTime Start_Date { get; set; }
+        public int Room_Type_Id { get; set; }
 
     }
 }

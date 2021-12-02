@@ -93,7 +93,7 @@ namespace WebClient.Controllers
 
             for (int i = 0; i < rooms.Count(); i++)
             {
-                rooms[i].price = getPriceOnRoom(rooms[i]);
+                rooms[i].price = GetPriceOnRoom(rooms[i]);
             }
  
             
@@ -102,15 +102,14 @@ namespace WebClient.Controllers
             return rooms;
         }
 
-        private int getPriceOnRoom(Room room)
+        private int GetPriceOnRoom(Room room)
         {
             DateTime now = DateTime.Now;
             var res = _priceDao
-                .ReadAll(new PriceDto() { roomTypeId = room.Id ?? -1 })
-                .Select((p) => p.Map())
-                .Where((p) => p.start_date <= now)
+                .ReadAll(new PriceDto() { RoomTypeId = room.Id ?? -1 })
+                .Where((p) => p.StartDate <= now)
                 .Last()
-                .price;
+                .Value;
 
             return res;
         }

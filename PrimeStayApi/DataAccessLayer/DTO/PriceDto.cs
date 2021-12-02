@@ -8,8 +8,8 @@ namespace DataAccessLayer.DTO
 {
     public class PriceDto : BaseModelDto
     {
-        public DateTime? startDate { get; set; }
-        public int? price { get; set; }
-        public int? roomTypeId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public int? Value { get; set; }
+        public int? RoomTypeId { get; set; }
     }
 }
