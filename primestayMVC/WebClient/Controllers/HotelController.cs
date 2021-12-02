@@ -7,6 +7,7 @@ using WebClient.Models;
 using DataAccessLayer.DTO;
 using DataAccessLayer;
 using Models;
+using System;
 
 namespace WebClient.Controllers
 {
@@ -103,8 +104,13 @@ namespace WebClient.Controllers
 
         private int getPriceOnRoom(Room room)
         {
-            var res = _priceDao.ReadAll(new PriceDto() { roomTypeId = room.Id ?? -1 })
-                .Select((p) => p.Map()).Last().price;
+            DateTime now = DateTime.Now;
+            var res = _priceDao
+                .ReadAll(new PriceDto() { roomTypeId = room.Id ?? -1 })
+                .Select((p) => p.Map())
+                .Where((p) => p.start_date <= now)
+                .Last()
+                .price;
 
             return res;
         }
