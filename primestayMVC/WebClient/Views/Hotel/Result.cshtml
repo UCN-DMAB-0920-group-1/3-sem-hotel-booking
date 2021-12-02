@@ -70,7 +70,7 @@
     </div>
 </div>
 
-    <div id="map"></div>
+<div id="map"></div>
 
 
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
@@ -121,12 +121,14 @@
     <!-- GOOGLE API -->
     <script>
         $(function () {
-        let position = { lat: Number(@item.Location.Lat), lng: Number(@item.Location.Lng) };
+            let lat = Number("@item.Location.Lat".replace(",","."));
+            let lng = Number("@item.Location.Lng".replace(",", "."));
+        let position = { lat: lat, lng: lng };
         let label = "@item.Id";
         let newMarker = new google.maps.Marker({ position, label });
 
-          newMarker.addListener("click", () => {
-          infoWindow.setContent("PRimeStay Hotel with label: " + @item.Id );
+            newMarker.addListener("click", () => {
+                infoWindow.setContent("<div><p>Hotel: @item.Name</p> <p> Address: @item.Location.StreetAddress</p> </div>");
           infoWindow.open(map, newMarker);
           });
 
