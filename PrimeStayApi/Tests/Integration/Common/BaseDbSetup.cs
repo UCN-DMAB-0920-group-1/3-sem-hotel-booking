@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Version = Database.Version;
 
-namespace Tests.Integration
+namespace Tests.Integration.Common
 {
     public class BaseDbSetup
     {

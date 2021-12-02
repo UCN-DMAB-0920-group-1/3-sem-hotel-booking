@@ -10,36 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tests.Integration.Common;
 using Version = Database.Version;
 
-namespace Tests
+namespace Tests.Integration
 {
     [TestClass]
-    public class BookingControllerTest
+    public class BookingControllerIntegrationTest : BaseDbSetup
     {
-        private string connectionString = new ENV().ConnectionStringTest;
-        private static SqlDataContext _dataContext;
-        private static List<Action> _dropDatabaseActions = new();
-
-        [TestInitialize]
-        public void SetUp()
-        {
-            _dataContext = new SqlDataContext(connectionString);
-            Version.Upgrade(connectionString);
-        }
-
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            Parallel.Invoke(_dropDatabaseActions.ToArray());
-        }
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
-        }
-
         [TestMethod]
         public void TestCreateBookingDao()
         {

@@ -28,9 +28,9 @@ namespace Tests.Unit
             Assert.AreEqual(res.Result.GetType(), typeof(OkObjectResult));
             var hotel = (res.Result as OkObjectResult).Value as HotelDto;
 
-            Assert.IsNotNull(hotel);
-            Assert.AreEqual(hotelId, hotel.ExtractId());
-            Assert.IsFalse(string.IsNullOrEmpty(hotel.Name));
+            //Assert.IsNotNull(hotel);
+            //Assert.AreEqual(hotelId, hotel.ExtractId());
+            //Assert.IsFalse(string.IsNullOrEmpty(hotel.Name));
 
             hotel.Should().NotBeNull().And.BeOfType<HotelDto>();
             hotel.ExtractId().Should().NotBeNull().And.Be(hotelId);

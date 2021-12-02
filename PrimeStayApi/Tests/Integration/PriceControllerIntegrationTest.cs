@@ -1,46 +1,19 @@
-﻿using API;
-using API.Controllers;
+﻿using API.Controllers;
 using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Version = Database.Version;
+using Tests.Integration.Common;
 
-namespace Tests
+namespace Tests.Integration
 {
     [TestClass]
-    public class PriceControllerTest
+    public class PriceControllerIntegrationTest : BaseDbSetup
     {
-        private string connectionString = new ENV().ConnectionStringTest;
-        private static SqlDataContext _dataContext;
-        private static List<Action> _dropDatabaseActions = new();
-
-        [TestInitialize]
-        public void SetUp()
-        {
-            _dataContext = new SqlDataContext(connectionString);
-            Version.Upgrade(connectionString);
-        }
-
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            Parallel.Invoke(_dropDatabaseActions.ToArray());
-        }
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
-        }
-
-
         #region DAO
         [TestMethod]
         public void CreatePriceDaoTest()
@@ -58,7 +31,7 @@ namespace Tests
             int id = dao.Create(newPrice);
 
             //Assert
-            Assert.AreEqual(49,id);
+            Assert.AreEqual(49, id);
         }
 
         [TestMethod]
@@ -105,7 +78,6 @@ namespace Tests
             Assert.AreEqual(DateTime.Parse("2017-10-10"), priceEntities.ToList()[1].start_date);
         }
         #endregion
-
 
         #region Controller
         [TestMethod]
