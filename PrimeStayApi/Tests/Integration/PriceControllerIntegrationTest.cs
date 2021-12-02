@@ -22,9 +22,9 @@ namespace Tests.Integration
             var dao = DaoFactory.Create<PriceEntity>(_dataContext);
             PriceEntity newPrice = new PriceEntity()
             {
-                price = 10000,
-                room_type_id = 1,
-                start_date = DateTime.Now,
+                Value = 10000,
+                Room_Type_Id = 1,
+                Start_Date = DateTime.Now,
             };
 
             //Act
@@ -46,9 +46,9 @@ namespace Tests.Integration
 
 
             //Assert
-            Assert.AreEqual(1, price.room_type_id);
-            Assert.AreEqual(DateTime.Parse("2018-10-10"), price.start_date);
-            Assert.AreEqual(50000, price.price);
+            Assert.AreEqual(1, price.Room_Type_Id);
+            Assert.AreEqual(DateTime.Parse("2018-10-10"), price.Start_Date);
+            Assert.AreEqual(50000, price.Value);
         }
 
         [TestMethod]
@@ -56,26 +56,26 @@ namespace Tests.Integration
         {
             //Arrange
             var dao = DaoFactory.Create<PriceEntity>(_dataContext);
-            PriceEntity priceToFind = new PriceEntity()
+            PriceEntity ValueToFind = new PriceEntity()
             {
-                room_type_id = 7,
+                Room_Type_Id = 7,
             };
-            IEnumerable<PriceEntity> priceEntities = null;
+            IEnumerable<PriceEntity> ValueEntities = null;
 
             //Act
-            priceEntities = dao.ReadAll(priceToFind);
+            ValueEntities = dao.ReadAll(ValueToFind);
 
 
 
             //Assert
-            Assert.IsNotNull(priceEntities);
-            Assert.AreEqual(6, priceEntities.Count());
+            Assert.IsNotNull(ValueEntities);
+            Assert.AreEqual(6, ValueEntities.Count());
 
-            Assert.AreEqual(120000, priceEntities.First().price);
-            Assert.AreEqual(DateTime.Parse("2016-10-10"), priceEntities.First().start_date);
+            Assert.AreEqual(120000, ValueEntities.First().Value);
+            Assert.AreEqual(DateTime.Parse("2016-10-10"), ValueEntities.First().Start_Date);
 
-            Assert.AreEqual(140000, priceEntities.ToList()[1].price);
-            Assert.AreEqual(DateTime.Parse("2017-10-10"), priceEntities.ToList()[1].start_date);
+            Assert.AreEqual(140000, ValueEntities.ToList()[1].Value);
+            Assert.AreEqual(DateTime.Parse("2017-10-10"), ValueEntities.ToList()[1].Start_Date);
         }
         #endregion
 
@@ -89,13 +89,13 @@ namespace Tests.Integration
 
             PriceDto newPrice = new PriceDto()
             {
-                price = 10000,
-                roomTypeId = 1,
-                startDate = DateTime.Now,
+                Value = 10000,
+                RoomTypeId = 1,
+                StartDate= DateTime.Now,
             };
 
             //Act
-            var res = controller.create(newPrice);
+            var res = controller.Create(newPrice);
 
             //Assert
             Assert.AreEqual(typeof(OkObjectResult), res.Result.GetType());
@@ -114,15 +114,15 @@ namespace Tests.Integration
             int id = 7;
 
             //Act
-            var res = controller.details(id);
+            var res = controller.Details(id);
 
             //Assert
             Assert.AreEqual(typeof(OkObjectResult), res.Result.GetType());
             var price = (res.Result as OkObjectResult).Value as PriceDto;
 
-            Assert.AreEqual(2, price.roomTypeId);
-            Assert.AreEqual(DateTime.Parse("2016-10-10"), price.startDate);
-            Assert.AreEqual(50000, price.price);
+            Assert.AreEqual(2, price.RoomTypeId);
+            Assert.AreEqual(DateTime.Parse("2016-10-10"), price.StartDate);
+            Assert.AreEqual(50000, price.Value);
         }
 
         [TestMethod]
@@ -132,14 +132,14 @@ namespace Tests.Integration
             var dao = DaoFactory.Create<PriceEntity>(_dataContext);
             PriceController controller = new PriceController(dao);
 
-            PriceDto priceToFind = new PriceDto()
+            PriceDto ValueToFind = new PriceDto()
             {
-                roomTypeId = 7,
+                RoomTypeId = 7,
             };
 
 
             //Act
-            var res = controller.Index(priceToFind);
+            var res = controller.Index(ValueToFind);
 
             //Assert
             Assert.AreEqual(typeof(OkObjectResult), res.Result.GetType());
@@ -148,11 +148,11 @@ namespace Tests.Integration
             Assert.IsNotNull(prices);
             Assert.AreEqual(6, prices.Count());
 
-            Assert.AreEqual(120000, prices.First().price);
-            Assert.AreEqual(DateTime.Parse("2016-10-10"), prices.First().startDate);
+            Assert.AreEqual(120000, prices.First().Value);
+            Assert.AreEqual(DateTime.Parse("2016-10-10"), prices.First().StartDate);
 
-            Assert.AreEqual(140000, prices.ToList()[1].price);
-            Assert.AreEqual(DateTime.Parse("2017-10-10"), prices.ToList()[1].startDate);
+            Assert.AreEqual(140000, prices.ToList()[1].Value);
+            Assert.AreEqual(DateTime.Parse("2017-10-10"), prices.ToList()[1].StartDate);
         }
 
         #endregion
