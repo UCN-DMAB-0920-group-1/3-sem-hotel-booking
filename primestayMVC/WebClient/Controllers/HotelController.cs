@@ -7,6 +7,7 @@ using WebClient.Models;
 using DataAccessLayer.DTO;
 using DataAccessLayer;
 using Models;
+using System;
 
 namespace WebClient.Controllers
 {
@@ -15,12 +16,14 @@ namespace WebClient.Controllers
         private readonly IDao<HotelDto> _HotelDao;
         private readonly IDao<RoomTypeDto> _RoomDao;
         private readonly IDao<LocationDto> _LocationDao;
+        private readonly IDao<PriceDto> _priceDao;
 
-        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomTypeDto> roomDao)
+        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomTypeDto> roomDao, IDao<PriceDto> priceDao)
         {
             _HotelDao = dao;
             _LocationDao = locationDao;
             _RoomDao = roomDao;
+            _priceDao = priceDao;
         }
         public IActionResult Index()
         {
@@ -36,7 +39,7 @@ namespace WebClient.Controllers
             hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
             hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
 
-            hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
+
 
             return View(hotelMatches);
         }
@@ -45,9 +48,10 @@ namespace WebClient.Controllers
         //[Route("Details")]
         public IActionResult Details(string hotelHref)
         {
-            var hotel = GetHotel(hotelHref);
+            Hotel hotel = GetHotel(hotelHref);
             hotel.Location = GetHotelLocation(hotel);
             hotel.rooms = GetAllHotelRoomsForHotel(hotelHref);
+
 
             return View(hotel);
         }
@@ -81,7 +85,33 @@ namespace WebClient.Controllers
 
         private IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
         {
-            return _RoomDao.ReadAll(new RoomTypeDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
+            //Get to the last number of the href (last index of '/' + 1), then take the rest
+            string idAsString = href[(href.LastIndexOf("/") + 1)..];
+            int hotelId = int.Parse(idAsString);
+
+            var rooms = _RoomDao.ReadAll(new RoomTypeDto() { HotelId = hotelId }).Select(r => r.Map()).ToList();
+
+            for (int i = 0; i < rooms.Count(); i++)
+            {
+                rooms[i].price = GetPriceOnRoom(rooms[i]);
+            }
+ 
+            
+
+
+            return rooms;
+        }
+
+        private int GetPriceOnRoom(Room room)
+        {
+            DateTime now = DateTime.Now;
+            var res = _priceDao
+                .ReadAll(new PriceDto() { RoomTypeId = room.Id ?? -1 })
+                .Where((p) => p.StartDate <= now)
+                .Last()
+                .Value;
+
+            return res;
         }
         #endregion
 

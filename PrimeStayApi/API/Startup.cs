@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Models;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace API
 {
@@ -28,7 +29,15 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext dataContext = new SqlDataContext(ENV.ConnectionString);
+            var env = Configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT");
+
+            IDataContext dataContext = env switch
+            {
+                var connectionString when env.Equals("Development") => new SqlDataContext(ENV.ConnectionStringDev),
+                var connectionString when env.Equals("Release") => new SqlDataContext(ENV.ConnectionString),
+                _ => null
+            };
+
             services.AddScoped(s => DaoFactory.Create<HotelEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<LocationEntity>(dataContext));
@@ -37,6 +46,7 @@ namespace API
             services.AddScoped(s => DaoFactory.Create<RoomEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<UserEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<CustomerEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<PriceEntity>(dataContext));
 
             services.AddCors(options =>
             {
@@ -75,7 +85,6 @@ namespace API
                 {
                     { jwtSecurityScheme, Array.Empty<string>() }
                 });
-
             }); // JWT Token
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -86,6 +95,15 @@ namespace API
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:SecretKey"]))
+                    };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            context.Token = context.Request.Cookies["jwt"];
+                            return Task.CompletedTask;
+                        },
                     };
                 });
 
@@ -100,13 +118,15 @@ namespace API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "PrimeStayApi v1"));
+
+                Database.Version.Drop(ENV.ConnectionStringDev);
+                Database.Version.Upgrade(ENV.ConnectionStringDev);
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
-
 
             app.UseAuthentication();
             app.UseAuthorization();

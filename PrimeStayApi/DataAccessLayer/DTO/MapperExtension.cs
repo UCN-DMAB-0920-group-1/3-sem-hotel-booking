@@ -166,6 +166,30 @@ namespace DataAccessLayer.DTO
                 Birthday = customer.Birthday,
             };
         }
+
+
+        public static PriceEntity Map(this PriceDto price)
+        {
+            return new PriceEntity()
+            {
+                Id = price.ExtractId(),
+                Value = price.Value,
+                Room_Type_Id = price.RoomTypeId,
+                Start_Date = price.StartDate,
+
+            };
+        }
+        public static PriceDto Map(this PriceEntity price)
+        {
+            return new PriceDto()
+            {
+                Href = price.ExtractHref(),
+                Value = price.Value,
+                RoomTypeId = price.Room_Type_Id,
+                StartDate = price.Start_Date,
+            };
+        }
+
         #region helperMethods
         public static int? ExtractId(this BaseModelDto dto)
         {
