@@ -2,6 +2,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="~/js/map.js" asp-append-version="true"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @using Models
 @using Microsoft.AspNetCore.Http;
 @{
@@ -16,7 +17,7 @@
 
 @model List<Hotel>
 
-<div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; height: 100%; padding-bottom:50px;">
+<div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; mix-height: 50%; padding-bottom:50px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
         <h1> Find your dream stay!</h1>
     </div>
@@ -69,11 +70,12 @@
         </div>
     </div>
 </div>
-<div id="map"></div>
+
+    <div id="map"></div>
+
+
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4zN3I-Eg2lRrNrxH6o1EVpVhQNxG-8zI&callback=initMap&v=weekly"
-        async>
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4zN3I-Eg2lRrNrxH6o1EVpVhQNxG-8zI&callback=initMap&v=weekly" async></script>
 
 @foreach (Hotel item in Model)
 {
