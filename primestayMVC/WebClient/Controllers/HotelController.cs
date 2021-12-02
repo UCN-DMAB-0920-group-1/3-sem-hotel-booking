@@ -36,7 +36,7 @@ namespace WebClient.Controllers
             if (location is null) location = " ";
             IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
-            hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
+            hotelMatches.AsParallel().ForAll(h => h.Location = GetHotelLocation(h));
             hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
 
 
@@ -95,8 +95,8 @@ namespace WebClient.Controllers
             {
                 rooms[i].price = GetPriceOnRoom(rooms[i]);
             }
- 
-            
+
+
 
 
             return rooms;
