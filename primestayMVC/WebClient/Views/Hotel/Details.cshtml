@@ -78,7 +78,7 @@
                                 <p1 class="card-text" id="avaliable">Avaliable rooms: </p1>
 
                                 <div class="form-group float-right">
-                                    <span class="form-label" style="padding-bottom:10px;">Price: @roomType.price kr/night</span>
+                                    <span class="form-label" style="padding-bottom:10px;">Price: @(@roomType.price / 100) kr/night</span>
                                     <br />
                                     <a asp-controller="Booking" asp-action="Info" asp-all-route-data=@queryParams> <input class="btn btn-primary " type="button" name="order" value="Choose" style="width:150px;" /></a>
                                 </div>

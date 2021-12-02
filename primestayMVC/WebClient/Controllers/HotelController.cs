@@ -7,6 +7,7 @@ using WebClient.Models;
 using DataAccessLayer.DTO;
 using DataAccessLayer;
 using Models;
+using System;
 
 namespace WebClient.Controllers
 {
@@ -88,24 +89,30 @@ namespace WebClient.Controllers
             string idAsString = href[(href.LastIndexOf("/") + 1)..];
             int hotelId = int.Parse(idAsString);
 
-            var rooms = _RoomDao.ReadAll(new RoomTypeDto() { HotelId = hotelId }).Select(r => r.Map());
+            var rooms = _RoomDao.ReadAll(new RoomTypeDto() { HotelId = hotelId }).Select(r => r.Map()).ToList();
 
-            foreach (Room room in rooms)
+            for (int i = 0; i < rooms.Count(); i++)
             {
-                room.price = getPriceOnRoom(room);
+                rooms[i].price = getPriceOnRoom(rooms[i]);
             }
+ 
+            
+
 
             return rooms;
         }
 
         private int getPriceOnRoom(Room room)
         {
-            var res = _priceDao.ReadAll(new PriceDto() { roomTypeId = room.Id ?? -1 })
-                .Select((p) => p.Map());
+            DateTime now = DateTime.Now;
+            var res = _priceDao
+                .ReadAll(new PriceDto() { roomTypeId = room.Id ?? -1 })
+                .Select((p) => p.Map())
+                .Where((p) => p.start_date <= now)
+                .Last()
+                .price;
 
-
-            return 0;
-
+            return res;
         }
         #endregion
 
