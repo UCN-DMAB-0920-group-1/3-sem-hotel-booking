@@ -1,4 +1,4 @@
-﻿INSERT INTO [dbo].[Location] ([street_address],[zip_code],[city],[country])
+﻿INSERT INTO [dbo].[Location] ([street_address],[zip_code],[city],[country], [lat], [lng])
     VALUES
     ('Sysbjærrevej 54','2556','Testborg','Denmark', 57.021915750209956, 9.906814008513377),('Bjernerdsgade 20','6000','Debugstad','Denmark',57.04265378259877, 9.92930700352939)
 GO
