@@ -18,15 +18,21 @@ namespace Tests.Integration
         public void GetAvaliableforRoom()
         {
             //arrange
-            var dao = DaoFactory.Create<RoomTypeEntity>(_dataContext) as IDaoDateExtension<RoomTypeEntity>;
+            var dao = DaoFactory.Create<RoomTypeEntity>(_dataContext);
+            RoomTypeController controller = new RoomTypeController(dao);
             int roomTypeId = 1;
             DateTime startDate = DateTime.Parse("2010-11-10");
             DateTime endDate = DateTime.Parse("2010-11-15");
+
             //act
-            var testRes = dao.CheckAvailability(roomTypeId, startDate, endDate);
+            var testRes = controller.roomAvailibility(roomTypeId, startDate, endDate);
+
             //assert
-            Assert.IsNotNull(testRes.Avaliable);
-            Assert.AreEqual(1, testRes.Avaliable);
+            Assert.AreEqual(typeof(OkObjectResult), testRes.GetType());
+            var roomType = (testRes as OkObjectResult).Value as RoomTypeDto;
+
+            Assert.IsNotNull(roomType.Avaliable);
+            Assert.AreEqual(1, roomType.Avaliable);
         }
 
 
