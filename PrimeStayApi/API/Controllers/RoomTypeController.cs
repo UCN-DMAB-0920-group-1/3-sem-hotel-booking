@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace API.Controllers
@@ -24,7 +25,7 @@ namespace API.Controllers
         {
             try
             {
-                return Ok(_dao.ReadAll(room.Map()).Select(h => h.Map()));
+                return Ok(_dao.ReadAll(room.Map()).Select(roomType => roomType.Map()));
             }
             catch (Exception ex)
             {
@@ -77,14 +78,19 @@ namespace API.Controllers
         // GET: api/roomType/available?roomTypeId={id}&startDate={startDate}&endDate={endDate}
         [HttpGet]
         [Route("available")]
-        public ActionResult<RoomDto> roomAvailibility(int roomTypeId, DateTime startDate, DateTime endDate)
+        public IActionResult roomAvailibility(int roomTypeId, DateTime startDate, DateTime endDate)
         {
             try
             {
-                var res = (_dao as IDaoDateExtension<RoomTypeEntity>).CheckAvailability(roomTypeId, startDate, endDate);
-                return Ok(res.Map());
+                if(_dao is IDaoDateExtension<RoomTypeEntity> extendedDao)
+                {
+                    return Ok(extendedDao.CheckAvailability(roomTypeId, startDate, endDate).Map());
+                } else
+                {
+                    throw new DaoExtensionException($"{_dao.GetType().Name} could not be cast to {typeof(IDaoDateExtension<RoomTypeEntity>).Name}");
+                }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 return NotFound(ex);
             }
