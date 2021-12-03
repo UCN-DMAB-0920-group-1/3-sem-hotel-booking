@@ -78,7 +78,7 @@ namespace DataAccessLayer.SQL
         {
             using (IDbConnection connection = DataContext.Open())
             {
-                return connection.QueryFirst<CustomerEntity>(SELECT_CUSTOMER_BY_ID, new { id });
+                return connection.QueryFirstOrDefault<CustomerEntity>(SELECT_CUSTOMER_BY_ID, new { id });
             }
         }
 
