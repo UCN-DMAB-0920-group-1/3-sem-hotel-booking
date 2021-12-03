@@ -1,0 +1,92 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+          <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://cdn-icons.flaticon.com/png/512/1946/premium/1946788.png?token=exp=1638349741~hmac=b577f8901b2c70600709f27c506481eb" class="img-fluid"
+          alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">  
+          <div class="divider d-flex align-items-center my-4">
+          </div>
+
+          <!-- Username input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="Username" class="form-control form-control-lg"
+              placeholder="Enter a Username" />
+            <label class="form-label">Username</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="Password" class="form-control form-control-lg"
+              placeholder="Enter password" />
+            <label class="form-label">Password</label>
+          </div>
+
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button id="login_btn" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © 2021. All rights reserved.
+    </div>
+    <!-- Copyright -->
+
+    <!-- Right -->
+    <div>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="#!" class="text-white">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </div>
+</section>
+<script>
+   $(document).ready(function() {
+  $("#login_btn").click(function() {
+        var username = $('input#Username').val();
+        var password = $('input#Password').val();
+        var url = 'https://localhost:44312/api/account/login';
+        console.log(username + password + url);
+        
+        axios({
+    method: 'post',
+    url:url,
+    data: {
+      Username: username,
+      Password: password
+    }})
+    .then(res => {
+                     console.log(res.data);
+                     document.cookie = 'CustomerId =' + res.data.userid;
+                     document.cookie = 'jwt =' + res.data.token;
+                     console.log(document.cookie)
+                     window.history.back();
+
+                  })
+     .catch(err => alert("Username/Password incorrect"));
+    })
+   })    
+</script>

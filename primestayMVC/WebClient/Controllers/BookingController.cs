@@ -3,7 +3,6 @@ using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
-using WebClient.Models;
 
 namespace WebClient.Controllers
 {

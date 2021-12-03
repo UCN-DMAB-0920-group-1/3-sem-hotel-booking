@@ -11,5 +11,6 @@ namespace API.Services.Models
         public bool IsAuthenticated { get; set; }
         public DateTime Expires { get; set; }
         public string Token { get; set; }
+        public int? CustomerId { get; set; }
     }
 }
