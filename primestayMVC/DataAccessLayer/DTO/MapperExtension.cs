@@ -1,4 +1,3 @@
-using DataAccessLayer.DTO;
 using Models;
 using System;
 
@@ -85,7 +84,7 @@ namespace DataAccessLayer.DTO
             if (price == null) return null;
             return new PriceDto()
             {
-                Href = GetHrefFromId(typeof(Price),price.Id),
+                Href = GetHrefFromId(typeof(Price), price.Id),
                 Value = price.Value,
                 RoomTypeId = price.Room_Type_Id,
                 StartDate = price.Start_Date,
@@ -132,10 +131,9 @@ namespace DataAccessLayer.DTO
                 Href = booking.Href,
                 EndDate = booking.EndDate,
                 StartDate = booking.StartDate,
-                CustomerHref = booking.CustomerHref,
+                CustomerHref = GetHrefFromId(typeof(Customer), booking.CustomerId),
                 Guests = booking.Guests,
                 RoomTypeHref = booking.RoomTypeHref,
-                Customer = booking.Customer.Map(),
             };
         }
 
@@ -146,12 +144,11 @@ namespace DataAccessLayer.DTO
             {
                 Id = booking.ExtractId(),
                 Href = booking.Href,
-                CustomerHref = booking.CustomerHref,
+                CustomerId = GetIdFromHref(booking.CustomerHref),
                 EndDate = booking.EndDate,
                 StartDate = booking.StartDate,
                 Guests = booking.Guests,
                 RoomTypeHref = booking.RoomTypeHref,
-                Customer = booking.Customer.Map(),
 
 
             };

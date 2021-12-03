@@ -80,7 +80,7 @@
     }})
     .then(res => {
                      console.log(res.data);
-                     document.cookie = 'CustomerId =' + res.data.userid;
+                     document.cookie = 'customerId =' + res.data.customerId;
                      document.cookie = 'jwt =' + res.data.token;
                      console.log(document.cookie)
                      window.history.back();

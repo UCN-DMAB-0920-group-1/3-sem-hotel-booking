@@ -1,0 +1,72 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+@model (IEnumerable<Models.Booking> bookings, Customer customer);
+
+<div class="container">
+    <h4 class="m-t-sm">@Model.customer.Name</h4>
+    <p class="m-b-sm">@Model.customer.Email</p>
+    <h1>BookingHistory</h1>
+    <div id="logout_btn" class="btn-danger">Log Out</div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Guests
+            </th>
+            <th>
+                RoomTypeHref
+            </th>
+            <th>
+                CustomerId
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.bookings) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guests)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomTypeHref)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+  <script>
+   $(document).ready(function() {
+        $("#logout_btn").click(function() {
+                     document.cookie = 'customerId = ';
+                     document.cookie = 'jwt = ';
+                     console.log(document.cookie);
+                     alert("you have been logged out");
+                     window.history.back();
+        })
+   })
+</script>

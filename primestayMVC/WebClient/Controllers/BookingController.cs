@@ -17,25 +17,19 @@ namespace WebClient.Controllers
 
         public IActionResult Info()
         {
-            return View();
+            bool loggedIn = int.TryParse(Request.Cookies["customerId"], out int customer_id);
+            if (loggedIn && customer_id > 0) return Create(customer_id);
+            return View("../Customer/Login");
         }
-        public IActionResult Create()
+        public IActionResult Create(int customer_id)
         {
-            Customer customer = new()
-            {
-                Name = Request.Form["name"],
-                Email = Request.Form["email"],
-                Phone = Request.Form["phone"],
-                Birthday = DateTime.Parse(Request.Form["Birthday"] + "Z"),
-            };
             Booking booking = new()
             {
                 StartDate = DateTime.Parse(Request.Query["startDate"] + "Z"),
                 EndDate = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
                 RoomTypeHref = Request.Query["roomType"],
-                Customer = customer,
-
+                CustomerId = customer_id,
 
             };
 
@@ -44,6 +38,7 @@ namespace WebClient.Controllers
 
             return View("confirm", _bookingDao.ReadByHref(href).Map());
         }
+
 
     }
 }
