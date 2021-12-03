@@ -15,7 +15,7 @@ namespace DataAccessLayer.DTO
                 Description = hotel.Description,
                 StaffedHours = hotel.Staffed_hours,
                 Stars = hotel.Stars,
-                LocationHref = @$"api/Location/{hotel.Location_Id}", // TODO use helper method GetHrefFromId()
+                LocationHref = GetHrefFromId(typeof(LocationEntity), hotel.Location_Id),
                 Active = hotel.Active,
             };
         }
@@ -58,9 +58,9 @@ namespace DataAccessLayer.DTO
                 StartDate = booking.Start_date,
                 EndDate = booking.End_date,
                 Guests = booking.Guests,
-                RoomHref = @$"api/Room/{booking.Room_id}",
-                RoomTypeHref = $@"api/RoomType/{booking.Room_type_id}",
-                CustomerHref = @$"api/Customer/{booking.Customer_id}" // TODO use helper method GetHrefFromId()
+                RoomHref = GetHrefFromId(typeof(RoomEntity), booking.Room_id),
+                RoomTypeHref = GetHrefFromId(typeof(RoomTypeEntity), booking.Room_type_id),
+                CustomerHref = GetHrefFromId(typeof(CustomerEntity), booking.Customer_id),
             };
         }
 
@@ -114,8 +114,8 @@ namespace DataAccessLayer.DTO
             return new PictureDto()
             {
                 Href = picture.ExtractHref(),
-                HotelHref = picture.Type == "hotel" ? "api/hotel/" + picture.Hotel_id : null,
-                RoomHref = picture.Type == "room" ? "api/room/" + picture.Room_id : null,
+                HotelHref = picture.Type.Equals("hotel") ? GetHrefFromId(typeof(HotelEntity), picture.Hotel_id) : null,
+                RoomHref = picture.Type.Equals("room") ? GetHrefFromId(typeof(RoomEntity), picture.Room_id) : null,
                 Path = picture.Path,
                 Description = picture.Description,
                 Title = picture.Title
@@ -127,7 +127,7 @@ namespace DataAccessLayer.DTO
             return new RoomDto()
             {
                 Href = room.ExtractHref(),
-                RoomTypeHref = $"api/roomType/{room.Room_type_id}",
+                RoomTypeHref = GetHrefFromId(typeof(RoomTypeEntity), room.Room_type_id),
                 Room_number = room.Room_number,
                 Notes = room.Notes,
                 Active = room.Active ?? false,
@@ -198,15 +198,14 @@ namespace DataAccessLayer.DTO
             return GetIdFromHref(dto.Href);
         }
 
-        public static string ExtractHref(this BaseEntity model)
+        public static string? ExtractHref(this BaseEntity model)
         {
-
             return GetHrefFromId(model.GetType(), model.Id);
         }
 
-        public static string GetHrefFromId(Type type, int? id)
+        public static string? GetHrefFromId(Type type, int? id)
         {
-            if (id == null) return null;
+            if (id is null) return null;
             string typeName = type.Name.Substring(0, type.Name.IndexOf("Entity"));
             return $@"api/{typeName}/{id}";
         }
@@ -214,8 +213,9 @@ namespace DataAccessLayer.DTO
         public static int? GetIdFromHref(string href)
         {
             if (string.IsNullOrEmpty(href)) return null;
-            _ = int.TryParse(href[(href.LastIndexOf("/") + 1)..], out int result);
-            return result;
+            int idIndex = href.LastIndexOf("/") + 1;
+            bool res = int.TryParse(href[idIndex..], out int result);
+            return res ? result : throw new HrefFormatException($"Parse error: could not find ID in Href at {idIndex}");
         }
         #endregion
     }
