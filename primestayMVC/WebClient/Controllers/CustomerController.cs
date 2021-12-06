@@ -3,6 +3,7 @@ using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System.Linq;
+using WebClient.Service;
 
 namespace WebClient.Controllers
 {
@@ -21,11 +22,17 @@ namespace WebClient.Controllers
         }
         public IActionResult BookingHistory()
         {
-            bool loggedIn = int.TryParse(Request.Cookies["customerId"], out int customer_id);
-            //Send to  "you have to log in to view this page" page
-            if (!loggedIn || customer_id < 1) return View("Login");
-            var bookings = _bookingDao.ReadAll(new Booking() { CustomerId = customer_id }.Map()).Select(b => b.Map());
-            var customer = _customerDao.ReadByHref($"api/Customer/{customer_id}").Map();
+            string token = Request.Cookies["jwt"];
+            if (!JwtMethods.HasToken(token)) return View("Login");
+
+            int customerId = int.Parse(JwtMethods.GetCustomerIdFromJwtToken(token));
+            var bookings = _bookingDao.ReadAll(new Booking()
+            {
+                CustomerId = customerId,
+            }
+            .Map()).Select(b => b.Map());
+
+            var customer = _customerDao.ReadByHref($"api/Customer/{customerId}").Map();
             return View((bookings, customer));
 
         }
