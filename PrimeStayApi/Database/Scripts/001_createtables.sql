@@ -80,7 +80,7 @@ CREATE TABLE [Customer] (
   [email] VARCHAR(250) NOT NULL,
   [phone] VARCHAR(250) NOT NULL,
   [birthday] datetime NOT NULL,
-  [user_id] VARCHAR(250),
+  [user_id] int NOT NULL
   PRIMARY KEY ([id])
 )
 GO
