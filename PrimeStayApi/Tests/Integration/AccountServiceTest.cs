@@ -26,8 +26,9 @@ namespace Tests.Integration
         public void AuthenticationFailTest()
         {
             //Arrange 
-            IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<UserEntity> userDao = DaoFactory.Create<UserEntity>(_dataContext);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, userDao, customerDao);
 
             LoginRequest user = new()
             {
@@ -46,8 +47,9 @@ namespace Tests.Integration
         public void AuthenticationSuccessTest()
         {
             //Arrange 
-            IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<UserEntity> userDao = DaoFactory.Create<UserEntity>(_dataContext);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, userDao, customerDao);
 
             LoginRequest user = new()
             {
@@ -68,8 +70,9 @@ namespace Tests.Integration
         public void UserRegisterSuccessTest()
         {
             //Arrange 
-            IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<UserEntity> userDao = DaoFactory.Create<UserEntity>(_dataContext);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, userDao, customerDao);
 
             LoginRequest user = new()
             {
@@ -91,8 +94,9 @@ namespace Tests.Integration
         public void UserRegisterFailTest()
         {
             //Arrange 
-            IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<UserEntity> userDao = DaoFactory.Create<UserEntity>(_dataContext);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, userDao, customerDao);
 
             LoginRequest user = new()
             {
@@ -111,8 +115,9 @@ namespace Tests.Integration
         public void UserRegisterRoleFailTest()
         {
             //Arrange 
-            IDao<UserEntity> dao = DaoFactory.Create<UserEntity>(_dataContext);
-            IAccountService accountService = new AccountService(_conf, dao);
+            IDao<UserEntity> userDao = DaoFactory.Create<UserEntity>(_dataContext);
+            IDao<CustomerEntity> customerDao = DaoFactory.Create<CustomerEntity>(_dataContext);
+            IAccountService accountService = new AccountService(_conf, userDao, customerDao);
 
             LoginRequest user = new()
             {

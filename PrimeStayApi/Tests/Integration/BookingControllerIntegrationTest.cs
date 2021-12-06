@@ -58,7 +58,7 @@ namespace Tests.Integration
                 Guests = 1,
                 RoomHref = "api/room/1",
                 RoomTypeHref = "api/roomType/1",
-                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com" },
+                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com", Href = "api/customer/1" },
 
             };
 

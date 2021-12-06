@@ -48,19 +48,6 @@ namespace API.Controllers
         [HttpPost]
         public ActionResult Create(BookingDto booking)
         {
-            int newCustomerId = 0;
-            var matches = _customerDao.ReadAll(new CustomerEntity() { Email = booking.Customer.Email });
-            bool isNewCustomer = !matches.Any();
-
-            if (isNewCustomer)
-            {
-                newCustomerId = _customerDao.Create(booking.Customer.Map());
-                booking.CustomerHref = "api/Customer/" + newCustomerId;
-            }
-            else
-            {
-                booking.CustomerHref = matches.First().ExtractHref();
-            }
 
             int id = _dao.Create(booking.Map());
 
@@ -71,7 +58,6 @@ namespace API.Controllers
             }
             else
             {
-                if (isNewCustomer) _customerDao.Delete(new CustomerEntity() { Id = newCustomerId });
                 return BadRequest();
             }
         }
