@@ -34,7 +34,6 @@ namespace WebClient.Controllers
 
             var customer = _customerDao.ReadByHref($"api/Customer/{customerId}").Map();
             return View((bookings, customer));
-
         }
 
     }

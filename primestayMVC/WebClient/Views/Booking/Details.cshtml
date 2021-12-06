@@ -1,0 +1,21 @@
+﻿@using DataAccessLayer.DTO;
+@using Models;
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+@model Booking;
+<div class="container">
+    <div class="card" style="width: 18rem; text-align: center">
+        <div class="card-header">
+            Booking number:
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Number of people: @Model.Guests</li>
+            <li class="list-group-item">Start Date: @Model.StartDate.Value.ToShortDateString()</li>
+            <li class="list-group-item">End Date: @Model.EndDate.Value.ToShortDateString()</li>
+
+        </ul>
+
+    </div>
+</div>

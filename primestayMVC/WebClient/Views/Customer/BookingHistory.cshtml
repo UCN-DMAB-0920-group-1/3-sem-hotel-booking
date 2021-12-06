@@ -33,42 +33,45 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.bookings) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Guests)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomTypeHref)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
-            </td>
-            <td>
-            <td>
-                @Html.ActionLink("Details","Details",  new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.bookings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guests)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomTypeHref)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerId)
+                </td>
+                <td>
+                <td>
+                    <a asp-controller="Booking" asp-action="Details" asp-route-bookingHref="@item.Href">
+                        <input class="btn btn-primary " type="button" name="Details" value="Details" style="width:150px;" />
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
 
-  <script>
-   $(document).ready(function() {
-        $("#logout_btn").click(function() {
-                     document.cookie = 'customerId = ';
-                     document.cookie = 'jwt = ';
-                     document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                     console.log(document.cookie);
-                     alert("you have been logged out");
-                     window.history.back();
+<script>
+    $(document).ready(function () {
+        $("#logout_btn").click(function () {
+            document.cookie = 'customerId = ';
+            document.cookie = 'jwt = ';
+            document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            console.log(document.cookie);
+            alert("you have been logged out");
+            window.history.back();
         })
-   })
+    })
 </script>

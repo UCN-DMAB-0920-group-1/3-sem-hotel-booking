@@ -40,6 +40,11 @@ namespace WebClient.Controllers
             return View("confirm", _bookingDao.ReadByHref(href).Map());
         }
 
+        public IActionResult Details(string bookingHref)
+        {
+            var booking = _bookingDao.ReadByHref(bookingHref).Map();
+            return View(booking);
+        }
 
     }
 }
