@@ -32,13 +32,16 @@ namespace Tests.Integration
             var customer = new CustomerEntity()
             {
                 Name = "Test",
-                Email = "Test",
+                Email = "Test@example.com",
                 Phone = "12345678",
                 Birthday = DateTime.Parse("2001-09-01"),
+                User_id = 1,
             };
             CustomerController customerCtrl = new CustomerController(DaoFactory.Create<CustomerEntity>(_dataContext));
+
             //Act
             var res = customerCtrl.Create(customer.Map());
+
             //Assert
             Assert.IsNotNull(res);
             Assert.IsInstanceOfType(res, typeof(CreatedResult));
