@@ -9,7 +9,9 @@ namespace DataAccessLayer.SQL
     internal class BookingDao : BaseDao<IDataContext<IDbConnection>>, IDao<BookingEntity>
     {
         #region SQL-Queries
-        private static readonly string SELECT_BOOKING_BY_ID = @"SELECT * FROM Booking WHERE id = @id";
+        private static readonly string SELECT_BOOKING_BY_ID = @"SELECT booking.id, start_date, end_date, guests, room_id, customer_id, room_type_id , room.id as roomIDDISCARD " +
+                                                             "FROM booking INNER JOIN room ON booking.room_id = room.id WHERE " +
+                                                             "booking.id = ISNULL(@id, booking.id)";
 
         private static readonly string SELECT_ALL_BOOKINGS = "SELECT booking.id, start_date, end_date, guests, room_id, customer_id, room_type_id , room.id as roomIDDISCARD " +
                                                              "FROM booking INNER JOIN room ON booking.room_id = room.id WHERE " +

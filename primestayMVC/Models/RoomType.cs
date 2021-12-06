@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    public class Room : BaseModel
+    public class RoomType : BaseModel
     {
         public string Type { get; set; }
         public int? Avaliable { get; set; }

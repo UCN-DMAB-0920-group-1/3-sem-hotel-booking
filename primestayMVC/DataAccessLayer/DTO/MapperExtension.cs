@@ -34,10 +34,10 @@ namespace DataAccessLayer.DTO
             };
         }
 
-        public static Room Map(this RoomTypeDto room)
+        public static RoomType Map(this RoomTypeDto room)
         {
             if (room == null) return null;
-            return new Room()
+            return new RoomType()
             {
                 Id = GetIdFromHref(room.Href),
                 Href = room.Href,
@@ -46,21 +46,21 @@ namespace DataAccessLayer.DTO
                 Beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                HotelId = room.HotelId,
+                HotelId = GetIdFromHref(room.HotelHref),
             };
         }
-        public static RoomTypeDto Map(this Room room)
+        public static RoomTypeDto Map(this RoomType room)
         {
             if (room == null) return null;
             return new RoomTypeDto()
             {
-                Href = GetHrefFromId(typeof(Room), room.Id),
+                Href = GetHrefFromId(typeof(RoomType), room.Id),
                 Type = room.Type,
                 Avaliable = room.Avaliable,
                 Beds = room.Beds,
                 Description = room.Description,
                 Rating = room.Rating,
-                HotelId = room.HotelId,
+                HotelHref = GetHrefFromId(typeof(RoomType), room.HotelId),
             };
         }
 
@@ -133,7 +133,7 @@ namespace DataAccessLayer.DTO
                 StartDate = booking.StartDate,
                 CustomerHref = GetHrefFromId(typeof(Customer), booking.CustomerId),
                 Guests = booking.Guests,
-                RoomTypeHref = booking.RoomTypeHref,
+                RoomTypeHref = GetHrefFromId(typeof(Booking), booking.RoomTypeId),
             };
         }
 
@@ -148,7 +148,7 @@ namespace DataAccessLayer.DTO
                 EndDate = booking.EndDate,
                 StartDate = booking.StartDate,
                 Guests = booking.Guests,
-                RoomTypeHref = booking.RoomTypeHref,
+                RoomTypeId = GetIdFromHref(booking.RoomTypeHref),
 
 
             };
