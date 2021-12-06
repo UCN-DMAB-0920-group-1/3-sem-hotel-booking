@@ -3,6 +3,7 @@ using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
+using WebClient.Service;
 
 namespace WebClient.Controllers
 {
@@ -17,19 +18,19 @@ namespace WebClient.Controllers
 
         public IActionResult Info()
         {
-            bool loggedIn = int.TryParse(Request.Cookies["customerId"], out int customer_id);
-            if (!loggedIn || customer_id < 1) return View("../Customer/Login");
-            return Create(customer_id);
+            string jwt = Request.Cookies["jwt"];
+            return JwtMethods.HasToken(jwt) ? Create(jwt) : View("../Customer/Login");
         }
-        public IActionResult Create(int customer_id)
+        public IActionResult Create(string jwt)
         {
+            string customerIdAsString = JwtMethods.GetCustomerIdFromJwtToken(jwt);
             Booking booking = new()
             {
                 StartDate = DateTime.Parse(Request.Query["startDate"] + "Z"),
                 EndDate = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
                 RoomTypeHref = Request.Query["roomType"],
-                CustomerId = customer_id,
+                CustomerId = int.Parse(customerIdAsString),
 
             };
 

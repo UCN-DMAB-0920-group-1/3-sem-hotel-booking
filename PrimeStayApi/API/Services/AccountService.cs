@@ -112,9 +112,10 @@ namespace API.Services
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userinfo.Username),
                 new Claim(JwtRegisteredClaimNames.Iss, _configuration["JwtSettings:Issuer"]),
                 new Claim(JwtRegisteredClaimNames.Exp, expires.ToString()),
+                new Claim(JwtRegisteredClaimNames.Name, userinfo.Username),
+                new Claim("customerId", userinfo.CustomerId.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, "Token");
