@@ -61,7 +61,7 @@
         <div class="container">
             <h1>Rooms</h1>
         </div>
-        @foreach (Room roomType in Model.rooms)
+        @foreach (RoomType roomType in Model.rooms)
         {
             queryParams["roomType"] = roomType.Href;
             <div class="container" style="padding-top: 30px; padding-bottom: 30px;" id="@roomType.Id">

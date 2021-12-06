@@ -26,21 +26,16 @@ namespace WebClient.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
+        public IEnumerable<RoomType> GetAllHotelRoomsForHotel(string href)
         {
+            var rooms = _dao.ReadAll(new RoomTypeDto() { HotelHref = href }).Select(r => r.Map());
 
-                                //Get to the last number of the href (last index of '/' + 1), then take the rest
-            string idAsString = href[(href.LastIndexOf("/") + 1)..];
-            int hotelId = int.Parse(idAsString);
-
-            var rooms = _dao.ReadAll(new RoomTypeDto() { HotelId = hotelId }).Select(r => r.Map());
-
-            var prices = _priceDao.ReadAll(new PriceDto() { RoomTypeId = rooms.First().Id ?? 0});
+            var prices = _priceDao.ReadAll(new PriceDto() { RoomTypeId = rooms.First().Id ?? 0 });
 
             return rooms;
         }
 
-        public Room GetRoom(string href)
+        public RoomType GetRoom(string href)
         {
             //TODO Make Pretty
             return _dao.ReadByHref(href).Map();

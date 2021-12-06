@@ -10,9 +10,13 @@ namespace WebClient.Controllers
     public class BookingController : Controller
     {
         private readonly IDao<BookingDto> _bookingDao;
-        public BookingController(IDao<BookingDto> bookingDao)
+        private readonly IDao<HotelDto> _hotelDao;
+        private readonly IDao<RoomTypeDto> _roomTypeDao;
+        public BookingController(IDao<BookingDto> bookingDao, IDao<HotelDto> hotelDao, IDao<RoomTypeDto> roomTypeDao)
         {
             _bookingDao = bookingDao;
+            _hotelDao = hotelDao;
+            _roomTypeDao = roomTypeDao;
 
         }
 
@@ -29,7 +33,7 @@ namespace WebClient.Controllers
                 StartDate = DateTime.Parse(Request.Query["startDate"] + "Z"),
                 EndDate = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
-                RoomTypeHref = Request.Query["roomType"],
+                RoomTypeId = int.Parse(Request.Query["roomType"]),
                 CustomerId = int.Parse(customerIdAsString),
 
             };
@@ -43,7 +47,11 @@ namespace WebClient.Controllers
         public IActionResult Details(string bookingHref)
         {
             var booking = _bookingDao.ReadByHref(bookingHref).Map();
-            return View(booking);
+            var roomTypeDTO = _roomTypeDao.ReadByHref($"api/roomType/{booking.RoomTypeId}");
+            var roomType = roomTypeDTO.Map();
+            var hotel = _hotelDao.ReadByHref(roomTypeDTO.HotelHref).Map();
+
+            return View((booking, roomType, hotel));
         }
 
     }

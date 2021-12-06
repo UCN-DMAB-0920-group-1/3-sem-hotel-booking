@@ -4,16 +4,22 @@
 @{
     ViewData["Title"] = "Order Details";
 }
-@model Booking;
+@model (Booking booking, RoomType roomType, Hotel hotel)
 <div class="container">
-    <div class="card" style="width: 18rem; text-align: center">
+    <div class="card" style="width: 18rem; text-align: center; ">
         <div class="card-header">
             Booking number:
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Number of people: @Model.Guests</li>
-            <li class="list-group-item">Start Date: @Model.StartDate.Value.ToShortDateString()</li>
-            <li class="list-group-item">End Date: @Model.EndDate.Value.ToShortDateString()</li>
+            <li class="list-group-item">Number of people: @Model.booking.Guests</li>
+            <li class="list-group-item">Start Date: @Model.booking.StartDate.Value.ToShortDateString()</li>
+            <li class="list-group-item">End Date: @Model.booking.EndDate.Value.ToShortDateString()</li>
+            <li class="list-group-item">Hotel: @Model.hotel.Name</li>
+            <li class="list-group-item">stars: @Model.hotel.Stars</li>
+            <li class="list-group-item">Check in hours: @Model.hotel.StaffedHours</li>
+            <li class="list-group-item">Roomtype: @Model.roomType.Type</li>
+            <li class="list-group-item">room rating: @Model.roomType.Rating</li>
+
 
         </ul>
 
