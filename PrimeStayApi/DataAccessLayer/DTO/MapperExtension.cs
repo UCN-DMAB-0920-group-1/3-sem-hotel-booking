@@ -151,6 +151,7 @@ namespace DataAccessLayer.DTO
             {
                 Id = customer.ExtractId(),
                 Name = customer.Name,
+                User_id = customer.user_id,
                 Email = customer.Email,
                 Phone = customer.Phone,
                 Birthday = customer.Birthday,
@@ -162,6 +163,7 @@ namespace DataAccessLayer.DTO
             return new CustomerDto()
             {
                 Href = customer.ExtractHref(),
+                user_id = customer.User_id!.Value,
                 Name = customer.Name,
                 Email = customer.Email,
                 Phone = customer.Phone,

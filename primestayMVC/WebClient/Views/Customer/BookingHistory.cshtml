@@ -37,10 +37,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+                    @item.StartDate.Value.ToShortDateString()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
+                    @item.EndDate.Value.ToShortDateString()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Guests)
