@@ -18,8 +18,8 @@ namespace WebClient.Controllers
         public IActionResult Info()
         {
             bool loggedIn = int.TryParse(Request.Cookies["customerId"], out int customer_id);
-            if (loggedIn && customer_id > 0) return Create(customer_id);
-            return View("../Customer/Login");
+            if (!loggedIn || customer_id < 1) return View("../Customer/Login");
+            return Create(customer_id);
         }
         public IActionResult Create(int customer_id)
         {

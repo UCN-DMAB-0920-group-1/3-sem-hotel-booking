@@ -29,5 +29,6 @@ namespace WebClient.Controllers
             return View((bookings, customer));
 
         }
+
     }
 }
