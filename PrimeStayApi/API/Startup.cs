@@ -1,6 +1,6 @@
 using API.Services;
 using DataAccessLayer;
-using Enviroment;
+using Environment;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
