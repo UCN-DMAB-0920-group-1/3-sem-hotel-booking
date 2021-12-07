@@ -25,11 +25,13 @@ namespace API.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IDao<UserEntity> _dao;
+        private readonly IDao<CustomerEntity> _customerDao;
 
-        public AccountService(IConfiguration configuration, IDao<UserEntity> dao)
+        public AccountService(IConfiguration configuration, IDao<UserEntity> dao, IDao<CustomerEntity> customerDao)
         {
             _configuration = configuration;
             _dao = dao;
+            _customerDao = customerDao;
         }
 
         public Userinfo Save(string username, string password, string role)
@@ -87,11 +89,11 @@ namespace API.Services
                 string passwordHash = HashPassword(password, user.Salt);
                 if (!user.Password.Equals(passwordHash)) return null;
 
-                return CreateAuthenticatedUser(username, user.Role);
+                return CreateAuthenticatedUser(username, user.Role, user.Id ?? -1);
             }
         }
 
-        private Userinfo CreateAuthenticatedUser(string username, string role)
+        private Userinfo CreateAuthenticatedUser(string username, string role, int id = -1)
         {
             var expires = DateTime.Now.AddDays(1);
 
@@ -101,6 +103,7 @@ namespace API.Services
                 Username = username,
                 Expires = expires,
             };
+            if (id != -1) userInfo.CustomerId = _customerDao.ReadAll(new CustomerEntity() { User_id = id }).FirstOrDefault().Id;
             userInfo.Token = GenerateJwt(userInfo, expires, role);
             return userInfo;
         }
@@ -109,9 +112,10 @@ namespace API.Services
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userinfo.Username),
                 new Claim(JwtRegisteredClaimNames.Iss, _configuration["JwtSettings:Issuer"]),
                 new Claim(JwtRegisteredClaimNames.Exp, expires.ToString()),
+                new Claim(JwtRegisteredClaimNames.Name, userinfo.Username),
+                new Claim("customerId", userinfo.CustomerId.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, "Token");

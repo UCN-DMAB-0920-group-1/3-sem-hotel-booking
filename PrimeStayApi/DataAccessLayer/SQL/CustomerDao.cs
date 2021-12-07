@@ -17,11 +17,12 @@ namespace DataAccessLayer.SQL
                                                             "AND Name = ISNULL(@Name, Name)" +
                                                             "AND Email = ISNULL(@Email, Email)" +
                                                             "AND Birthday = ISNULL(@Birthday, Birthday)" +
+                                                            "AND User_id = ISNULL(@User_id, User_id)" +
                                                             "AND Phone = ISNULL(@Phone, Phone)";
 
-        private static readonly string INSERT_CUSTOMER_RETURN_ID = @"INSERT INTO Customer (Name, Email, Phone,Birthday) " +
+        private static readonly string INSERT_CUSTOMER_RETURN_ID = @"INSERT INTO Customer (Name, Email, Phone,Birthday, user_id) " +
                                                                 @"OUTPUT INSERTED.id " +
-                                                                @"VALUES (@Name, @Email, @Phone,@Birthday)";
+                                                                @"VALUES (@Name, @Email, @Phone,@Birthday, @user_id)";
         private static readonly string DELETECUSTOMER = "DELETE FROM Customer WHERE id=@id AND Name=@Name AND Phone=@phone AND Email=@Email";
         private readonly static string UPDATECUSTOMER = "UPDATE Customer SET Name=@name ,Phone=@Phone, Email=@Email WHERE id=@id";
         #endregion

@@ -9,5 +9,6 @@ namespace API.Models
     {
         public string Token { get; set; }
         public DateTime Expires { get; internal set; }
+        public int? CustomerId { get; set; }
     }
 }

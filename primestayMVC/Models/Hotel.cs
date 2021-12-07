@@ -13,7 +13,7 @@ namespace Models
         public int? LocationId { get; set; }
         public bool? Active { get; set; }
         public Location Location { get; set; }
-        public IEnumerable<Room> rooms { get; set; }
+        public IEnumerable<RoomType> rooms { get; set; }
 
         public bool Matches(string input)
         {

@@ -8,5 +8,6 @@ namespace DataAccessLayer.DTO
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime? Birthday { get; set; }
+        public int user_id { get; set; }
     }
 }

@@ -127,10 +127,11 @@ INSERT INTO [dbo].[Price] ([start_date],[value],[room_type_id])
     ('2021-10-10',125000,8)
 GO
 
-INSERT INTO [dbo].[Customer] ([name],[email],[phone],[birthday])
+INSERT INTO [dbo].[Customer] ([name],[email],[phone],[birthday],[user_id])
     VALUES 
-    ('Mia Afilahk','MiaAfilahk@watersports.com','64623510','1990-01-01'),
-        ('Delete Test','Delete test','Delete Test','1990-01-01')
+    ('Mia Afilahk','MiaAfilahk@watersports.com','64623510','1990-01-01',3),
+        ('Delete Test','Delete test','Delete Test','1990-01-01',2),
+        ('Michael','Email@Email.Email','88888888','1990-01-01',1)
 
 GO
 

@@ -50,7 +50,7 @@ namespace Tests.Integration
 
             BookingController controller = new BookingController(dao, customerDao);
 
-
+            string customerHref = "api/customer/1";
             BookingDto booking = new BookingDto()
             {
                 EndDate = DateTime.Now,
@@ -58,7 +58,8 @@ namespace Tests.Integration
                 Guests = 1,
                 RoomHref = "api/room/1",
                 RoomTypeHref = "api/roomType/1",
-                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com" },
+                CustomerHref = customerHref,
+                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com", Href =  customerHref},
 
             };
 

@@ -24,7 +24,7 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model)
         {
-            var query_hotelId = $"hotelHref=api/hotel/{model.HotelId}";
+            var query_hotelId = $"hotelHref={model.HotelHref}";
 
 
 
