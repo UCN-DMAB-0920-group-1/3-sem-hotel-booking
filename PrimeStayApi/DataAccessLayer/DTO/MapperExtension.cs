@@ -163,7 +163,7 @@ namespace DataAccessLayer.DTO
             return new CustomerDto()
             {
                 Href = customer.ExtractHref(),
-                user_id = customer.User_id!.Value,
+                user_id = customer.User_id,
                 Name = customer.Name,
                 Email = customer.Email,
                 Phone = customer.Phone,
