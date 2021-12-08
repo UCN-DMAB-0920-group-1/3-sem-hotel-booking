@@ -26,7 +26,7 @@ namespace WebClient.Controllers
             HttpContext.Session.SetString("LoggedIn", "false");
             HttpContext.Session.Clear();
             Debug.WriteLine(HttpContext.Session.GetString("LoggedIn"));
-            return View("../Hotel/Index");
+            return Redirect("../Hotel/Index");
         }
 
 
