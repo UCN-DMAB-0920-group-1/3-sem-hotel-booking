@@ -1,10 +1,10 @@
 ﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+@model string;
 
 
-
-          <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+ <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 <section class="vh-100">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -15,26 +15,31 @@
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">  
           <div class="divider d-flex align-items-center my-4">
           </div>
+          <form asp-controller="Account" asp-action="Authorize" method="post">
+            <!-- Username input -->
+            <div class="form-outline mb-4">
+                        @if (string.IsNullOrEmpty(Model))
+                        {
+                            <input type="text" name="Username" class="form-control form-control-lg" placeholder="Enter a Username")/>
+                        }else
+                        {
+                            <input type="text" name="Username" class="form-control form-control-lg" value="@Model" />
+                        } 
+                        <label class="form-label">Username</label>
+            </div>
 
-          <!-- Username input -->
-          <div class="form-outline mb-4">
-            <input type="text" id="Username" class="form-control form-control-lg"
-              placeholder="Enter a Username" />
-            <label class="form-label">Username</label>
-          </div>
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <input type="password" name="Password" class="form-control form-control-lg"
+                placeholder="Enter password" />
+              <label class="form-label">Password</label>
+            </div>
 
-          <!-- Password input -->
-          <div class="form-outline mb-3">
-            <input type="password" id="Password" class="form-control form-control-lg"
-              placeholder="Enter password" />
-            <label class="form-label">Password</label>
-          </div>
-
-
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <button id="login_btn" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-          </div>
+            <div class="text-center text-lg-start mt-4 pt-2">
+                
+                  <button class="btn btn-primary">Login</button> 
+            </div>
+          </form>
       </div>
     </div>
   </div>

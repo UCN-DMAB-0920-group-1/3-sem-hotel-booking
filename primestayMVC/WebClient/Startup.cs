@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RestSharp;
+using Microsoft.AspNetCore.Session;
 
 namespace WebClient
 {
@@ -29,13 +30,15 @@ namespace WebClient
             services.AddScoped(s => DaoFactory.Create<BookingDto>(dataContext));
             services.AddScoped(s => DaoFactory.Create<PriceDto>(dataContext));
             services.AddScoped(s => DaoFactory.Create<CustomerDto>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<UserDto>(dataContext));
 
             services.AddControllersWithViews();
+            services.AddMemoryCache();
             services.AddSession(options =>
             {
                 options.IdleTimeout = System.TimeSpan.FromMinutes(15);
             });
-            services.AddMemoryCache();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

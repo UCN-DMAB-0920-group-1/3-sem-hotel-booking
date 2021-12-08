@@ -7,7 +7,6 @@
     <h4 class="m-t-sm">@Model.customer.Name</h4>
     <p class="m-b-sm">@Model.customer.Email</p>
     <h1>BookingHistory</h1>
-    <button id="logout_btn">logout</button>
 </div>
 
 
@@ -62,16 +61,3 @@
     </tbody>
 </table>
 
-
-<script>
-    $(document).ready(function () {
-        $("#logout_btn").click(function () {
-            document.cookie = 'customerId = ';
-            document.cookie = 'jwt = ';
-            document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-            console.log(document.cookie);
-            alert("you have been logged out");
-            window.history.back();
-        })
-    })
-</script>

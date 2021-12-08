@@ -12,7 +12,7 @@ using Microsoft.OpenApi.Models;
 using Models;
 using System;
 using System.Text;
-using System.Threading.Tasks;
+using Version = Database.Version;
 
 namespace API
 {
@@ -96,15 +96,6 @@ namespace API
                         ValidateAudience = false,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:SecretKey"]))
                     };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            context.Token = context.Request.Cookies["jwt"];
-                            return Task.CompletedTask;
-                        },
-                    };
                 });
 
             services.AddTransient<IAccountService, AccountService>();
@@ -119,8 +110,8 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "PrimeStayApi v1"));
 
-                Database.Version.Drop(ENV.ConnectionStringDev);
-                Database.Version.Upgrade(ENV.ConnectionStringDev);
+                Version.Drop(ENV.ConnectionStringDev);
+                Version.Upgrade(ENV.ConnectionStringDev);
             }
 
             app.UseHttpsRedirection();

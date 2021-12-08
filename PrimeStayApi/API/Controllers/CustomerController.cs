@@ -56,13 +56,13 @@ namespace API.Controllers
         [HttpPut]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<CustomerDto> Edit([FromBody] CustomerDto customer)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult Edit([FromBody] CustomerDto customer)
         {
             return _dao.Update(customer.Map()) switch
             {
                 > 0 => Ok(customer),
-                -1 => BadRequest(),
+                -1 => NotFound(),
                 _ => throw new Exception("something went wrong")
             };
         }
@@ -70,13 +70,13 @@ namespace API.Controllers
         [HttpDelete]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CustomerDto> Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
             {
-                > 0 => Ok(customer),
-                -1 => BadRequest(),
+                1 => Ok(customer),
+                -1 => NotFound(),
                 _ => throw new Exception("something went wrong")
             };
         }
