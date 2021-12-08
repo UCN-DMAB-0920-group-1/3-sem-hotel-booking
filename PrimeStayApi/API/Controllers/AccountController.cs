@@ -36,12 +36,9 @@ namespace API.Controllers
                 {
                     Token = user.Token,
                     Expires = user.Expires,
-                    CustomerId = user.CustomerId,
+                   
                 };
                 return Ok(response);
-
-
-
             }
 
             catch (Exception ex)

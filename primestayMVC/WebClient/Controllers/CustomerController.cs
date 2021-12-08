@@ -1,7 +1,9 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using System.Diagnostics;
 using System.Linq;
 using WebClient.Service;
 
@@ -18,6 +20,9 @@ namespace WebClient.Controllers
         }
         public IActionResult Login()
         {
+
+            HttpContext.Session.SetString("Email", "Test@test.dk");
+            Debug.WriteLine(HttpContext.Session.GetString("Email"));
             return View();
         }
         public IActionResult BookingHistory()

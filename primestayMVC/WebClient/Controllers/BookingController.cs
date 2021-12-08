@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Models;
 using System;
 using WebClient.Service;
