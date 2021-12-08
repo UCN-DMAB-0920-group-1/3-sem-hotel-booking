@@ -13,12 +13,12 @@ namespace DataAccessLayer.SQL
         private static readonly string SELECT_CUSTOMER_BY_ID = @"SELECT * FROM Customer WHERE id = @id";
 
         private static readonly string SELECT_ALL_CUSTOMER = @"SELECT * FROM Customer WHERE " +
-                                                            "id = ISNULL(@id,id)" +
-                                                            "AND Name = ISNULL(@Name, Name)" +
-                                                            "AND Email = ISNULL(@Email, Email)" +
-                                                            "AND Birthday = ISNULL(@Birthday, Birthday)" +
-                                                            "AND User_id = ISNULL(@User_id, User_id)" +
-                                                            "AND Phone = ISNULL(@Phone, Phone)";
+                                                            "id = ISNULL(@id,id) " +
+                                                            "AND Name = ISNULL(@Name, Name) " +
+                                                            "AND Email = ISNULL(@Email, Email) " +
+                                                            "AND Birthday = ISNULL(@Birthday, Birthday) " +
+                                                            "AND User_id = ISNULL(@User_id, User_id) " +
+                                                            "AND Phone = ISNULL(@Phone, Phone) ";
 
         private static readonly string INSERT_CUSTOMER_RETURN_ID = @"INSERT INTO Customer (Name, Email, Phone,Birthday, user_id) " +
                                                                 @"OUTPUT INSERTED.id " +
