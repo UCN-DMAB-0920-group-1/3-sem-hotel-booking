@@ -24,7 +24,7 @@ namespace WebClient.Controllers
         public IActionResult Info()
         {
             string jwt = HttpContext.Session.GetString("Jwt");
-            return JwtMethods.HasToken(jwt) ? Create(jwt) : View("../Customer/Login");
+            return JwtMethods.HasToken(jwt) ? Create(jwt) : View("../Account/Login");
         }
         public IActionResult Create(string jwt)
         {
