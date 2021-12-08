@@ -66,7 +66,7 @@ namespace Tests.Integration
             var res = customerCtrl.Delete(customer.Map());
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res.Result, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
         }
         [TestMethod]
         public void UpdateCustomer()
@@ -86,7 +86,7 @@ namespace Tests.Integration
             var res = customerCtrl.Edit(customer.Map());
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res.Result, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
         }
     }
 }

@@ -71,7 +71,7 @@ namespace API.Controllers
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CustomerDto> Delete(CustomerDto customer)
+        public ActionResult Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
             {
