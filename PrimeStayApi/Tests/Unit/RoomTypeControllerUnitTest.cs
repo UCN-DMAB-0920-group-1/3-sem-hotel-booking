@@ -1,16 +1,12 @@
-using API;
 using API.Controllers;
 using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Version = Database.Version;
 
 namespace Tests.Unit
 {

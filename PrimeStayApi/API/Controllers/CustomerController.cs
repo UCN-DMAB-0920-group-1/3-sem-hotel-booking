@@ -14,13 +14,14 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class CustomerController : Controller
     {
+        #region setup
         private readonly IDao<CustomerEntity> _dao;
         public CustomerController(IDao<CustomerEntity> dao)
         {
             _dao = dao;
         }
+        #endregion
 
-        // GET: BookingController
         [HttpGet]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -31,21 +32,20 @@ namespace API.Controllers
             return customers.Any() ? Ok(customers) : NotFound();
         }
 
-        // GET: api/Booking/5
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public CustomerDto Details(int id)
+        public ActionResult<CustomerDto> Details(int id)
         {
-            return _dao.ReadById(id).Map();
+            var customer = _dao.ReadById(id).Map();
+            return customer is not null ? Ok(customer) : NotFound();
         }
 
-        // POST: BookingController/
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Create([FromBody] CustomerDto customer)
+        public ActionResult<CustomerDto> Create([FromBody] CustomerDto customer)
         {
             var res = _dao.Create(customer.Map());
             customer.Href = "api/customer/" + res;
@@ -53,12 +53,11 @@ namespace API.Controllers
             else return BadRequest(res);
         }
 
-        // PUT: BookingController/Edit/5
         [HttpPut]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Edit([FromBody] CustomerDto customer)
+        public ActionResult<CustomerDto> Edit([FromBody] CustomerDto customer)
         {
             return _dao.Update(customer.Map()) switch
             {
@@ -68,12 +67,11 @@ namespace API.Controllers
             };
         }
 
-        // DELETE: BookingController/Delete/5
         [HttpDelete]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Delete(CustomerDto customer)
+        public ActionResult<CustomerDto> Delete(CustomerDto customer)
         {
             return _dao.Delete(customer.Map()) switch
             {

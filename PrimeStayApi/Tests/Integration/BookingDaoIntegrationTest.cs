@@ -1,13 +1,8 @@
-﻿using API;
-using DataAccessLayer;
-using Enviroment;
+﻿using DataAccessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Tests.Integration.Common;
-using Version = Database.Version;
 
 namespace Tests.Integration
 {

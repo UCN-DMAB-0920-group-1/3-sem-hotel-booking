@@ -5,25 +5,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-/**
- * Author: Lars Nysom
- */
 namespace API.Controllers
 {
+    /**
+     * Author: Gruppe 1
+     * Origin: Lars Nysom
+     * <summary>Class <see cref="AccountController"/> handles http requests related to user login/registration</summary>
+     */
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
+        #region setup
         private readonly IAccountService _accountService;
 
         public AccountController(IAccountService accountService)
         {
             _accountService = accountService;
         }
+        #endregion
 
         [HttpPost]
         [Route("login")]
-        public IActionResult Login([FromBody] LoginRequest login)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<LoginResponse> Login([FromBody] LoginRequest login)
         {
             try
             {
@@ -31,19 +38,9 @@ namespace API.Controllers
 
                 if (user is null) return StatusCode(StatusCodes.Status500InternalServerError, "Incorrect username/password");
                 if (!user.IsAuthenticated) return Unauthorized();
-
-                var response = new LoginResponse
-                {
-                    Token = user.Token,
-                    Expires = user.Expires,
-                    CustomerId = user.CustomerId,
-                };
+                LoginResponse response = CreateResponse(user);
                 return Ok(response);
-
-
-
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -51,20 +48,19 @@ namespace API.Controllers
             }
         }
 
+
         [HttpPost]
         [Route("register")]
-        public IActionResult Register([FromBody] LoginRequest login)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<LoginResponse> Register([FromBody] LoginRequest login)
         {
             try
             {
                 Userinfo user = _accountService.Save(login.Username, login.Password, "user");
                 if (user is not null && user.IsAuthenticated)
                 {
-                    var response = new LoginResponse
-                    {
-                        Token = user.Token,
-                        Expires = user.Expires,
-                    };
+                    LoginResponse response = CreateResponse(user);
                     return Ok(response);
                 }
 
@@ -79,18 +75,16 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("register-admin")]
-        public IActionResult RegisterAdmin([FromBody] LoginRequest login)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<LoginResponse> RegisterAdmin([FromBody] LoginRequest login)
         {
             try
             {
                 Userinfo user = _accountService.Save(login.Username, login.Password, "admin");
                 if (user is not null && user.IsAuthenticated)
                 {
-                    var response = new LoginResponse
-                    {
-                        Token = user.Token,
-                        Expires = user.Expires,
-                    };
+                    LoginResponse response = CreateResponse(user);
                     return Ok(response);
                 }
 
@@ -100,6 +94,16 @@ namespace API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "User could not be registered");
             }
+        }
+
+        private static LoginResponse CreateResponse(Userinfo user)
+        {
+            return new LoginResponse
+            {
+                Token = user.Token,
+                Expires = user.Expires,
+                CustomerId = user.CustomerId,
+            };
         }
     }
 }

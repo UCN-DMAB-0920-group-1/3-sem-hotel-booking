@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
+using Tests.Extensions;
 using Tests.Integration.Common;
 
 namespace Tests.Integration
@@ -25,7 +26,7 @@ namespace Tests.Integration
 
 
             //act 
-            pictureDtos = controller.getPictureByType(type, id);
+            pictureDtos = controller.getPictureByType(type, id).GetValue();
 
             //assert 
             Assert.IsNotNull(pictureDtos);
@@ -47,7 +48,7 @@ namespace Tests.Integration
 
 
             //act 
-            pictureDtos = controller.getPictureByType(type, id);
+            pictureDtos = controller.getPictureByType(type, id).GetValue();
 
             //assert 
             Assert.IsTrue(pictureDtos.Any());

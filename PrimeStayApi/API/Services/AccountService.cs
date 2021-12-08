@@ -10,17 +10,24 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-/**
-* Author: Lars Nysom
-*/
 namespace API.Services
 {
+    /**
+     * Author: Gruppe 1
+     * Origin: Lars Nysom
+     * <summary>An interface for an account service. Handles user login/registration</summary>
+     */
     public interface IAccountService
     {
         Userinfo Save(string username, string password, string role);
         Userinfo Authenticate(string username, string password);
     }
 
+    /**
+     * Author: Gruppe 1
+     * Origin: Lars Nysom
+     * <summary>An implementation of <see cref="IAccountService"/></summary>
+     */
     public class AccountService : IAccountService
     {
         private readonly IConfiguration _configuration;
