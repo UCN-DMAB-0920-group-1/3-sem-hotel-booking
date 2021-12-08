@@ -61,7 +61,7 @@
         <div class="container">
             <h1>Rooms</h1>
         </div>
-        @foreach (Room roomType in Model.rooms)
+        @foreach (RoomType roomType in Model.rooms)
         {
             queryParams["roomType"] = roomType.Href;
             <div class="container" style="padding-top: 30px; padding-bottom: 30px;" id="@roomType.Id">
@@ -78,7 +78,7 @@
                                 <p1 class="card-text" id="avaliable">Avaliable rooms: </p1>
 
                                 <div class="form-group float-right">
-                                    <span class="form-label" style="padding-bottom:10px;">Price: KOMMER SNART kr/night</span>
+                                    <span class="form-label" style="padding-bottom:10px;">Price: @(@roomType.price / 100) kr/night</span>
                                     <br />
                                     <a asp-controller="Booking" asp-action="Info" asp-all-route-data=@queryParams> <input class="btn btn-primary " type="button" name="order" value="Choose" style="width:150px;" /></a>
                                 </div>

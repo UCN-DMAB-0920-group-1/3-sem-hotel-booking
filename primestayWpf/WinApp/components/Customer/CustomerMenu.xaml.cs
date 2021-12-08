@@ -14,7 +14,7 @@ namespace WinApp.Components.CustomerView
     {
         private readonly IDao<CustomerDto> dao;
         private readonly IDao<BookingDto> bookingDao;
-        private ObservableCollection<Model.Customer> CustomerList { get; set; } = new ObservableCollection<Model.Customer>();
+        private ObservableCollection<Customer> CustomerList { get; set; } = new ObservableCollection<Model.Customer>();
 
         public CustomerMenu(IDao<CustomerDto> _dao, IDao<BookingDto> bookingDao)
         {
@@ -27,18 +27,16 @@ namespace WinApp.Components.CustomerView
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            var customer = CustomerListView.SelectedItem as Model.Customer;
-            string text = $"Are you sure that you would like to delete{customer?.Phone ?? "this customer"}?";
-            if (MessageBox.Show(text, "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            var customer = CustomerListView.SelectedItem as Customer;
+
+            if (MessageBox.Show($"Are you sure you would like to delete {customer!.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show($"Are you sure you would like to delete {customer.Name}?", "Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    var res = dao.Delete(customer.Map());
-                    UpdateList();
-                    if (res > 0) MessageBox.Show($"Customer{customer.Phone} was deleted");
-                    else MessageBox.Show($"Could not delete {customer.Phone}, contact admin");
-                }
+                var res = dao.Delete(customer.Map());
+                UpdateList();
+                if (res > 0) MessageBox.Show($"Customer{customer.Phone} was deleted");
+                else MessageBox.Show($"Could not delete {customer.Phone}, contact admin");
             }
+
         }
 
 
@@ -59,7 +57,7 @@ namespace WinApp.Components.CustomerView
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            if (CustomerListView.SelectedItem is not Model.Customer oldCustomer)
+            if (CustomerListView.SelectedItem is not Customer oldCustomer)
             {
                 MessageBox.Show("Please select a Customer", "Error");
             }
@@ -69,7 +67,7 @@ namespace WinApp.Components.CustomerView
                 var yesNo = form.ShowDialog();
                 if (yesNo ?? false)
                 {
-                    Model.Customer customer = new()
+                    Customer customer = new()
                     {
                         Id = oldCustomer.Id,
                         Name = form.Name.Text,

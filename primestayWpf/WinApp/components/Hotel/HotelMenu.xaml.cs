@@ -51,7 +51,7 @@ namespace WinApp.Components.HotelView
                         Description = form.Description.Text,
                         LocationId = int.Parse(form.LocationId.Text),
                         StaffedHours = form.StaffedHours.Text,
-                        Stars = (int)form.Stars.Value,
+                        Stars = (int)form.Stars.Value, //TODO: check this out
                         Active = form.Active.IsChecked,
                     };
                     var res = dao.Update(hotel.Map());

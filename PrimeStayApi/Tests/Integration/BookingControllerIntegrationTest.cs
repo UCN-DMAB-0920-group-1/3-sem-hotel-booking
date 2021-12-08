@@ -10,36 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tests.Integration.Common;
 using Version = Database.Version;
 
-namespace Tests
+namespace Tests.Integration
 {
     [TestClass]
-    public class BookingControllerTest
+    public class BookingControllerIntegrationTest : BaseDbSetup
     {
-        private string connectionString = new ENV().ConnectionStringTest;
-        private static SqlDataContext _dataContext;
-        private static List<Action> _dropDatabaseActions = new();
-
-        [TestInitialize]
-        public void SetUp()
-        {
-            _dataContext = new SqlDataContext(connectionString);
-            Version.Upgrade(connectionString);
-        }
-
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            Parallel.Invoke(_dropDatabaseActions.ToArray());
-        }
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            _dropDatabaseActions.Add(() => Version.Drop(connectionString));
-        }
-
         [TestMethod]
         public void TestCreateBookingDao()
         {
@@ -48,6 +26,7 @@ namespace Tests
             var booking = new BookingEntity()
             {
                 Customer_id = 1,
+                Room_type_id = 1,
                 End_date = DateTime.Parse("2010-11-01"),
                 Start_date = DateTime.Parse("2010-11-02"),
                 Guests = 10,
@@ -71,14 +50,17 @@ namespace Tests
 
             BookingController controller = new BookingController(dao, customerDao);
 
-
+            string customerHref = "api/customer/1";
             BookingDto booking = new BookingDto()
             {
-                CustomerHref = "api/customer/1",
                 EndDate = DateTime.Now,
                 StartDate = DateTime.Now,
                 Guests = 1,
-                RoomHref = "api/room/1"
+                RoomHref = "api/room/1",
+                RoomTypeHref = "api/roomType/1",
+                CustomerHref = customerHref,
+                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com", Href =  customerHref},
+
             };
 
             //Act

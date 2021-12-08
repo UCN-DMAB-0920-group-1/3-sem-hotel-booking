@@ -1,8 +1,8 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebClient.Controllers;
 using System.Collections.Generic;
+using WebClient.Controllers;
 
 namespace Tests.Controllers
 {
@@ -12,6 +12,7 @@ namespace Tests.Controllers
         private IDao<HotelDto> _hotelDao;
         private IDao<LocationDto> _locationDao;
         private IDao<RoomTypeDto> _roomDao;
+        private IDao<PriceDto> _priceDao;
         private HotelController _controller;
 
         [TestInitialize]
@@ -20,6 +21,7 @@ namespace Tests.Controllers
             _hotelDao = new MockHotelDao();
             _locationDao = new MockLocationDao();
             _roomDao = new MockRoomDao();
+            _priceDao = new MockPriceDao();
         }
 
         [TestCleanup]
@@ -32,7 +34,7 @@ namespace Tests.Controllers
         public void IndexTest()
         {
             //Arrange
-            _controller = new HotelController(_hotelDao, _locationDao, _roomDao);
+            _controller = new HotelController(_hotelDao, _locationDao, _roomDao, _priceDao);
             //Act 
             var testView = _controller.Index();
             //Assert 
@@ -42,7 +44,7 @@ namespace Tests.Controllers
         public void ResultTest()
         {
             //Arrange
-            _controller = new HotelController(_hotelDao, _locationDao, _roomDao);
+            _controller = new HotelController(_hotelDao, _locationDao, _roomDao, _priceDao);
             var collection = "api/hotel/1";
             //Act 
             var testView = _controller.Result(collection);
@@ -54,7 +56,7 @@ namespace Tests.Controllers
         public void DetailsTest()
         {
             //Arrange
-            _controller = new HotelController(_hotelDao, _locationDao, _roomDao);
+            _controller = new HotelController(_hotelDao, _locationDao, _roomDao, _priceDao);
             var testHotelHref = "hotel/1";
             //Act 
             var testView = _controller.Details(testHotelHref);
@@ -143,6 +145,33 @@ namespace Tests.Controllers
             public int Update(RoomTypeDto model)
             {
                 return -1;
+            }
+        }
+        internal class MockPriceDao : IDao<PriceDto> //TODO: Fill with returns
+        {
+            public string Create(PriceDto model)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public int Delete(PriceDto model)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public IEnumerable<PriceDto> ReadAll(PriceDto model)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public PriceDto ReadByHref(string href)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public int Update(PriceDto model)
+            {
+                throw new System.NotImplementedException();
             }
         }
 

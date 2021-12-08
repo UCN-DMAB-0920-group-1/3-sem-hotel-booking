@@ -24,13 +24,14 @@ namespace DataAccessLayer.DAO
 
         public IEnumerable<RoomTypeDto> ReadAll(RoomTypeDto model)
         {
-            var query_hotelId = $"hotelHref=api/hotel/{model.HotelId}";
+            var query_hotelId = $"hotelHref={model.HotelHref}";
 
 
 
             IRestClient restClient = DataContext.Open();
             IRestRequest restRequest = new RestRequest($"/api/RoomType?{query_hotelId}", Method.GET, DataFormat.Json);
             var res = restClient.Get<IEnumerable<RoomTypeDto>>(restRequest).Data;
+
             return res; //TODO: Use parameterbinding
         }
 

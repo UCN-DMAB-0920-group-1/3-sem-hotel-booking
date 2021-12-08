@@ -56,8 +56,7 @@ GO
 CREATE TABLE [Price] (
   [id] int NOT NULL IDENTITY(1, 1),
   [start_date] date NOT NULL,
-  [end_date] date NOT NULL,
-  [amount] int NOT NULL,
+  [value] int NOT NULL,
   [room_type_id] int NOT NULL,
   PRIMARY KEY ([id])
 )
@@ -69,6 +68,8 @@ CREATE TABLE [Location] (
   [zip_code] VARCHAR(250) NOT NULL,
   [city] VARCHAR(250) NOT NULL,
   [country] VARCHAR(250) NOT NULL,
+  [lat] float,
+  [lng] float,
   PRIMARY KEY ([id])
 )
 GO
@@ -79,6 +80,7 @@ CREATE TABLE [Customer] (
   [email] VARCHAR(250) NOT NULL,
   [phone] VARCHAR(250) NOT NULL,
   [birthday] datetime NOT NULL,
+  [user_id] int NOT NULL
   PRIMARY KEY ([id])
 )
 GO
@@ -138,7 +140,8 @@ GO
 CREATE UNIQUE INDEX [UK_Picture_path] ON [Picture] ("path")
 GO
 
-CREATE UNIQUE INDEX [Price_start_end] ON [Price] ("start_date", "end_date")
+
+CREATE UNIQUE INDEX [Price_start_end] ON [Price] ("start_date", "value", "room_type_id")
 GO
 
 CREATE UNIQUE INDEX [UK_Location_street_address] ON [Location] ("street_address")
@@ -186,7 +189,7 @@ REFERENCES [Customer] ([id])
 ALTER TABLE [Booking] CHECK CONSTRAINT [FK_Booking_customer_id]
 
 ALTER TABLE [Price] WITH CHECK ADD CONSTRAINT [FK_Price_room_type_id] FOREIGN KEY([room_type_id])
-REFERENCES [Room] ([id])
+REFERENCES [RoomType] ([id])
 
 ALTER TABLE [Price] CHECK CONSTRAINT [FK_Price_room_type_id]
 

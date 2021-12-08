@@ -3,40 +3,38 @@ using DataAccessLayer.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
-using WebClient.Models;
+using WebClient.Service;
 
 namespace WebClient.Controllers
 {
     public class BookingController : Controller
     {
         private readonly IDao<BookingDto> _bookingDao;
-        public BookingController(IDao<BookingDto> bookingDao)
+        private readonly IDao<HotelDto> _hotelDao;
+        private readonly IDao<RoomTypeDto> _roomTypeDao;
+        public BookingController(IDao<BookingDto> bookingDao, IDao<HotelDto> hotelDao, IDao<RoomTypeDto> roomTypeDao)
         {
             _bookingDao = bookingDao;
+            _hotelDao = hotelDao;
+            _roomTypeDao = roomTypeDao;
 
         }
 
         public IActionResult Info()
         {
-            return View();
+            string jwt = Request.Cookies["jwt"];
+            return JwtMethods.HasToken(jwt) ? Create(jwt) : View("../Customer/Login");
         }
-        public IActionResult Create()
+        public IActionResult Create(string jwt)
         {
-            Customer customer = new()
-            {
-                Name = Request.Form["name"],
-                Email = Request.Form["email"],
-                Phone = Request.Form["phone"],
-                Birthday = DateTime.Parse(Request.Form["Birthday"] + "Z"),
-            };
+            string customerIdAsString = JwtMethods.GetCustomerIdFromJwtToken(jwt);
             Booking booking = new()
             {
                 StartDate = DateTime.Parse(Request.Query["startDate"] + "Z"),
                 EndDate = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
-                RoomTypeHref = Request.Query["roomType"],
-                Customer = customer,
-
+                RoomTypeId = int.Parse(Request.Query["roomType"]),
+                CustomerId = int.Parse(customerIdAsString),
 
             };
 
@@ -44,6 +42,16 @@ namespace WebClient.Controllers
             if (href is null || href.EndsWith("-1")) return View("BookingError");
 
             return View("confirm", _bookingDao.ReadByHref(href).Map());
+        }
+
+        public IActionResult Details(string bookingHref)
+        {
+            var booking = _bookingDao.ReadByHref(bookingHref).Map();
+            var roomTypeDTO = _roomTypeDao.ReadByHref($"api/roomType/{booking.RoomTypeId}");
+            var roomType = roomTypeDTO.Map();
+            var hotel = _hotelDao.ReadByHref(roomTypeDTO.HotelHref).Map();
+
+            return View((booking, roomType, hotel));
         }
 
     }

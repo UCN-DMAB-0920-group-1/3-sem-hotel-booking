@@ -105,6 +105,8 @@ namespace DataAccessLayer.DTO
                 City = location.City,
                 Country = location.Country,
                 ZipCode = location.Zip_code,
+                Lat = location.Lat,
+                Lng = location.Lng,
             };
         }
         public static PictureDto Map(this PictureEntity picture)
@@ -149,6 +151,7 @@ namespace DataAccessLayer.DTO
             {
                 Id = customer.ExtractId(),
                 Name = customer.Name,
+                User_id = customer.user_id,
                 Email = customer.Email,
                 Phone = customer.Phone,
                 Birthday = customer.Birthday,
@@ -160,12 +163,37 @@ namespace DataAccessLayer.DTO
             return new CustomerDto()
             {
                 Href = customer.ExtractHref(),
+                user_id = customer.User_id!.Value,
                 Name = customer.Name,
                 Email = customer.Email,
                 Phone = customer.Phone,
                 Birthday = customer.Birthday,
             };
         }
+
+
+        public static PriceEntity Map(this PriceDto price)
+        {
+            return new PriceEntity()
+            {
+                Id = price.ExtractId(),
+                Value = price.Value,
+                Room_Type_Id = price.RoomTypeId,
+                Start_Date = price.StartDate,
+
+            };
+        }
+        public static PriceDto Map(this PriceEntity price)
+        {
+            return new PriceDto()
+            {
+                Href = price.ExtractHref(),
+                Value = price.Value,
+                RoomTypeId = price.Room_Type_Id,
+                StartDate = price.Start_Date,
+            };
+        }
+
         #region helperMethods
         public static int? ExtractId(this BaseModelDto dto)
         {

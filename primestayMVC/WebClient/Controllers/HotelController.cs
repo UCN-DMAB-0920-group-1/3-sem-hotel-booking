@@ -7,6 +7,7 @@ using WebClient.Models;
 using DataAccessLayer.DTO;
 using DataAccessLayer;
 using Models;
+using System;
 
 namespace WebClient.Controllers
 {
@@ -15,12 +16,14 @@ namespace WebClient.Controllers
         private readonly IDao<HotelDto> _HotelDao;
         private readonly IDao<RoomTypeDto> _RoomDao;
         private readonly IDao<LocationDto> _LocationDao;
+        private readonly IDao<PriceDto> _priceDao;
 
-        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomTypeDto> roomDao)
+        public HotelController(IDao<HotelDto> dao, IDao<LocationDto> locationDao, IDao<RoomTypeDto> roomDao, IDao<PriceDto> priceDao)
         {
             _HotelDao = dao;
             _LocationDao = locationDao;
             _RoomDao = roomDao;
+            _priceDao = priceDao;
         }
         public IActionResult Index()
         {
@@ -33,10 +36,10 @@ namespace WebClient.Controllers
             if (location is null) location = " ";
             IEnumerable<HotelDto> hotels = _HotelDao.ReadAll(new HotelDto());
             List<Hotel> hotelMatches = hotels.Select(h => h.Map()).ToList();
-            hotelMatches.ForEach(h => h.Location = GetHotelLocation(h));
+            hotelMatches.AsParallel().ForAll(h => h.Location = GetHotelLocation(h));
             hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
 
-            hotelMatches = hotelMatches.Where(h => h.Matches(location)).ToList();
+
 
             return View(hotelMatches);
         }
@@ -45,9 +48,10 @@ namespace WebClient.Controllers
         //[Route("Details")]
         public IActionResult Details(string hotelHref)
         {
-            var hotel = GetHotel(hotelHref);
+            Hotel hotel = GetHotel(hotelHref);
             hotel.Location = GetHotelLocation(hotel);
             hotel.rooms = GetAllHotelRoomsForHotel(hotelHref);
+
 
             return View(hotel);
         }
@@ -79,9 +83,32 @@ namespace WebClient.Controllers
             return _LocationDao.ReadByHref($"/api/location/{h.LocationId}").Map();
         }
 
-        private IEnumerable<Room> GetAllHotelRoomsForHotel(string href)
+        private IEnumerable<RoomType> GetAllHotelRoomsForHotel(string href)
         {
-            return _RoomDao.ReadAll(new RoomTypeDto() { HotelId = int.Parse(href[(href.LastIndexOf("/") + 1)..]) }).Select(r => r.Map());
+
+            var rooms = _RoomDao.ReadAll(new RoomTypeDto() { HotelHref = href }).Select(r => r.Map()).ToList();
+
+            for (int i = 0; i < rooms.Count(); i++)
+            {
+                rooms[i].price = GetPriceOnRoom(rooms[i]);
+            }
+
+
+
+
+            return rooms;
+        }
+
+        private int GetPriceOnRoom(RoomType room)
+        {
+            DateTime now = DateTime.Now;
+            var res = _priceDao
+                .ReadAll(new PriceDto() { RoomTypeId = room.Id ?? -1 })
+                .Where((p) => p.StartDate <= now)
+                .Last()
+                .Value;
+
+            return res;
         }
         #endregion
 

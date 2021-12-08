@@ -13,6 +13,7 @@ using Models;
 using System;
 using System.Text;
 using Version = Database.Version;
+using System.Threading.Tasks;
 
 namespace API
 {
@@ -29,7 +30,15 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDataContext dataContext = new SqlDataContext(ENV.ConnectionStringDev);
+            var env = Configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT");
+
+            IDataContext dataContext = env switch
+            {
+                var connectionString when env.Equals("Development") => new SqlDataContext(ENV.ConnectionStringDev),
+                var connectionString when env.Equals("Release") => new SqlDataContext(ENV.ConnectionString),
+                _ => null
+            };
+
             services.AddScoped(s => DaoFactory.Create<HotelEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<RoomTypeEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<LocationEntity>(dataContext));
@@ -38,6 +47,7 @@ namespace API
             services.AddScoped(s => DaoFactory.Create<RoomEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<UserEntity>(dataContext));
             services.AddScoped(s => DaoFactory.Create<CustomerEntity>(dataContext));
+            services.AddScoped(s => DaoFactory.Create<PriceEntity>(dataContext));
 
             services.AddCors(options =>
             {
@@ -76,7 +86,6 @@ namespace API
                 {
                     { jwtSecurityScheme, Array.Empty<string>() }
                 });
-
             }); // JWT Token
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -110,7 +119,6 @@ namespace API
 
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
-
 
             app.UseAuthentication();
             app.UseAuthorization();
