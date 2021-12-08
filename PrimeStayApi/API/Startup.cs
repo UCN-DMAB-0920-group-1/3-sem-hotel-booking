@@ -1,6 +1,6 @@
 using API.Services;
 using DataAccessLayer;
-using Enviroment;
+using Environment;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +13,6 @@ using Models;
 using System;
 using System.Text;
 using Version = Database.Version;
-using System.Threading.Tasks;
 
 namespace API
 {
