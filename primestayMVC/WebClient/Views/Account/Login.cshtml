@@ -1,7 +1,7 @@
 ﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-@model (string username, string password)
+@model string;
 
 
  <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -18,12 +18,12 @@
           <form asp-controller="Account" asp-action="Authorize" method="post">
             <!-- Username input -->
             <div class="form-outline mb-4">
-                        @if (string.IsNullOrEmpty(Model.username))
+                        @if (string.IsNullOrEmpty(Model))
                         {
                             <input type="text" name="Username" class="form-control form-control-lg" placeholder="Enter a Username")/>
                         }else
                         {
-                            <input type="text" name="Username" class="form-control form-control-lg" value="@Model.username" />
+                            <input type="text" name="Username" class="form-control form-control-lg" value="@Model" />
                         } 
                         <label class="form-label">Username</label>
             </div>

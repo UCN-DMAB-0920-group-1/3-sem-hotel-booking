@@ -23,20 +23,20 @@ namespace WebClient.Controllers
 
         public IActionResult Info()
         {
-            string jwt = Request.Cookies["jwt"];
+            string jwt = HttpContext.Session.GetString("Jwt");
             return JwtMethods.HasToken(jwt) ? Create(jwt) : View("../Customer/Login");
         }
         public IActionResult Create(string jwt)
         {
             string customerIdAsString = JwtMethods.GetCustomerIdFromJwtToken(jwt);
+            string roomTypeHref = Request.Query["roomtype"];
             Booking booking = new()
             {
                 StartDate = DateTime.Parse(Request.Query["startDate"] + "Z"),
                 EndDate = DateTime.Parse(Request.Query["endDate"] + "Z"),
                 Guests = int.Parse(Request.Query["guests"]),
-                RoomTypeId = int.Parse(Request.Query["roomType"]),
-                CustomerId = int.Parse(customerIdAsString),
-
+                RoomTypeId = MapperExtension.GetIdFromHref(roomTypeHref),
+                CustomerId = int.Parse(customerIdAsString)
             };
 
             string href = _bookingDao.Create(booking.Map());

@@ -17,8 +17,9 @@ namespace DataAccessLayer.DAO
 
         public LoginResponse Authorize(string username, string password)
         {
+            var loginReq = new LoginRequest { Username = username , Password = password };    
             IRestClient client = DataContext.Open();
-            IRestRequest request = new RestRequest("/api/account/login", Method.POST, DataFormat.Json).AddJsonBody(username, password);
+            IRestRequest request = new RestRequest("/api/account/login", Method.POST, DataFormat.Json).AddJsonBody(loginReq);
             var res = client.Execute<LoginResponse>(request);
             return res.Data;
         }

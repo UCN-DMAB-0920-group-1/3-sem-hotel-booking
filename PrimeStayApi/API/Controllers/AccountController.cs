@@ -36,7 +36,8 @@ namespace API.Controllers
                 {
                     Token = user.Token,
                     Expires = user.Expires,
-                   
+                    username = user.Username,
+                    CustomerId = user.CustomerId,
                 };
                 return Ok(response);
             }

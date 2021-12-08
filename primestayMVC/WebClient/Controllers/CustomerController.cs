@@ -27,8 +27,8 @@ namespace WebClient.Controllers
         }
         public IActionResult BookingHistory()
         {
-            string token = Request.Cookies["jwt"];
-            if (!JwtMethods.HasToken(token)) return View("Login");
+            string token = HttpContext.Session.GetString("Jwt");
+            if (!JwtMethods.HasToken(token)) return View("../Account/login");
 
             int customerId = int.Parse(JwtMethods.GetCustomerIdFromJwtToken(token));
             var bookings = _bookingDao.ReadAll(new Booking()

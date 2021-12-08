@@ -19,11 +19,12 @@ namespace WebClient.Controllers
         }
         public IActionResult Login(string username = "", string password = "")
         {
-            return View((username,password));
+            return View("Login",username);
         }
         public IActionResult Logout()
         {
             HttpContext.Session.SetString("LoggedIn", "false");
+            HttpContext.Session.Clear();
             Debug.WriteLine(HttpContext.Session.GetString("LoggedIn"));
             return View("../Hotel/Index");
         }
@@ -31,16 +32,21 @@ namespace WebClient.Controllers
 
         public IActionResult Authorize()
         {
-            var res = ((IDaoAccountExtension<LoginResponse>)_accountDao).Authorize(Request.Form["Username"], Request.Form["Password"]);
-            if(res.Token is not null) {
+            string username = Request.Form["Username"];
+            string password = Request.Form["Password"];
+
+            var res = ((IDaoAccountExtension<LoginResponse>)_accountDao).Authorize(username,password);
+
+            if(res is not null && res.Token is not null) {
                 HttpContext.Session.SetString("Jwt", res.Token);
                 HttpContext.Session.SetString("LoggedIn", "true");
+                HttpContext.Session.SetString("Username", res.Username);
                 
             } else
             {
-                Login(Request.Form["Username"], Request.Form["Username"]);
+                return RedirectToAction("Login","Account", new { @username = username});
             }
-            return View("../Hotel/Index");
+            return Redirect("../Hotel/Index");
         }
     }
 }
