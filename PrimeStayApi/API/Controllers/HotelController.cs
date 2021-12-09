@@ -38,7 +38,6 @@ namespace API.Controllers
                     Stars = hotel.Stars,
                     Active = hotel.Active,
                 }).Select(h => h.Map()));
-
             }
             catch (Exception ex)
             {
