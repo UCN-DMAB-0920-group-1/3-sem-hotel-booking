@@ -70,7 +70,7 @@ namespace API
                     Name = "JWT Authentication",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
-                    Description = "Put **_ONLY_** your JWT Bearer token ín field below!",
+                    Description = "Put **_ONLY_** your JWT Bearer token Ã­n field below!",
 
                     Reference = new OpenApiReference
                     {

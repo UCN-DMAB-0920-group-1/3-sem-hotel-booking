@@ -8,7 +8,6 @@
         public string Description { get; set; }
         public int? Rating { get; set; }
         public int? HotelId { get; set; }
-
         public int? price {get; set;}
     }
 }
