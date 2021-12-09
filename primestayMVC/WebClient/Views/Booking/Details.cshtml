@@ -1,14 +1,19 @@
-﻿@using DataAccessLayer.DTO;
+﻿
+@using DataAccessLayer.DTO;
 @using Models;
 
 @{
     ViewData["Title"] = "Order Details";
 }
 @model (Booking booking, RoomType roomType, Hotel hotel)
-<div class="container">
-    <div class="card" style="width: 18rem; text-align: center; ">
-        <div class="card-header">
-            Booking number: @Model.booking.Id
+<div class="container" style="height:90%;">
+
+
+    <div class="card" style="width: 18rem;">
+        <img src="@Model.hotel." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Booking: @Model.booking.Id</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Number of people: @Model.booking.Guests</li>
@@ -19,9 +24,25 @@
             <li class="list-group-item">Check in hours: @Model.hotel.StaffedHours</li>
             <li class="list-group-item">Roomtype: @Model.roomType.Type</li>
             <li class="list-group-item">room rating: @Model.roomType.Rating</li>
-
-
         </ul>
-
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
     </div>
+
+
 </div>
+<script>
+        $(document).ready(function () {
+           var href = "api/picture/room/" + @Model.roomType.Id;
+           var uri = "https://localhost:44312/";
+           axios.get(uri + href)
+           .then(result => {
+               $('img').attr("src", result.data[0].path);
+
+           }).catch(err => {
+               console.log(err);
+           })
+        })
+</script>

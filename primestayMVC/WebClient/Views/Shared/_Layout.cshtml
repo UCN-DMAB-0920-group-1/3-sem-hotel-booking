@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http;
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="~/lib/googlemaps/markerclusterer/dist/index.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +14,7 @@
 
 </head>
 <body>
+
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
@@ -29,36 +32,47 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="Privacy">Privacy</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-controller="Customer" asp-action="BookingHistory">BookingHistory</a>
-                        </li>  
-                        <li class="nav-item">
-                            @if(Context.Session.GetString("LoggedIn") is null || Context.Session.GetString("LoggedIn").ToLower().Equals("false")){
-                                <a class="nav-link text-dark"  asp-controller="Account" asp-action="Login">Login</a>
-                            } else {
-                                <a class="nav-link text-dark"  asp-controller="Account" asp-action="Logout">Logout</a>
-                            }
-                        </li>
-                    </ul>
+                            @if (Context.Session.GetString("LoggedIn") is null || Context.Session.GetString("LoggedIn").ToLower().Equals("false"))
+                            {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Customer" asp-action="BookingHistory">BookingHistory</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+
+                        }
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <main role="main" class="">
-        @RenderBody()
-    </main>
+            </nav>
+        </header>
+        <main role="main" class="">
+            @RenderBody()
+        </main>
 
-    <footer class="container">
-        <p>© 2017-2021 PrimeStay, Inc. <a asp-area="" asp-controller="Hotel" asp-action="Privacy">Privacy</a></p>
-    </footer>
-
+        <footer class="container">
+            <p>© 2017-2021 PrimeStay, Inc. <a asp-area="" asp-controller="Hotel" asp-action="Privacy">Privacy</a></p>
+        </footer>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
 
-</body>
+        @await RenderSectionAsync("Scripts", required: false)
+
+    </body>
 </html>

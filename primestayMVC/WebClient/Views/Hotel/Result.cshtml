@@ -1,6 +1,5 @@
-﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+﻿
 <script src="~/js/map.js" asp-append-version="true"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script defer src="https://maps.googleapis.com/maps/api/js?key=@ENV.GOOGLE_API_KEY&callback=initMap&v=weekly"></script>
 @using Models
 @using Microsoft.AspNetCore.Http;
@@ -12,12 +11,13 @@
             };
     var query = Context.Request.Query;
     query.Keys.ToList().ForEach(key => queryParams.Add(key, Context.Request.Query[key]));
-
+    var today = DateTime.Today.ToString("yyyy-MM-dd").Substring(0, 10);
+    var tomorrow = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd").Substring(0, 10);
 };
 
 @model List<Hotel>
 
-<div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; mix-height: 50%; padding-bottom:50px;">
+<div style="background-image: url('../img/fott1.jpg'); background-size: cover; background-position:center; mix-height: 50%; padding-bottom:50px; margin-top:-25px;">
     <div class="container" style="color:white; font-weight:bold; padding-top:30px;">
         <h1> Find your dream stay!</h1>
     </div>
@@ -33,13 +33,13 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Check In</span>
-                            <input class="form-control" name="startDate" type="date" value="@queryParams["startDate"]" required="">
+                            <input class="form-control" name="startDate" type="date" value="@queryParams["startDate"]" required="" min="@today">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <span class="form-label">Check out</span>
-                            <input class="form-control" type="date" required="" value="@queryParams["endDate"]" name="endDate">
+                            <input class="form-control" type="date" required="" value="@queryParams["endDate"]" name="endDate" min="@tomorrow">
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,10 @@
 </div>
 
 <div id="map"></div>
-
+<br />
+<div class="container">
+    <h1>Hotels</h1>
+</div>
 @foreach (Hotel item in Model)
 {
 
@@ -91,8 +94,7 @@
 
                         <div class="form-group float-right">
                             <br />
-                            <a asp-action="Details"
-                               asp-all-route-data=@queryParams><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
+                            <a asp-action="Details" asp-all-route-data=@queryParams><input class="btn btn-primary " type="button" name="order" value="Order" style="width:150px;" /></a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +127,7 @@
         let newMarker = new google.maps.Marker({ position, label });
 
             newMarker.addListener("click", () => {
-                infoWindow.setContent("<div><p>Hotel: @item.Name</p> <p> Address: @item.Location.StreetAddress</p> </div>");
+                infoWindow.setContent("<div class='container'><p>Hotel: @item.Name</p> <p> Address: @item.Location.StreetAddress</p>  </div>");
           infoWindow.open(map, newMarker);
           });
 
