@@ -13,7 +13,7 @@ using System.Text;
 namespace API.Services
 {
     /**
-     * Author: Julius, Magnus, Michael, Mike, Nicolai
+     * Author: Julius, Magnus, Michael, Mike, Nicolas
      * Origin: Lars Nysom
      * <summary>An interface for an account service. Handles user login/registration</summary>
      */
@@ -24,7 +24,7 @@ namespace API.Services
     }
 
     /**
-     * Author: Julius, Magnus, Michael, Mike, Nicolai
+     * Author: Julius, Magnus, Michael, Mike, Nicolas
      * Origin: Lars Nysom
      * <summary>An implementation of <see cref="IAccountService"/></summary>
      */

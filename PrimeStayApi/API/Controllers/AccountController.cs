@@ -8,7 +8,7 @@ using System;
 namespace API.Controllers
 {
     /**
-     * Author: Julius, Magnus, Michael, Mike, Nicolai
+     * Author: Julius, Magnus, Michael, Mike, Nicolas
      * Origin: Lars Nysom
      * <summary>Class <see cref="AccountController"/> handles http requests related to user login/registration</summary>
      */
