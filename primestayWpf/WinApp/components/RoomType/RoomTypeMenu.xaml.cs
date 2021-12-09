@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using WinApp.Components.BookingView;
 using WinApp.Components.RoomView;
@@ -56,8 +57,9 @@ namespace WinApp.Components.RoomTypeView
                     };
                     var res = dao.Update(roomType.Map());
                     UpdateList();
-                    if (res > 0) MessageBox.Show($"RoomType: {roomType.Type} was updated");
-                    else MessageBox.Show($"Could not update {roomType.Type}, contact admin");
+                    if (res == 1) MessageBox.Show($"RoomType: {roomType.Type} was updated successfully");
+                    else if (res == 0) MessageBox.Show($"Unable to find {roomType.Type}, contact admin");
+                    else if (res == -1) MessageBox.Show($"Could not update {roomType.Type}, contact admin");
 
                 }
             }
@@ -86,7 +88,6 @@ namespace WinApp.Components.RoomTypeView
 
                 RoomType roomType = new()
                 {
-                    Id = int.Parse(form.Id.Text),
                     Type = form.Type.Text,
                     Description = form.Description.Text,
                     Rating = (int)form.Rating.Value,

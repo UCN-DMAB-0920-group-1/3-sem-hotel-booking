@@ -30,7 +30,6 @@ namespace WinApp.Components.RoomView
                 DialogResult = true;
                 Close();
             }
-
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)

@@ -58,6 +58,7 @@ namespace API.Controllers
         public ActionResult<RoomDto> Create([FromBody] RoomDto room)
         {
             int id = _dao.Create(room.Map());
+            room.Href = $"api/room/{id}";
             if (id <= 0) return BadRequest();
             return Created(id.ToString(), room);
         }
