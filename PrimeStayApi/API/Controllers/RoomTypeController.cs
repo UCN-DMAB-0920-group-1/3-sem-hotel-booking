@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -12,14 +13,17 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class RoomTypeController : Controller
     {
+        #region setup
         private readonly IDao<RoomTypeEntity> _dao;
         public RoomTypeController(IDao<RoomTypeEntity> dao)
         {
             _dao = dao;
         }
+        #endregion
 
-        // GET: RoomController
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<RoomTypeDto>> Index([FromQuery] RoomTypeDto room)
         {
             try
@@ -34,6 +38,8 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<RoomTypeDto> Details(int id)
         {
             try
@@ -47,7 +53,9 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(RoomTypeDto room)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<RoomTypeDto> Create(RoomTypeDto room)
         {
             int id = _dao.Create(room.Map());
 
@@ -61,22 +69,26 @@ namespace API.Controllers
             }
         }
 
-
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Edit(int id, RoomTypeDto room)
         {
-            return _dao.Update(room.Map()) == 1 ? Ok() : NotFound();
+            return _dao.Update(room.Map()) == 1 ? NoContent() : NotFound();
         }
 
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Delete([FromBody] RoomTypeDto room)
         {
-            return _dao.Delete(room.Map()) == 1 ? Ok() : NotFound();
+            return _dao.Delete(room.Map()) == 1 ? NoContent() : NotFound();
         }
 
-        // GET: api/roomType/available?roomTypeId={id}&startDate={startDate}&endDate={endDate}
         [HttpGet]
-        [Route("available")]
+        [Route("available")] //TODO not very restful
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<RoomDto> roomAvailibility(int roomTypeId, DateTime startDate, DateTime endDate)
         {
             try

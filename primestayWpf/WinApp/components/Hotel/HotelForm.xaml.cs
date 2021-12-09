@@ -12,22 +12,25 @@ namespace WinApp.Components.HotelView
     /// </summary>
     public partial class HotelForm : Window
     {
-        public readonly string HotelHref = string.Empty;
+        public readonly Hotel? HotelEdit;
+
         public HotelForm()
         {
             InitializeComponent();
-
         }
+
         public HotelForm(Hotel hotel)
         {
             InitializeComponent();
+
+            HotelEdit = hotel;
+
             Name.Text = hotel.Name;
             Description.Text = hotel.Description;
             StaffedHours.Text = hotel.StaffedHours;
             Stars.Value = hotel.Stars ?? 0d;
             LocationId.Text = hotel.LocationId.ToString();
             Active.IsChecked = hotel.Active;
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

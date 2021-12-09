@@ -81,7 +81,7 @@ namespace Tests.Unit
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(res, typeof(NoContentResult));
 
         }
 
@@ -104,7 +104,7 @@ namespace Tests.Unit
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(CreatedResult));
+            Assert.IsInstanceOfType(res.Result, typeof(CreatedResult));
 
         }
 
@@ -126,7 +126,7 @@ namespace Tests.Unit
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(res, typeof(NoContentResult));
 
         }
     }

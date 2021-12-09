@@ -10,5 +10,6 @@ namespace DataAccessLayer.DTO
         public string Phone { get; set; }
 
         public DateTime BirthDay { get; set; }
+        public int? UserId { get; set; }
     }
 }

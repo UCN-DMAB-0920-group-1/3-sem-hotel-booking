@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31717.71
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "..\Models\Models.csproj", "{E7098CCE-9C51-411E-B47B-B94793C43546}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enviroment", "..\Enviroment\Enviroment.csproj", "{6479AA3C-6EFB-4F89-8641-011A3B63C1A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Environment", "..\Enviroment\Environment.csproj", "{6479AA3C-6EFB-4F89-8641-011A3B63C1A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "..\Database\Database.csproj", "{6355A7C3-3397-4F39-9661-035CD1E67D5F}"
 EndProject

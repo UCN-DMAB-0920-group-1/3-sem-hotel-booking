@@ -70,24 +70,14 @@ namespace WinApp.Components.BookingView
                 default:
                     break;
             }
-
-
         }
 
-        private void AddBtn_Clicked(object sender, RoutedEventArgs e)
-        {
+        private void AddBtn_Clicked(object sender, RoutedEventArgs e) { return;  }
 
-        }
+        private void EditBtn_Clicked(object sender, RoutedEventArgs e) { return; }
 
-        private void EditBtn_Clicked(object sender, RoutedEventArgs e)
-        {
+        private void DeleteBtn_Clicked(object sender, RoutedEventArgs e) { return; }
 
-        }
-
-        private void DeleteBtn_Clicked(object sender, RoutedEventArgs e)
-        {
-
-        }
         #region dao-searches
         private void CustomerBookingSeach(Booking search)
         {

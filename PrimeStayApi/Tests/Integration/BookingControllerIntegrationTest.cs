@@ -1,17 +1,14 @@
-using API;
 using API.Controllers;
 using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Tests.Extensions;
 using Tests.Integration.Common;
-using Version = Database.Version;
 
 namespace Tests.Integration
 {
@@ -59,7 +56,7 @@ namespace Tests.Integration
                 RoomHref = "api/room/1",
                 RoomTypeHref = "api/roomType/1",
                 CustomerHref = customerHref,
-                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com", Href =  customerHref},
+                Customer = new CustomerDto() { Email = "MiaAfilahk@watersports.com", Href = customerHref },
 
             };
 
@@ -67,7 +64,7 @@ namespace Tests.Integration
             var actionResult = controller.Create(booking);
 
             //Assert
-            Assert.IsInstanceOfType(actionResult, typeof(CreatedResult));
+            Assert.IsInstanceOfType(actionResult.Result, typeof(CreatedResult));
         }
 
         [TestMethod]
@@ -114,7 +111,7 @@ namespace Tests.Integration
             var booking = controller.Details(id);
 
             Assert.IsNotNull(booking);
-            Assert.IsTrue(booking.Guests == 4);
+            Assert.IsTrue(booking.GetValue().Guests == 4);
         }
     }
 }
