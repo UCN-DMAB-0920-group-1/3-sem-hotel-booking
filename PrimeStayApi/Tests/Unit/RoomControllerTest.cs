@@ -1,17 +1,11 @@
-﻿using API;
-using API.Controllers;
+﻿using API.Controllers;
 using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Enviroment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Tests.Integration.Common;
-using Version = Database.Version;
 
 namespace Tests.Unit
 {
@@ -57,9 +51,9 @@ namespace Tests.Unit
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(OkResult));
-
+            Assert.IsInstanceOfType(res, typeof(NoContentResult));
         }
+
         [TestMethod]
         public void CreateRoomFakeDao()
         {
@@ -78,7 +72,7 @@ namespace Tests.Unit
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(CreatedResult));
+            Assert.IsInstanceOfType(res.Result, typeof(CreatedResult));
 
         }
         [TestMethod]
@@ -99,7 +93,7 @@ namespace Tests.Unit
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(OkResult));
+            Assert.IsInstanceOfType(res, typeof(NoContentResult));
         }
 
 

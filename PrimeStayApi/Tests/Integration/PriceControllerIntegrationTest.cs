@@ -7,6 +7,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tests.Extensions;
 using Tests.Integration.Common;
 
 namespace Tests.Integration
@@ -91,15 +92,15 @@ namespace Tests.Integration
             {
                 Value = 10000,
                 RoomTypeId = 1,
-                StartDate= DateTime.Now,
+                StartDate = DateTime.Now,
             };
 
             //Act
             var res = controller.Create(newPrice);
 
             //Assert
-            Assert.AreEqual(typeof(OkObjectResult), res.Result.GetType());
-            int? id = (res.Result as OkObjectResult).Value as int?;
+            Assert.AreEqual(typeof(CreatedResult), res.Result.GetType());
+            int? id = res.GetValue().ExtractId();
 
             Assert.IsNotNull(id);
             Assert.AreEqual(49, id);

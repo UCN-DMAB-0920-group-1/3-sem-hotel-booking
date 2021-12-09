@@ -27,7 +27,7 @@ namespace DataAccessLayer.DTO
                 Name = hotel.Name,
                 Description = hotel.Description,
                 StaffedHours = hotel.StaffedHours,
-                LocationHref = GetHrefFromId(typeof(Hotel), hotel.LocationId),
+                LocationHref = GetHrefFromId(typeof(Location), hotel.LocationId),
                 Stars = hotel.Stars,
                 Active = hotel.Active,
 
@@ -69,6 +69,7 @@ namespace DataAccessLayer.DTO
                 Email = customer.Email,
                 Name = customer.Name,
                 Phone = customer.Phone,
+                UserId = customer.UserId,
             };
         }
         public static CustomerDto Map(this Customer customer)
@@ -81,6 +82,7 @@ namespace DataAccessLayer.DTO
                 BirthDay = customer.BirthDay,
                 Name = customer.Name,
                 Phone = customer.Phone,
+                UserId = customer.UserId,
             };
 
         }

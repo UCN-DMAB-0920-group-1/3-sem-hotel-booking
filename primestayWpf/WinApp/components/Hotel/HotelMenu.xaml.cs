@@ -46,7 +46,7 @@ namespace WinApp.Components.HotelView
 
                     Hotel hotel = new()
                     {
-                        Id = int.Parse(form.HotelHref),
+                        Id = form.HotelEdit is not null ? form.HotelEdit.Id : null,
                         Name = form.Name.Text,
                         Description = form.Description.Text,
                         LocationId = int.Parse(form.LocationId.Text),
@@ -96,6 +96,7 @@ namespace WinApp.Components.HotelView
                     LocationId = int.Parse(form.LocationId.Text),
                     StaffedHours = form.StaffedHours.Text,
                     Stars = (int)form.Stars.Value,
+                    Active = form.Active.IsChecked,
                 };
                 var newHotelHref = dao.Create(hotel.Map());
                 if (newHotelHref is null) MessageBox.Show("could not create Hotel");

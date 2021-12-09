@@ -73,6 +73,7 @@ namespace WinApp.Components.CustomerView
                         Name = form.Name.Text,
                         Email = form.Email.Text,
                         Phone = form.Phone.Text,
+                        UserId = int.TryParse(form.UserId.Text, out int userId) ? userId : -1,
                         BirthDay = form.Datepicker.SelectedDate!.Value,
                     };
                     var res = dao.Update(customer.Map());
@@ -96,6 +97,7 @@ namespace WinApp.Components.CustomerView
                     Email = form.Email.Text,
                     Phone = form.Phone.Text,
                     BirthDay = form.Datepicker.SelectedDate!.Value,
+                    UserId = int.TryParse(form.UserId.Text, out int userId) ? userId : null,
                 };
                 var newCustomerHref = dao.Create(customer.Map());
                 if (newCustomerHref is null) MessageBox.Show("Could not create new customer");

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using System;
+using Tests.Extensions;
 using Tests.Integration.Common;
 
 namespace Tests.Integration
@@ -20,7 +21,7 @@ namespace Tests.Integration
             CustomerController customerCtrl = new CustomerController(DaoFactory.Create<CustomerEntity>(_dataContext));
             CustomerEntity customer;
             //Act
-            customer = customerCtrl.Details(id).Map();
+            customer = customerCtrl.Details(id).GetValue().Map();
             //Assert
             Assert.IsNotNull(customer);
             Assert.AreEqual(id, customer.Id);
@@ -44,7 +45,7 @@ namespace Tests.Integration
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(CreatedResult));
+            Assert.IsInstanceOfType(res.Result, typeof(CreatedResult));
 
         }
         [TestMethod]
@@ -54,6 +55,7 @@ namespace Tests.Integration
             var customer = new CustomerEntity()
             {
                 Id = 2,
+                User_id = 1,
                 Name = "Delete test",
                 Email = "Delete test",
                 Phone = "Delete test",
@@ -73,6 +75,7 @@ namespace Tests.Integration
             var customer = new CustomerEntity()
             {
                 Id = 1,
+                User_id = 1,
                 Name = "Update test",
                 Email = "Update test",
                 Phone = "Update test",

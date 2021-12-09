@@ -73,7 +73,7 @@ namespace WinApp.Components.RoomView
             if (form is null) return null;
             return new Room()
             {
-                Id = int.Parse(form.Id.Text),
+                Id = int.TryParse(form.Id.Text, out int id) ? id : null,
                 Notes = form.Notes.Text,
                 Active = form.Active.IsChecked,
                 RoomNumber = form.RoomNumber.Text,

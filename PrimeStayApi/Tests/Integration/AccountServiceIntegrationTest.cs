@@ -10,7 +10,7 @@ using Tests.Integration.Common;
 namespace Tests.Integration
 {
     [TestClass]
-    public class AccountServiceTest : BaseDbSetup
+    public class AccountServiceIntegrationTest : BaseDbSetup
     {
         #region setup
         private static IConfiguration _conf;
