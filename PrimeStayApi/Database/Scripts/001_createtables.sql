@@ -1,5 +1,4 @@
-﻿
-CREATE TABLE [Hotel] (
+﻿CREATE TABLE [Hotel] (
   [id] int NOT NULL IDENTITY(1, 1),
   [name] VARCHAR(500) NOT NULL,
   [description] VARCHAR(6000) NOT NULL,
@@ -221,3 +220,6 @@ ALTER TABLE [TablePictures] CHECK CONSTRAINT [FK_TablePictures_picture_id]
 
 ALTER TABLE [User] WITH CHECK ADD CONSTRAINT [FK_User_Role_id] FOREIGN KEY([role_id])
 REFERENCES [Role] ([id])
+
+ALTER TABLE [Customer] WITH CHECK ADD CONSTRAINT [FK_User_id] FOREIGN KEY([user_id])
+REFERENCES [User] ([id])

@@ -13,16 +13,19 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class PictureController : ControllerBase
     {
+        #region setup
         private readonly IDao<PictureEntity> _dao;
         public PictureController(IDao<PictureEntity> dao)
         {
             _dao = dao;
         }
+        #endregion
 
-        // GET: PictureController/{type}/{id}
         [HttpGet]
         [Route("{type}/{id}")]
-        public IEnumerable<PictureDto> getPictureByType(string type, int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<PictureDto>> getPictureByType(string type, int id) //TODO rename method
         {
             PictureEntity pictureEntity = new()
             {
@@ -31,7 +34,8 @@ namespace API.Controllers
                 Room_id = id,
             };
 
-            return _dao.ReadAll(pictureEntity).Select(p => p.Map());
+            var pictures = _dao.ReadAll(pictureEntity).Select(p => p.Map());
+            return pictures.Any() ? Ok(pictures) : NotFound();
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -14,21 +13,24 @@ namespace API.Controllers
     [ApiController]
     public class PriceController : ControllerBase
     {
+        #region setup
         private readonly IDao<PriceEntity> _dao;
 
         public PriceController(IDao<PriceEntity> priceDao)
         {
             _dao = priceDao;
         }
+        #endregion
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<PriceDto>> Index([FromQuery] PriceDto price)
         {
             try
             {
                 var res = _dao.ReadAll(price.Map()).Select(p => p.Map()).ToList();
                 return Ok(res);
-
             }
             catch (Exception ex)
             {
@@ -38,6 +40,8 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<PriceDto> Details([FromQuery] int id)
         {
             try
@@ -51,15 +55,19 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Create([FromBody] PriceDto price)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<PriceDto> Create([FromBody] PriceDto price)
         {
             try
             {
-                return Ok(_dao.Create(price.Map()));
+                var priceId = _dao.Create(price.Map());
+                price.Href = $"api/price/{priceId}";
+                return Created(price.Href, price);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return NotFound(ex);
+                return BadRequest();
             }
         }
     }

@@ -36,6 +36,8 @@ namespace DataAccessLayer.DAO
             return response.StatusCode switch
             {
                 HttpStatusCode.OK => 1,
+                HttpStatusCode.NoContent => 1,
+                HttpStatusCode.NotFound => 0,
                 _ => -1
             };
         }
@@ -70,6 +72,8 @@ namespace DataAccessLayer.DAO
             return response.StatusCode switch
             {
                 HttpStatusCode.OK => 1,
+                HttpStatusCode.NoContent => 1,
+                HttpStatusCode.NotFound => 0,
                 _ => -1
             };
         }

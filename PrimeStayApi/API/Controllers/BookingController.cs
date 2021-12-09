@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -14,15 +14,20 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class BookingController : Controller
     {
+        #region setup
         private readonly IDao<BookingEntity> _dao;
         private readonly IDao<CustomerEntity> _customerDao;
+
         public BookingController(IDao<BookingEntity> bookingDao, IDao<CustomerEntity> customerDao)
         {
             _dao = bookingDao;
             _customerDao = customerDao;
         }
-        // GET: BookingController
+        #endregion
+
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<IEnumerable<BookingDto>> Index([FromQuery] BookingDto booking)
         {
             try
@@ -37,17 +42,27 @@ namespace API.Controllers
             }
         }
 
-        // GET: api/Booking/5
         [HttpGet]
         [Route("{id}")]
-        public BookingDto Details(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<BookingDto> Details(int id)
         {
-            return _dao.ReadById(id).Map();
+            try
+            {
+                return Ok(_dao.ReadById(id).Map());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return NotFound();
+            }
         }
 
-        // POST: BookingController/
         [HttpPost]
-        public ActionResult Create(BookingDto booking)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<BookingDto> Create(BookingDto booking)
         {
 
             int id = _dao.Create(booking.Map());
@@ -61,22 +76,6 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        // PUT: BookingController/5
-        [HttpPut]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(BookingDto booking)
-        {
-            throw new NotImplementedException();
-        }
-
-        // DELETE: BookingController/5
-        [HttpDelete]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(BookingDto booking)
-        {
-            throw new NotImplementedException();
         }
     }
 }

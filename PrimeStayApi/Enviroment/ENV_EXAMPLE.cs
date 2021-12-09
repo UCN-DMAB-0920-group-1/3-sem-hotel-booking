@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Enviroment
+namespace Environment
 {
 
     public class ENV_EXAMPLE

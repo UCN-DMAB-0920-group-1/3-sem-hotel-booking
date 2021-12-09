@@ -125,7 +125,7 @@ namespace Tests.Integration
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(res, typeof(NoContentResult));
 
         }
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Tests.Integration
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(CreatedResult));
+            Assert.IsInstanceOfType(res.Result, typeof(CreatedResult));
 
         }
         [TestMethod]
@@ -168,7 +168,7 @@ namespace Tests.Integration
 
             //Assert
             Assert.IsNotNull(res);
-            Assert.IsInstanceOfType(res, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(res, typeof(NoContentResult));
 
         }
 

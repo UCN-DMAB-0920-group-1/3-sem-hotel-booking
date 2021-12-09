@@ -19,20 +19,21 @@ namespace WinApp.components.Customer
         public CustomerForm(Model.Customer customer)
         {
             InitializeComponent();
-                Name.Text = customer.Name;
-                Phone.Text = customer.Phone;
-                Email.Text = customer.Email;
-                Datepicker.SelectedDate = customer.BirthDay;
+            Name.Text = customer.Name;
+            Phone.Text = customer.Phone;
+            Email.Text = customer.Email;
+            UserId.Text = customer.UserId.ToString();
+            Datepicker.SelectedDate = customer.BirthDay;
         }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-     {
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             if (validateForm())
             {
                 DialogResult = true;
                 Close();
             }
-    }
+        }
 
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
