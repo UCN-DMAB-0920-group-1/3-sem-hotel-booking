@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
@@ -24,6 +23,15 @@ namespace WebClient.Service
         {
             if (string.IsNullOrWhiteSpace(jwt)) return fail;
             return success;
+        }
+        public static string GetUsernameFromJwt(string jwt)
+        {
+            if (string.IsNullOrWhiteSpace(jwt)) return null;
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(jwt);
+            var username = token.Payload.Claims.First(x => x.Type.Equals("name")).Value;
+            return username;
+
         }
     }
 }
