@@ -176,10 +176,10 @@ INSERT INTO [dbo].[Booking] ([start_date],[end_date],[guests],[room_id],[custome
 GO
 
 
-INSERT INTO [dbo].[Staff] ([name],[email],[phone],birthday,[employee_number],[password],[hotel_id])
+INSERT INTO [dbo].[Staff] ([name],[email],[phone],birthday,[employee_number],[hotel_id])
     VALUES 
-    ('Kim Jong-un','KimTheLeader@NKorea.gov','0000000001','1980-01-01',12,'TooSexyForMyCountry9000',1),
-    ('Donald Trump','DonaldTheGreatLeader@Unemployed.gov','00000000020','1985-01-01',14,'BiggerThanKim11',1)
+    ('Kim Jong-un','KimTheLeader@NKorea.gov','0000000001','1980-01-01',12,1),
+    ('Donald Trump','DonaldTheGreatLeader@Unemployed.gov','00000000020','1985-01-01',14,1)
 GO
 
 INSERT INTO [dbo].[Picture] ([title],[description],[path])
