@@ -31,7 +31,7 @@ namespace API.Controllers
             {
                 Type = type.ToLower(),
                 Hotel_id = id,
-                Room_id = id,
+                Room_type_id = id,
             };
 
             var pictures = _dao.ReadAll(pictureEntity).Select(p => p.Map());

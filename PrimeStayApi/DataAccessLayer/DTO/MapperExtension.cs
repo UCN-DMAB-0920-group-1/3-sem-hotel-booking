@@ -34,6 +34,7 @@ namespace DataAccessLayer.DTO
                 Active = hotel.Active,
             };
         }
+
         public static BookingEntity Map(this BookingDto booking)
         {
             if (booking == null) return null;
@@ -109,13 +110,14 @@ namespace DataAccessLayer.DTO
                 Lng = location.Lng,
             };
         }
+
         public static PictureDto Map(this PictureEntity picture)
         {
             return new PictureDto()
             {
                 Href = picture.ExtractHref(),
                 HotelHref = picture.Type == "hotel" ? GetHrefFromId(typeof(HotelEntity), picture.Hotel_id) : null,
-                RoomHref = picture.Type == "room" ? GetHrefFromId(typeof(RoomEntity), picture.Room_id) : null,
+                RoomHref = picture.Type == "room" ? GetHrefFromId(typeof(RoomEntity), picture.Room_type_id) : null,
                 Path = picture.Path,
                 Description = picture.Description,
                 Title = picture.Title
@@ -145,6 +147,7 @@ namespace DataAccessLayer.DTO
                 Active = room.Active,
             };
         }
+
         public static CustomerEntity Map(this CustomerDto customer)
         {
             return new CustomerEntity()
@@ -158,6 +161,7 @@ namespace DataAccessLayer.DTO
 
             };
         }
+
         public static CustomerDto Map(this CustomerEntity customer)
         {
             return new CustomerDto()
@@ -171,7 +175,6 @@ namespace DataAccessLayer.DTO
             };
         }
 
-
         public static PriceEntity Map(this PriceDto price)
         {
             return new PriceEntity()
@@ -182,6 +185,7 @@ namespace DataAccessLayer.DTO
                 Start_Date = price.StartDate,
             };
         }
+
         public static PriceDto Map(this PriceEntity price)
         {
             return new PriceDto()

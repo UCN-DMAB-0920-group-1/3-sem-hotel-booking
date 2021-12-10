@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -11,10 +12,11 @@ namespace DataAccessLayer.SQL
         private readonly static string SELECT_ALL_PICTURES = $"SELECT * FROM TablePictures " +
                                                     $"INNER JOIN picture ON picture.id = TablePictures.picture_id ";
         #endregion
+
         public PictureDao(IDataContext<IDbConnection> dataContext) : base(dataContext)
         {
-
         }
+
         public int Create(PictureEntity model)
         {
             throw new System.NotImplementedException();
@@ -27,15 +29,11 @@ namespace DataAccessLayer.SQL
 
         public IEnumerable<PictureEntity> ReadAll(PictureEntity model)
         {
+            using IDbConnection connection = DataContext.Open();
+
             string whereStatement = GetWhereStatement(model);
-
-            using (IDbConnection connection = DataContext.Open())
-            {
-                return connection.Query<PictureEntity>(SELECT_ALL_PICTURES + whereStatement, model);
-
-            };
+            return connection.Query<PictureEntity>(SELECT_ALL_PICTURES + whereStatement, model);
         }
-
 
         public PictureEntity ReadById(int id)
         {
@@ -46,23 +44,15 @@ namespace DataAccessLayer.SQL
         {
             throw new System.NotImplementedException();
         }
+
         private static string GetWhereStatement(PictureEntity model)
         {
-            string whereStatement;
-            switch (model.Type)
+            return model.Type switch
             {
-
-                case "hotel":
-                    whereStatement = $"WHERE type = @Type AND hotel_id = @Hotel_id";
-                    break;
-                case "room":
-                    whereStatement = $"WHERE type = @Type AND room_type_id = @Room_id";
-                    break;
-                default:
-                    throw new System.Exception("Invalid type " + model.Type);
-            }
-
-            return whereStatement;
+                string type when type.Equals("hotel") => $"WHERE type = @Type AND hotel_id = @Hotel_id",
+                string type when type.Equals("room") => $"WHERE type = @Type AND room_type_id = @Room_type_id",
+                string type => throw new DaoException($"Invalid type: {type}"),
+            };
         }
     }
 }
