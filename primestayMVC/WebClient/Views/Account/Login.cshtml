@@ -6,7 +6,6 @@
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
 
-            <!-- here goes picture-->
 
 
 
@@ -41,30 +40,3 @@
         </div>
     </div>
 </div>
-<script>
-   $(document).ready(function() {
-  $("#login_btn").click(function() {
-        var username = $('input#Username').val();
-        var password = $('input#Password').val();
-        var url = 'https://localhost:44312/api/account/login';
-        console.log(username + password + url);
-        
-        axios({
-    method: 'post',
-    url:url,
-    data: {
-      Username: username,
-      Password: password
-    }})
-    .then(res => {
-                     console.log(res.data);
-                     document.cookie = 'customerId =' + res.data.customerId;
-                     document.cookie = 'jwt =' + res.data.token;
-                     console.log(document.cookie)
-                     window.history.back();
-
-                  })
-     .catch(err => alert("Username/Password incorrect"));
-    })
-   })    
-</script>
