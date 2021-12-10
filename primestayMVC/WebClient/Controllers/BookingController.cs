@@ -1,7 +1,7 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.DTO;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
 using WebClient.Service;
@@ -13,12 +13,14 @@ namespace WebClient.Controllers
         private readonly IDao<BookingDto> _bookingDao;
         private readonly IDao<HotelDto> _hotelDao;
         private readonly IDao<RoomTypeDto> _roomTypeDao;
-        public BookingController(IDao<BookingDto> bookingDao, IDao<HotelDto> hotelDao, IDao<RoomTypeDto> roomTypeDao)
+        private readonly IDao<LocationDto> _LocationDao;
+
+        public BookingController(IDao<BookingDto> bookingDao, IDao<HotelDto> hotelDao, IDao<RoomTypeDto> roomTypeDao, IDao<LocationDto> locationDao)
         {
             _bookingDao = bookingDao;
             _hotelDao = hotelDao;
             _roomTypeDao = roomTypeDao;
-
+            _LocationDao = locationDao;
         }
 
         public IActionResult Info()
@@ -42,18 +44,28 @@ namespace WebClient.Controllers
             string href = _bookingDao.Create(booking.Map());
             if (href is null || href.EndsWith("-1")) return View("BookingError");
 
-            return View("confirm", _bookingDao.ReadByHref(href).Map());
+            var bookingInfo = GetAllBookingInfo(href);
+            return View("Details", bookingInfo);
         }
 
         public IActionResult Details(string bookingHref)
+        {
+            var bookingInfo = GetAllBookingInfo(bookingHref);
+
+            return View(bookingInfo);
+        }
+
+        #region Helper methods
+        private (Booking, RoomType, Hotel) GetAllBookingInfo(string bookingHref)
         {
             var booking = _bookingDao.ReadByHref(bookingHref).Map();
             var roomTypeDTO = _roomTypeDao.ReadByHref($"api/roomType/{booking.RoomTypeId}");
             var roomType = roomTypeDTO.Map();
             var hotel = _hotelDao.ReadByHref(roomTypeDTO.HotelHref).Map();
+            hotel.Location = _LocationDao.ReadByHref($"/api/location/{hotel.LocationId}").Map();
+            return (booking, roomType, hotel);
 
-            return View((booking, roomType, hotel));
         }
-
+        #endregion
     }
 }
