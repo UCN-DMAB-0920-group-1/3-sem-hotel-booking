@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Models;
-using DataAccessLayer.SQL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,15 +28,13 @@ namespace DataAccessLayer.SQL
 
             try
             {
-                connection.Execute(INSERT_USER, model);
+                return connection.Execute(INSERT_USER, model);
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
                 throw new DaoException("Could not create new user");
             }
-
-            return -1;
         }
 
         public int Delete(UserEntity model)
@@ -52,12 +49,11 @@ namespace DataAccessLayer.SQL
             try
             {
                 return connection.Query<UserEntity>(SELECT_USER, model);
-
             }
             catch (SqlException e)
             {
                 Console.WriteLine(e.Message);
-                return new List<UserEntity>();
+                throw new DaoException($"Could not find user with username: {model.Username}");
             }
         }
 

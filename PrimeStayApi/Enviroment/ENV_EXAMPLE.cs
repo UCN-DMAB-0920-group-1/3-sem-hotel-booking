@@ -7,7 +7,7 @@ namespace Environment
     {
         public const string ConnectionString = "Your-connection-string";
         public const string ConnectionStringDev = "Your-connection-string";
-        public const string ConnectionStringTest = "Your-connection-string";
+        public readonly string ConnectionStringTest = "Your-connection-string";
     }
 
 }

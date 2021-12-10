@@ -31,29 +31,24 @@ namespace API.Services
     public class AccountService : IAccountService
     {
         private readonly IConfiguration _configuration;
-        private readonly IDao<UserEntity> _dao;
+        private readonly IDao<UserEntity> _userDao;
         private readonly IDao<CustomerEntity> _customerDao;
 
-        public AccountService(IConfiguration configuration, IDao<UserEntity> dao, IDao<CustomerEntity> customerDao)
+        public AccountService(IConfiguration configuration, IDao<UserEntity> userDao, IDao<CustomerEntity> customerDao)
         {
             _configuration = configuration;
-            _dao = dao;
+            _userDao = userDao;
             _customerDao = customerDao;
         }
 
         public Userinfo Save(string username, string password, string role)
         {
-            var rngCSP = RandomNumberGenerator.Create();
-
-            byte[] randomSeq = new byte[256];
-            rngCSP.GetNonZeroBytes(randomSeq);
-            string salt = Convert.ToBase64String(randomSeq);
-
-            string passwordHash = HashPassword(password, salt);
-
             try
             {
-                _dao.Create(new UserEntity()
+                string salt = GenerateSalt();
+                string passwordHash = HashPassword(password, salt);
+
+                _userDao.Create(new UserEntity()
                 {
                     Username = username,
                     Password = passwordHash,
@@ -70,25 +65,17 @@ namespace API.Services
             }
         }
 
-        private string HashPassword(string password, string salt)
-        {
-            HashAlgorithm hashAlgorithm = SHA256.Create();
-            string saltedPassword = salt.Insert(salt.Length / 2, password);
-            return Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword)));
-        }
 
         public Userinfo Authenticate(string username, string password)
         {
-            UserEntity user = _dao.ReadAll(new UserEntity()
+            UserEntity user = _userDao.ReadAll(new UserEntity()
             {
                 Username = username,
             }).SingleOrDefault();
 
             if (user is null)
             {
-
                 string passwordHash = HashPassword(password, "salt");
-
                 return null;
             }
             else
@@ -96,8 +83,23 @@ namespace API.Services
                 string passwordHash = HashPassword(password, user.Salt);
                 if (!user.Password.Equals(passwordHash)) return null;
 
-                return CreateAuthenticatedUser(username, user.Role, user.Id ?? -1);
+                return CreateAuthenticatedUser(username, user.Role, user.Id!.Value);
             }
+        }
+
+        private static string GenerateSalt()
+        {
+            var rng = RandomNumberGenerator.Create();
+            byte[] randomSeq = new byte[256];
+            rng.GetNonZeroBytes(randomSeq);
+            return Convert.ToBase64String(randomSeq);
+        }
+
+        private string HashPassword(string password, string salt)
+        {
+            HashAlgorithm hashAlgorithm = SHA256.Create();
+            string saltedPassword = salt.Insert(salt.Length / 2, password);
+            return Convert.ToBase64String(hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword)));
         }
 
         private Userinfo CreateAuthenticatedUser(string username, string role, int id = -1)

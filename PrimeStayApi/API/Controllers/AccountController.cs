@@ -102,7 +102,6 @@ namespace API.Controllers
             {
                 Token = user.Token,
                 Expires = user.Expires,
-                CustomerId = user.CustomerId,
             };
         }
     }
