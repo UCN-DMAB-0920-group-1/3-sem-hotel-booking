@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System.Diagnostics;
-
+using WebClient.Service;
 
 namespace WebClient.Controllers
 {
@@ -19,7 +19,7 @@ namespace WebClient.Controllers
         }
         public IActionResult Login(string username = "", string password = "")
         {
-            return View("Login",username);
+            return View("Login", username);
         }
         public IActionResult Logout()
         {
@@ -35,16 +35,17 @@ namespace WebClient.Controllers
             string username = Request.Form["Username"];
             string password = Request.Form["Password"];
 
-            var res = ((IDaoAccountExtension<LoginResponse>)_accountDao).Authorize(username,password);
+            var res = ((IDaoAccountExtension<LoginResponse>)_accountDao).Authorize(username, password);
 
-            if(res is not null && res.Token is not null) {
+            if (res is not null && res.Token is not null)
+            {
                 HttpContext.Session.SetString("Jwt", res.Token);
                 HttpContext.Session.SetString("LoggedIn", "true");
-                HttpContext.Session.SetString("Username", res.Username);
-                
-            } else
+                HttpContext.Session.SetString("Username", JwtMethods.GetUsernameFromJwt(res.Token));
+            }
+            else
             {
-                return RedirectToAction("Login","Account", new { @username = username});
+                return RedirectToAction("Login", "Account", new { @username = username });
             }
             return Redirect("../Hotel/Index");
         }

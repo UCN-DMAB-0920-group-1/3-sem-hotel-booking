@@ -6,6 +6,5 @@ namespace Models
     {
         public string Token { get; set; }
         public DateTime Expires { get; internal set; }
-        public string Username { get; set; }
     }
 }

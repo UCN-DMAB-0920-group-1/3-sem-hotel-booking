@@ -149,11 +149,6 @@ INSERT INTO [dbo].[Customer] ([name],[email],[phone],[birthday],[user_id])
     ('Read Test','Read@test','Read Test','1992-01-01',3)
 GO
 
-INSERT INTO [dbo].[Credit_Information] ([customer_id],[card_holder_name],[card_number],[expiration_date],[CVC_number])
-    VALUES 
-    (1,'Mia Afilahk','6400555543002300','12/23','832')
-GO
-
 INSERT INTO [dbo].[Booking] ([start_date],[end_date],[guests],[room_id],[customer_id])
     VALUES 
     ('2010-11-04','2010-11-16',4,1,1),

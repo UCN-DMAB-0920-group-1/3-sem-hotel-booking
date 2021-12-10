@@ -84,17 +84,6 @@ CREATE TABLE [Customer] (
 )
 GO
 
-CREATE TABLE [Credit_Information] (
-  [id] int NOT NULL IDENTITY(1, 1),
-  [customer_id] int NOT NULL,
-  [card_holder_name] VARCHAR(250) NOT NULL,
-  [card_number] VARCHAR(250) NOT NULL,
-  [expiration_date] VARCHAR(250) NOT NULL,
-  [CVC_number] VARCHAR(250) NOT NULL,
-  PRIMARY KEY ([id])
-)
-GO
-
 CREATE TABLE [Staff] (
   [id] int NOT NULL IDENTITY(1, 1),
   [name] VARCHAR(250) NOT NULL,
@@ -148,9 +137,6 @@ GO
 CREATE UNIQUE INDEX [UK_Customer_email] ON [Customer] ("email")
 GO
 
-CREATE UNIQUE INDEX [UK_card_number] ON [Credit_Information] ("card_number")
-GO
-
 CREATE UNIQUE INDEX [UK_Staff_email] ON [Staff] ("email")
 GO
 
@@ -187,12 +173,6 @@ ALTER TABLE [Price] WITH CHECK ADD CONSTRAINT [FK_Price_room_type_id] FOREIGN KE
 REFERENCES [RoomType] ([id])
 
 ALTER TABLE [Price] CHECK CONSTRAINT [FK_Price_room_type_id]
-
-ALTER TABLE [Credit_Information] WITH CHECK ADD CONSTRAINT [FK_Credit_Information_customer_id] FOREIGN KEY([customer_id])
-REFERENCES [Customer] ([id])
-
-
-ALTER TABLE [Credit_Information] CHECK CONSTRAINT [FK_Credit_Information_customer_id]
 
 ALTER TABLE [Staff] WITH CHECK ADD CONSTRAINT [FK_Staff_hotel_id] FOREIGN KEY([hotel_id])
 REFERENCES [Hotel] ([id])
