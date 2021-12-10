@@ -93,9 +93,6 @@ namespace WebClient.Controllers
                 rooms[i].price = GetPriceOnRoom(rooms[i]);
             }
 
-
-
-
             return rooms;
         }
 
