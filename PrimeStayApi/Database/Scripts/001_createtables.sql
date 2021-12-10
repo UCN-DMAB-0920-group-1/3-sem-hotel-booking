@@ -102,7 +102,6 @@ CREATE TABLE [Staff] (
   [phone] VARCHAR(250) NOT NULL,
   [birthday] datetime NOT NULL,
   [employee_number] int NOT NULL,
-  [password] VARCHAR(250) NOT NULL,
   [hotel_id] int NOT NULL,
   PRIMARY KEY ([id])
 )
@@ -156,9 +155,6 @@ CREATE UNIQUE INDEX [UK_Staff_email] ON [Staff] ("email")
 GO
 
 CREATE UNIQUE INDEX [UK_Staff_employee_number] ON [Staff] ("employee_number")
-GO
-
-CREATE UNIQUE INDEX [UK_Staff_password] ON [Staff] ("password")
 GO
 
 CREATE UNIQUE INDEX [UK_User_name] ON [User] ("username")
