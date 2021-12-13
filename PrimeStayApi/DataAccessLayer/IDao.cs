@@ -4,10 +4,10 @@ namespace DataAccessLayer
 {
     public interface IDao<T>
     {
-        public T ReadById(int id);
-        public int Create(T model);
-        public int Update(T model);
-        public int Delete(T model);
+        T ReadById(int id);
+        int Create(T model);
+        int Update(T model);
+        int Delete(T model);
         IEnumerable<T> ReadAll(T model);
     }
 }

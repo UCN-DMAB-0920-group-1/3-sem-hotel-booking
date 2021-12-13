@@ -5,10 +5,10 @@ namespace DataAccessLayer
 {
     public interface IDao<T>
     {
-        public T ReadByHref(string href);
-        public string Create(T model);
-        public int Update(T model);
-        public int Delete(T model);
+        T ReadByHref(string href);
+        string Create(T model);
+        int Update(T model);
+        int Delete(T model);
         IEnumerable<T> ReadAll(T model);
     }
 }
