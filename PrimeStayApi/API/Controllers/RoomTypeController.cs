@@ -72,7 +72,7 @@ namespace API.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Edit(int id, RoomTypeDto room)
+        public ActionResult Edit(RoomTypeDto room)
         {
             return _dao.Update(room.Map()) == 1 ? NoContent() : NotFound();
         }
@@ -86,10 +86,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("available")] //TODO not very restful
+        [Route("date")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<RoomDto> roomAvailibility(int roomTypeId, DateTime startDate, DateTime endDate)
+        public ActionResult<RoomDto> RoomAvailibility(int roomTypeId, DateTime startDate, DateTime endDate)
         {
             try
             {

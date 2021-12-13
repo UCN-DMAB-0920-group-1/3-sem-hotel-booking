@@ -105,7 +105,7 @@
                 </script>
                 <script>
         $(document).ready(function () {
-           var href = "api/roomType/available?roomTypeId=@roomType.Id&startDate=@queryParams["startDate"]&endDate=@queryParams["endDate"]";
+           var href = "api/roomType/date?roomTypeId=@roomType.Id&startDate=@queryParams["startDate"]&endDate=@queryParams["endDate"]";
            var uri = "https://localhost:44312/";
            console.log(uri + href)
            axios.get(uri + href)
