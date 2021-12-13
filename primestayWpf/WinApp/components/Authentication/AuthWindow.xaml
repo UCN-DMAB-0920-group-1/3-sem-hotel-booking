@@ -39,9 +39,9 @@
         </PasswordBox>
         <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Width="208" Height="23"/>
         <Label x:Name="passwordLabel" Content="Password&#xD;&#xA;" HorizontalAlignment="Center" VerticalAlignment="Center" Width="208" Height="21"/>
-        <Image HorizontalAlignment="Right" Height="78" Margin="0,0,25,36" VerticalAlignment="Bottom" Width="78" Source="/res/group_logo.png"/>
+        <Image HorizontalAlignment="Right" Height="78" Margin="0,0,24,49" VerticalAlignment="Bottom" Width="78" Source="/res/group_logo.png"/>
         <Label Name="errorLabel" Content="" x:FieldModifier="public" HorizontalAlignment="Center" Margin="0,291,0,0" VerticalAlignment="Top" Width="208" HorizontalContentAlignment="Center" Height="29" Foreground="#FFFF2727"/>
-        <ProgressBar x:Name="loadingBar" Visibility="Hidden" IsEnabled="False" IsIndeterminate="True" Height="20" Margin="0,348,0,24"/>
+        <ProgressBar x:Name="loadingBar" Visibility="Hidden" IsEnabled="False" IsIndeterminate="True" Height="20" Margin="0,348,0,24" VerticalAlignment="Bottom"/>
         <Label Content="Primestay&#xD;&#xA;" HorizontalAlignment="Center" VerticalAlignment="Top" Height="72" Width="208" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontSize="36" Foreground="#FF51397C" FontWeight="Bold" Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
