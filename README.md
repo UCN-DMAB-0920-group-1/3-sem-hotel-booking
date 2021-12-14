@@ -1,2 +1,1 @@
-# 3-sem-hotel-booking
-A hotel booking system, built with asp.net
+A hotel booking system, built with ASP.NET core 5 and WPF
