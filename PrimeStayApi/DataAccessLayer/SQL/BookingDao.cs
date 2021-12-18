@@ -52,7 +52,7 @@ namespace DataAccessLayer.SQL
         public int Create(BookingEntity model)
         {
             var res = -1;
-            using (IDbTransaction transaction = DataContext.Open().BeginTransaction())
+            using (IDbTransaction transaction = DataContext.Open().BeginTransaction(IsolationLevel.Serializable))
             {
                 model.Room_id = transaction.ExecuteScalar<int>(GET_AVAILABLE_ROOM_RANDOM,
                     model);
