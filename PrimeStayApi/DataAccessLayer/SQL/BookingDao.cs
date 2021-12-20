@@ -1,8 +1,10 @@
 ﻿using Dapper;
 using Dapper.Transaction;
 using Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 
 namespace DataAccessLayer.SQL
 {
@@ -52,20 +54,27 @@ namespace DataAccessLayer.SQL
         public int Create(BookingEntity model)
         {
             var res = -1;
-            using (IDbTransaction transaction = DataContext.Open().BeginTransaction(IsolationLevel.Serializable))
+            try
             {
-                model.Room_id = transaction.ExecuteScalar<int>(GET_AVAILABLE_ROOM_RANDOM,
-                    model);
-
-                if (model.Room_id is not null && model.Room_id > 0)
+                using (IDbTransaction transaction = DataContext.Open().BeginTransaction(IsolationLevel.Serializable))
                 {
+                    model.Room_id = transaction.ExecuteScalar<int>(GET_AVAILABLE_ROOM_RANDOM,
+                        model);
 
-                    res = transaction.ExecuteScalar<int>(INSERT_BOOKING_RETURN_ID,
-                        new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
-                    transaction.Commit();
-                }
-                else transaction.Rollback();
-            };
+                    if (model.Room_id is not null && model.Room_id > 0)
+                    {
+
+                        res = transaction.ExecuteScalar<int>(INSERT_BOOKING_RETURN_ID,
+                            new { model.Start_date, model.End_date, model.Guests, model.Room_id, model.Customer_id });
+                        transaction.Commit();
+                    }
+                    else transaction.Rollback();
+                };
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
             return res;
         }
 
