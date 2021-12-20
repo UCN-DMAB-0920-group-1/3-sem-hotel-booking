@@ -45,7 +45,7 @@ namespace Tests.Controllers
         {
             //Arrange
             _controller = new HotelController(_hotelDao, _locationDao, _roomDao, _priceDao);
-            var collection = "api/hotel/1";
+            var collection = "Test";
             //Act 
             var testView = _controller.Result(collection);
             //Assert 
